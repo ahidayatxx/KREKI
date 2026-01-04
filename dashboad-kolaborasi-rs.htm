@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Kolaborasi RS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="importmap">
+    {
+      "imports": {
+        "react": "https://esm.sh/react@18.2.0",
+        "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
+        "lucide-react": "https://esm.sh/lucide-react@0.263.1"
+      }
+    }
+    </script>
+    <!-- Load Babel -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script>
+      window.process = { env: { NODE_ENV: 'development' } };
+    </script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel" data-type="module" data-presets="react,typescript">
+        import React, { useState, useEffect } from 'react';
+        import { createRoot } from 'react-dom/client';
+        import { 
+          LayoutDashboard, 
+          ShoppingCart, 
+          Users, 
+          Package, 
+          TrendingUp, 
+          FileText, 
+          Bell, 
+          Settings, 
+          LogOut,
+          ChevronRight,
+          Plus,
+          Filter,
+          Search,
+          CheckCircle,
+          Clock,
+          AlertCircle,
+          MapPin,
+          Building2
+        } from 'lucide-react';
+
+        // --- Types & Mock Data ---
+
+        type Role = 'member' | 'admin' | 'vendor';
+
+        interface PricingTier {
+          minQty: number;
+          maxQty: number | null;
+          discount: number; // percentage
+        }
+
+        interface Product {
+          id: string;
+          name: string;
+          vendor: string;
+          basePrice: number;
+          unit: string;
+          currentPoolQty: number; // Total aggregated quantity currently
+          tiers: PricingTier[];
+          deadline: string;
+          category: string;
+        }
+
+        interface Order {
+          id: string;
+          productName: string;
+          vendorName: string;
+          qty: number;
+          status: 'Open' | 'Closed' | 'Shipped' | 'Paid';
+          orderDate: string;
+          estimatedSaving: number;
+        }
+
+        const MOCK_PRODUCTS: Product[] = [
+          {
+            id: 'P001',
+            name: 'Paracetamol Infusion 1g/100ml',
+            vendor: 'PharmaOne Indo',
+            basePrice: 25000,
+            unit: 'Botol',
+            currentPoolQty: 850,
+            category: 'Obat',
+            deadline: '2 Hari Lagi',
+            tiers: [
+              { minQty: 0, maxQty: 499, discount: 0 },
+              { minQty: 500, maxQty: 999, discount: 10 },
+              { minQty: 1000, maxQty: null, discount: 20 },
+            ]
+          },
+          {
+            id: 'P002',
+            name: 'Surgical Mask 3-Ply (Box)',
+            vendor: 'MedEquip Utama',
+            basePrice: 35000,
+            unit: 'Box',
+            currentPoolQty: 2100,
+            category: 'Alkes',
+            deadline: '5 Hari Lagi',
+            tiers: [
+              { minQty: 0, maxQty: 999, discount: 0 },
+              { minQty: 1000, maxQty: 4999, discount: 15 },
+              { minQty: 5000, maxQty: null, discount: 25 },
+            ]
+          },
+          {
+            id: 'P003',
+            name: 'Ceftriaxone Injection 1g',
+            vendor: 'BioFarma Global',
+            basePrice: 18000,
+            unit: 'Vial',
+            currentPoolQty: 120,
+            category: 'Obat',
+            deadline: '1 Hari Lagi',
+            tiers: [
+              { minQty: 0, maxQty: 199, discount: 0 },
+              { minQty: 200, maxQty: 499, discount: 5 },
+              { minQty: 500, maxQty: null, discount: 12 },
+            ]
+          }
+        ];
+
+        const MOCK_ORDERS: Order[] = [
+          { id: 'ORD-001', productName: 'Paracetamol Infusion', vendorName: 'PharmaOne Indo', qty: 200, status: 'Open', orderDate: '2025-12-30', estimatedSaving: 500000 },
+          { id: 'ORD-002', productName: 'Surgical Gloves', vendorName: 'MedEquip Utama', qty: 50, status: 'Closed', orderDate: '2025-12-25', estimatedSaving: 150000 },
+          { id: 'ORD-003', productName: 'Amoxicillin 500mg', vendorName: 'Generic Co', qty: 1000, status: 'Shipped', orderDate: '2025-12-20', estimatedSaving: 2000000 },
+        ];
+
+        // --- Helper Components ---
+
+        const StatusBadge = ({ status }: { status: string }) => {
+          const styles: Record<string, string> = {
+            Open: 'bg-blue-100 text-blue-700 border-blue-200',
+            Closed: 'bg-yellow-100 text-yellow-700 border-yellow-200',
+            Shipped: 'bg-purple-100 text-purple-700 border-purple-200',
+            Paid: 'bg-green-100 text-green-700 border-green-200',
+          };
+          return (
+            <span className={`px-2 py-1 rounded-full text-xs font-medium border ${styles[status] || 'bg-gray-100 text-gray-700'}`}>
+              {status}
+            </span>
+          );
+        };
+
+        const formatRupiah = (num: number) => {
+          return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(num);
+        };
+
+        // --- Main Components ---
+
+        const ProductCard = ({ product, role }: { product: Product, role: Role }) => {
+          // Logic to determine current tier and next tier
+          const currentTier = product.tiers.slice().reverse().find(t => product.currentPoolQty >= t.minQty) || product.tiers[0];
+          const nextTier = product.tiers.find(t => product.currentPoolQty < t.minQty);
+          
+          const currentPrice = product.basePrice * (1 - currentTier.discount / 100);
+          const progressPercent = nextTier 
+            ? (product.currentPoolQty / nextTier.minQty) * 100 
+            : 100;
+
+          return (
+            <div className="bg-white rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col">
+              <div className="p-5 flex-1">
+                <div className="flex justify-between items-start mb-2">
+                  <span className="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-1 rounded-md">{product.category}</span>
+                  <span className="text-xs text-slate-500 flex items-center gap-1">
+                    <Clock size={14} /> {product.deadline}
+                  </span>
+                </div>
+                <h3 className="font-bold text-slate-800 text-lg mb-1">{product.name}</h3>
+                <p className="text-sm text-slate-500 mb-4">{product.vendor}</p>
+
+                {/* Pricing Info */}
+                <div className="bg-slate-50 p-3 rounded-lg mb-4">
+                  <div className="flex justify-between items-end mb-1">
+                    <span className="text-sm text-slate-600">Harga Estimasi Saat Ini</span>
+                    <span className="font-bold text-emerald-700 text-lg">{formatRupiah(currentPrice)}</span>
+                  </div>
+                  <div className="flex justify-between items-center text-xs text-slate-400">
+                     <span className="line-through">{formatRupiah(product.basePrice)}</span>
+                     <span className="text-emerald-600 font-medium">Hemat {currentTier.discount}%</span>
+                  </div>
+                </div>
+
+                {/* Progress Bar for Tier */}
+                <div className="mb-4">
+                  <div className="flex justify-between text-xs mb-1">
+                    <span className="text-slate-600 font-medium">Pool Terkumpul: <span className="text-blue-600">{product.currentPoolQty} {product.unit}</span></span>
+                    {nextTier ? (
+                      <span className="text-slate-500">Target Next Tier: {nextTier.minQty}</span>
+                    ) : (
+                      <span className="text-emerald-600 font-bold">Max Diskon!</span>
+                    )}
+                  </div>
+                  <div className="w-full bg-slate-200 rounded-full h-2.5 mb-1 overflow-hidden">
+                    <div 
+                      className={`h-2.5 rounded-full ${nextTier ? 'bg-blue-500' : 'bg-emerald-500'}`} 
+                      style={{ width: `${Math.min(progressPercent, 100)}%` }}
+                    ></div>
+                  </div>
+                  {nextTier && (
+                    <p className="text-xs text-blue-600 mt-1">
+                      Butuh <b>{nextTier.minQty - product.currentPoolQty} {product.unit}</b> lagi untuk diskon <b>{nextTier.discount}%</b>
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              <div className="p-4 border-t border-slate-100">
+                {role === 'member' ? (
+                  <button className="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors flex items-center justify-center gap-2">
+                    <ShoppingCart size={18} /> Gabung Pesanan
+                  </button>
+                ) : (
+                  <button className="w-full py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg font-medium transition-colors">
+                    Lihat Detail Pool
+                  </button>
+                )}
+              </div>
+            </div>
+          );
+        };
+
+        // --- View Containers ---
+
+        const MemberView = () => (
+          <div className="space-y-6">
+            {/* Hero Stats */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl p-5 text-white shadow-lg">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="p-2 bg-white/20 rounded-lg"><TrendingUp size={20} /></div>
+                  <span className="font-medium text-blue-100">Total Penghematan</span>
+                </div>
+                <h2 className="text-2xl font-bold">Rp 45.200.000</h2>
+                <p className="text-sm text-blue-100 mt-1">Tahun Berjalan 2025</p>
+              </div>
+              <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="p-2 bg-orange-100 text-orange-600 rounded-lg"><Package size={20} /></div>
+                  <span className="font-medium text-slate-600">Pesanan Aktif (Open)</span>
+                </div>
+                <h2 className="text-2xl font-bold text-slate-800">3 Batch</h2>
+                <p className="text-sm text-slate-500 mt-1">Menunggu penutupan pool</p>
+              </div>
+              <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="p-2 bg-emerald-100 text-emerald-600 rounded-lg"><FileText size={20} /></div>
+                  <span className="font-medium text-slate-600">Tagihan Belum Lunas</span>
+                </div>
+                <h2 className="text-2xl font-bold text-slate-800">Rp 12.500.000</h2>
+                <p className="text-sm text-slate-500 mt-1">Jatuh tempo dalam 7 hari</p>
+              </div>
+            </div>
+
+            {/* Section: Available Pools */}
+            <div>
+              <div className="flex justify-between items-center mb-4">
+                <h2 className="text-xl font-bold text-slate-800">Pool Pembelian Aktif</h2>
+                <div className="flex gap-2">
+                  <button className="px-3 py-1.5 border border-slate-300 rounded-lg text-sm flex items-center gap-2 hover:bg-slate-50"><Filter size={16}/> Filter</button>
+                  <button className="px-3 py-1.5 border border-slate-300 rounded-lg text-sm flex items-center gap-2 hover:bg-slate-50"><Search size={16}/> Cari Obat</button>
+                </div>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {MOCK_PRODUCTS.map(p => <ProductCard key={p.id} product={p} role="member" />)}
+              </div>
+            </div>
+
+            {/* Section: Recent Orders Table */}
+            <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+              <div className="px-6 py-4 border-b border-slate-100 flex justify-between items-center">
+                <h3 className="font-bold text-slate-800">Riwayat Pesanan Anda</h3>
+                <a href="#" className="text-blue-600 text-sm hover:underline">Lihat Semua</a>
+              </div>
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm text-left">
+                  <thead className="bg-slate-50 text-slate-600 font-medium">
+                    <tr>
+                      <th className="px-6 py-3">ID Pesanan</th>
+                      <th className="px-6 py-3">Produk</th>
+                      <th className="px-6 py-3">Vendor</th>
+                      <th className="px-6 py-3">Qty</th>
+                      <th className="px-6 py-3">Est. Hemat</th>
+                      <th className="px-6 py-3">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-100">
+                    {MOCK_ORDERS.map(order => (
+                      <tr key={order.id} className="hover:bg-slate-50">
+                        <td className="px-6 py-4 font-medium text-slate-900">{order.id}</td>
+                        <td className="px-6 py-4">{order.productName}</td>
+                        <td className="px-6 py-4 text-slate-500">{order.vendorName}</td>
+                        <td className="px-6 py-4">{order.qty}</td>
+                        <td className="px-6 py-4 text-emerald-600">{formatRupiah(order.estimatedSaving)}</td>
+                        <td className="px-6 py-4"><StatusBadge status={order.status} /></td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        );
+
+        const AdminView = () => (
+          <div className="space-y-6">
+            {/* RS Pelopor Profile Card */}
+            <div className="bg-white rounded-xl border border-slate-200 p-6 shadow-sm relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-50 rounded-bl-full -mr-8 -mt-8 z-0 opacity-50"></div>
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-center relative z-10 gap-4">
+                    <div className="flex items-center gap-5">
+                        <div className="w-16 h-16 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-full flex items-center justify-center text-white font-bold text-2xl shadow-md">
+                           <Building2 size={28} />
+                        </div>
+                        <div>
+                            <div className="flex items-center gap-2 mb-1">
+                                <h2 className="text-xl font-bold text-slate-900">RUMAH SAKIT ISLAM UNISMA MALANG</h2>
+                                <span className="bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wide border border-indigo-200">
+                                    RS Pelopor
+                                </span>
+                            </div>
+                            <div className="flex items-start gap-1.5 text-sm text-slate-500 max-w-lg">
+                                <MapPin size={16} className="mt-0.5 shrink-0 text-slate-400" />
+                                <p>JALAN MAYJEN HARYONO NO.139, DINOYO, KEC. LOWOKWARU, KOTA MALANG, JAWA TIMUR 65144</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="text-right hidden md:block pl-6 border-l border-slate-100">
+                        <p className="text-xs text-slate-400 uppercase tracking-wider font-semibold">Status Akun</p>
+                        <div className="flex items-center gap-2 justify-end mt-1">
+                             <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+                             <p className="font-medium text-emerald-700 text-sm">Konsorsium Aktif</p>
+                        </div>
+                        <p className="text-xs text-slate-400 mt-1">ID: 3573UNISMA-INIT</p>
+                    </div>
+                </div>
+            </div>
+
+            <div className="bg-indigo-900 rounded-xl p-6 text-white mb-6 shadow-md">
+              <h2 className="text-2xl font-bold mb-2">Panel Kontrol Konsorsium</h2>
+              <p className="text-indigo-200">Kelola agregasi pesanan, monitoring vendor, dan penutupan batch konsorsium untuk wilayah Malang Raya.</p>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* Aggregation Monitor */}
+              <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-6">
+                <div className="flex justify-between items-center mb-6">
+                  <h3 className="font-bold text-lg text-slate-800">Monitor Agregasi (Real-time)</h3>
+                  <span className="px-3 py-1 bg-green-100 text-green-700 text-xs rounded-full animate-pulse">Live Update</span>
+                </div>
+                <div className="space-y-6">
+                  {MOCK_PRODUCTS.map(p => (
+                    <div key={p.id} className="border-b border-slate-100 pb-4 last:border-0 last:pb-0">
+                      <div className="flex justify-between mb-2">
+                        <span className="font-medium text-slate-800">{p.name}</span>
+                        <span className="text-sm text-slate-500">{p.vendor}</span>
+                      </div>
+                      <div className="flex items-center gap-4 text-sm mb-2">
+                         <div className="flex-1 bg-slate-100 rounded-full h-3">
+                            <div className="bg-blue-600 h-3 rounded-full" style={{ width: '75%' }}></div>
+                         </div>
+                         <span className="font-bold text-slate-700">{p.currentPoolQty} Unit</span>
+                      </div>
+                      <div className="flex justify-between items-center mt-3">
+                        <div className="text-xs text-slate-500">
+                          <span className="block">Target Tier Berikutnya: 1000 Unit (Disc 20%)</span>
+                          <span className="block text-red-500">Sisa Waktu: {p.deadline}</span>
+                        </div>
+                        <button className="px-4 py-2 bg-indigo-600 text-white text-xs rounded-lg hover:bg-indigo-700">
+                          Tutup Batch & Buat PO
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Vendor Applications / Alerts */}
+              <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-6">
+                 <h3 className="font-bold text-lg text-slate-800 mb-4">Persetujuan & Notifikasi</h3>
+                 <div className="space-y-4">
+                    <div className="flex gap-4 items-start p-3 bg-slate-50 rounded-lg border border-slate-100">
+                       <div className="mt-1"><AlertCircle className="text-orange-500" size={20} /></div>
+                       <div>
+                          <h4 className="font-bold text-sm text-slate-800">Vendor Baru: Global Medika</h4>
+                          <p className="text-xs text-slate-600 mt-1">Mengajukan pendaftaran. Dokumen legal lengkap. Menunggu verifikasi.</p>
+                          <div className="mt-2 flex gap-2">
+                             <button className="text-xs px-3 py-1 bg-white border border-slate-300 rounded hover:bg-slate-50">Lihat Dokumen</button>
+                             <button className="text-xs px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700">Approve</button>
+                          </div>
+                       </div>
+                    </div>
+                    <div className="flex gap-4 items-start p-3 bg-slate-50 rounded-lg border border-slate-100">
+                       <div className="mt-1"><CheckCircle className="text-green-500" size={20} /></div>
+                       <div>
+                          <h4 className="font-bold text-sm text-slate-800">PO Kolektif #PO-2025-099 Selesai</h4>
+                          <p className="text-xs text-slate-600 mt-1">Vendor PharmaOne telah mengkonfirmasi pengiriman ke 5 RS Anggota.</p>
+                       </div>
+                    </div>
+                 </div>
+              </div>
+            </div>
+          </div>
+        );
+
+        const VendorView = () => (
+          <div className="space-y-6">
+            <div className="flex justify-between items-end mb-6">
+              <div>
+                <h2 className="text-2xl font-bold text-slate-800">Portal Vendor: PharmaOne Indo</h2>
+                <p className="text-slate-500">Kelola katalog produk, seting tier harga, dan proses PO masuk.</p>
+              </div>
+              <button className="flex items-center gap-2 px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700">
+                <Plus size={18} /> Tambah Produk Baru
+              </button>
+            </div>
+
+            {/* Tier Configuration Demo */}
+            <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-6 mb-6">
+              <h3 className="font-bold text-lg text-slate-800 mb-4 border-b border-slate-100 pb-2">Konfigurasi Harga Bertingkat (Tiered Pricing)</h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="col-span-1">
+                   <label className="block text-sm font-medium text-slate-700 mb-1">Pilih Produk</label>
+                   <select className="w-full border-slate-300 rounded-lg border p-2 text-sm bg-slate-50">
+                     <option>Paracetamol Infusion 1g</option>
+                     <option>Amoxicillin 500mg</option>
+                   </select>
+                   <div className="mt-4 p-4 bg-blue-50 rounded-lg text-xs text-blue-700">
+                      <p className="font-bold mb-1">Strategi Diskon:</p>
+                      <p>Semakin besar volume diskon yang Anda berikan, semakin besar kemungkinan RS Pelopor menutup batch lebih cepat.</p>
+                   </div>
+                </div>
+                <div className="col-span-2 space-y-3">
+                   <div className="flex items-center gap-4">
+                      <div className="w-24 text-sm font-medium text-slate-600">Tier 1</div>
+                      <input type="number" placeholder="Min Qty (0)" className="border border-slate-300 rounded p-2 text-sm w-24" defaultValue={0} disabled />
+                      <span className="text-slate-400">-</span>
+                      <input type="number" placeholder="Max Qty" className="border border-slate-300 rounded p-2 text-sm w-24" defaultValue={499} />
+                      <div className="flex items-center gap-2">
+                         <input type="number" placeholder="%" className="border border-slate-300 rounded p-2 text-sm w-16" defaultValue={0} />
+                         <span className="text-sm text-slate-500">% Off</span>
+                      </div>
+                   </div>
+                   <div className="flex items-center gap-4">
+                      <div className="w-24 text-sm font-medium text-slate-600">Tier 2</div>
+                      <input type="number" placeholder="Min Qty" className="border border-slate-300 rounded p-2 text-sm w-24" defaultValue={500} />
+                      <span className="text-slate-400">-</span>
+                      <input type="number" placeholder="Max Qty" className="border border-slate-300 rounded p-2 text-sm w-24" defaultValue={999} />
+                      <div className="flex items-center gap-2">
+                         <input type="number" placeholder="%" className="border border-slate-300 rounded p-2 text-sm w-16" defaultValue={10} />
+                         <span className="text-sm text-slate-500">% Off</span>
+                      </div>
+                   </div>
+                   <div className="flex items-center gap-4">
+                      <div className="w-24 text-sm font-medium text-slate-600">Tier 3</div>
+                      <input type="number" placeholder="Min Qty" className="border border-slate-300 rounded p-2 text-sm w-24" defaultValue={1000} />
+                      <span className="text-slate-400">-</span>
+                      <input type="text" value="Unlimited" disabled className="bg-slate-100 border border-slate-300 rounded p-2 text-sm w-24 text-slate-500" />
+                      <div className="flex items-center gap-2">
+                         <input type="number" placeholder="%" className="border border-slate-300 rounded p-2 text-sm w-16" defaultValue={20} />
+                         <span className="text-sm text-slate-500">% Off</span>
+                      </div>
+                   </div>
+                   <button className="mt-2 text-sm text-blue-600 font-medium hover:underline">+ Tambah Tier</button>
+                   <div className="flex justify-end mt-4">
+                     <button className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium">Simpan Perubahan</button>
+                   </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Incoming PO Table */}
+            <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+              <div className="px-6 py-4 border-b border-slate-100">
+                <h3 className="font-bold text-slate-800">Purchase Order (PO) Masuk</h3>
+              </div>
+              <table className="w-full text-sm text-left">
+                <thead className="bg-slate-50 text-slate-600 font-medium">
+                  <tr>
+                    <th className="px-6 py-3">No. PO</th>
+                    <th className="px-6 py-3">Konsorsium</th>
+                    <th className="px-6 py-3">Produk</th>
+                    <th className="px-6 py-3">Total Qty</th>
+                    <th className="px-6 py-3">Tier Terpakai</th>
+                    <th className="px-6 py-3">Total Nilai</th>
+                    <th className="px-6 py-3">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100">
+                  <tr>
+                    <td className="px-6 py-4 font-medium">PO-KONS-088</td>
+                    <td className="px-6 py-4">MedAlliance Jakarta</td>
+                    <td className="px-6 py-4">Paracetamol Infusion</td>
+                    <td className="px-6 py-4">1,200 Botol</td>
+                    <td className="px-6 py-4"><span className="text-green-600 font-bold bg-green-50 px-2 py-1 rounded">Tier 3 (20%)</span></td>
+                    <td className="px-6 py-4 font-bold">Rp 24.000.000</td>
+                    <td className="px-6 py-4">
+                       <button className="text-blue-600 hover:underline mr-3">Proses</button>
+                       <button className="text-slate-500 hover:underline">Invoice</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        );
+
+        // --- Layout & App ---
+
+        const App = () => {
+          const [activeRole, setActiveRole] = useState('member');
+          const [activeTab, setActiveTab] = useState('dashboard');
+
+          return (
+            <div className="min-h-screen bg-slate-50 font-sans text-slate-900 flex">
+              {/* Sidebar */}
+              <aside className="w-64 bg-white border-r border-slate-200 hidden md:flex flex-col fixed h-full z-10">
+                <div className="p-6 border-b border-slate-100">
+                  <div className="flex items-center gap-2 text-emerald-600 font-bold text-xl">
+                    <Users size={28} className="fill-current" />
+                    <span>MedSynergy</span>
+                  </div>
+                  <p className="text-xs text-slate-400 mt-1">Platform Kolaborasi RS & Klinik</p>
+                </div>
+                
+                <nav className="flex-1 p-4 space-y-1">
+                  <button 
+                    onClick={() => setActiveTab('dashboard')}
+                    className={`w-full flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-lg transition-colors ${activeTab === 'dashboard' ? 'bg-emerald-50 text-emerald-700' : 'text-slate-600 hover:bg-slate-50'}`}
+                  >
+                    <LayoutDashboard size={18} /> Dashboard
+                  </button>
+                  <button 
+                     onClick={() => setActiveTab('catalog')}
+                     className={`w-full flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-lg transition-colors ${activeTab === 'catalog' ? 'bg-emerald-50 text-emerald-700' : 'text-slate-600 hover:bg-slate-50'}`}
+                  >
+                    <ShoppingCart size={18} /> {activeRole === 'vendor' ? 'Katalog Saya' : 'Katalog Kolektif'}
+                  </button>
+                  <button className="w-full flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-600 hover:bg-slate-50 rounded-lg">
+                    <FileText size={18} /> {activeRole === 'member' ? 'Tagihan Saya' : 'Invoices'}
+                  </button>
+                  <button className="w-full flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-600 hover:bg-slate-50 rounded-lg">
+                    <Users size={18} /> {activeRole === 'member' ? 'Anggota Lain' : 'Manajemen Anggota'}
+                  </button>
+                </nav>
+
+                <div className="p-4 border-t border-slate-100">
+                  <button className="w-full flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-600 hover:bg-slate-50 rounded-lg">
+                    <Settings size={18} /> Pengaturan
+                  </button>
+                </div>
+              </aside>
+
+              {/* Main Content */}
+              <main className="flex-1 md:ml-64 p-4 md:p-8">
+                {/* Top Header */}
+                <header className="flex justify-between items-center mb-8">
+                  <div>
+                    <h1 className="text-2xl font-bold text-slate-800">
+                      {activeTab === 'dashboard' ? 'Dashboard Utama' : 'Katalog Produk'}
+                    </h1>
+                    <p className="text-slate-500 text-sm">Selamat datang kembali, {activeRole === 'member' ? 'Dr. Budi (Klinik Sehat)' : activeRole === 'admin' ? 'Admin RSI Unisma Malang (Pelopor)' : 'Sales Manager PharmaOne'}</p>
+                  </div>
+
+                  <div className="flex items-center gap-4">
+                     {/* Role Switcher for Demo Purpose */}
+                     <div className="flex bg-white rounded-lg p-1 border border-slate-200 shadow-sm">
+                        <button 
+                          onClick={() => setActiveRole('member')}
+                          className={`px-3 py-1 text-xs font-medium rounded transition-colors ${activeRole === 'member' ? 'bg-blue-100 text-blue-700' : 'text-slate-500 hover:bg-slate-50'}`}
+                        >
+                          Member
+                        </button>
+                        <button 
+                          onClick={() => setActiveRole('admin')}
+                          className={`px-3 py-1 text-xs font-medium rounded transition-colors ${activeRole === 'admin' ? 'bg-indigo-100 text-indigo-700' : 'text-slate-500 hover:bg-slate-50'}`}
+                        >
+                          Admin
+                        </button>
+                        <button 
+                          onClick={() => setActiveRole('vendor')}
+                          className={`px-3 py-1 text-xs font-medium rounded transition-colors ${activeRole === 'vendor' ? 'bg-emerald-100 text-emerald-700' : 'text-slate-500 hover:bg-slate-50'}`}
+                        >
+                          Vendor
+                        </button>
+                     </div>
+
+                     <button className="p-2 text-slate-400 hover:bg-white hover:text-slate-600 rounded-full transition-colors relative">
+                       <Bell size={20} />
+                       <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full border border-slate-50"></span>
+                     </button>
+                     <div className="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center text-slate-600 font-bold text-xs">
+                        {activeRole === 'member' ? 'BS' : activeRole === 'admin' ? 'RSI' : 'PO'}
+                     </div>
+                  </div>
+                </header>
+
+                {/* Dynamic Content based on Role */}
+                <div className="animate-fade-in">
+                  {activeRole === 'member' && <MemberView />}
+                  {activeRole === 'admin' && <AdminView />}
+                  {activeRole === 'vendor' && <VendorView />}
+                </div>
+              </main>
+            </div>
+          );
+        };
+
+        const root = createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
