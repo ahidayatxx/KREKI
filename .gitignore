@@ -126,4 +126,4 @@ synthea-with-dependencies.jar
 *.old
 
 # Auto-commit scripts (local development tools)
-digital-health-competency/watch-and-commit.sh
+projects/digital-health-competency/watch-and-commit.sh
