@@ -1,0 +1,129 @@
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+.env
+
+# IDE and editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+logs
+*.log
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
+
+# nyc test coverage
+.nyc_output
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Temporary folders
+tmp/
+temp/
+
+# Build outputs
+dist/
+build/
+out/
+target/
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Package manager lock files (keep one, remove others based on preference)
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+
+# Claude Code specific
+.claude/session-history/
+.claude/cache/
+CLAUDE.md
+.claude/
+
+# Agent outputs (may contain sensitive data)
+agent-output/
+
+# Synthea generated files (if not meant to be tracked)
+*.csv
+*.xml
+# Uncomment below if synthea output should not be tracked
+# synthea-output/
+
+# Git large files - these exceed GitHub's 100MB limit
+*.jar
+*.zip
+*.tar.gz
+*.rar
+# Synthea jar files specifically
+synthea-with-dependencies.jar
+**/synthea-with-dependencies.jar
+
+# Firebase/Genkit
+.genkit/
+
+# Backup files
+*.bak
+*.backup
+*.old
+
+# Auto-commit scripts (local development tools)
+digital-health-competency/watch-and-commit.sh
