@@ -15,6 +15,7 @@ Sistem KREKI menggunakan arsitektur **Microservices** yang dirancang untuk modul
 |---------|-----------|
 | [System Architecture](./system-architecture.md) | Desain teknis lengkap dengan diagram microservices |
 | [Microservices Design](./microservices-design.md) | Detail setiap microservice dan teknologi stack |
+| [API Reference](./api-reference.md) | Dokumentasi API lengkap dengan request/response examples |
 
 ## Overview
 
