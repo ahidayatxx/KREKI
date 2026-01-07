@@ -525,6 +525,18 @@
                             </p>
                         </div>
 
+                        {/* View All Domains Link */}
+                        <div className="mb-8 flex justify-center">
+                            <a
+                                href="competency-framework-domains.html"
+                                className="group inline-flex items-center gap-3 px-6 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold shadow-lg shadow-blue-500/20 hover:shadow-blue-500/30 transition-all duration-300 hover:-translate-y-0.5"
+                            >
+                                <Database className="w-5 h-5" />
+                                <span>View All Domains (Table)</span>
+                                <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                            </a>
+                        </div>
+
                         {/* Tier Navigation (Desktop Only) */}
                         <div className="hidden md:grid grid-cols-3 gap-6 mb-12">
                             {frameworkData.map((tier) => {
