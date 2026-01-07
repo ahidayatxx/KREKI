@@ -306,9 +306,111 @@ docs/
 
 ---
 
-## 10. Capacity Planning
+## 10. Social Impact Measurement
 
-### 10.1 Scaling Strategy
+### 10.1 Social Impact KPIs
+
+**Mission-Critical Metrics (Mengukur Dampak Nyata):**
+
+| Metric | Definition | Target | Measurement Method |
+|--------|------------|--------|-------------------|
+| **Lives Saved** | Jumlah korban yang selamat berkat intervensi relawan | Increasing YOY | Post-emergency follow-up, hospital reports |
+| **Response Time Reduction** | Pengurangan waktu respons dibanding baseline | < 5 min (urban), < 8 min (rural) | Time from panic button to volunteer arrival |
+| **Survival Rate** | Persentase survival untuk kondisi kritis (e.g., cardiac arrest) | > 40% (vs 10% tanpa intervensi) | Hospital outcome tracking |
+| **Handoff Success Rate** | Persentase handoff ke layanan profesional yang berhasil | > 95% | Volunteer reports, hospital confirmation |
+
+**Community Engagement Metrics:**
+
+| Metric | Definition | Target | Measurement Method |
+|--------|------------|--------|-------------------|
+| **Volunteer Reach** | Jumlah relawan aktif per 10.000 penduduk | 10 relawan/10.000 penduduk | Volunteer database |
+| **Geographic Coverage** | Persentase kecamatan dengan minimal 5 relawan | 100% kecamatan Indonesia | Geographic analysis |
+| **Community Trust** | Tingkat kepercayaan masyarakat (survey) | > 80% trust level | Annual community survey |
+| **App Adoption** | Jumlah download per 1.000 penduduk | 100 downloads/1.000 penduduk | App analytics |
+
+### 10.2 Health Outcome Metrics
+
+**Per Emergency Type:**
+
+| Emergency Type | Key Metric | Baseline (Tanpa HELP 119) | Target (Dengan HELP 119) |
+|----------------|------------|---------------------------|-------------------------|
+| **Cardiac Arrest** | Survival to discharge | 5-10% | > 40% |
+| **Severe Bleeding** | Survival with intervention | 70% | > 95% |
+| **Choking** | Resolution without hospital | 60% | > 90% |
+| **Difficulty Breathing** | Stabilization before ambulance | 30% | > 70% |
+| **Traffic Accident** | Triage accuracy | 50% | > 85% |
+
+**Longitudinal Tracking:**
+- 30-day survival rate untuk SEV-1 emergencies
+- Quality of life survey untuk korban (3 months, 6 months post-emergency)
+- Disability-adjusted life years (DALYs) saved
+
+### 10.3 Volunteer Engagement Metrics
+
+**Engagement Indicators:**
+
+| Metric | Good Performance | Needs Improvement | Action Required |
+|--------|------------------|-------------------|-----------------|
+| **Active Volunteer Rate** | > 70% certified relawan aktif | < 50% | Re-engagement campaign |
+| **Response Acceptance Rate** | > 80% requests diterima relawan | < 60% | Recruit lebih banyak relawan |
+| **Volunteer Retention** | > 70% tahun-ke-tahun | < 50% | Improve volunteer experience |
+| **Satisfaction Score** | > 4/5 (survey) | < 3/5 | Investigate pain points |
+| **Burnout Rate** | < 10% relawan mengundurkan diri | > 20% | Review workload, support |
+
+**Development Metrics:**
+- Certification completion rate
+- Re-certification compliance rate
+- Advanced training uptake (Basic → Plus → Instructor)
+- Volunteer leadership progression
+
+### 10.4 Impact Attribution
+
+**Challenges:**
+- Tidak selalu jelas apakah survival disebabkan intervensi relawan atau faktor lain
+- Data pasca-kejadian sering tidak tersedia
+- Self-selection bias (korban yang memakai HELP 119 mungkin sudah lebih aware)
+
+**Attribution Methods:**
+1. **Counterfactual Analysis:** Bandingkan outcome dengan area tanpa HELP 119
+2. **Matched Pair Study:** Cocokkan kasus yang serat berdasarkan severity
+3. **Expert Review:** Panel medis menilai kontribusi relawan terhadap outcome
+4. **Volunteer Self-Assessment:** Relawan menilai apakah intervensi mereka berdampak
+
+### 10.5 Social Impact Reporting
+
+**Quarterly Impact Report:**
+- Executive summary untuk publik
+- Case studies (anonimized) dari lives saved
+- Geographic heatmaps dari emergency responses
+- Volunteer spotlight stories
+- Areas untuk improvement
+
+**Annual Impact Report:**
+- Comprehensive impact assessment
+- Year-over-year comparison
+- Cost per life saved analysis
+- Testimonials dari korban dan relawan
+- Strategic priorities untuk tahun depan
+
+### 10.6 Baseline Establishment
+
+**Pre-Launch Baseline (Sebelum HELP 119 Launch):**
+- Rata-rata waktu respons ambulans di Indonesia: ~15-20 menit
+- Cardiac arrest survival rate: < 10%
+- First aid knowledge penetration: < 20% populasi
+- Geographic coverage: Urban areas only
+
+**Post-Launch Tracking (Setelah HELP 119 Launch):**
+- Tracking response time setiap emergency
+- Monthly survival rate analysis per emergency type
+- Annual community knowledge survey
+- Quarterly geographic coverage analysis
+
+---
+
+## 11. Capacity Planning
+
+### 11.1 Scaling Strategy
 
 **Emergency Core Service:**
 - Auto-scaling based on CPU > 70%
@@ -322,7 +424,7 @@ docs/
 
 ---
 
-## Implementation Roadmap
+## 12. Implementation Roadmap
 
 ### Phase 1 - Critical (Months 1-2)
 1. Establish Technical Board and Operations Committee
