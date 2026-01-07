@@ -33,6 +33,8 @@ last_updated: 2025-01-07
 ###  HELP 119
 Mobile application dengan volunteer geolocation dan emergency button.
 
+*Panduan pengguna lengkap tersedia di [Panduan HELP 119](../manual/help-119-guide.md)*
+
 ###  KREKI LMS
 Platform edukasi untuk pelatihan Bantuan Hidup Dasar (BHD).
 

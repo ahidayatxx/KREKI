@@ -49,6 +49,12 @@ Informasi organisasi, kontak, dan program KREKI.
 - [Organization Profile](about/organization.md) - Profil lengkap organisasi
 - [Contact & Partners](about/contact.md) - Kontak dan mitra strategis
 
+###  Manual / Panduan
+
+Panduan pengguna untuk aplikasi dan layanan KREKI.
+
+- [Panduan HELP 119](manual/help-119-guide.md) - Panduan lengkap penggunaan aplikasi HELP 119 untuk masyarakat dan relawan
+
 ###  Engineering
 
 Technical handbook untuk ekosistem digital KREKI.
@@ -65,6 +71,7 @@ kreki/
 │   ├── governance/        # Tata kelola IT
 │   ├── architecture/      # Arsitektur sistem
 │   ├── contributing/      # Panduan kontribusi
+│   ├── manual/            # Panduan pengguna
 │   └── about/            # Info organisasi
 └── engineering/          # Technical handbook
 ```
