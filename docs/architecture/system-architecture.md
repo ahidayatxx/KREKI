@@ -16,32 +16,32 @@ graph TD
     UserApp[Mobile App HELP 119] --> API_Gateway
     WebAdmin[Web Dashboard] --> API_Gateway
 
-    subgraph "Infrastructure Layer (Docker Swarm/K8s)"
-        API_Gateway[API Gateway / Kong]
+    subgraph Infrastructure["Infrastructure Layer - Docker Swarm/K8s"]
+        API_Gateway["API Gateway / Kong"]
 
-        subgraph "Core Services"
-            Auth[Auth Service<br/>(Identity & SSO)]
-            Emer[Emergency Service<br/>(Panic Button & Dispatch)]
-            Relay[Volunteer Service<br/>(Profile & Skills)]
+        subgraph Core["Core Services"]
+            Auth["Auth Service - Identity & SSO"]
+            Emer["Emergency Service - Panic Button & Dispatch"]
+            Relay["Volunteer Service - Profile & Skills"]
         end
 
-        subgraph "Support Services"
-            LMS[LMS Service<br/>(Training & Quiz)]
-            Notif[Notification Service<br/>(FCM, WA, Email)]
-            CMS[Content Service<br/>(News & Static Info)]
+        subgraph Support["Support Services"]
+            LMS["LMS Service - Training & Quiz"]
+            Notif["Notification Service - FCM, WA, Email"]
+            CMS["Content Service - News & Static Info"]
         end
 
-        subgraph "External Integrations"
-            Bridge[SATUSEHAT Bridge]
+        subgraph External["External Integrations"]
+            Bridge["SATUSEHAT Bridge"]
         end
     end
 
-    Auth --> DB_Users[(DB Users)]
-    Emer --> DB_Ops[(DB Operations + GIS)]
+    Auth --> DB_Users[("(DB Users)")]
+    Emer --> DB_Ops[("(DB Operations + GIS)")]
     Relay --> DB_Ops
-    LMS --> DB_LMS[(DB Learning)]
+    LMS --> DB_LMS[("(DB Learning)")]
 
-    Bridge --> SATUSEHAT_API((Kemenkes API))
+    Bridge --> SATUSEHAT_API[("Kemenkes API")]
 ```
 
 ## Design Principles
