@@ -2,7 +2,7 @@
 title: "Dokumentasi KREKI"
 description: "Pusat dokumentasi sistem informasi dan tata kelola KREKI"
 category: "index"
-last_updated: 2025-01-07
+last_updated: 2025-01-08
 ---
 
 # Dokumentasi KREKI
@@ -14,7 +14,7 @@ Selamat datang di dokumentasi resmi **Komunitas Relawan Emergensi Kesehatan Indo
 | Untuk Anda | Mulai Dari |
 |-----------|------------|
 | **Developer Baru** | [Panduan Kontribusi](contributing/contribution-guide.md) |
-| **Architect/Lead** | [Arsitektur Sistem](architecture/system-architecture.md) |
+| **Architect/Lead** | [Enterprise Architecture](ea/) |
 | **Ops/DevOps** | [Tata Kelola IT](governance/it-governance.md) |
 | **General Info** | [Tentang KREKI](about/) |
 
@@ -55,6 +55,21 @@ Panduan pengguna untuk aplikasi dan layanan KREKI.
 
 - [Panduan HELP 119](manual/help-119-guide.md) - Panduan lengkap penggunaan aplikasi HELP 119 untuk masyarakat dan relawan
 
+###  Enterprise Architecture
+
+Enterprise Architecture (EA) framework sebagai "rumah tumbuh" untuk ekosistem digital KREKI.
+
+- [EA Overview](ea/index.md) - Pengantar Enterprise Architecture KREKI
+- [Business Architecture](ea/business-architecture.md) - Kapabilitas bisnis, value streams, stakeholder
+- [Data Architecture](ea/data-architecture.md) - Data domains, flows, governance
+- [Application Architecture](ea/application-architecture.md) - Portfolio aplikasi dan lifecycle
+- [Technology Architecture](ea/technology-architecture.md) - Technology stack dan standards
+- [Security Architecture](ea/security-architecture.md) - Security domains dan controls
+- [Integration Architecture](ea/integration-architecture.md) - Integration patterns dan standards
+- [Innovation Framework](ea/innovation-framework.md) - Technology radar dan emerging tech
+- [EA Governance](ea/ea-governance.md) - Tata kelola EA dan update cycle
+- [EA Roadmap](ea/roadmap.md) - Peta jalan evolusi EA
+
 ###  Engineering
 
 Technical handbook untuk ekosistem digital KREKI.
@@ -70,6 +85,7 @@ kreki/
 ├── docs/                  # Dokumentasi utama
 │   ├── governance/        # Tata kelola IT
 │   ├── architecture/      # Arsitektur sistem
+│   ├── ea/                # Enterprise Architecture
 │   ├── contributing/      # Panduan kontribusi
 │   ├── manual/            # Panduan pengguna
 │   └── about/            # Info organisasi
