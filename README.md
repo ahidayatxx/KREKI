@@ -1,111 +1,60 @@
-# KREKI Digital Ecosystem
+# ⚠️ KREKI Repository - MIGRATED
 
-<div align="center">
-
-**Komunitas Relawan Emergensi Kesehatan Indonesia**
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![GitHub](https://img.shields.io/badge/GitHub-Repository-blue)](https://github.com/kreki/kreki-docs)
-
-*Menjadi wadah komunitas relawan untuk memberikan bantuan darurat kesehatan secara cepat dan profesional di seluruh wilayah Indonesia.*
-
-[Website](https://kreki.id) | [Documentation](./docs) | [Contributing](./docs/contributing/) | [Contact](./docs/about/contact.md)
-
-</div>
+**This repository has been migrated to the new kreki-indonesia GitHub organization.**
 
 ---
 
-## Tentang KREKI
+## 📢 Important Notice
 
-**KREKI** (Komunitas Relawan Emergensi Kesehatan Indonesia) adalah organisasi relawan nasional yang didirikan pada Desember 2018 dengan misi memberikan respon kesehatan darurat yang cepat di seluruh Indonesia.
+This repository is **archived** and no longer maintained. All content has been migrated to the new **kreki-indonesia** GitHub organization.
 
-### Nilai Inti (KREKI)
-
-- **K**ompeten - Memastikan relawan memiliki keterampilan terverifikasi
-- **R**esponsif - Menjaga kesiapan untuk penyebaran cepat
-- **E**mpati - Pendekatan dengan kasih sayang dan kepedulian
-- **K**omunikatif - Pertukaran informasi yang jelas
-- **I**novatif - Merangkul solusi teknologi
+**Please visit: https://github.com/kreki-indonesia**
 
 ---
 
-## Ekosistem Digital
+## 🚀 New Location
 
-Kami menggabungkan semangat kerelawanan dengan inovasi teknologi:
+All KREKI documentation, standards, and platform services are now organized in multiple repositories under:
 
-###  HELP 119 (Mobile Application)
-Platform respon darurat terintegrasi dengan geolocation relawan dan tombol panik.
+### **GitHub Organization: kreki-indonesia**
+🌐 https://github.com/kreki-indonesia
 
-###  KREKI Learning Management System
-Platform edukasi digital untuk pelatihan Bantuan Hidup Dasar (BHD).
+### Key Repositories:
 
-###  Governance Platform
-Portal transparansi untuk tata kelola organisasi dan akuntabilitas operasional.
-
----
-
-## Dokumentasi
-
-Dokumentasi teknis dan tata kelola sistem informasi KREKI:
-
-| Dokumen | Deskripsi |
-|---------|-----------|
-| [Architecture](./docs/architecture/) | Desain microservices dan arsitektur sistem |
-| [Governance](./docs/governance/) | Framework tata kelola IT dan SLA |
-| [Contributing](./docs/contributing/) | Panduan kontribusi dan standar kode |
-| [Engineering](./engineering/handbook.md) | Technical handbook dan ecosystem |
+| Repository | Purpose | URL |
+|------------|---------|-----|
+| **ea-standards** | Enterprise Architecture & Standards | https://github.com/kreki-indonesia/ea-standards |
+| **api-specifications** | API Documentation | https://github.com/kreki-indonesia/api-specifications |
+| **fhir-profiles** | FHIR Implementation Guides | https://github.com/kreki-indonesia/fhir-profiles |
+| **security-framework** | Security Standards | https://github.com/kreki-indonesia/security-framework |
+| **certification-framework** | Certification Programs | https://github.com/kreki-indonesia/certification-framework |
+| **help-119-mobile** | Mobile Application | https://github.com/kreki-indonesia/help-119-mobile |
+| **help-119-backend** | Backend Services | https://github.com/kreki-indonesia/help-119-backend |
+| **kreki-auth-service** | Authentication Service | https://github.com/kreki-indonesia/kreki-auth-service |
+| **kreki-emergency-core** | Emergency Response Engine | https://github.com/kreki-indonesia/kreki-emergency-core |
+| **kreki-lms** | Learning Management System | https://github.com/kreki-indonesia/kreki-lms |
+| **satusehat-bridge** | SATUSEHAT Integration | https://github.com/kreki-indonesia/satusehat-bridge |
 
 ---
 
-## Berkontribusi
+## 📖 Documentation
 
-Kami mengundang developer, mahasiswa, dan profesional untuk berkontribusi:
-
-1. Baca [Panduan Kontribusi](./docs/contributing/contribution-guide.md)
-2. Fork repositori ini
-3. Buat branch untuk fitur atau perbaikan (`feat/feature-name` atau `fix/bug-name`)
-4. Commit dengan pesan yang jelas
-5. Push dan buat Pull Request
-
-### Untuk Developer
-- Vendor developers
-- Mahasiswa magang
-- IT Volunteers
-
-### Untuk Organisasi
-- Universitas (partnership)
-- Perusahaan teknologi (CSR)
-- Institusi kesehatan
+For complete migration details, see: **[MIGRATION_NOTICE.md](./MIGRATION_NOTICE.md)**
 
 ---
 
-## Mitra Strategis
+## ✅ Next Steps
 
-- **Pemerintah:** Kemenkes, Dinas Kesehatan, BPBD
-- **Akademisi:** FK-KMK UGM, PKMK UGM
-- **Sektor Kesehatan:** IndoHCF, jaringan Rumah Sakit
-
----
-
-## Kontak
-
-- **Email:** sekretariat.kreki@gmail.com
-- **Hotline:** 08888-119-119 (Ambulans & Gawat Darurat)
-- **IT Support:** it-support@kreki.or.id
-- **Security:** security@kreki.or.id
+1. **Visit the new organization**: https://github.com/kreki-indonesia
+2. **Clone the repositories** you need
+3. **Update your bookmarks** and references
+4. **Join the organization** for contributor access
 
 ---
 
-## Lisensi
-
-Project ini dilisensikan under the MIT License - lihat [LICENSE](./LICENSE) untuk detail.
+*Last Updated: January 9, 2026*
+*Archived by: KREKI Technical Committee*
 
 ---
 
-<div align="center">
-
-**Menyelamatkan Nyawa Melalui Kode**
-
-Made with   by KREKI Tech Community
-
-</div>
+**🙏 Terima kasih! Thank you for your support!**
