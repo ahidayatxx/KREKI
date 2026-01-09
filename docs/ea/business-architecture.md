@@ -2,7 +2,7 @@
 title: "Business Architecture KREKI"
 description: "Kapabilitas bisnis, value streams, dan stakeholder mapping KREKI"
 category: "enterprise-architecture"
-last_updated: 2025-01-08
+last_updated: 2025-01-09
 ---
 
 # Business Architecture KREKI
@@ -297,6 +297,34 @@ KREKI Chapter (Provinsi/Kabupaten)
 
 ## Strategic Goals Alignment
 
+### Hierarki KPI
+
+Arsitektur KPI KREKI memisahkan pengukuran strategis dari operasional untuk akuntabilitas yang jelas.
+
+#### KPI Strategis (Strategic KPI)
+
+Mengukur dampak utama terhadap keselamatan jiwa dan kesiapsiagaan nasional.
+
+| KPI Strategis | Target | Cara Ukur | Penanggung Jawab |
+|--------------|--------|-----------|-----------------|
+| **Survival Rate Kondisi Kritis** | > 40% | Persentase korban kritis yang bertahan hidup setelah menerima respon awal | Steering Committee |
+| **Cakupan Wilayah Layanan** | 80% wilayah berisiko | Proporsi wilayah dengan akses relawan aktif dan siap | Steering Committee |
+| **Relawan Terlatih per Populasi** | 10/10.000 penduduk | Rasio relawan tersertifikasi terhadap populasi | Steering Committee |
+| **Kemitraan Strategis Aktif** | 5+ kemitraan formal | Jumlah kemitraan yang berjalan dan berkontribusi langsung | Steering Committee |
+
+#### KPI Operasional (Operational KPI)
+
+Mengukur efektivitas pelaksanaan program dan proses respons di lapangan.
+
+| KPI Operasional | Target | Cara Ukur | Penanggung Jawab |
+|----------------|--------|-----------|-----------------|
+| **Waktu Tanggap Respons** | < 5 menit (urban), < 8 menit (rural) | Dari laporan diterima hingga relawan tiba di lokasi | Program Management |
+| **Keberhasilan Penugasan** | > 90% | Persentase penugasan yang selesai sesuai rencana tanpa pembatalan | Program Management |
+| **Kepatuhan SOP** | > 95% | Tingkat kesesuaian tindakan lapangan dengan prosedur yang ditetapkan | Program Management |
+| **Tingkat Kesiapan Relawan** | > 80% | Proporsi relawan yang aktif, tersertifikasi, dan tersedia saat dibutuhkan | Program Management |
+
+### Strategic Goals Alignment
+
 | Goal | Target | KPI | EA Enabler |
 |------|--------|-----|------------|
 | **Response Time < 5 min** | 80% emergencies urban | Response time P95 | Geo-dispatch algorithm, real-time tracking |
@@ -312,6 +340,7 @@ KREKI Chapter (Provinsi/Kabupaten)
 - [Volunteer Program](../about/volunteer-program.md) - Program relawan detail
 - [Stakeholder Integration](../governance/stakeholder-integration.md) - Protokol integrasi eksternal
 - [IT Governance](../governance/it-governance.md) - Tata kelola IT
+- [Risk Management](./risk-management.md) - Enterprise risk register dan mitigasi
 
 ---
 

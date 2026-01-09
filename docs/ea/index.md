@@ -2,7 +2,7 @@
 title: "Enterprise Architecture KREKI"
 description: "Kerangka Enterprise Architecture sebagai rumah tumbuh untuk ekosistem digital KREKI"
 category: "enterprise-architecture"
-last_updated: 2025-01-08
+last_updated: 2025-01-09
 ---
 
 # Enterprise Architecture KREKI
@@ -40,6 +40,69 @@ graph LR
 - **Ekstensibel**: Mudah menambah kapabilitas/aplikasi/teknologi baru
 - **Version-Controlled**: Git-based dengan riwayat perubahan jelas
 - **Living Document**: Review triwulan, refresh tahunan
+
+---
+
+## Prinsip Dasar Arsitektur
+
+Lima prinsip inti yang menjadi landasan arsitektur KREKI:
+
+### 1. Misi di atas Teknologi (Mission First - Technology Enables)
+
+Teknologi diposisikan sebagai pendukung pencapaian tujuan kemanusiaan, bukan sebagai faktor penentu arah organisasi.
+
+**Implementasi:**
+- Prioritas tetap pada penyelamatan jiwa dan peningkatan kesiapsiagaan komunitas
+- Keputusan teknis harus selaras dengan mandat misi kemanusiaan
+- Technology enables mission, not drives it
+
+**Risiko jika dilanggar:** Teknologi mendominasi, misi bergeser, penurunan relevansi dan efektivitas
+
+### 2. Pemberdayaan Komunitas (Community Empowerment)
+
+Arsitektur dirancang untuk memperkuat kapasitas komunitas sebagai *first responder*, bukan hanya mengandalkan institusi formal.
+
+**Implementasi:**
+- Mendukung pelatihan, koordinasi, dan kemandirian komunitas
+- Desain sistem yang dapat digunakan langsung oleh warga
+- Komunitas sebagai aktor utama respon emergensi
+
+**Risiko jika dilangkat:** Lemahnya kesiapsiagaan grassroots, peningkatan keterlambatan respons
+
+### 3. Integrasi Nasional & Interoperabilitas (National Integration)
+
+Sistem harus selaras dengan tata kelola nasional dan terhubung secara aman, standar, dan fungsional lintas platform.
+
+**Implementasi:**
+- Mendukung integrasi dengan PSC 119, SATUSEHAT, dan sistem kesehatan lainnya
+- Mengikuti standar nasional untuk interoperabilitas data
+- Keterhubungan dengan ekosistem emergensi nasional
+
+**Risiko jika dilangkat:** Fragmentasi sistem, gangguan koordinasi, hilangnya efektivitas ekosistem emergensi
+
+### 4. Berbasis Data & KPI (Evidence & KPI Driven)
+
+Keputusan, evaluasi, dan pengembangan sistem berbasis bukti dan indikator kinerja yang terukur.
+
+**Implementasi:**
+- Memiliki kemampuan pengambilan data, analitik, dan pelaporan
+- Keputusan berdasarkan data, bukan asumsi
+- KPI strategis dan operasional yang jelas
+
+**Risiko jika dilangkat:** Kegagalan evaluasi, arah kebijakan salah, pemborosan sumber daya
+
+### 5. Tangguh & Berkelanjutan (Resilience & Sustainability)
+
+Sistem dan organisasi dirancang untuk withstand gangguan, adaptif, dan memastikan keberlanjutan jangka panjang.
+
+**Implementasi:**
+- Platform dengan keandalan tinggi, kontinuitas, dan kesiapan pemulihan
+- Desain untuk resiliensi dan business continuity
+- Keberlanjutan operasional jangka panjang
+
+**Risiko jika dilangkat:** Kegagalan layanan saat krisis, hilangnya kepercayaan publik, ketidakterberlanjutan sistem
+
+---
 
 ## Domain Enterprise Architecture
 
@@ -146,6 +209,19 @@ Tata kelola EA dan siklus pembaruan.
 - Communication Strategy
 
 [Selengkapnya →](./ea-governance.md)
+
+---
+
+### 9. Risk Management
+Manajemen risiko enterprise dan framework mitigasi.
+
+**Fokus:**
+- Risk Register (Governance, Operational, Technology, Privacy)
+- Risk Assessment & Treatment
+- Risk Governance & Roles
+- KPI Risiko
+
+[Selengkapnya →](./risk-management.md)
 
 ---
 
