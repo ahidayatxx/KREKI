@@ -1,0 +1,20 @@
+# AI Assistant Files (Local Development Only)
+CLAUDE.md
+.claude/
+
+# GitHub Token (if stored locally)
+.github_token
+
+# IDE and Editor Files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Temporary Files
+*.tmp
+*.log
+.env.local
+.env.*.local
