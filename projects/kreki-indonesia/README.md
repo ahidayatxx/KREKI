@@ -76,11 +76,11 @@ National standards other organizations can adopt.
 
 | Repository | Description | License |
 |------------|-------------|---------|
-| [ea-standards](./standards/ea-standards/) | TOGAF-based emergency services EA framework | CC BY 4.0 |
-| [api-specifications](./standards/api-specifications/) | OpenAPI specs for emergency response APIs | MIT |
-| [fhir-profiles](./standards/fhir-profiles/) | Emergency services FHIR implementation guides | Apache 2.0 |
-| [security-framework](./standards/security-framework/) | Zero Trust security standards | MIT |
-| [certification-framework](./standards/certification-framework/) | Volunteer competency certification | CC BY 4.0 |
+| [ea-standards](https://github.com/kreki-indonesia/ea-standards) | TOGAF-based emergency services EA framework | CC BY 4.0 |
+| [api-specifications](https://github.com/kreki-indonesia/api-specifications) | OpenAPI specs for emergency response APIs | MIT |
+| [fhir-profiles](https://github.com/kreki-indonesia/fhir-profiles) | Emergency services FHIR implementation guides | Apache 2.0 |
+| [security-framework](https://github.com/kreki-indonesia/security-framework) | Zero Trust security standards | MIT |
+| [certification-framework](https://github.com/kreki-indonesia/certification-framework) | Volunteer competency certification | CC BY 4.0 |
 
 ### 🛠️ Platform Services (Source Available)
 
@@ -88,12 +88,12 @@ Core platform implementations (viewable source, licensed for use).
 
 | Repository | Description | License |
 |------------|-------------|---------|
-| [help-119-mobile](./platform/help-119-mobile/) | Android & iOS mobile application | Source Available |
-| [help-119-backend](./platform/help-119-backend/) | Core backend microservices | Source Available |
-| [kreki-auth-service](./platform/kreki-auth-service/) | Multi-tenant authentication & SSO | Source Available |
-| [kreki-emergency-core](./platform/kreki-emergency-core/) | Geo-dispatch engine | Source Available |
-| [kreki-lms](./platform/kreki-lms/) | Learning Management System | Source Available |
-| [satusehat-bridge](./platform/satusehat-bridge/) | SATUSEHAT integration wrapper | Source Available |
+| [help-119-mobile](https://github.com/kreki-indonesia/help-119-mobile) | Android & iOS mobile application | Source Available |
+| [help-119-backend](https://github.com/kreki-indonesia/help-119-backend) | Core backend microservices | Source Available |
+| [kreki-auth-service](https://github.com/kreki-indonesia/kreki-auth-service) | Multi-tenant authentication & SSO | Source Available |
+| [kreki-emergency-core](https://github.com/kreki-indonesia/kreki-emergency-core) | Geo-dispatch engine | Source Available |
+| [kreki-lms](https://github.com/kreki-indonesia/kreki-lms) | Learning Management System | Source Available |
+| [satusehat-bridge](https://github.com/kreki-indonesia/satusehat-bridge) | SATUSEHAT integration wrapper | Source Available |
 
 ### 🏢 Organization-Specific (Private/Private)
 
@@ -101,9 +101,7 @@ Internal assets and configurations (restricted access).
 
 | Repository | Description | Visibility |
 |------------|-------------|------------|
-| [kreki-branding](./org-specific/kreki-branding/) | Brand assets, design system | Private |
-| [deployment-kreki](./org-specific/deployment-kreki/) | Production deployment configs | Private |
-| [docs-portal](./org-specific/docs-portal/) | Public documentation source | Public |
+| [docs-portal](https://github.com/kreki-indonesia/docs-portal) | Public documentation source | Public |
 
 ---
 
@@ -150,9 +148,9 @@ KREKI offers partnership models for organizations:
 ### Get Started
 
 1. **Explore Standards**: Check out our [open standards](./standards/)
-2. **Review Documentation**: Read the [EA Standards documentation](./standards/ea-standards/)
+2. **Review Documentation**: Read the [EA Standards documentation](https://github.com/kreki-indonesia/ea-standards)
 3. **Review Code**: Browse our [platform repositories](./platform/)
-4. **Join Community**: Participate in [GitHub Discussions](https://github.com/kreki-indonesia/ea-standards/discussions)
+4. **Join Community**: Contact us at [info@kreki.or.id](mailto:info@kreki.or.id) for community engagement
 
 ### API Access
 
@@ -163,7 +161,7 @@ KREKI provides public APIs for integration:
 - **Location Services**: GPS-based volunteer matching
 - **FHIR Integration**: Healthcare data exchange
 
-**API Specifications**: See [api-specifications](./standards/api-specifications/) repository
+**API Specifications**: See [api-specifications](https://github.com/kreki-indonesia/api-specifications) repository
 
 ### Contribute
 
@@ -205,7 +203,7 @@ KREKI is governed by a **Steering Committee** comprising:
 - **Standards Oversight Committee**: Certification and compliance
 - **Advisory Council**: Government, industry, and academia representatives
 
-**Governance Documentation**: [See EA standards](./standards/ea-standards/)
+**Governance Documentation**: [See EA standards](https://github.com/kreki-indonesia/ea-standards)
 
 ---
 
@@ -219,7 +217,7 @@ KREKI maintains the highest standards for security and data protection:
 - **ISO 27001**: Information security management
 - **Regular Audits**: Quarterly security assessments
 
-**Security Policy**: [security-framework](./standards/security-framework/)
+**Security Policy**: [security-framework](https://github.com/kreki-indonesia/security-framework)
 
 ---
 
