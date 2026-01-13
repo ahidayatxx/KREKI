@@ -17,11 +17,21 @@ Our mission is to **save lives** by creating a nationwide network of certified e
 
 ## 🚀 Quick Links
 
-- **📱 Download HELP 119 App**: [Android](https://play.google.com/store/apps/details?id=id.kreki.help119) | [iOS](https://apps.apple.com/app/id1492345678)
-- **🌐 Official Website**: [https://kreki.or.id](https://kreki.or.id)
-- **📚 Documentation**: [https://docs.kreki.id](https://docs.kreki.id)
-- **💼 Partner With Us**: [partners@kreki.or.id](mailto:partners@kreki.or.id)
-- **🤝 Volunteer**: [volunteer.kreki.or.id](https://volunteer.kreki.or.id)
+- **GitHub Organization**: [github.com/kreki-indonesia](https://github.com/kreki-indonesia)
+- **License Information**: See [LICENSE](./LICENSE)
+- **Contact**: [Contact section below](#-contact)
+- **Standards & Reference**: [Open repositories](#-repository-structure) available for adoption
+
+---
+
+## 📋 At a Glance
+
+| Metric | Value |
+|--------|-------|
+| **Mission** | Save lives through technology-enabled community emergency response |
+| **Platform** | HELP 119 mobile app connecting victims to nearby trained volunteers |
+| **Coverage** | 34 Indonesian provinces, 15,000+ certified volunteers |
+| **Open Source** | National standards available for adoption (CC BY 4.0, MIT, Apache 2.0) |
 
 ---
 
@@ -64,26 +74,26 @@ The `kreki-indonesia` GitHub organization contains three categories of repositor
 
 National standards other organizations can adopt.
 
-| Repository | Description | License | Stars |
-|------------|-------------|---------|-------|
-| [ea-standards](./standards/ea-standards/) | TOGAF-based emergency services EA framework | CC BY 4.0 | ![GitHub Repo stars](https://img.shields.io/github/stars/kreki-indonesia/ea-standards?style=social) |
-| [api-specifications](./standards/api-specifications/) | OpenAPI specs for emergency response APIs | MIT | ![GitHub Repo stars](https://img.shields.io/github/stars/kreki-indonesia/api-specifications?style=social) |
-| [fhir-profiles](./standards/fhir-profiles/) | Emergency services FHIR implementation guides | Apache 2.0 | ![GitHub Repo stars](https://img.shields.io/github/stars/kreki-indonesia/fhir-profiles?style=social) |
-| [security-framework](./standards/security-framework/) | Zero Trust security standards | MIT | ![GitHub Repo stars](https://img.shields.io/github/stars/kreki-indonesia/security-framework?style=social) |
-| [certification-framework](./standards/certification-framework/) | Volunteer competency certification | CC BY 4.0 | ![GitHub Repo stars](https://img.shields.io/github/stars/kreki-indonesia/certification-framework?style=social) |
+| Repository | Description | License |
+|------------|-------------|---------|
+| [ea-standards](./standards/ea-standards/) | TOGAF-based emergency services EA framework | CC BY 4.0 |
+| [api-specifications](./standards/api-specifications/) | OpenAPI specs for emergency response APIs | MIT |
+| [fhir-profiles](./standards/fhir-profiles/) | Emergency services FHIR implementation guides | Apache 2.0 |
+| [security-framework](./standards/security-framework/) | Zero Trust security standards | MIT |
+| [certification-framework](./standards/certification-framework/) | Volunteer competency certification | CC BY 4.0 |
 
 ### 🛠️ Platform Services (Source Available)
 
 Core platform implementations (viewable source, licensed for use).
 
-| Repository | Description | License | Stars |
-|------------|-------------|---------|-------|
-| [help-119-mobile](./platform/help-119-mobile/) | Android & iOS mobile application | Source Available | ![GitHub Repo stars](https://img.shields.io/github/stars/kreki-indonesia/help-119-mobile?style=social) |
-| [help-119-backend](./platform/help-119-backend/) | Core backend microservices | Source Available | ![GitHub Repo stars](https://img.shields.io/github/stars/kreki-indonesia/help-119-backend?style=social) |
-| [kreki-auth-service](./platform/kreki-auth-service/) | Multi-tenant authentication & SSO | Source Available | ![GitHub Repo stars](https://img.shields.io/github/stars/kreki-indonesia/kreki-auth-service?style=social) |
-| [kreki-emergency-core](./platform/kreki-emergency-core/) | Geo-dispatch engine | Source Available | ![GitHub Repo stars](https://img.shields.io/github/stars/kreki-indonesia/kreki-emergency-core?style=social) |
-| [kreki-lms](./platform/kreki-lms/) | Learning Management System | Source Available | ![GitHub Repo stars](https://img.shields.io/github/stars/kreki-indonesia/kreki-lms?style=social) |
-| [satusehat-bridge](./platform/satusehat-bridge/) | SATUSEHAT integration wrapper | Source Available | ![GitHub Repo stars](https://img.shields.io/github/stars/kreki-indonesia/satusehat-bridge?style=social) |
+| Repository | Description | License |
+|------------|-------------|---------|
+| [help-119-mobile](./platform/help-119-mobile/) | Android & iOS mobile application | Source Available |
+| [help-119-backend](./platform/help-119-backend/) | Core backend microservices | Source Available |
+| [kreki-auth-service](./platform/kreki-auth-service/) | Multi-tenant authentication & SSO | Source Available |
+| [kreki-emergency-core](./platform/kreki-emergency-core/) | Geo-dispatch engine | Source Available |
+| [kreki-lms](./platform/kreki-lms/) | Learning Management System | Source Available |
+| [satusehat-bridge](./platform/satusehat-bridge/) | SATUSEHAT integration wrapper | Source Available |
 
 ### 🏢 Organization-Specific (Private/Private)
 
@@ -140,7 +150,7 @@ KREKI offers partnership models for organizations:
 ### Get Started
 
 1. **Explore Standards**: Check out our [open standards](./standards/)
-2. **Read Documentation**: Visit [docs.kreki.id](https://docs.kreki.id)
+2. **Review Documentation**: Read the [EA Standards documentation](./standards/ea-standards/)
 3. **Review Code**: Browse our [platform repositories](./platform/)
 4. **Join Community**: Participate in [GitHub Discussions](https://github.com/kreki-indonesia/ea-standards/discussions)
 
@@ -153,7 +163,7 @@ KREKI provides public APIs for integration:
 - **Location Services**: GPS-based volunteer matching
 - **FHIR Integration**: Healthcare data exchange
 
-**Get API Keys**: [developers.kreki.or.id](https://developers.kreki.or.id)
+**API Specifications**: See [api-specifications](./standards/api-specifications/) repository
 
 ### Contribute
 
@@ -241,14 +251,13 @@ KREKI maintains the highest standards for security and data protection:
 ### General Inquiries
 
 - **Email**: [info@kreki.or.id](mailto:info@kreki.or.id)
-- **Website**: [https://kreki.or.id](https://kreki.or.id)
-- **Phone**: +62 21 1234 5678
+- **GitHub**: [https://github.com/kreki-indonesia](https://github.com/kreki-indonesia)
 
 ### For Developers
 
 - **GitHub**: [https://github.com/kreki-indonesia](https://github.com/kreki-indonesia)
-- **Documentation**: [https://docs.kreki.id](https://docs.kreki.id)
 - **Developer Support**: [dev-support@kreki.or.id](mailto:dev-support@kreki.or.id)
+- **Documentation**: See repository README files
 
 ### For Partners
 
@@ -257,12 +266,11 @@ KREKI maintains the highest standards for security and data protection:
 
 ### For Volunteers
 
-- **Volunteer Portal**: [https://volunteer.kreki.or.id](https://volunteer.kreki.or.id)
 - **Certification**: [certify@kreki.or.id](mailto:certify@kreki.or.id)
+- **Volunteer Coordination**: [volunteer@kreki.or.id](mailto:volunteer@kreki.or.id)
 
 ### Media & Press
 
-- **Press Kit**: [https://kreki.or.id/media-kit](https://kreki.or.id/media-kit)
 - **Press Contact**: [press@kreki.or.id](mailto:press@kreki.or.id)
 
 ---
@@ -318,7 +326,7 @@ LICENSE file for specific terms.
 
 For general licensing inquiries:
 Email: licensing@kreki.or.id
-Website: https://kreki.or.id/license
+GitHub: https://github.com/kreki-indonesia
 ```
 
 ---
@@ -329,8 +337,8 @@ Website: https://kreki.or.id/license
 
 **🇮🇩 Melayani Indonesia dengan Hati dan Kompetensi**
 
-[![Website](https://img.shields.io/badge/Website-kreki.or.id-blue)](https://kreki.or.id)
-[![Documentation](https://img.shields.io/badge/Docs-docs.kreki.id-green)](https://docs.kreki.id)
 [![GitHub](https://img.shields.io/badge/GitHub-kreki--indonesia-lightgrey)](https://github.com/kreki-indonesia)
+
+*Work in Progress • Standards and repositories under active development*
 
 </div>
