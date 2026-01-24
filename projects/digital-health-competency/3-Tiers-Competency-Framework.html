@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Digital Health Competency Framework</title>
-    
+
     <!-- Google Fonts: Inter & Plus Jakarta Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -22,7 +25,7 @@
                 extend: {
                     colors: {
                         slate: {
-                            850: '#151f32', 
+                            850: '#151f32',
                         },
                         brand: {
                             50: '#eff6ff',
@@ -59,34 +62,38 @@
             }
         }
     </script>
-    
+
     <!-- React & ReactDOM -->
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    
+
     <!-- Babel for JSX -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    
+
     <style>
         /* Custom Scrollbar */
         ::-webkit-scrollbar {
             width: 6px;
             height: 6px;
         }
+
         ::-webkit-scrollbar-track {
-            background: transparent; 
+            background: transparent;
         }
+
         ::-webkit-scrollbar-thumb {
-            background: #334155; 
+            background: #334155;
             border-radius: 3px;
         }
+
         ::-webkit-scrollbar-thumb:hover {
-            background: #475569; 
+            background: #475569;
         }
-        
+
         body {
-            background-color: #020617; /* Dark Blue / Slate 950 */
-            background-image: 
+            background-color: #020617;
+            /* Dark Blue / Slate 950 */
+            background-image:
                 radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.08) 0px, transparent 50%),
                 radial-gradient(at 100% 0%, rgba(139, 92, 246, 0.08) 0px, transparent 50%);
         }
@@ -94,12 +101,14 @@
         .mobile-menu-enter {
             transform: translateX(-100%);
         }
+
         .mobile-menu-enter-active {
             transform: translateX(0);
             transition: transform 0.3s ease-out;
         }
     </style>
 </head>
+
 <body class="text-slate-100 antialiased min-h-screen flex flex-col">
     <div id="root" class="flex-grow"></div>
 
@@ -108,17 +117,17 @@
 
         // --- Inline Icons Helper ---
         const IconBase = ({ children, className, ...props }) => (
-            <svg 
-                xmlns="http://www.w3.org/2000/svg" 
-                width="24" 
-                height="24" 
-                viewBox="0 0 24 24" 
-                fill="none" 
-                stroke="currentColor" 
-                strokeWidth="2" 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
-                className={className} 
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className={className}
                 {...props}
             >
                 {children}
@@ -251,6 +260,14 @@
             </IconBase>
         );
 
+        const LogOut = (props) => (
+            <IconBase {...props}>
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                <polyline points="16 17 21 12 16 7" />
+                <line x1="21" x2="9" y1="12" y2="12" />
+            </IconBase>
+        );
+
         // --- Data Structure ---
         const frameworkData = [
             {
@@ -266,46 +283,46 @@
                 focus: "To equip the entire health workforce with the core skills and understanding needed to participate safely, ethically, and effectively in a digitally-enabled healthcare environment.",
                 audience: "All individuals who deliver or assist in the delivery of health services, including clinicians, administrators, community health workers, and support staff.",
                 domains: [
-                {
-                    id: "A",
-                    name: "Digital Professionalism & Ethics",
-                    icon: <Shield className="w-5 h-5" />,
-                    components: [
-                    { id: "A1", desc: "Understands and adheres to relevant legislation, professional codes of conduct, policy, and ethics, including data privacy and security requirements." },
-                    { id: "A2", desc: "Understands the benefits and risks of a digital presence and manages one's online footprint to maintain professional and public trust." },
-                    { id: "A3", desc: "Employs digital technologies in personal and professional learning and maintains currency with tools and innovations in digital health." }
-                    ]
-                },
-                {
-                    id: "B",
-                    name: "Digital Tools & Systems",
-                    icon: <Monitor className="w-5 h-5" />,
-                    components: [
-                    { id: "B1", desc: "Recognises and uses the right technology for the needs of both the patient and the worker to deliver safe, consumer-centric services." },
-                    { id: "B2", desc: "Confidently uses a range of appropriate devices, applications, and software for undertaking role responsibilities." },
-                    { id: "B3", desc: "Understands where to seek support and how to work around technology or process failures to maintain safe service delivery." }
-                    ]
-                },
-                {
-                    id: "C",
-                    name: "Information & Data Use",
-                    icon: <Database className="w-5 h-5" />,
-                    components: [
-                    { id: "C1", desc: "Understands that all health workers play a crucial role in the capture of quality data and ensures accurate collection and recording of health information relevant to their role." },
-                    { id: "C2", desc: "Uses relevant data and information to support their own decision-making within their scope of practice." },
-                    { id: "C3", desc: "Understands common terminology used in digital health and the purpose and structure of electronic health records." }
-                    ]
-                },
-                {
-                    id: "D",
-                    name: "Digital Communication & Collaboration",
-                    icon: <Users className="w-5 h-5" />,
-                    components: [
-                    { id: "D1", desc: "Assists individuals to use a range of communication technologies in their health interactions, such as telehealth." },
-                    { id: "D2", desc: "Uses digital health tools to support communication and collaboration with peers in the workplace." },
-                    { id: "D3", desc: "Advocates for individuals' access to their own health data and information through digital channels." }
-                    ]
-                }
+                    {
+                        id: "A",
+                        name: "Digital Professionalism & Ethics",
+                        icon: <Shield className="w-5 h-5" />,
+                        components: [
+                            { id: "A1", desc: "Understands and adheres to relevant legislation, professional codes of conduct, policy, and ethics, including data privacy and security requirements." },
+                            { id: "A2", desc: "Understands the benefits and risks of a digital presence and manages one's online footprint to maintain professional and public trust." },
+                            { id: "A3", desc: "Employs digital technologies in personal and professional learning and maintains currency with tools and innovations in digital health." }
+                        ]
+                    },
+                    {
+                        id: "B",
+                        name: "Digital Tools & Systems",
+                        icon: <Monitor className="w-5 h-5" />,
+                        components: [
+                            { id: "B1", desc: "Recognises and uses the right technology for the needs of both the patient and the worker to deliver safe, consumer-centric services." },
+                            { id: "B2", desc: "Confidently uses a range of appropriate devices, applications, and software for undertaking role responsibilities." },
+                            { id: "B3", desc: "Understands where to seek support and how to work around technology or process failures to maintain safe service delivery." }
+                        ]
+                    },
+                    {
+                        id: "C",
+                        name: "Information & Data Use",
+                        icon: <Database className="w-5 h-5" />,
+                        components: [
+                            { id: "C1", desc: "Understands that all health workers play a crucial role in the capture of quality data and ensures accurate collection and recording of health information relevant to their role." },
+                            { id: "C2", desc: "Uses relevant data and information to support their own decision-making within their scope of practice." },
+                            { id: "C3", desc: "Understands common terminology used in digital health and the purpose and structure of electronic health records." }
+                        ]
+                    },
+                    {
+                        id: "D",
+                        name: "Digital Communication & Collaboration",
+                        icon: <Users className="w-5 h-5" />,
+                        components: [
+                            { id: "D1", desc: "Assists individuals to use a range of communication technologies in their health interactions, such as telehealth." },
+                            { id: "D2", desc: "Uses digital health tools to support communication and collaboration with peers in the workplace." },
+                            { id: "D3", desc: "Advocates for individuals' access to their own health data and information through digital channels." }
+                        ]
+                    }
                 ]
             },
             {
@@ -321,46 +338,46 @@
                 focus: "To enable health professionals and managers to optimize clinical and administrative processes, lead local digital health initiatives, and use data for service improvement.",
                 audience: "Health professionals in supervisory roles, clinic and service managers, project leads, and health program managers.",
                 domains: [
-                {
-                    id: "E",
-                    name: "Clinical & Process Improvement",
-                    icon: <Activity className="w-5 h-5" />,
-                    components: [
-                    { id: "E1", desc: "Applies process re-engineering to facilitate business and organisational transformation." },
-                    { id: "E2", desc: "Advocates for using digital health technologies and data to support innovation, quality improvement, and consumer experience." },
-                    { id: "E3", desc: "Recognises the potential of digital health to support current practices and enable new services and models of care." }
-                    ]
-                },
-                {
-                    id: "F",
-                    name: "Project & Change Management",
-                    icon: <Briefcase className="w-5 h-5" />,
-                    components: [
-                    { id: "F1", desc: "Employs appropriate, effective, and efficient program and project management methodologies." },
-                    { id: "F2", desc: "Employs appropriate, effective, and efficient change management methodologies." },
-                    { id: "F3", desc: "Develops strategies for stakeholder engagement by applying relationship management principles." }
-                    ]
-                },
-                {
-                    id: "G",
-                    name: "Data Analytics & Governance",
-                    icon: <Database className="w-5 h-5" />,
-                    components: [
-                    { id: "G1", desc: "Employs concepts of descriptive and inferential statistics and identifies effective visualisation methods for knowledge discovery." },
-                    { id: "G2", desc: "Ascertains the appropriateness, ethics, effectiveness, and efficiency of information and information system governance." },
-                    { id: "G3", desc: "Recognises the central role of data integrity in healthcare and the importance of complete, timely, and accurate information." }
-                    ]
-                },
-                {
-                    id: "H",
-                    name: "Patient-Centered Digital Services",
-                    icon: <User className="w-5 h-5" />,
-                    components: [
-                    { id: "H1", desc: "Determines best practice in human-centered design, usability, and human factors." },
-                    { id: "H2", desc: "Determines best practice in integrating health literacy into information sources and systems." },
-                    { id: "H3", desc: "Appraises digital tools and technologies to facilitate person-centered management and participation in health decision-making." }
-                    ]
-                }
+                    {
+                        id: "E",
+                        name: "Clinical & Process Improvement",
+                        icon: <Activity className="w-5 h-5" />,
+                        components: [
+                            { id: "E1", desc: "Applies process re-engineering to facilitate business and organisational transformation." },
+                            { id: "E2", desc: "Advocates for using digital health technologies and data to support innovation, quality improvement, and consumer experience." },
+                            { id: "E3", desc: "Recognises the potential of digital health to support current practices and enable new services and models of care." }
+                        ]
+                    },
+                    {
+                        id: "F",
+                        name: "Project & Change Management",
+                        icon: <Briefcase className="w-5 h-5" />,
+                        components: [
+                            { id: "F1", desc: "Employs appropriate, effective, and efficient program and project management methodologies." },
+                            { id: "F2", desc: "Employs appropriate, effective, and efficient change management methodologies." },
+                            { id: "F3", desc: "Develops strategies for stakeholder engagement by applying relationship management principles." }
+                        ]
+                    },
+                    {
+                        id: "G",
+                        name: "Data Analytics & Governance",
+                        icon: <Database className="w-5 h-5" />,
+                        components: [
+                            { id: "G1", desc: "Employs concepts of descriptive and inferential statistics and identifies effective visualisation methods for knowledge discovery." },
+                            { id: "G2", desc: "Ascertains the appropriateness, ethics, effectiveness, and efficiency of information and information system governance." },
+                            { id: "G3", desc: "Recognises the central role of data integrity in healthcare and the importance of complete, timely, and accurate information." }
+                        ]
+                    },
+                    {
+                        id: "H",
+                        name: "Patient-Centered Digital Services",
+                        icon: <User className="w-5 h-5" />,
+                        components: [
+                            { id: "H1", desc: "Determines best practice in human-centered design, usability, and human factors." },
+                            { id: "H2", desc: "Determines best practice in integrating health literacy into information sources and systems." },
+                            { id: "H3", desc: "Appraises digital tools and technologies to facilitate person-centered management and participation in health decision-making." }
+                        ]
+                    }
                 ]
             },
             {
@@ -376,46 +393,46 @@
                 focus: "To guide the design, strategy, and transformation of the broader health ecosystem through the application of deep and specialized health informatics knowledge.",
                 audience: "Health informaticians, Chief Information/Innovation Officers, digital health strategists, researchers, and senior policymakers.",
                 domains: [
-                {
-                    id: "I",
-                    name: "Health Informatics Science & Theory",
-                    icon: <BookOpen className="w-5 h-5" />,
-                    components: [
-                    { id: "I1", desc: "Applies theoretical and conceptual frameworks to their practice and relates the history of health informatics to the current and future health environment." },
-                    { id: "I2", desc: "Appraises the structure and design of health information in different use contexts." },
-                    { id: "I3", desc: "Appraises current scientific literature for its contribution to evidence-informed digital health practice." }
-                    ]
-                },
-                {
-                    id: "J",
-                    name: "Enterprise Systems & Interoperability",
-                    icon: <Server className="w-5 h-5" />,
-                    components: [
-                    { id: "J1", desc: "Differentiates enterprise and information systems architecture components." },
-                    { id: "J2", desc: "Appraises the relevant standards, including messaging, exchange formats, and ontologies, to support safe and effective system interfacing and interoperability." },
-                    { id: "J3", desc: "Applies appropriate practices throughout the information system lifecycle and selects system security risk and mitigation strategies." }
-                    ]
-                },
-                {
-                    id: "K",
-                    name: "Strategic Governance & Policy",
-                    icon: <Globe className="w-5 h-5" />,
-                    components: [
-                    { id: "K1", desc: "Builds alignment between information systems and business/clinical goals and strategies." },
-                    { id: "K2", desc: "Interprets the legislative, regulatory, and policy obligations that are relevant in specific digital health contexts." },
-                    { id: "K3", desc: "Distinguishes approaches to health data governance, including sovereignty, in different contexts." }
-                    ]
-                },
-                {
-                    id: "L",
-                    name: "Innovation & Health Economics",
-                    icon: <Zap className="w-5 h-5" />,
-                    components: [
-                    { id: "L1", desc: "Appraises new data sources and emerging technologies and their relevance to health." },
-                    { id: "L2", desc: "Determines the economic impact of digital health initiatives." },
-                    { id: "L3", desc: "Selects appropriate value management and benefit realisation strategies to support the delivery of successful outcomes." }
-                    ]
-                }
+                    {
+                        id: "I",
+                        name: "Health Informatics Science & Theory",
+                        icon: <BookOpen className="w-5 h-5" />,
+                        components: [
+                            { id: "I1", desc: "Applies theoretical and conceptual frameworks to their practice and relates the history of health informatics to the current and future health environment." },
+                            { id: "I2", desc: "Appraises the structure and design of health information in different use contexts." },
+                            { id: "I3", desc: "Appraises current scientific literature for its contribution to evidence-informed digital health practice." }
+                        ]
+                    },
+                    {
+                        id: "J",
+                        name: "Enterprise Systems & Interoperability",
+                        icon: <Server className="w-5 h-5" />,
+                        components: [
+                            { id: "J1", desc: "Differentiates enterprise and information systems architecture components." },
+                            { id: "J2", desc: "Appraises the relevant standards, including messaging, exchange formats, and ontologies, to support safe and effective system interfacing and interoperability." },
+                            { id: "J3", desc: "Applies appropriate practices throughout the information system lifecycle and selects system security risk and mitigation strategies." }
+                        ]
+                    },
+                    {
+                        id: "K",
+                        name: "Strategic Governance & Policy",
+                        icon: <Globe className="w-5 h-5" />,
+                        components: [
+                            { id: "K1", desc: "Builds alignment between information systems and business/clinical goals and strategies." },
+                            { id: "K2", desc: "Interprets the legislative, regulatory, and policy obligations that are relevant in specific digital health contexts." },
+                            { id: "K3", desc: "Distinguishes approaches to health data governance, including sovereignty, in different contexts." }
+                        ]
+                    },
+                    {
+                        id: "L",
+                        name: "Innovation & Health Economics",
+                        icon: <Zap className="w-5 h-5" />,
+                        components: [
+                            { id: "L1", desc: "Appraises new data sources and emerging technologies and their relevance to health." },
+                            { id: "L2", desc: "Determines the economic impact of digital health initiatives." },
+                            { id: "L3", desc: "Selects appropriate value management and benefit realisation strategies to support the delivery of successful outcomes." }
+                        ]
+                    }
                 ]
             }
         ];
@@ -425,24 +442,32 @@
             const [isAuthenticated, setIsAuthenticated] = useState(false);
 
             useEffect(() => {
-                const auth = sessionStorage.getItem('auth');
-                if (auth !== 'true') {
+                // Check URL hash for auth (works with file:// protocol)
+                const hasAuthHash = window.location.hash === '#auth=true';
+                // Also check localStorage as fallback
+                const hasLocalStorage = sessionStorage.getItem('auth') === 'true';
+
+                if (hasAuthHash || hasLocalStorage) {
+                    setIsAuthenticated(true);
+                    // Clean up the hash from URL
+                    if (hasAuthHash) {
+                        history.replaceState(null, null, ' ');
+                    }
+                } else {
                     // Redirect to index.html if not authenticated
                     window.location.href = 'index.html';
-                } else {
-                    setIsAuthenticated(true);
                 }
             }, []);
-
-            // Show nothing while checking/redirecting
-            if (!isAuthenticated) {
-                return null;
-            }
 
             const [activeTier, setActiveTier] = useState(frameworkData[0]);
             const [activeDomain, setActiveDomain] = useState(frameworkData[0].domains[0]);
             const [searchQuery, setSearchQuery] = useState("");
             const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+            // Show nothing while checking/redirecting
+            if (!isAuthenticated) {
+                return null;
+            }
 
             const handleTierClick = (tier) => {
                 setActiveTier(tier);
@@ -452,9 +477,14 @@
 
             const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
 
+            const handleLogout = () => {
+                sessionStorage.removeItem('auth');
+                window.location.href = 'index.html';
+            };
+
             return (
                 <div className="min-h-screen font-sans selection:bg-blue-500/30 selection:text-blue-200 pb-20">
-                    
+
                     {/* Dark Modern Header */}
                     <header className="sticky top-0 z-50 bg-slate-900/80 backdrop-blur-lg border-b border-slate-800 shadow-xl transition-all duration-300">
                         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
@@ -472,21 +502,30 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div className="flex items-center gap-4">
                                 <div className="relative hidden md:block group">
                                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 group-focus-within:text-blue-400 transition-colors" />
-                                    <input 
-                                        type="text" 
-                                        placeholder="Find competencies..." 
+                                    <input
+                                        type="text"
+                                        placeholder="Find competencies..."
                                         className="pl-10 pr-4 py-2.5 bg-slate-800/50 border border-slate-700 rounded-full text-sm font-medium focus:bg-slate-800 focus:border-blue-500/50 focus:ring-4 focus:ring-blue-500/10 w-64 lg:w-80 transition-all outline-none placeholder:text-slate-500 text-white"
                                         value={searchQuery}
                                         onChange={(e) => setSearchQuery(e.target.value)}
                                     />
                                 </div>
 
+                                {/* Logout Button (Desktop) */}
+                                <button
+                                    onClick={handleLogout}
+                                    className="hidden md:flex items-center justify-center w-10 h-10 rounded-xl bg-slate-800 hover:bg-red-500/10 text-slate-400 hover:text-red-400 border border-slate-700 hover:border-red-500/50 transition-all"
+                                    title="Logout"
+                                >
+                                    <LogOut className="w-5 h-5" />
+                                </button>
+
                                 {/* Hamburger Menu Button */}
-                                <button 
+                                <button
                                     onClick={toggleMobileMenu}
                                     className="md:hidden p-2.5 rounded-xl bg-slate-800 text-slate-300 hover:text-white transition-colors border border-slate-700"
                                     aria-label="Toggle menu"
@@ -511,8 +550,8 @@
                                                 onClick={() => handleTierClick(tier)}
                                                 className={`
                                                     flex items-center gap-4 p-4 rounded-xl border transition-all
-                                                    ${activeTier.tier === tier.tier 
-                                                        ? `bg-slate-800 ${tier.borderColor} ring-1 ring-blue-500/20` 
+                                                    ${activeTier.tier === tier.tier
+                                                        ? `bg-slate-800 ${tier.borderColor} ring-1 ring-blue-500/20`
                                                         : 'bg-slate-800/40 border-slate-700/50'}
                                                 `}
                                             >
@@ -528,11 +567,21 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div className="pt-4 border-t border-slate-800">
+                                <button
+                                    onClick={handleLogout}
+                                    className="flex items-center gap-3 w-full p-4 rounded-xl bg-red-500/10 text-red-400 border border-red-500/20 hover:bg-red-500/20 transition-all"
+                                >
+                                    <LogOut className="w-5 h-5" />
+                                    <span className="font-bold">Log Out</span>
+                                </button>
+                            </div>
                         </div>
                     </header>
 
                     <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 animate-fade-in">
-                        
+
                         {/* Hero Section */}
                         <div className="mb-12 max-w-4xl">
                             <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white mb-6 tracking-tight leading-tight">
@@ -566,8 +615,8 @@
                                         className={`
                                             relative overflow-hidden rounded-2xl p-6 text-left transition-all duration-300
                                             group border
-                                            ${isActive 
-                                                ? `bg-slate-800/50 ${tier.borderColor} shadow-2xl shadow-blue-500/10 scale-[1.02] ring-1 ring-blue-500/20` 
+                                            ${isActive
+                                                ? `bg-slate-800/50 ${tier.borderColor} shadow-2xl shadow-blue-500/10 scale-[1.02] ring-1 ring-blue-500/20`
                                                 : 'bg-slate-900/40 border-slate-800 hover:border-slate-700 hover:bg-slate-800/30 hover:-translate-y-1 shadow-sm'
                                             }
                                         `}
@@ -587,7 +636,7 @@
                                                     {tier.icon}
                                                 </div>
                                             </div>
-                                            
+
                                             <div className="mt-auto">
                                                 <h3 className={`text-xl font-display font-bold mb-1 transition-colors ${isActive ? 'text-white' : 'text-slate-400'}`}>
                                                     {tier.title}
@@ -604,7 +653,7 @@
 
                         {/* Main Content Layout */}
                         <div className="flex flex-col lg:flex-row gap-8 animate-slide-up">
-                            
+
                             {/* Left: Sidebar */}
                             <div className="w-full lg:w-1/3 space-y-6">
                                 {/* Context Card */}
@@ -654,11 +703,11 @@
                                                     {isDomainActive && (
                                                         <div className={`absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b ${activeTier.gradient}`} />
                                                     )}
-                                                    
+
                                                     <div className={`
                                                         flex-shrink-0 w-10 h-10 rounded-xl flex items-center justify-center text-sm font-bold shadow-lg transition-all
-                                                        ${isDomainActive 
-                                                            ? `${activeTier.lightColor} ${activeTier.textColor} scale-110 ring-1 ${activeTier.borderColor}` 
+                                                        ${isDomainActive
+                                                            ? `${activeTier.lightColor} ${activeTier.textColor} scale-110 ring-1 ${activeTier.borderColor}`
                                                             : 'bg-slate-800 text-slate-600 group-hover:bg-slate-700 group-hover:text-slate-400'}
                                                     `}>
                                                         {domain.id}
@@ -679,7 +728,7 @@
                             {/* Right: Component Details */}
                             <div id="content-area" className="w-full lg:w-2/3">
                                 <div className="bg-slate-900/60 rounded-2xl border border-slate-800 shadow-2xl flex flex-col min-h-[600px] overflow-hidden relative animate-scale-in backdrop-blur-sm">
-                                    
+
                                     {/* Top Accent */}
                                     <div className={`h-1.5 w-full bg-gradient-to-r ${activeTier.gradient}`} />
 
@@ -707,7 +756,7 @@
                                             <h3 className="text-[10px] font-bold uppercase tracking-widest text-slate-500">Competency Components</h3>
                                             <div className="h-px flex-1 bg-slate-800/50 ml-6"></div>
                                         </div>
-                                        
+
                                         <div className="space-y-6">
                                             {activeDomain.components.map((comp) => (
                                                 <div key={comp.id} className="group flex gap-6 p-5 rounded-2xl hover:bg-slate-800/40 transition-all duration-300 border border-transparent hover:border-slate-800">
@@ -722,7 +771,7 @@
                                                         <p className="text-slate-300 leading-relaxed text-lg font-medium group-hover:text-white transition-colors">
                                                             {comp.desc}
                                                         </p>
-                                                        
+
                                                         {/* Visual Tags */}
                                                         <div className="mt-5 flex gap-2 opacity-0 group-hover:opacity-100 transition-all transform translate-y-2 group-hover:translate-y-0 duration-300">
                                                             <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-slate-800 text-slate-500 uppercase tracking-widest border border-slate-700/50">
@@ -757,7 +806,7 @@
                     {/* Footer with Attribution & References */}
                     <footer className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 border-t border-slate-800/50 mt-auto w-full">
                         <div className="flex flex-col items-center justify-center text-center space-y-6">
-                            
+
                             {/* Developer & Group Attribution */}
                             <div className="space-y-2">
                                 <p className="text-slate-500 text-sm font-medium">
@@ -784,7 +833,7 @@
 
                         </div>
                     </footer>
-                </div>
+                </div >
             );
         };
 
@@ -792,4 +841,5 @@
         root.render(<App />);
     </script>
 </body>
+
 </html>

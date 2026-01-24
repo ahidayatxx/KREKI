@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,9 @@
     <!-- Google Fonts: Inter & Plus Jakarta Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -73,19 +76,23 @@
             width: 6px;
             height: 6px;
         }
+
         ::-webkit-scrollbar-track {
             background: transparent;
         }
+
         ::-webkit-scrollbar-thumb {
             background: #334155;
             border-radius: 3px;
         }
+
         ::-webkit-scrollbar-thumb:hover {
             background: #475569;
         }
 
         body {
-            background-color: #020617; /* Dark Blue / Slate 950 */
+            background-color: #020617;
+            /* Dark Blue / Slate 950 */
             background-image:
                 radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.08) 0px, transparent 50%),
                 radial-gradient(at 100% 0%, rgba(139, 92, 246, 0.08) 0px, transparent 50%);
@@ -94,17 +101,19 @@
         .mobile-menu-enter {
             transform: translateX(-100%);
         }
+
         .mobile-menu-enter-active {
             transform: translateX(0);
             transition: transform 0.3s ease-out;
         }
     </style>
 </head>
+
 <body class="text-slate-100 antialiased min-h-screen flex flex-col">
     <div id="root" class="flex-grow"></div>
 
     <script type="text/babel">
-        const { useState, useMemo } = React;
+        const { useState, useEffect, useMemo } = React;
 
         // --- Inline Icons Helper ---
         const IconBase = ({ children, className, ...props }) => (
@@ -523,11 +532,43 @@
             );
         };
 
+        const LogOut = (props) => (
+            <IconBase {...props}>
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                <polyline points="16 17 21 12 16 7" />
+                <line x1="21" x2="9" y1="12" y2="12" />
+            </IconBase>
+        );
+
         // --- Main App Component ---
         const App = () => {
+            const [isAuthenticated, setIsAuthenticated] = useState(false);
             const [searchQuery, setSearchQuery] = useState("");
             const [tierFilter, setTierFilter] = useState("all");
             const [expandedDomains, setExpandedDomains] = useState(new Set());
+
+            const handleLogout = () => {
+                sessionStorage.removeItem('auth');
+                window.location.href = 'index.html';
+            };
+
+            useEffect(() => {
+                // Check URL hash for auth (works with file:// protocol)
+                const hasAuthHash = window.location.hash === '#auth=true';
+                // Also check localStorage as fallback
+                const hasLocalStorage = sessionStorage.getItem('auth') === 'true';
+
+                if (hasAuthHash || hasLocalStorage) {
+                    setIsAuthenticated(true);
+                    // Clean up the hash from URL
+                    if (hasAuthHash) {
+                        history.replaceState(null, null, ' ');
+                    }
+                } else {
+                    // Redirect to index.html if not authenticated
+                    window.location.href = 'index.html';
+                }
+            }, []);
 
             // Filter domains based on search and tier
             const filteredDomains = useMemo(() => {
@@ -541,6 +582,10 @@
                     return matchesTier && matchesSearch;
                 });
             }, [searchQuery, tierFilter]);
+
+            if (!isAuthenticated) {
+                return <div className="min-h-screen flex items-center justify-center bg-slate-900 text-slate-400">Verifying access...</div>;
+            }
 
             const toggleDomain = (domainId) => {
                 setExpandedDomains(prev => {
@@ -582,6 +627,15 @@
                                     </div>
                                 </div>
                             </div>
+
+                            {/* Logout Button */}
+                            <button
+                                onClick={handleLogout}
+                                className="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-800 hover:bg-red-500/10 text-slate-400 hover:text-red-400 border border-slate-700 hover:border-red-500/50 transition-all font-medium text-sm"
+                            >
+                                <LogOut className="w-4 h-4" />
+                                <span>Log Out</span>
+                            </button>
                         </div>
                     </header>
 
@@ -756,7 +810,7 @@
                         </div>
                     </footer>
 
-                </div>
+                </div >
             );
         };
 
@@ -764,4 +818,5 @@
         root.render(<App />);
     </script>
 </body>
+
 </html>
