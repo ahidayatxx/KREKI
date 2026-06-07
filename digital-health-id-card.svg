@@ -1,0 +1,74 @@
+<svg width="400" height="250" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="400" height="250" fill="#ffffff"/>
+
+  <!-- Header bar -->
+  <rect width="400" height="50" fill="#dc2626"/>
+
+  <!-- Header text - SATUSEHAT -->
+  <text x="200" y="32" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#ffffff" text-anchor="middle">
+    SATUSEHAT
+  </text>
+
+  <!-- Digital Health ID section -->
+  <text x="30" y="80" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#1f2937">
+    Digital Health ID
+  </text>
+
+  <!-- ID Number -->
+  <rect x="30" y="90" width="340" height="35" rx="5" fill="#f3f4f6" stroke="#d1d5db" stroke-width="1"/>
+  <text x="200" y="113" font-family="monospace" font-size="14" fill="#1f2937" text-anchor="middle">
+    1234567890123456
+  </text>
+
+  <!-- Patient Name -->
+  <text x="30" y="150" font-family="Arial, sans-serif" font-size="11" fill="#6b7280">
+    Nama Lengkap:
+  </text>
+  <text x="120" y="150" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#1f2937">
+    [Nama Pasien]
+  </text>
+
+  <!-- Date of Birth -->
+  <text x="30" y="170" font-family="Arial, sans-serif" font-size="11" fill="#6b7280">
+    Tanggal Lahir:
+  </text>
+  <text x="120" y="170" font-family="Arial, sans-serif" font-size="11" fill="#1f2937">
+    [DD-MM-YYYY]
+  </text>
+
+  <!-- Gender -->
+  <text x="230" y="170" font-family="Arial, sans-serif" font-size="11" fill="#6b7280">
+    Jenis Kelamin:
+  </text>
+  <text x="310" y="170" font-family="Arial, sans-serif" font-size="11" fill="#1f2937">
+    [L/P]
+  </text>
+
+  <!-- QR Code placeholder -->
+  <rect x="280" y="195" width="50" height="50" fill="#ffffff" stroke="#d1d5db" stroke-width="1"/>
+
+  <!-- QR Code pattern -->
+  <g fill="#000000">
+    <rect x="285" y="200" width="8" height="8"/>
+    <rect x="296" y="200" width="8" height="8"/>
+    <rect x="307" y="200" width="8" height="8"/>
+    <rect x="318" y="200" width="8" height="8"/>
+    <rect x="285" y="211" width="8" height="8"/>
+    <rect x="296" y="211" width="8" height="8"/>
+    <rect x="318" y="211" width="8" height="8"/>
+    <rect x="285" y="222" width="8" height="8"/>
+    <rect x="307" y="222" width="8" height="8"/>
+    <rect x="318" y="222" width="8" height="8"/>
+    <rect x="296" y="233" width="8" height="8"/>
+    <rect x="307" y="233" width="8" height="8"/>
+  </g>
+
+  <!-- Footer note -->
+  <text x="30" y="220" font-family="Arial, sans-serif" font-size="9" fill="#9ca3af">
+    Scan QR Code untuk akses data kesehatan
+  </text>
+  <text x="30" y="233" font-family="Arial, sans-serif" font-size="9" fill="#9ca3af">
+    Kementerian Kesehatan RI
+  </text>
+</svg>

@@ -1,0 +1,129 @@
+---
+---
+
+<div id="search" class="search-container">
+  <div id="search-bar" class="search-bar">
+    <input
+      type="text"
+      id="search-input"
+      placeholder="Search wiki..."
+      class="search-input"
+      autocomplete="off"
+    />
+  </div>
+  <div id="search-results" class="search-results"></div>
+</div>
+
+<script>
+  async function initSearch() {
+    const pagefind = await import(/* @vite-ignore */ '/pagefind/pagefind.js');
+    const input = document.getElementById('search-input') as HTMLInputElement;
+    const results = document.getElementById('search-results') as HTMLDivElement;
+
+    input.addEventListener('input', async () => {
+      const query = input.value.trim();
+      if (query.length < 2) {
+        results.innerHTML = '';
+        results.style.display = 'none';
+        return;
+      }
+
+      const search = await pagefind.search(query);
+      const items = await Promise.all(search.results.slice(0, 8).map((r: any) => r.data()));
+
+      results.innerHTML = items
+        .map(
+          (item: any) =>
+            `<a href="${item.url}" class="search-result">
+              <span class="search-result-title">${item.meta?.title || item.url}</span>
+              <span class="search-result-excerpt">${item.excerpt || ''}</span>
+            </a>`
+        )
+        .join('');
+      results.style.display = 'block';
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!(e.target as Element).closest('.search-container')) {
+        results.style.display = 'none';
+      }
+    });
+  }
+
+  initSearch();
+</script>
+
+<style>
+  .search-container {
+    position: relative;
+    padding: 0 1.25rem 1rem;
+  }
+
+  .search-input {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    font-size: 0.88rem;
+    font-family: var(--font-body);
+    background: var(--color-bg);
+    color: var(--color-text);
+    outline: none;
+  }
+
+  .search-input:focus {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 2px rgba(51, 102, 204, 0.15);
+  }
+
+  .search-results {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 1.25rem;
+    right: 1.25rem;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    max-height: 400px;
+    overflow-y: auto;
+  }
+
+  .search-result {
+    display: block;
+    padding: 0.6rem 0.75rem;
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-border-light);
+  }
+
+  .search-result:last-child {
+    border-bottom: none;
+  }
+
+  .search-result:hover {
+    background: var(--color-sidebar-active);
+    text-decoration: none;
+  }
+
+  .search-result-title {
+    display: block;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--color-link);
+  }
+
+  .search-result-excerpt {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    margin-top: 0.15em;
+  }
+
+  .search-result-excerpt mark {
+    background: #fff3a8;
+    padding: 0.05em 0.15em;
+    border-radius: 2px;
+  }
+</style>

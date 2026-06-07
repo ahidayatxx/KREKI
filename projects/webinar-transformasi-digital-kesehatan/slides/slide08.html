@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+html { background: #ffffff; }
+body {
+  width: 720pt; height: 405pt; margin: 0; padding: 0;
+  background: #ffffff;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+.header {
+  background: #1E5128;
+  padding: 8pt 40pt;
+}
+h1 {
+  color: #ffffff;
+  font-size: 22pt;
+  font-weight: bold;
+  margin: 0;
+}
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4pt 40pt 90pt 40pt;
+  gap: 6pt;
+}
+.checkpoint-item {
+  display: flex;
+  align-items: center;
+  gap: 8pt;
+  padding: 5pt 8pt;
+  background: #ECF0F1;
+  border-radius: 8pt;
+}
+.icon {
+  font-size: 20pt;
+  min-width: 28pt;
+  text-align: center;
+}
+.text {
+  color: #2C3E50;
+  font-size: 11pt;
+  font-weight: bold;
+}
+.success {
+  border-left: 4pt solid #4E9F3D;
+}
+.warning {
+  border-left: 4pt solid #F39C12;
+}
+.arrow {
+  text-align: center;
+  color: #2C3E50;
+  font-size: 12pt;
+  font-weight: bold;
+  margin: 2pt 0 0 0;
+}
+</style>
+</head>
+<body>
+  <div class="header">
+    <h1>Kesimpulan Bagian I</h1>
+  </div>
+  <div class="content">
+    <div class="checkpoint-item success">
+      <p class="icon">✓</p>
+      <p class="text">Fondasi kebijakan tetap kuat</p>
+    </div>
+    <div class="checkpoint-item success">
+      <p class="icon">✓</p>
+      <p class="text">Program konkret terus berjalan</p>
+    </div>
+    <div class="checkpoint-item warning">
+      <p class="icon">⚠</p>
+      <p class="text">Tantangan operasional signifikan</p>
+    </div>
+    <p class="arrow">→ Perlu strategi mitigasi yang tepat</p>
+  </div>
+</body>
+</html>

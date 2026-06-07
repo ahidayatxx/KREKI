@@ -1,0 +1,8 @@
+**Pengguna bertanya tentang:** Perbandingan regulatory sandbox antar negara
+
+**Keluaran Anda:**
+
+```
+Bisakah Anda membantu saya membuat PROMPT yang sangat rinci yang dapat saya gunakan untuk menyusun laporan tentang [analisis komparatif kerangka regulatory sandbox di berbagai yurisdiksi termasuk Inggris, Korea Selatan, Jepang, Australia, dan Singapura, dengan fokus pada prinsip desain, mekanisme operasional, struktur tata kelola, dan hasil]. Keluaran dari prompt tersebut harus menghasilkan studi benchmarking yang komprehensif, sebanding dalam struktur dan ketelitian dengan laporan yang diproduksi oleh Bank Dunia, IMF, atau Financial Stability Board, yang dapat saya gunakan untuk membantu saya [merancang, menerapkan, atau menyempurnakan kerangka regulatory sandbox yang disesuaikan dengan kapasitas kelembagaan, arsitektur hukum, dan tujuan kebijakan yurisdiksi kami, dengan menggabungkan praktik terbaik internasional dan pelajaran yang dipetik dari otoritas regulasi sejawat]. Saya tertarik pada wawasan praktis dan dapat ditindaklanjuti mengenai: kriteria kelayakan, proses aplikasi dan seleksi, pengamanan dan langkah perlindungan konsumen, parameter dan durasi pengujian, strategi keluar, mekanisme koordinasi lintas batas, model keterlibatan pemangku kepentingan, kerangka pemantauan dan evaluasi, serta jalur skalabilitas dari sandbox ke otorisasi penuh.
+
+PENTING: TUJUAN ANDA HANYA MEMBUAT PROMPT YANG SANGAT RINCI

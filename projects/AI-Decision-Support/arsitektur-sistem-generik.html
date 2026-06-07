@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arsitektur Sistem Pengambilan Keputusan Penerimaan Pasien IGD Berbasis AI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="30" r="1.5" fill="rgba(255,255,255,0.1)"/><circle cx="30" cy="70" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="70" cy="80" r="2.5" fill="rgba(255,255,255,0.1)"/></svg>');
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-20px); }
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            animation: slideDown 1s ease-out;
+        }
+
+        .hero .subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            opacity: 0.9;
+            animation: slideUp 1s ease-out 0.2s both;
+        }
+
+        .hero .hospital-name {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #ffd700;
+            margin-bottom: 30px;
+            animation: slideUp 1s ease-out 0.4s both;
+        }
+
+        .hero .description {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            opacity: 0.9;
+            animation: slideUp 1s ease-out 0.6s both;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Navigation */
+        .nav-menu {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            color: #2c3e50;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #7f8c8d;
+            margin-bottom: 60px;
+        }
+
+        /* Architecture Overview Section */
+        .architecture-overview {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        }
+
+        .architecture-flow {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .flow-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .flow-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .flow-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .flow-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .flow-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .flow-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .flow-desc {
+            color: #7f8c8d;
+            line-height: 1.6;
+        }
+
+        /* Data Flow Section */
+        .data-flow {
+            background: white;
+        }
+
+        .data-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 50px;
+        }
+
+        .data-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border-left: 5px solid;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .data-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .data-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 1.5rem;
+            color: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .card-content ul {
+            list-style: none;
+        }
+
+        .card-content li {
+            padding: 8px 0;
+            border-bottom: 1px solid #ecf0f1;
+            position: relative;
+            padding-left: 20px;
+            color: #34495e;
+            transition: color 0.3s ease;
+        }
+
+        .card-content li:last-child {
+            border-bottom: none;
+        }
+
+        .card-content li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        .card-content li:hover {
+            color: #2980b9;
+        }
+
+        /* Color themes for data cards */
+        .data-pasien { border-left-color: #3498db; }
+        .data-pasien .card-icon { background: linear-gradient(135deg, #3498db, #2980b9); }
+
+        .kondisi-klinis { border-left-color: #e74c3c; }
+        .kondisi-klinis .card-icon { background: linear-gradient(135deg, #e74c3c, #c0392b); }
+
+        .riwayat-medis { border-left-color: #f39c12; }
+        .riwayat-medis .card-icon { background: linear-gradient(135deg, #f39c12, #e67e22); }
+
+        .kebutuhan-sumber { border-left-color: #9b59b6; }
+        .kebutuhan-sumber .card-icon { background: linear-gradient(135deg, #9b59b6, #8e44ad); }
+
+        .info-logistik { border-left-color: #1abc9c; }
+        .info-logistik .card-icon { background: linear-gradient(135deg, #1abc9c, #16a085); }
+
+        .status-pembayaran { border-left-color: #2ecc71; }
+        .status-pembayaran .card-icon { background: linear-gradient(135deg, #2ecc71, #27ae60); }
+
+        /* Decision Process Section */
+        .decision-process {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        }
+
+        .process-flow {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            margin-top: 50px;
+        }
+
+        .process-step {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            width: 100%;
+            max-width: 700px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .process-step:hover {
+            transform: scale(1.02);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .step-number {
+            position: absolute;
+            top: -15px;
+            left: 30px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .step-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            padding-left: 20px;
+        }
+
+        .step-content {
+            color: #34495e;
+            line-height: 1.6;
+        }
+
+        .arrow {
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 20px solid #667eea;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        /* Decision Matrix */
+        .decision-matrix {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .decision-card {
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            color: white;
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .decision-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .decision-terima {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+        }
+
+        .decision-rujuk {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+        }
+
+        .decision-standby {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+        }
+
+        .decision-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .decision-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        .decision-desc {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            line-height: 1.4;
+        }
+
+        /* System Components Section */
+        .system-components {
+            background: white;
+        }
+
+        .components-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .component-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 25px;
+            border-radius: 15px;
+            background: linear-gradient(135deg, #f8f9fa, #ffffff);
+            border: 1px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+
+        .component-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .component-icon {
+            font-size: 2rem;
+            margin-right: 20px;
+            color: #667eea;
+            flex-shrink: 0;
+        }
+
+        .component-content h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .component-content p {
+            color: #7f8c8d;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Implementation Phases Section */
+        .implementation-phases {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+        }
+
+        .phases-timeline {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .phase-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .phase-card:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .phase-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ffd700;
+            margin-bottom: 15px;
+        }
+
+        .phase-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .phase-desc {
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .cta p {
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 18px 35px;
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(231, 76, 60, 0.3);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(231, 76, 60, 0.4);
+        }
+
+        .cta-btn.secondary {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.3);
+        }
+
+        .cta-btn.secondary:hover {
+            box-shadow: 0 15px 35px rgba(52, 152, 219, 0.4);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .nav-links { flex-direction: column; align-items: center; gap: 15px; }
+            .section { padding: 50px 0; }
+            .architecture-flow { grid-template-columns: 1fr; }
+            .data-categories { grid-template-columns: 1fr; }
+            .decision-matrix { grid-template-columns: 1fr; }
+            .components-grid { grid-template-columns: 1fr; }
+            .phases-timeline { grid-template-columns: 1fr; }
+            .cta-buttons { flex-direction: column; align-items: center; }
+            .cta-btn { width: 250px; }
+        }
+
+        /* Floating Animation */
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="floating">🏗️ Arsitektur Sistem Pengambilan Keputusan</h1>
+            <p class="subtitle">Penerimaan Pasien IGD Berbasis AI</p>
+            <p class="description">
+                Solusi teknologi terdepan untuk mengoptimalkan proses penerimaan pasien di Instalasi Gawat Darurat dengan sistem pengambilan keputusan otomatis berbasis AI dan data pre-hospital.
+            </p>
+        </div>
+    </section>
+
+    <!-- Navigation Menu -->
+    <nav class="nav-menu">
+        <div class="nav-container">
+            <div class="nav-links">
+                <a href="#overview" class="nav-link">🏗️ Arsitektur Overview</a>
+                <a href="#data-flow" class="nav-link">📊 Data Flow</a>
+                <a href="#decision-process" class="nav-link">⚡ Proses Keputusan</a>
+                <a href="#components" class="nav-link">🔧 Komponen Sistem</a>
+                <a href="#phases" class="nav-link">📋 Tahap Implementasi</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Architecture Overview Section -->
+    <section class="section architecture-overview" id="overview">
+        <div class="container">
+            <h2 class="section-title">Arsitektur Sistem Overview</h2>
+            <p class="section-subtitle">Tiga komponen utama arsitektur sistem yang akan dibangun</p>
+            
+            <div class="architecture-flow">
+                <div class="flow-card">
+                    <div class="flow-icon">📋</div>
+                    <h3 class="flow-title">Data Input Layer</h3>
+                    <p class="flow-desc">
+                        Modul pengumpulan dan validasi data pre-hospital dari berbagai sumber (ambulans, fasilitas kesehatan, sistem eksternal) dengan standardisasi format data.
+                    </p>
+                </div>
+                
+                <div class="flow-card">
+                    <div class="flow-icon">🧠</div>
+                    <h3 class="flow-title">AI Processing Engine</h3>
+                    <p class="flow-desc">
+                        Algoritma machine learning untuk analisis data, risk stratification, prediksi kebutuhan sumber daya, dan generasi rekomendasi otomatis.
+                    </p>
+                </div>
+                
+                <div class="flow-card">
+                    <div class="flow-icon">📊</div>
+                    <h3 class="flow-title">Decision Output Interface</h3>
+                    <p class="flow-desc">
+                        Dashboard real-time untuk menampilkan hasil analisis, rekomendasi keputusan, dan integrasi dengan sistem informasi rumah sakit existing.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Data Flow Architecture Section -->
+    <section class="section data-flow" id="data-flow">
+        <div class="container">
+            <h2 class="section-title">Arsitektur Data Flow</h2>
+            <p class="section-subtitle">Struktur data yang akan diproses dalam sistem</p>
+            
+            <div class="data-categories">
+                <div class="data-card data-pasien">
+                    <div class="card-header">
+                        <div class="card-icon">👤</div>
+                        <div class="card-title">Data Pasien</div>
+                    </div>
+                    <div class="card-content">
+                        <ul>
+                            <li>Identitas lengkap (nama, usia, jenis kelamin)</li>
+                            <li>Nomor kartu identitas/BPJS</li>
+                            <li>Data demografi dan kontak darurat</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="data-card kondisi-klinis">
+                    <div class="card-header">
+                        <div class="card-icon">🩺</div>
+                        <div class="card-title">Kondisi Klinis</div>
+                    </div>
+                    <div class="card-content">
+                        <ul>
+                            <li>Keluhan utama dan onset gejala</li>
+                            <li>Tanda vital lengkap dengan trend monitoring</li>
+                            <li>Tingkat kesadaran (GCS) dan pain score</li>
+                            <li>Skor triase (ESI/CWTS) dan kategori prioritas</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="data-card riwayat-medis">
+                    <div class="card-header">
+                        <div class="card-icon">📋</div>
+                        <div class="card-title">Riwayat Medis</div>
+                    </div>
+                    <div class="card-content">
+                        <ul>
+                            <li>Diagnosis kerja dan differential diagnosis</li>
+                            <li>Riwayat penyakit kronis yang relevan</li>
+                            <li>Alergi obat dan kontraindikasi</li>
+                            <li>Medikasi saat ini dan riwayat operasi</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="data-card kebutuhan-sumber">
+                    <div class="card-header">
+                        <div class="card-icon">🏥</div>
+                        <div class="card-title">Prediksi Kebutuhan Sumber Daya</div>
+                    </div>
+                    <div class="card-content">
+                        <ul>
+                            <li>Estimasi zona perawatan (red/yellow/green/blue/black)</li>
+                            <li>Kebutuhan alat khusus (ventilator, defibrilator, hemodialisis)</li>
+                            <li>Prediksi durasi stay di IGD</li>
+                            <li>Kemungkinan rujuk lanjut (ICU/OK/rawat inap)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="data-card info-logistik">
+                    <div class="card-header">
+                        <div class="card-icon">🚑</div>
+                        <div class="card-title">Informasi Logistik</div>
+                    </div>
+                    <div class="card-content">
+                        <ul>
+                            <li>ETA akurat dengan traffic real-time</li>
+                            <li>Stabilitas kondisi selama transport</li>
+                            <li>Kebutuhan receiving team spesialis</li>
+                            <li>Persiapan ruang dan equipment</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="data-card status-pembayaran">
+                    <div class="card-header">
+                        <div class="card-icon">💳</div>
+                        <div class="card-title">Status Administrasi</div>
+                    </div>
+                    <div class="card-content">
+                        <ul>
+                            <li>Jenis jaminan kesehatan aktif</li>
+                            <li>Status kepesertaan BPJS/asuransi</li>
+                            <li>Coverage limit dan benefit yang tersedia</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Decision Process Architecture Section -->
+    <section class="section decision-process" id="decision-process">
+        <div class="container">
+            <h2 class="section-title">Arsitektur Proses Keputusan AI</h2>
+            <p class="section-subtitle">Alur pemrosesan data menjadi rekomendasi keputusan otomatis</p>
+            
+            <div class="process-flow">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <div class="step-title">Data Ingestion & Validation</div>
+                    <div class="step-content">
+                        Sistem menerima, memvalidasi, dan menstandarisasi data pre-hospital dari berbagai sumber dengan format yang berbeda. Melakukan data cleansing dan completeness check.
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <div class="step-title">AI Risk Stratification</div>
+                    <div class="step-content">
+                        Machine learning algorithms melakukan risk scoring, severity assessment, dan prediksi outcome berdasarkan data klinis dan historical patterns.
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <div class="step-title">Real-time Capacity Matching</div>
+                    <div class="step-content">
+                        Sistem mencocokkan kebutuhan pasien dengan kapasitas RS real-time (bed availability, staff capacity, equipment status, specialist on-call).
+                    </div>
+                </div>
+
+                <div class="arrow"></div>
+
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <div class="step-title">Decision Generation & Confidence Scoring</div>
+                    <div class="step-content">
+                        Algoritma menghasilkan rekomendasi keputusan dengan confidence score, reasoning explanation, dan alternative options untuk review.
+                    </div>
+                </div>
+            </div>
+
+            <div class="decision-matrix">
+                <div class="decision-card decision-terima">
+                    <div class="decision-icon">✅</div>
+                    <div class="decision-title">TERIMA</div>
+                    <div class="decision-desc">
+                        Kapasitas mencukupi<br>
+                        Kompetensi sesuai<br>
+                        Risk manageable<br>
+                        Resource available
+                    </div>
+                </div>
+
+                <div class="decision-card decision-rujuk">
+                    <div class="decision-icon">↗️</div>
+                    <div class="decision-title">RUJUK</div>
+                    <div class="decision-desc">
+                        Kapasitas tidak sesuai<br>
+                        Butuh spesialisasi lain<br>
+                        High complexity case<br>
+                        Resource constraints
+                    </div>
+                </div>
+
+                <div class="decision-card decision-standby">
+                    <div class="decision-icon">⏳</div>
+                    <div class="decision-title">STANDBY</div>
+                    <div class="decision-desc">
+                        Kapasitas terbatas<br>
+                        Menunggu discharge<br>
+                        Monitoring kontinyu<br>
+                        Queue management
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- System Components Section -->
+    <section class="section system-components" id="components">
+        <div class="container">
+            <h2 class="section-title">Komponen Sistem Teknis</h2>
+            <p class="section-subtitle">Spesifikasi teknis dan requirements infrastruktur</p>
+            
+            <div class="components-grid">
+                <div class="component-item">
+                    <div class="component-icon">🗄️</div>
+                    <div class="component-content">
+                        <h3>Database Architecture</h3>
+                        <p>Real-time database untuk data pasien, historical records, dan system logs dengan high availability dan backup strategy.</p>
+                    </div>
+                </div>
+                
+                <div class="component-item">
+                    <div class="component-icon">🔗</div>
+                    <div class="component-content">
+                        <h3>API Integration Layer</h3>
+                        <p>RESTful APIs untuk integrasi dengan SIMRS, ambulans systems, dan external healthcare providers dengan security protocols.</p>
+                    </div>
+                </div>
+                
+                <div class="component-item">
+                    <div class="component-icon">🤖</div>
+                    <div class="component-content">
+                        <h3>ML Model Engine</h3>
+                        <p>Machine learning models untuk risk prediction, resource optimization, dan decision support dengan continuous learning capabilities.</p>
+                    </div>
+                </div>
+                
+                <div class="component-item">
+                    <div class="component-icon">📊</div>
+                    <div class="component-content">
+                        <h3>Real-time Dashboard</h3>
+                        <p>Web-based dashboard untuk monitoring, decision review, dan system administration dengan role-based access control.</p>
+                    </div>
+                </div>
+                
+                <div class="component-item">
+                    <div class="component-icon">🔒</div>
+                    <div class="component-content">
+                        <h3>Security & Compliance</h3>
+                        <p>Data encryption, audit trails, user authentication, dan compliance dengan regulasi kesehatan Indonesia.</p>
+                    </div>
+                </div>
+                
+                <div class="component-item">
+                    <div class="component-icon">📱</div>
+                    <div class="component-content">
+                        <h3>Mobile Interface</h3>
+                        <p>Mobile application untuk staff IGD, dokter, dan ambulans teams dengan offline capability dan push notifications.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Implementation Phases Section -->
+    <section class="section implementation-phases" id="phases">
+        <div class="container">
+            <h2 class="section-title">Tahapan Implementasi</h2>
+            <p class="section-subtitle">Roadmap pembangunan sistem secara bertahap</p>
+            
+            <div class="phases-timeline">
+                <div class="phase-card">
+                    <div class="phase-number">Phase 1</div>
+                    <div class="phase-title">Data Architecture Setup</div>
+                    <div class="phase-desc">
+                        • Database design dan infrastructure setup<br>
+                        • Data integration dengan SIMRS existing<br>
+                        • Security framework implementation<br>
+                        • Basic API development
+                    </div>
+                </div>
+
+                <div class="phase-card">
+                    <div class="phase-number">Phase 2</div>
+                    <div class="phase-title">AI Engine Development</div>
+                    <div class="phase-desc">
+                        • Machine learning model development<br>
+                        • Training dengan historical data<br>
+                        • Risk stratification algorithms<br>
+                        • Decision logic implementation
+                    </div>
+                </div>
+
+                <div class="phase-card">
+                    <div class="phase-number">Phase 3</div>
+                    <div class="phase-title">Dashboard Integration</div>
+                    <div class="phase-desc">
+                        • Real-time dashboard development<br>
+                        • User interface untuk different roles<br>
+                        • Mobile application development<br>
+                        • Notification system setup
+                    </div>
+                </div>
+
+                <div class="phase-card">
+                    <div class="phase-number">Phase 4</div>
+                    <div class="phase-title">Testing & Deployment</div>
+                    <div class="phase-desc">
+                        • System testing dan validation<br>
+                        • Staff training dan change management<br>
+                        • Pilot implementation<br>
+                        • Go-live dan support
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section cta">
+        <div class="container">
+            <h2>Tertarik Mengimplementasikan Sistem Ini?</h2>
+            <p>Hubungi tim kami untuk diskusi lebih lanjut mengenai implementasi sistem pengambilan keputusan AI di rumah sakit Anda. Kami siap membantu merancang solusi yang sesuai dengan kebutuhan spesifik institusi Anda.</p>
+            
+            <div class="cta-buttons">
+                <a href="#contact" class="cta-btn">
+                    📞 Konsultasi Gratis
+                </a>
+                <a href="#demo" class="cta-btn secondary">
+                    🎯 Request Demo
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                if (targetSection) {
+                    targetSection.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.flow-card, .data-card, .process-step, .component-item, .phase-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Active navigation link highlighting
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('.section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

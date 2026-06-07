@@ -1,0 +1,350 @@
+# TEMPLATE INPUT DATA KINERJA RUMAH SAKIT
+# Hospital Performance Data Input Template
+
+# ==========================================
+# SECTION 1: IDENTITAS RUMAH SAKIT
+# ==========================================
+
+NAMA_RS: "RSU [Nama RS]"
+PROVINSI: "[Nama Provinsi]"
+KOTA_KAB: "[Nama Kota/Kabupaten]"
+KELAS_RS: "A/B/C/D"
+JENIS_RS: "RS Pemerintah/RS Swasta/RS BUMN/RS Pendidikan/RS TNI-Polri"
+AKREDITASI_STATUS: "Paripurna/Sehat/Belum Terakreditasi"
+AKREDITASI_SCORE: [0-100]
+PERIODE_LAPORAN: "Bulan: [1-12], Tahun: [YYYY]"
+TANGGAL_PENGISIAN: "[DD/MM/YYYY]"
+
+# ==========================================
+# SECTION 2: VARIABEL KLINIS (CLINICAL)
+# ==========================================
+
+# A1. Lama Tunggu Rawat Inap (jam)
+# Rumus: SUM(waktu tunggu jam semua pasien) / COUNT(pasien rawat inap)
+DATA_PASIEN_RAWAT_INAP_BULAN_INI: [jumlah pasien rawat inap]
+TOTAL_JAM_TUNGGU_RAWAT_INAP: [total jam]
+A1_LAMA_TUNGGU_RAWAT_INAP_JAM: [hitung otomatis]
+
+# A2. Lama Tunggu Rawat Jalan (menit)
+# Rumus: SUM(waktu tunggu menit) / COUNT(pasien rawat jalan)
+DATA_PASIEN_RAWAT_JALAN_BULAN_INI: [jumlah pasien rawat jalan]
+TOTAL_MENIT_TUNGGU_RAWAT_JALAN: [total menit]
+A2_LAMA_TUNGGU_RAWAT_JALAN_MENIT: [hitung otomatis]
+
+# A3. Occupancy Rate per Department (%)
+# Rumus: (Total Hari Perawatan / Total Hari Tempat Tidur Tersedia) × 100%
+JUMLAH_TEMPAT_TIDUR: [jumlah TT]
+JUMLAH_HARI_OPERASIONAL: 30
+TOTAL_HARI_PERAWATAN: [Σ LOS hari semua pasien]
+A3_OCCUPANCY_RATE_PERCENT: [hitung otomatis]
+
+# A4. Bed Turnover Rate
+# Rumus: Jumlah Pasien Keluar / Rata-rata Tempat Tidur Terpakai
+PASIEN_KELUAR_BULAN_INI: [jumlah]
+RATA_RATA_TT_TERPAKAI: [rata-rata]
+A4_BED_TURNOVER_RATE: [hitung otomatis]
+
+# A5. Average Length of Stay / ALOS (hari)
+# Rumus: Total Hari Rawat Inap / Jumlah Pasien Keluar
+TOTAL_HARI_RAWAT_INAP: [Σ LOS hari]
+PASIEN_KELUAR_EXCLUDE_MENINGGAL: [jumlah]
+A5_AVERAGE_LENGTH_OF_STAY_HARI: [hitung otomatis]
+
+# A6. Mortality Rate ICU (%)
+# Rumus: (Pasien Meninggal ICU / Total Pasien Keluar ICU) × 100%
+PASIEN_MENINGGAL_ICU: [jumlah]
+PASIEN_KELUAR_ICU: [jumlah]
+A6_MORTALITY_RATE_ICU_PERCENT: [hitung otomatis]
+
+# A7. Mortality Rate Post-Operasi (%)
+# Rumus: (Kematian ≤ 30 hari post-op / Total Operasi) × 100%
+KEMATIAN_POST_OPERASI_30_HARI: [jumlah]
+TOTAL_OPERASI_BULAN_INI: [jumlah]
+A7_MORTALITY_RATE_POST_OPERASI_PERCENT: [hitung otomatis]
+
+# A8. Readmission Rate 30 Hari (%)
+# Rumus: (Readmission dalam 30 hari / Pasien Pulang) × 100%
+PASIEN_READMISSION_30_HARI: [jumlah]
+PASIEN_PULANG_BULAN_LALU: [jumlah]
+A8_READMISSION_RATE_30_HARI_PERCENT: [hitung otomatis]
+
+# A9. Persentase Pasiensenyum (%)
+# Rumus: (Puas + Sangat Puas) / Total Respon × 100%
+SANGAT_PUAS: [jumlah]
+PUAS: [jumlah]
+CUKUP: [jumlah]
+KURANG: [jumlah]
+SANGAT_KURANG: [jumlah]
+A9_PERSENTASE_PASIENSENYUM_PERCENT: [hitung otomatis]
+
+# A10. Indikator Kualitas Layanan 13 (%)
+# Rumus: Rata-rata 13 indikator kualitas (Permenkes 30/2022)
+I1_PENYAKIT_MENULAR: [persentase]
+I2_PENCEGAHAN_INFEKSI: [persentase]
+I3_IMUNISASI_LENGKAP: [persentase]
+I4_PENYAKIT_TIDAK_MENULAR: [persentase]
+I5_SUSPEK_TB: [persentase]
+I6_IMPLEMENTASI_BPJS: [persentase]
+I7_SAFETY_PASIEN: [persentase]
+I8_PEMERIKSAAN_KESEHATAN: [persentase]
+I9_PELAYANAN_KESEHATAN_MASYARAKAT: [persentase]
+I10_GIZI: [persentase]
+I11_OBAT_ESENSIAL: [persentase]
+I12_LABORATORIUM: [persentase]
+I13_RADIOLOGI: [persentase]
+A10_INDIKATOR_KUALITAS_LAYANAN_13_PERCENT: [rata-rata otomatis]
+
+# ==========================================
+# SECTION 3: VARIABEL OPERASIONAL (OPERATIONAL)
+# ==========================================
+
+# B1. Ratio Pasien ke Dokter
+# Rumus: Rata-rata Kunjungan Harian / Jumlah Dokter FTE
+TOTAL_KUNJUNGAN_BULANAN: [jumlah]
+KUNJUNGAN_HARIAN_RATA_RATA: [hitung otomatis]
+JUMLAH_DOKTER_FTE: [jumlah]
+B1_RATIO_PASIEN_KE_DOKTER: [hitung otomatis]
+
+# B2. Ratio Pasien ke Perawat
+# Rumus: Rata-rata Kunjungan Harian / Jumlah Perawat FTE
+JUMLAH_PERAWAT_FTE: [jumlah]
+B2_RATIO_PASIEN_KE_PERAWAT: [hitung otomatis]
+
+# B3. Waktu Tunggu Laboratorium (jam)
+TOTAL_JAM_TUNGGU_LAB: [total jam]
+JUMLAH_TES_LABORATORIUM: [jumlah]
+B3_WAKTU_TUNGGU_LABORATORIUM_JAM: [hitung otomatis]
+
+# B4. Waktu Antrean Pharmacy (menit)
+TOTAL_MENIT_TUNGGU_PHARMACY: [total menit]
+JUMLAH_RESEP_DILAYANI: [jumlah]
+B4_WAKTU_ANTREAN_PHARMACY_MENIT: [hitung otomatis]
+
+# B5. Efficiency Score v2 (0-100)
+# Rumus: (Occupancy Score + Labor Score + Service Score) / 3
+OCCUPANCY_SCORE: [hitung dari A3]
+LABOR_SCORE: [100 - (B1/50 × 100)]
+SERVICE_SCORE: [100 - (A2/120 × 100)]
+B5_EFFICIENCY_SCORE: [hitung otomatis]
+
+# B6. Digital Readiness Score (0-5)
+# Rumus: Rata-rata 6 dimensi digital readiness
+SCORE_INFRASTRUKTUR_IT: [0-5]
+SCORE_EMR: [0-5]
+SCORE_TELEHEALTH: [0-5]
+SCORE_INTEROPERABILITAS: [0-5]
+SCORE_ANALYTICS: [0-5]
+SCORE_SECURITY: [0-5]
+B6_DIGITAL_READINESS_SCORE: [hitung otomatis]
+
+# B7. Data Completeness SIRS (%)
+# Rumus: (Data Terisi / Data Wajib) × 100%
+DATA_TERISI: [jumlah]
+DATA_WAJIB: [jumlah]
+B7_DATA_COMPLETENESS_SIRS_PERCENT: [hitung otomatis]
+
+# B8. System Downtime per Month (jam)
+TOTAL_DOWNTIME_JAM: [jumlah]
+B8_SYSTEM_DOWNTIME_PER_MONTH_JAM: [isi langsung]
+
+# ==========================================
+# SECTION 4: VARIABEL KEUANGAN (FINANCIAL)
+# ==========================================
+
+# C1. Net Profit Margin (%)
+PENDAPATAN_TOTAL_RP: [jumlah rupiah]
+BIAYA_TOTAL_RP: [jumlah rupiah]
+LABA_BERSIH_RP: [hitung otomatis]
+C1_NET_PROFIT_MARGIN_PERCENT: [hitung otomatis]
+
+# C2. Cost Efficiency Ratio
+C2_COST_EFFICIENCY_RATIO: [hitung otomatis dari C1]
+
+# C3. Persentase Realisasi Anggaran (%)
+ANGGARAN_DIRENCANAKAN_RP: [jumlah rupiah]
+REALISASI_ANGGARAN_RP: [jumlah rupiah]
+C3_PERSENTASE_REALISASI_ANGGARAN_PERCENT: [hitung otomatis]
+
+# C4. Pendapatan Total per Bulan (IDR)
+PENDAPATAN_PELAYANAN_MEDIS_RP: [jumlah]
+PENDAPATAN_PENUNJANG_RP: [jumlah]
+PENDAPATAN_LAINNYA_RP: [jumlah]
+C4_PENDAPATAN_TOTAL_PER_BULAN_IDR: [jumlah total]
+
+# C5. Labor Cost Percentage (%)
+BIAYA_SDM_GAJI_RP: [jumlah]
+BIAYA_SDM_TUNJANGAN_RP: [jumlah]
+BIAYA_SDM_BPJS_RP: [jumlah]
+BIAYA_SDM_LEMBUR_RP: [jumlah]
+BIAYA_SDM_BONUS_RP: [jumlah]
+TOTAL_BIAYA_SDM_RP: [jumlah total]
+C5_LABOR_COST_PERCENTAGE: [hitung otomatis]
+
+# C6. Operational Cost Percentage (%)
+BIAYA_OBAT_RP: [jumlah]
+BIAYA_ALAT_KESEHATAN_RP: [jumlah]
+BIAYA_UTILITY_RP: [jumlah]
+BIAYA_PEMELIHARAAN_RP: [jumlah]
+BIAYA_SEWA_RP: [jumlah]
+BIAYA_OPERASIONAL_LAIN_RP: [jumlah]
+TOTAL_BIAYA_OPERASIONAL_RP: [jumlah total]
+C6_OPERATIONAL_COST_PERCENTAGE: [hitung otomatis]
+
+# C7. Return on Assets (%)
+TOTAL_ASET_RP: [jumlah rupiah]
+C7_RETURN_ON_ASSETS_PERCENT: [hitung otomatis]
+
+# ==========================================
+# SECTION 5: VARIABEL KUALITAS (13 Indikator MoH)
+# ==========================================
+
+# D1-D7 sudah dihitung di A10, berikut detail inputnya:
+
+# D1. Persentase Penyakit Menular (%)
+PASIEN_PENYAKIT_MENULAR: [jumlah]
+PASIEN_PENYAKIT_MENULAR_SESUAISTANDAR: [jumlah]
+D1_PERSENTASE_PENYAKIT_MENULAR: [hitung otomatis]
+
+# D2. Persentase Pencegahan Infeksi (%)
+OBSERVASI_HANDHYGIENE: [jumlah]
+KEPATUHAN_HANDHYGIENE: [jumlah]
+D2_PERSENTASE_TINDAKAN_PENCEGAHAN_INFEKSI: [hitung otomatis]
+
+# D3. Persentase Imunisasi Lengkap (%)
+BAYI_IMUNISASI_LENGKAP: [jumlah]
+TOTAL_BAYI: [jumlah]
+D3_PERSENTASE_IMUNISASI_LENGKAP: [hitung otomatis]
+
+# D4. Persentase Safety Pasien (%)
+PASIEN_SAFETY_COMPLIANCE: [jumlah]
+TOTAL_PASIEN_SAFETY_CHECK: [jumlah]
+D4_PERSENTASE_SAFETY_PASIEN: [hitung otomatis]
+
+# D5. Persentase Obat Esensial (%)
+OBAT_ESENSIAL TERSEDIA: [jumlah]
+TOTAL_OBAT_ESENSIAL: [jumlah]
+D5_PERSENTASE_OBAT_ESENSIAL: [hitung otomatis]
+
+# D6. Persentase Laboratorium (%)
+TES_LAB_SAKSI_WAKTU: [jumlah]
+TOTAL_TES_LAB: [jumlah]
+D6_PERSENTASE_LABORATORIUM: [hitung otomatis]
+
+# D7. Persentase Radiologi (%)
+TES_RADIO_SAKSI_WAKTU: [jumlah]
+TOTAL_TES_RADIO: [jumlah]
+D7_PERSENTASE_RADIOLOGI: [hitung otomatis]
+
+# ==========================================
+# SECTION 6: VARIABEL INFRASTRUKTUR & SDM
+# ==========================================
+
+# E1. Jumlah Tempat Tidur IGD
+E1_JUMLAH_TEMPAT_TIDUR_IGD: [isi langsung]
+
+# E2. Jumlah Ruang Operasi
+E2_JUMLAH_RUANG_OPERASI: [isi langsung]
+
+# E3. Persentase Peralatan Rusak (%)
+PERALATAN_RUSAK: [jumlah]
+TOTAL_PERALATAN: [jumlah]
+E3_PERSENTASE_PERALATAN_RUSAK_PERCENT: [hitung otomatis]
+
+# E4. Average Equipment Age (years)
+E4_AVERAGE_EQUIPMENT_AGE_YEARS: [hitung dari data aset]
+
+# E5. Certification Rate (%)
+KARYAWAN_TERSERTIFIKASI: [jumlah]
+TOTAL_KARYAWAN: [jumlah]
+E5_CERTIFICATION_RATE_PERCENT: [hitung otomatis]
+
+# E6. Staff Satisfaction Score (0-100)
+SURVEI_KEPUASAN_MAKSIMAL: [jumlah]
+SURVEI_KEPUASAN_TOTAL_SKOR: [jumlah]
+E6_STAFF_SATISFACTION_SCORE: [hitung otomatis]
+
+# ==========================================
+# SECTION 7: VARIABEL AKREDITASI & KEPATUHAN
+# ==========================================
+
+# F1. Akreditasi Status (sudah diisi di Section 1)
+
+# F2. Akreditasi Score (sudah diisi di Section 1)
+
+# F3. Compliance SIRS Indicators (%)
+INDIKATOR_SIRS_COMPLIANT: [jumlah]
+TOTAL_INDIKATOR_SIRS: [jumlah]
+F3_COMPLIANCE_SIRS_INDICATORS_PERCENT: [hitung otomatis]
+
+# F4. Compliance MOH Regulations (%)
+REGULASI_COMPLIANT: [jumlah]
+TOTAL_REGULASI: [jumlah]
+F4_COMPLIANCE_MOH_REGULATIONS_PERCENT: [hitung otomatis]
+
+# ==========================================
+# SECTION 8: VARIABEL SOSIAL DEMOGRAFI
+# ==========================================
+
+# G1. Jumlah Pasien Per Bulan
+G1_JUMLAH_PASIEN_PER_BULAN: [isi langsung]
+
+# G2. Pasien Age Distribution
+PASIEN_BAYI: [jumlah]
+PASIEN_BALITA: [jumlah]
+PASIEN_ANAK: [jumlah]
+PASIEN_REMAJA: [jumlah]
+PASIEN_DEWASA: [jumlah]
+PASIEN_LANSIA: [jumlah]
+G2_PASIEN_AGE_DISTRIBUTION: |
+  Bayi (<1 th): [persentase]%
+  Balita (1-4 th): [persentase]%
+  Anak (5-11 th): [persentase]%
+  Remaja (12-17 th): [persentase]%
+  Dewasa (18-59 th): [persentase]%
+  Lansia (>=60 th): [persentase]%
+
+# G3. Pasien Residence Area
+PASIEN_URBAN: [jumlah]
+PASIEN_RURAL: [jumlah]
+G3_PASIEN_RESIDENCE_AREA: |
+  Urban: [persentase]%
+  Rural: [persentase]%
+
+# G4. Avg Household Income Region
+G4_AVG_HOUSEHOLD_INCOME_REGION_IDR: [isi dari data BPS]
+
+# ==========================================
+# SECTION 9: VARIABEL KINERJA STRATEGIS
+# ==========================================
+
+# H1. Persentase Capaian Target (%)
+TARGET_KUNJUNGAN: [jumlah]
+REALISASI_KUNJUNGAN: [jumlah]
+CAPAIAN_KUNJUNGAN_PERCENT: [hitung otomatis]
+TARGET_PENDAPATAN_RP: [jumlah]
+REALISASI_PENDAPATAN_RP: [jumlah]
+CAPAIAN_PENDAPATAN_PERCENT: [hitung otomatis]
+H1_PERSENTASE_CAPAIAN_TARGET_PERCENT: [rata-rata otomatis]
+
+# H2. Persentase Efektivitas (%)
+TINGKAT_SEMBUH: [persentase]
+TINGKAT_KEPUASAN: [persentase dari A9]
+TINGKAT_KEPATUHAN: [persentase]
+H2_PERSENTASE_EFEKTIVITAS_PERCENT: [rata-rata]
+
+# H3. Persentase Efisiensi (%)
+H3_PERSENTASE_EFISIENSI_PERCENT: [sama dengan B5]
+
+# H4. Sustainability Score (0-100)
+FINANCIAL_SCORE: [0-100]
+ENVIRONMENTAL_SCORE: [0-100]
+SOCIAL_SCORE: [0-100]
+GOVERNANCE_SCORE: [0-100]
+H4_SUSTAINABILITY_SCORE: [rata-rata]
+
+# ==========================================
+# SECTION 10: KLASIFIKASI KINERJA (OUTPUT)
+# ==========================================
+
+# Variabel target untuk klasifikasi kinerja RS
+KINERJA_RS: "Baik/Kurang"  # Akan ditentukan oleh sistem

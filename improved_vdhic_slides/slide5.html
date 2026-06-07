@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        @page { size: 720pt 405pt; margin: 0; }
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            width: 720pt;
+            height: 405pt;
+            overflow: hidden;
+            background: #f8fafc;
+            color: #1e293b;
+        }
+        .header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            padding: 25pt 40pt;
+            text-align: center;
+        }
+        .title {
+            font-size: 36pt;
+            font-weight: 700;
+            margin: 0;
+        }
+        .subtitle {
+            font-size: 16pt;
+            font-weight: 300;
+            opacity: 0.9;
+            margin-top: 5pt;
+        }
+        .quintuple-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15pt;
+            padding: 25pt 40pt;
+            height: calc(100% - 120pt);
+        }
+        .quintuple-item {
+            background: white;
+            border-radius: 12pt;
+            padding: 20pt 15pt;
+            box-shadow: 0 4pt 12pt rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .quintuple-item:hover {
+            transform: translateY(-5pt);
+        }
+        .item-1 { border-top: 4pt solid #ef4444; }
+        .item-2 { border-top: 4pt solid #3b82f6; }
+        .item-3 { border-top: 4pt solid #10b981; }
+        .item-4 { border-top: 4pt solid #f59e0b; }
+        .item-5 { border-top: 4pt solid #8b5cf6; }
+        .icon {
+            font-size: 36pt;
+            margin-bottom: 10pt;
+        }
+        .item-title {
+            font-size: 16pt;
+            font-weight: 600;
+            margin-bottom: 5pt;
+            color: #1e293b;
+        }
+        .item-desc {
+            font-size: 12pt;
+            color: #64748b;
+            line-height: 1.3;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1 class="title">The Quintuple Aim</h1>
+        <p class="subtitle">Every innovation must demonstrate clear alignment with these five outcomes</p>
+    </div>
+    <div class="quintuple-grid">
+        <div class="quintuple-item item-1">
+            <div class="icon">🏥</div>
+            <h2 class="item-title">Population Health</h2>
+            <p class="item-desc">Clinical outcomes at population level</p>
+        </div>
+        <div class="quintuple-item item-2">
+            <div class="icon">😊</div>
+            <h2 class="item-title">Patient Experience</h2>
+            <p class="item-desc">Satisfaction & engagement</p>
+        </div>
+        <div class="quintuple-item item-3">
+            <div class="icon">👨‍⚕️</div>
+            <h2 class="item-title">Provider Satisfaction</h2>
+            <p class="item-desc">Clinician workflow improvement</p>
+        </div>
+        <div class="quintuple-item item-4">
+            <div class="icon">💰</div>
+            <h2 class="item-title">Cost Reduction</h2>
+            <p class="item-desc">Efficiency gains</p>
+        </div>
+        <div class="quintuple-item item-5">
+            <div class="icon">⚖️</div>
+            <h2 class="item-title">Health Equity</h2>
+            <p class="item-desc">Reduce healthcare disparities</p>
+        </div>
+    </div>
+</body>
+</html>

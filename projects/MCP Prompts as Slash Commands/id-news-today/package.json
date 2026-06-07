@@ -1,0 +1,19 @@
+{
+  "name": "mcp-id-news-today",
+  "version": "1.0.0",
+  "description": "MCP server for Indonesian news prompt",
+  "main": "dist/id-news-today-prompt.js",
+  "type": "module",
+  "scripts": {
+    "start": "node dist/id-news-today-prompt.js",
+    "build": "tsc",
+    "prestart": "npm run build"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "*",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5"
+  }
+}

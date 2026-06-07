@@ -1,0 +1,116 @@
+# Provider Configuration
+# Technology-agnostic LLM provider settings
+
+# Claude (Anthropic) Configuration
+claude:
+  type: claude
+  models:
+    opus:
+      name: claude-3-opus-20240229
+      max_tokens: 4096
+      supports_vision: true
+    sonnet:
+      name: claude-3-5-sonnet-20241022
+      max_tokens: 8192
+      supports_vision: true
+    haiku:
+      name: claude-3-5-haiku-20241022
+      max_tokens: 8192
+      supports_vision: false
+  api_key_env: ANTHROPIC_API_KEY
+  base_url: https://api.anthropic.com
+  default_temperature: 0.7
+  timeout: 120
+
+# OpenAI Configuration
+openai:
+  type: openai
+  models:
+    gpt4_turbo:
+      name: gpt-4-turbo-preview
+      max_tokens: 4096
+      supports_vision: true
+    gpt4:
+      name: gpt-4
+      max_tokens: 8192
+      supports_vision: true
+    gpt35_turbo:
+      name: gpt-3.5-turbo
+      max_tokens: 4096
+      supports_vision: false
+  api_key_env: OPENAI_API_KEY
+  base_url: https://api.openai.com/v1
+  default_temperature: 0.7
+  timeout: 120
+
+# Gemini (Google) Configuration
+gemini:
+  type: gemini
+  models:
+    gemini_pro:
+      name: gemini-pro
+      max_tokens: 2048
+      supports_vision: true
+    gemini_ultra:
+      name: gemini-ultra
+      max_tokens: 4096
+      supports_vision: true
+  api_key_env: GOOGLE_API_KEY
+  default_temperature: 0.7
+  timeout: 120
+
+# Default Provider Selection
+default_provider: claude
+default_model: opus
+
+# Provider Selection Rules (can be used for automatic selection)
+provider_rules:
+  # Use for complex reasoning tasks
+  complex_reasoning:
+    preferred_provider: claude
+    preferred_model: opus
+
+  # Use for fast, cost-effective operations
+  fast_operations:
+    preferred_provider: claude
+    preferred_model: haiku
+
+  # Use for code generation
+  code_generation:
+    preferred_provider: openai
+    preferred_model: gpt4_turbo
+
+  # Use for multimodal (vision) tasks
+  multimodal:
+    preferred_provider: claude
+    preferred_model: sonnet
+
+# Cost Management (per 1M tokens)
+cost_tracking:
+  claude:
+    opus:
+      input: 15.0
+      output: 75.0
+    sonnet:
+      input: 3.0
+      output: 15.0
+    haiku:
+      input: 0.25
+      output: 1.25
+  openai:
+    gpt4_turbo:
+      input: 10.0
+      output: 30.0
+    gpt4:
+      input: 30.0
+      output: 60.0
+    gpt35_turbo:
+      input: 0.5
+      output: 1.5
+  gemini:
+    gemini_pro:
+      input: 0.5
+      output: 1.5
+    gemini_ultra:
+      input: 2.0
+      output: 8.0

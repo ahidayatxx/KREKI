@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progress Definisi Smart Health - SHS APIC</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .header .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 10px 20px;
+            background: linear-gradient(45deg, #27ae60, #2ecc71);
+            color: white;
+            border-radius: 25px;
+            font-weight: bold;
+            text-align: center;
+            margin: 0 auto;
+            display: block;
+            width: fit-content;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .card h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 8px;
+        }
+
+        .definition-card {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            color: white;
+        }
+
+        .definition-card h3 {
+            color: white;
+            border-bottom-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .domain {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            border-left: 4px solid #fff;
+        }
+
+        .domain h4 {
+            font-size: 1.2em;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+
+        .domain-icon {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .aman { background-color: #e74c3c; }
+        .hijau { background-color: #27ae60; }
+        .cerdas { background-color: #3498db; }
+
+        .progress-bar {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            height: 8px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.6s ease;
+        }
+
+        .progress-75 { width: 75%; background: linear-gradient(90deg, #27ae60, #2ecc71); }
+        .progress-80 { width: 80%; background: linear-gradient(90deg, #f39c12, #e67e22); }
+        .progress-60 { width: 60%; background: linear-gradient(90deg, #3498db, #2980b9); }
+
+        .status-list {
+            list-style: none;
+        }
+
+        .status-list li {
+            margin: 8px 0;
+            padding: 8px 15px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+        }
+
+        .status-done {
+            background: rgba(39, 174, 96, 0.1);
+            border-left: 4px solid #27ae60;
+        }
+
+        .status-progress {
+            background: rgba(230, 126, 34, 0.1);
+            border-left: 4px solid #e67e22;
+        }
+
+        .status-pending {
+            background: rgba(149, 165, 166, 0.1);
+            border-left: 4px solid #95a5a6;
+        }
+
+        .status-icon {
+            margin-right: 10px;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .date-update {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .timeline-item {
+            text-align: center;
+            flex: 1;
+            position: relative;
+        }
+
+        .timeline-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 15px;
+            right: -50%;
+            width: 100%;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .timeline-dot {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin: 0 auto 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+        }
+
+        .dot-done { background: #27ae60; }
+        .dot-current { background: #e67e22; animation: pulse 2s infinite; }
+        .dot-pending { background: #95a5a6; }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(230, 126, 34, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(230, 126, 34, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(230, 126, 34, 0); }
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #fd79a8 0%, #fdcb6e 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .timeline-item:not(:last-child)::after {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Progress Definisi Smart Health</h1>
+            <div class="subtitle">Smart Health Society - Asosiasi Prakarsa Indonesia Cerdas (SHS-APIC)</div>
+            <div class="status-badge">Status: Tahap Pematangan Konseptual</div>
+        </div>
+
+        <!-- Timeline Progress -->
+        <div class="card">
+            <h3>🎯 Timeline Pengembangan</h3>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot dot-done">✓</div>
+                    <div>Konseptualisasi</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot dot-done">✓</div>
+                    <div>Paradigma</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot dot-current">📍</div>
+                    <div>Pematangan</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot dot-pending">⏳</div>
+                    <div>Validasi Delphi</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot dot-pending">🎯</div>
+                    <div>Finalisasi</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Grid -->
+        <div class="grid">
+            <!-- Definisi Smart Health -->
+            <div class="card definition-card">
+                <h3>📋 Definisi Smart Health Terkini</h3>
+                <p style="margin-bottom: 20px; font-size: 1.1em;"><strong>Smart Health</strong> adalah sebuah <strong>ekosistem kesehatan berbasis outcome</strong> yang secara strategis mengintegrasikan solusi dalam tiga domain utama:</p>
+                
+                <div class="domain">
+                    <h4><span class="domain-icon aman">🛡️</span> AMAN (Safe)</h4>
+                    <p>Memastikan seluruh infrastruktur fisik dan operasional layanan kesehatan memiliki ketahanan dan keamanan tingkat tinggi terhadap berbagai ancaman.</p>
+                </div>
+
+                <div class="domain">
+                    <h4><span class="domain-icon hijau">🌱</span> HIJAU (Green)</h4>
+                    <p>Menerapkan prinsip keberlanjutan dan efisiensi dalam penggunaan sumber daya serta pengelolaan limbah yang bertanggung jawab.</p>
+                </div>
+
+                <div class="domain">
+                    <h4><span class="domain-icon cerdas">🧠</span> CERDAS (Smart & Connected)</h4>
+                    <p>Memanfaatkan teknologi digital dan data yang terintegrasi untuk meningkatkan kualitas, aksesibilitas, dan efisiensi layanan.</p>
+                </div>
+            </div>
+
+            <!-- Status Pengembangan -->
+            <div class="card">
+                <h3>📊 Status Pengembangan</h3>
+                <ul class="status-list">
+                    <li class="status-done">
+                        <span class="status-icon">✅</span>
+                        Kerangka dasar tiga domain telah ditetapkan
+                    </li>
+                    <li class="status-done">
+                        <span class="status-icon">✅</span>
+                        Pendekatan berbasis outcome telah dirumuskan
+                    </li>
+                    <li class="status-done">
+                        <span class="status-icon">✅</span>
+                        Framework metodologi Delphi telah disiapkan
+                    </li>
+                    <li class="status-progress">
+                        <span class="status-icon">🔄</span>
+                        Pematangan konseptual melalui diskusi rutin
+                    </li>
+                    <li class="status-progress">
+                        <span class="status-icon">🔄</span>
+                        Pengembangan indikator dan metrik
+                    </li>
+                    <li class="status-pending">
+                        <span class="status-icon">⏳</span>
+                        Implementasi metode Delphi untuk validasi formal
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Progress Metrics -->
+            <div class="card">
+                <h3>📈 Progress Keseluruhan</h3>
+                
+                <div style="margin-bottom: 15px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                        <span>Konseptualisasi</span>
+                        <span><strong>75%</strong></span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill progress-75"></div>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 15px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                        <span>Pematangan Konseptual</span>
+                        <span><strong>80%</strong></span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill progress-80"></div>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 15px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                        <span>Validasi dan Implementasi</span>
+                        <span><strong>60%</strong></span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill progress-60"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Metodologi -->
+            <div class="card">
+                <h3>🔬 Metodologi Pengembangan</h3>
+                <ul style="list-style: none;">
+                    <li style="margin: 10px 0; padding: 10px; background: rgba(52, 152, 219, 0.1); border-radius: 8px;">
+                        <strong>💬 Diskusi rutin</strong> dengan para ahli dan praktisi
+                    </li>
+                    <li style="margin: 10px 0; padding: 10px; background: rgba(46, 204, 113, 0.1); border-radius: 8px;">
+                        <strong>📚 Desk review</strong> terhadap literatur dan best practices internasional
+                    </li>
+                    <li style="margin: 10px 0; padding: 10px; background: rgba(155, 89, 182, 0.1); border-radius: 8px;">
+                        <strong>🎯 Metode Delphi</strong> untuk mencapai konsensus stakeholder
+                    </li>
+                    <li style="margin: 10px 0; padding: 10px; background: rgba(230, 126, 34, 0.1); border-radius: 8px;">
+                        <strong>🔄 Pendekatan iteratif</strong> untuk penyempurnaan berkelanjutan
+                    </li>
+                </ul>
+            </div>
+
+
+        </div>
+
+        <!-- Focus Question -->
+        <div class="card" style="background: linear-gradient(135deg, #a29bfe 0%, #6c5ce7 100%); color: white;">
+            <h3>🎯 Focus Question untuk Diskusi Lanjutan</h3>
+            <div class="highlight-box">
+                "Mengingat Domain CERDAS memiliki prioritas tertinggi karena direct alignment dengan Program Strategis #6 dan cross-cutting impact, bagaimana tim inti berencana mengoperasionalisasi konsep 'teknologi digital dan data yang terintegrasi' dalam konteks spesifik Indonesia dengan 42 indikator RIBK?"
+            </div>
+            <div style="margin-top: 20px;">
+                <h4>📋 Sub-pertanyaan untuk Eksplorasi:</h4>
+                <ul style="margin-top: 10px;">
+                    <li><strong>🔧 Operasionalisasi Teknologi Digital</strong></li>
+                    <li><strong>🔗 Integrasi Data Kesehatan</strong></li>
+                    <li><strong>📊 Measurement Framework</strong></li>
+                    <li><strong>🚀 Implementation Strategy</strong></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Date Update -->
+        <div class="date-update">
+            <h3 style="color: #2c3e50; margin-bottom: 10px;">📅 Update Terakhir</h3>
+            <p style="font-size: 1.2em; color: #34495e;"><strong>Senin, 8 September 2025</strong></p>
+            <p style="color: #7f8c8d; margin-top: 10px;">
+                Proyek sedang dalam tahap pematangan konseptual dengan fokus pada operasionalisasi Domain CERDAS 
+                dan persiapan framework untuk implementasi metode Delphi.
+            </p>
+            <div style="margin-top: 15px; padding: 15px; background: rgba(39, 174, 96, 0.1); border-radius: 8px; color: #27ae60;">
+                <strong>📈 Progress saat ini: 73% menuju validasi formal</strong>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

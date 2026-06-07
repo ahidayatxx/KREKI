@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Raperda Kesehatan Kota Depok | Interactive Dashboard</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1e40af;
+      --secondary: #10b981;
+      --accent: #f59e0b;
+      --danger: #ef4444;
+      --bg-light: #f8fafc;
+      --bg-white: #ffffff;
+      --text-primary: #1e293b;
+      --text-secondary: #64748b;
+      --border: #e2e8f0;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      --radius: 12px;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+      background: var(--bg-light);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* Header */
+    .header {
+      background: var(--bg-white);
+      border-bottom: 1px solid var(--border);
+      padding: 1.5rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .header-title {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .header-title h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .header-title .subtitle {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      margin-top: 0.25rem;
+    }
+
+    /* Search and Filters */
+    .controls {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .search-box {
+      position: relative;
+      min-width: 300px;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 0.75rem 1rem 0.75rem 2.5rem;
+      border: 2px solid var(--border);
+      border-radius: 50px;
+      font-size: 0.875rem;
+      transition: all 0.2s;
+    }
+
+    .search-box input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 0.875rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-secondary);
+    }
+
+    .filter-buttons {
+      display: flex;
+      gap: 0.5rem;
+      background: var(--bg-light);
+      padding: 0.25rem;
+      border-radius: 50px;
+    }
+
+    .filter-btn {
+      padding: 0.5rem 1rem;
+      border: none;
+      background: transparent;
+      border-radius: 50px;
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .filter-btn:hover {
+      background: var(--bg-white);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .filter-btn.active {
+      background: var(--primary);
+      color: white;
+      box-shadow: var(--shadow-md);
+    }
+
+    .view-toggle {
+      display: flex;
+      background: var(--bg-light);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .view-btn {
+      padding: 0.5rem;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.2s;
+      color: var(--text-secondary);
+    }
+
+    .view-btn.active {
+      background: var(--bg-white);
+      color: var(--primary);
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* Stats Bar */
+    .stats-bar {
+      margin: 2rem 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .stat-card {
+      background: var(--bg-white);
+      padding: 1.25rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .stat-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+    }
+
+    .stat-content h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.125rem;
+    }
+
+    .stat-content p {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
+
+    /* Content Grid */
+    .content-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .content-list {
+      display: none;
+      flex-direction: column;
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .content-list.active {
+      display: flex;
+    }
+
+    .content-grid.hidden {
+      display: none;
+    }
+
+    /* Cards */
+    .card {
+      background: var(--bg-white);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-2px);
+    }
+
+    .card-header {
+      padding: 1.25rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .card-category {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.25rem 0.75rem;
+      background: var(--bg-light);
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.75rem;
+    }
+
+    .card-title {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-subtitle {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
+
+    .card-body {
+      padding: 1.25rem;
+    }
+
+    .regulations {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .regulation-item {
+      padding: 0.875rem;
+      border-radius: 8px;
+      font-size: 0.875rem;
+    }
+
+    .regulation-uu {
+      background: #fef3c7;
+      border-left: 3px solid var(--accent);
+    }
+
+    .regulation-pp {
+      background: #d1fae5;
+      border-left: 3px solid var(--secondary);
+    }
+
+    .regulation-label {
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+      font-size: 0.8125rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* List View Items */
+    .list-item {
+      background: var(--bg-white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    .list-item:hover {
+      box-shadow: var(--shadow-md);
+      border-color: var(--primary);
+    }
+
+    .list-item-main {
+      flex: 1;
+    }
+
+    .list-item-category {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.25rem;
+    }
+
+    .list-item-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.125rem;
+    }
+
+    .list-item-subtitle {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
+
+    .list-item-tags {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .tag {
+      padding: 0.25rem 0.625rem;
+      background: var(--bg-light);
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      padding: 2rem;
+      overflow-y: auto;
+    }
+
+    .modal.active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-content {
+      background: var(--bg-white);
+      border-radius: 16px;
+      max-width: 700px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+    }
+
+    .modal-header {
+      padding: 2rem 2rem 1rem;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: none;
+      background: var(--bg-light);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .modal-close:hover {
+      background: var(--border);
+    }
+
+    .modal-body {
+      padding: 2rem;
+    }
+
+    .regulation-detail {
+      background: var(--bg-light);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .regulation-detail h4 {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      font-size: 1.125rem;
+    }
+
+    .regulation-detail p {
+      line-height: 1.7;
+    }
+
+    /* Empty State */
+    .empty-state {
+      text-align: center;
+      padding: 4rem 2rem;
+    }
+
+    .empty-state-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      opacity: 0.3;
+    }
+
+    .empty-state h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .empty-state p {
+      color: var(--text-secondary);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 1rem;
+      }
+
+      .header-content {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .controls {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .search-box {
+        min-width: auto;
+      }
+
+      .filter-buttons {
+        justify-content: center;
+      }
+
+      .content-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .list-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+
+      .list-item-tags {
+        width: 100%;
+      }
+    }
+
+    /* Loading Animation */
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .loading {
+      animation: pulse 2s infinite;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <div class="header-title">
+          <h1>📋 Raperda Kesehatan Kota Depok</h1>
+          <div class="subtitle">Peta Materi Muatan berdasarkan UU 17/2023 dan PP 28/2024</div>
+        </div>
+
+        <div class="controls">
+          <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input type="text" placeholder="Cari topik atau pasal..." id="searchInput">
+          </div>
+
+          <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">Semua</button>
+            <button class="filter-btn" data-filter="upaya">Upaya Kesehatan</button>
+            <button class="filter-btn" data-filter="penyakit">Penyakit</button>
+            <button class="filter-btn" data-filter="sdm">SDM</button>
+            <button class="filter-btn" data-filter="manajemen">Manajemen</button>
+          </div>
+
+          <div class="view-toggle">
+            <button class="view-btn active" data-view="grid">⊞</button>
+            <button class="view-btn" data-view="list">☰</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="container">
+    <!-- Stats Bar -->
+    <div class="stats-bar">
+      <div class="stat-card">
+        <div class="stat-icon" style="background: rgba(37, 99, 235, 0.1); color: var(--primary);">
+          📚
+        </div>
+        <div class="stat-content">
+          <h3 id="totalItems">0</h3>
+          <p>Total Materi</p>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon" style="background: rgba(16, 185, 129, 0.1); color: var(--secondary);">
+          🏥
+        </div>
+        <div class="stat-content">
+          <h3 id="upayaCount">0</h3>
+          <p>Upaya Kesehatan</p>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon" style="background: rgba(245, 158, 11, 0.1); color: var(--accent);">
+          🛡️
+        </div>
+        <div class="stat-content">
+          <h3 id="penyakitCount">0</h3>
+          <p>Penyakit & Lingkungan</p>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon" style="background: rgba(239, 68, 68, 0.1); color: var(--danger);">
+          👥
+        </div>
+        <div class="stat-content">
+          <h3 id="sdmCount">0</h3>
+          <p>SDM & Manajemen</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content Grid -->
+    <div class="content-grid" id="contentGrid">
+      <!-- Cards will be dynamically generated -->
+    </div>
+
+    <!-- Content List -->
+    <div class="content-list" id="contentList">
+      <!-- List items will be dynamically generated -->
+    </div>
+
+    <!-- Empty State -->
+    <div class="empty-state" id="emptyState" style="display: none;">
+      <div class="empty-state-icon">🔍</div>
+      <h3>Tidak ada hasil</h3>
+      <p>Coba kata kunci pencarian yang berbeda</p>
+    </div>
+  </div>
+
+  <!-- Detail Modal -->
+  <div class="modal" id="detailModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="modal-close" onclick="closeModal()">×</button>
+        <h2 id="modalTitle"></h2>
+        <p id="modalSubtitle" style="color: var(--text-secondary); margin-top: 0.5rem;"></p>
+      </div>
+      <div class="modal-body" id="modalBody">
+        <!-- Dynamic content -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Data
+    const regulations = [
+      // Upaya Kesehatan
+      {
+        id: 'umum',
+        category: 'upaya',
+        categoryLabel: 'Upaya Kesehatan',
+        title: 'Umum & Akses Layanan',
+        subtitle: 'Tanggung jawab umum penyelenggaraan',
+        color: '#2563eb',
+        icon: '🏥',
+        uu: 'Pasal 6(1), 7(1): Bertanggung jawab merencanakan, mengatur, membina, dan mengawasi upaya kesehatan yang bermutu.',
+        pp: 'Pasal 2(1): Pembinaan & pengawasan serta perencanaan kebutuhan Fasilitas Pelayanan Kesehatan.'
+      },
+      {
+        id: 'primer',
+        category: 'upaya',
+        categoryLabel: 'Upaya Kesehatan',
+        title: 'Pelayanan Primer',
+        subtitle: 'Puskesmas',
+        color: '#2563eb',
+        icon: '🏥',
+        uu: 'Pasal 28: Wajib menyediakan akses Pelayanan Kesehatan Primer di seluruh wilayah.',
+        pp: 'Pasal 803: Mendirikan minimal satu Puskesmas di setiap kecamatan.'
+      },
+      {
+        id: 'lanjutan',
+        category: 'upaya',
+        categoryLabel: 'Upaya Kesehatan',
+        title: 'Pelayanan Lanjutan',
+        subtitle: 'Rumah Sakit',
+        color: '#2563eb',
+        icon: '🏥',
+        uu: 'Pasal 30: Menyediakan Pelayanan Kesehatan Lanjutan (Rumah Sakit).',
+        pp: 'Pasal 811: Menyediakan RS berdasarkan kebutuhan & menjamin pembiayaan orang miskin.'
+      },
+      {
+        id: 'kia',
+        category: 'upaya',
+        categoryLabel: 'Upaya Kesehatan',
+        title: 'Kesehatan Ibu & Anak',
+        subtitle: 'KIA',
+        color: '#2563eb',
+        icon: '👶',
+        uu: 'Pasal 40: Pelayanan kesehatan ibu hamil, bersalin, dan nifas.',
+        pp: 'Pasal 13: Sistem rujukan maternal dan neonatal.'
+      },
+      {
+        id: 'lansia',
+        category: 'upaya',
+        categoryLabel: 'Upaya Kesehatan',
+        title: 'Kesehatan Lanjut Usia',
+        subtitle: 'Lansia',
+        color: '#2563eb',
+        icon: '👴',
+        uu: 'Pasal 52: Pelayanan kesehatan geriatri.',
+        pp: 'Pasal 79: Long term care untuk lansia.'
+      },
+
+      // Penyakit & Lingkungan
+      {
+        id: 'p2p',
+        category: 'penyakit',
+        categoryLabel: 'Penyakit & Lingkungan',
+        title: 'Pencegahan Penyakit',
+        subtitle: 'P2P',
+        color: '#10b981',
+        icon: '🛡️',
+        uu: 'Pasal 86: Pengendalian penyakit menular dan tidak menular.',
+        pp: 'Pasal 193: Kawasan pangan sehat dan gizi.'
+      },
+      {
+        id: 'kesling',
+        category: 'penyakit',
+        categoryLabel: 'Penyakit & Lingkungan',
+        title: 'Kesehatan Lingkungan',
+        subtitle: 'Sanitasi & Hygiene',
+        color: '#10b981',
+        icon: '🌱',
+        uu: 'Pasal 9: Standar kesehatan lingkungan.',
+        pp: 'Pasal 249: Baku mutu kesehatan lingkungan.'
+      },
+      {
+        id: 'ktr',
+        category: 'penyakit',
+        categoryLabel: 'Penyakit & Lingkungan',
+        title: 'Kawasan Tanpa Rokok',
+        subtitle: 'KTR',
+        color: '#10b981',
+        icon: '🚭',
+        uu: 'Pasal 151: Penetapan Kawasan Tanpa Rokok (KTR).',
+        pp: 'Pasal 443: Peraturan Daerah KTR.'
+      },
+
+      // SDM Kesehatan
+      {
+        id: 'plan',
+        category: 'sdm',
+        categoryLabel: 'SDM Kesehatan',
+        title: 'Perencanaan SDM',
+        subtitle: 'Tenaga Kesehatan',
+        color: '#f59e0b',
+        icon: '👥',
+        uu: 'Pasal 10: Pemerataan dan pengembangan SDM kesehatan.',
+        pp: 'Pasal 568: Dokumen perencanaan SDM kesehatan.'
+      },
+      {
+        id: 'mutu',
+        category: 'sdm',
+        categoryLabel: 'SDM Kesehatan',
+        title: 'Kompetensi & Sertifikasi',
+        subtitle: 'Standar Profesi',
+        color: '#f59e0b',
+        icon: '🎓',
+        uu: 'Pasal 12: Pendidikan dan pelatihan berkelanjutan.',
+        pp: 'Pasal 544: Izin praktik dan sertifikasi kompetensi.'
+      },
+
+      // Manajemen
+      {
+        id: 'dana',
+        category: 'manajemen',
+        categoryLabel: 'Manajemen',
+        title: 'Pendanaan Kesehatan',
+        subtitle: 'Anggaran',
+        color: '#ef4444',
+        icon: '💰',
+        uu: 'Pasal 403: Anggaran kesehatan daerah minimal 10% APBD.',
+        pp: 'Pasal 1125: Sistem pembiayaan berbasis kinerja.'
+      },
+      {
+        id: 'masyarakat',
+        category: 'manajemen',
+        categoryLabel: 'Manajemen',
+        title: 'Peran Serta Masyarakat',
+        subtitle: 'Partisipasi',
+        color: '#ef4444',
+        icon: '🤝',
+        uu: 'Pasal 14: Pemberdayaan masyarakat di bidang kesehatan.',
+        pp: 'Pasal 1146: Insentif untuk kader kesehatan.'
+      }
+    ];
+
+    // State
+    let currentFilter = 'all';
+    let currentView = 'grid';
+    let searchTerm = '';
+    let filteredData = [...regulations];
+
+    // Initialize
+    function init() {
+      updateStats();
+      renderContent();
+      setupEventListeners();
+    }
+
+    // Update statistics
+    function updateStats() {
+      const stats = {
+        total: regulations.length,
+        upaya: regulations.filter(r => r.category === 'upaya').length,
+        penyakit: regulations.filter(r => r.category === 'penyakit').length,
+        sdm: regulations.filter(r => r.category === 'sdm' || r.category === 'manajemen').length
+      };
+
+      document.getElementById('totalItems').textContent = stats.total;
+      document.getElementById('upayaCount').textContent = stats.upaya;
+      document.getElementById('penyakitCount').textContent = stats.penyakit;
+      document.getElementById('sdmCount').textContent = stats.sdm;
+    }
+
+    // Setup event listeners
+    function setupEventListeners() {
+      // Search
+      document.getElementById('searchInput').addEventListener('input', (e) => {
+        searchTerm = e.target.value.toLowerCase();
+        filterData();
+      });
+
+      // Filter buttons
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentFilter = btn.dataset.filter;
+          filterData();
+        });
+      });
+
+      // View toggle
+      document.querySelectorAll('.view-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentView = btn.dataset.view;
+          toggleView();
+        });
+      });
+
+      // Modal close
+      document.getElementById('detailModal').addEventListener('click', (e) => {
+        if (e.target.id === 'detailModal') {
+          closeModal();
+        }
+      });
+    }
+
+    // Filter data
+    function filterData() {
+      filteredData = regulations.filter(item => {
+        const matchesFilter = currentFilter === 'all' || item.category === currentFilter;
+        const matchesSearch = searchTerm === '' ||
+          item.title.toLowerCase().includes(searchTerm) ||
+          item.subtitle.toLowerCase().includes(searchTerm) ||
+          item.uu.toLowerCase().includes(searchTerm) ||
+          item.pp.toLowerCase().includes(searchTerm);
+
+        return matchesFilter && matchesSearch;
+      });
+
+      renderContent();
+    }
+
+    // Toggle view
+    function toggleView() {
+      const gridView = document.getElementById('contentGrid');
+      const listView = document.getElementById('contentList');
+
+      if (currentView === 'grid') {
+        gridView.classList.remove('hidden');
+        listView.classList.remove('active');
+      } else {
+        gridView.classList.add('hidden');
+        listView.classList.add('active');
+      }
+    }
+
+    // Render content
+    function renderContent() {
+      if (filteredData.length === 0) {
+        document.getElementById('emptyState').style.display = 'block';
+        document.getElementById('contentGrid').style.display = 'none';
+        document.getElementById('contentList').style.display = 'none';
+        return;
+      }
+
+      document.getElementById('emptyState').style.display = 'none';
+      document.getElementById('contentGrid').style.display = 'grid';
+
+      renderGrid();
+      renderList();
+    }
+
+    // Render grid view
+    function renderGrid() {
+      const grid = document.getElementById('contentGrid');
+      grid.innerHTML = filteredData.map(item => `
+        <div class="card" onclick="showDetail('${item.id}')">
+          <div class="card-header">
+            <div class="card-category" style="color: ${item.color};">
+              ${item.icon} ${item.categoryLabel}
+            </div>
+            <h3 class="card-title">${item.title}</h3>
+            <p class="card-subtitle">${item.subtitle}</p>
+          </div>
+          <div class="card-body">
+            <div class="regulations">
+              <div class="regulation-item regulation-uu">
+                <div class="regulation-label">UU 17/2023</div>
+                <div>${item.uu.substring(0, 80)}...</div>
+              </div>
+              <div class="regulation-item regulation-pp">
+                <div class="regulation-label">PP 28/2024</div>
+                <div>${item.pp.substring(0, 80)}...</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Render list view
+    function renderList() {
+      const list = document.getElementById('contentList');
+      list.innerHTML = filteredData.map(item => `
+        <div class="list-item" onclick="showDetail('${item.id}')">
+          <div class="list-item-main">
+            <div class="list-item-category" style="color: ${item.color};">
+              ${item.icon} ${item.categoryLabel}
+            </div>
+            <div class="list-item-title">${item.title}</div>
+            <div class="list-item-subtitle">${item.subtitle}</div>
+          </div>
+          <div class="list-item-tags">
+            <span class="tag">UU 17/2023</span>
+            <span class="tag">PP 28/2024</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Show detail modal
+    function showDetail(id) {
+      const item = regulations.find(r => r.id === id);
+      if (!item) return;
+
+      document.getElementById('modalTitle').textContent = item.title;
+      document.getElementById('modalSubtitle').textContent = `${item.categoryLabel} • ${item.subtitle}`;
+
+      document.getElementById('modalBody').innerHTML = `
+        <div class="regulation-detail">
+          <h4>
+            <span style="color: var(--accent);">📜</span>
+            Undang-Undang No. 17 Tahun 2023
+          </h4>
+          <p>${item.uu}</p>
+        </div>
+
+        <div class="regulation-detail">
+          <h4>
+            <span style="color: var(--secondary);">📋</span>
+            Peraturan Pemerintah No. 28 Tahun 2024
+          </h4>
+          <p>${item.pp}</p>
+        </div>
+
+        <div style="background: var(--bg-light); border-radius: var(--radius); padding: 1.5rem;">
+          <h4 style="margin-bottom: 1rem;">📝 Konteks Implementasi</h4>
+          <ul style="list-style: none; padding: 0;">
+            <li style="margin-bottom: 0.5rem;">• <strong>Kewajiban:</strong> Pemerintah Daerah wajib mengimplementasikan ketentuan ini</li>
+            <li style="margin-bottom: 0.5rem;">• <strong>Target:</strong> Tercapainya pelayanan kesehatan yang berkualitas untuk seluruh masyarakat</li>
+            <li style="margin-bottom: 0.5rem;">• <strong>Monitoring:</strong> Dilakukan evaluasi berkala oleh Kementerian Kesehatan</li>
+            <li>• <strong>Sanksi:</strong> Sesuai ketentuan perundang-undangan yang berlaku</li>
+          </ul>
+        </div>
+      `;
+
+      document.getElementById('detailModal').classList.add('active');
+    }
+
+    // Close modal
+    function closeModal() {
+      document.getElementById('detailModal').classList.remove('active');
+    }
+
+    // Start app
+    init();
+  </script>
+</body>
+</html>

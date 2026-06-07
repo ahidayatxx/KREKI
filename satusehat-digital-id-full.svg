@@ -1,0 +1,145 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="800" height="600" fill="#f9fafb"/>
+
+  <!-- Status Bar -->
+  <rect width="800" height="44" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- Time -->
+  <text x="40" y="28" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#000000">
+    09:41
+  </text>
+
+  <!-- Signal bars -->
+  <g fill="#000000">
+    <rect x="700" y="18" width="3" height="6"/>
+    <rect x="705" y="16" width="3" height="8"/>
+    <rect x="710" y="14" width="3" height="10"/>
+    <rect x="715" y="12" width="3" height="12"/>
+  </g>
+
+  <!-- Battery -->
+  <rect x="740" y="14" width="25" height="12" rx="2" fill="none" stroke="#000000" stroke-width="1.5"/>
+  <rect x="742" y="16" width="18" height="8" rx="1" fill="#000000"/>
+  <rect x="765" y="18" width="2" height="4" rx="1" fill="#000000"/>
+
+  <!-- WiFi icon -->
+  <g fill="#000000">
+    <rect x="670" y="22" width="3" height="3"/>
+    <rect x="675" y="18" width="3" height="7"/>
+    <rect x="680" y="14" width="3" height="11"/>
+  </g>
+
+  <!-- Header -->
+  <rect width="800" height="120" fill="#dc2626"/>
+
+  <!-- Logo placeholder circle -->
+  <circle cx="90" cy="60" r="30" fill="#ffffff"/>
+  <circle cx="90" cy="60" r="25" fill="#dc2626"/>
+
+  <!-- Title -->
+  <text x="140" y="55" font-family="system-ui, -apple-system, sans-serif" font-size="32" font-weight="bold" fill="#ffffff">
+    SATUSEHAT
+  </text>
+
+  <text x="140" y="85" font-family="system-ui, -apple-system, sans-serif" font-size="16" fill="#ffffff" opacity="0.9">
+    Platform Digital Kesehatan Indonesia
+  </text>
+
+  <!-- Back button -->
+  <text x="40" y="195" font-family="system-ui, -apple-system, sans-serif" font-size="16" fill="#dc2626">
+    ← Kembali
+  </text>
+
+  <!-- Main Card -->
+  <rect x="40" y="220" width="720" height="340" rx="16" fill="#ffffff" filter="url(#shadow)"/>
+
+  <!-- Card shadow filter -->
+  <defs>
+    <filter id="shadow" x="-4" y="-4" width="104%" height="104%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000000" flood-opacity="0.1"/>
+    </filter>
+  </defs>
+
+  <!-- Card Header -->
+  <text x="80" y="270" font-family="system-ui, -apple-system, sans-serif" font-size="18" font-weight="600" fill="#111827">
+    Identitas Digital Kesehatan
+  </text>
+
+  <!-- ID Card Display -->
+  <rect x="80" y="300" width="640" height="180" rx="12" fill="#fef2f2" stroke="#fecaca" stroke-width="1"/>
+
+  <!-- ID Label -->
+  <text x="110" y="335" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#6b7280">
+    Nomor Identitas
+  </text>
+
+  <!-- ID Number Display -->
+  <rect x="110" y="350" width="350" height="50" rx="8" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="130" y="382" font-family="monospace" font-size="20" font-weight="bold" fill="#111827">
+    1234567890123456
+  </text>
+
+  <!-- Copy Button -->
+  <rect x="480" y="350" width="100" height="50" rx="8" fill="#dc2626"/>
+  <text x="530" y="382" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="500" fill="#ffffff" text-anchor="middle">
+    Salin
+  </text>
+
+  <!-- Name Section -->
+  <text x="110" y="435" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#6b7280">
+    Nama Lengkap
+  </text>
+  <text x="110" y="460" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="500" fill="#111827">
+    AHMAD HIDAYAT
+  </text>
+
+  <!-- Info Grid -->
+  <text x="350" y="435" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#6b7280">
+    Tanggal Lahir
+  </text>
+  <text x="350" y="460" font-family="system-ui, -apple-system, sans-serif" font-size="16" fill="#111827">
+    15-08-1990
+  </text>
+
+  <text x="550" y="435" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#6b7280">
+    Jenis Kelamin
+  </text>
+  <text x="550" y="460" font-family="system-ui, -apple-system, sans-serif" font-size="16" fill="#111827">
+    Laki-laki
+  </text>
+
+  <!-- Action Buttons -->
+  <rect x="80" y="508" width="640" height="44" rx="8" fill="#ffffff" stroke="#dc2626" stroke-width="2"/>
+  <text x="400" y="537" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="600" fill="#dc2626" text-anchor="middle">
+    Lihat Data Kesehatan Lengkap
+  </text>
+
+  <!-- Bottom Navigation -->
+  <rect y="556" width="800" height="44" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- Home icon -->
+  <g transform="translate(120, 565)">
+    <path d="M12 3L2 12h3v9h6v-6h2v6h6v-9h3L12 3z" fill="#9ca3af"/>
+  </g>
+
+  <!-- Health records icon -->
+  <g transform="translate(320, 565)">
+    <rect x="4" y="2" width="16" height="20" rx="2" fill="none" stroke="#9ca3af" stroke-width="2"/>
+    <line x1="8" y1="8" x2="16" y2="8" stroke="#9ca3af" stroke-width="2"/>
+    <line x1="8" y1="12" x2="16" y2="12" stroke="#9ca3af" stroke-width="2"/>
+    <line x1="8" y1="16" x2="14" y2="16" stroke="#9ca3af" stroke-width="2"/>
+  </g>
+
+  <!-- Facilities icon -->
+  <g transform="translate(520, 565)">
+    <rect x="2" y="8" width="8" height="12" fill="none" stroke="#9ca3af" stroke-width="2"/>
+    <rect x="14" y="4" width="8" height="16" fill="none" stroke="#9ca3af" stroke-width="2"/>
+  </g>
+
+  <!-- Profile icon - Active -->
+  <g transform="translate(720, 565)">
+    <circle cx="12" cy="8" r="4" fill="#dc2626"/>
+    <path d="M4 20c0-4 4-5 8-5s8 1 8 5" fill="#dc2626"/>
+  </g>
+</svg>

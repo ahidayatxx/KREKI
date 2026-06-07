@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infografis Interaktif: DIM Raperda Kesehatan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        
+        /* Custom Scrollbar for the panel */
+        .custom-scroll::-webkit-scrollbar { width: 6px; }
+        .custom-scroll::-webkit-scrollbar-track { background: #f1f5f9; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+        .custom-scroll::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+        /* Hide scrollbar for canvas but allow panning */
+        .no-scroll { overflow: hidden; }
+
+        /* Smooth transitions */
+        .node-enter { animation: fadeIn 0.3s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Drag cursor states */
+        .cursor-grab { cursor: grab; }
+        .cursor-grabbing { cursor: grabbing; }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800 h-screen w-screen overflow-hidden flex">
+
+    <!-- CANVAS AREA (LEFT/MAIN) -->
+    <div id="canvas-container" class="flex-1 relative overflow-hidden cursor-grab bg-slate-100 select-none">
+        
+        <!-- Background Grid Pattern -->
+        <div class="absolute inset-0 opacity-[0.03] pointer-events-none" 
+             style="background-image: radial-gradient(#475569 1px, transparent 1px); background-size: 20px 20px;">
+        </div>
+
+        <!-- Toolbar -->
+        <div class="absolute top-4 left-4 z-50 bg-white p-1.5 rounded-lg shadow-lg border border-slate-200 flex gap-1">
+            <button onclick="zoom(0.1)" class="p-2 hover:bg-slate-100 rounded text-slate-600 transition-colors" title="Perbesar">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+            </button>
+            <button onclick="zoom(-0.1)" class="p-2 hover:bg-slate-100 rounded text-slate-600 transition-colors" title="Perkecil">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+            </button>
+            <div class="w-px bg-slate-200 my-1"></div>
+            <button onclick="resetView()" class="p-2 hover:bg-slate-100 rounded text-slate-600 transition-colors" title="Reset Posisi">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 9 2 12 5 15"></polyline><polyline points="9 5 12 2 15 5"></polyline><polyline points="15 19 12 22 9 19"></polyline><polyline points="19 9 22 12 19 15"></polyline><line x1="2" y1="12" x2="22" y2="12"></line><line x1="12" y1="2" x2="12" y2="22"></line></svg>
+            </button>
+        </div>
+
+        <!-- Info Badge -->
+        <div class="absolute top-4 right-4 z-40 bg-white/90 backdrop-blur px-4 py-2 rounded-lg shadow border border-slate-200 text-sm font-medium text-slate-600 pointer-events-none hidden md:block">
+            DIM Raperda Kota Depok - Visualisasi Struktur
+        </div>
+
+        <!-- Transformable Layer -->
+        <div id="mindmap-layer" class="absolute top-0 left-0 min-w-full min-h-full origin-top-center transition-transform duration-75 ease-out flex justify-center pt-20 pb-40">
+            <!-- Content will be injected here by JS -->
+        </div>
+        
+        <div class="absolute bottom-4 left-4 text-xs text-slate-400 pointer-events-none bg-white/50 px-2 py-1 rounded">
+            Klik simpul untuk detail. Scroll/Geser untuk navigasi.
+        </div>
+    </div>
+
+    <!-- RIGHT PANEL (DETAIL) -->
+    <div id="detail-panel" class="fixed inset-y-0 right-0 w-full md:w-96 bg-white shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out z-[100] flex flex-col border-l border-slate-200">
+        <!-- Header -->
+        <div class="p-4 border-b bg-slate-50 flex justify-between items-start sticky top-0 z-10">
+            <div class="flex items-center gap-3 text-emerald-700">
+                <div id="panel-icon" class="text-slate-500"></div>
+                <h2 id="panel-title" class="text-lg font-bold leading-tight">Detail Topik</h2>
+            </div>
+            <button onclick="closePanel()" class="p-1.5 hover:bg-slate-200 text-slate-500 rounded-full transition-colors">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+        </div>
+        
+        <!-- Content Body -->
+        <div id="panel-content" class="p-6 overflow-y-auto flex-1 space-y-6 custom-scroll">
+            <!-- Dynamic content goes here -->
+        </div>
+
+        <!-- Footer -->
+        <div class="p-4 border-t text-xs text-center text-slate-400 bg-slate-50">
+            Sumber: DIM Raperda1.pdf & UU 17/2023
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // --- DATA ---
+        const mindMapData = {
+          id: 'root',
+          label: 'Tanggung Jawab Pemda (Raperda Kesehatan)',
+          type: 'root',
+          iconName: 'book-open',
+          description: 'Peta Struktur Materi Muatan Raperda berdasarkan UU 17/2023 dan PP 28/2024.',
+          children: [
+            {
+              id: 'ukp_ukm',
+              label: 'Penyelenggaraan Upaya Kesehatan',
+              type: 'category',
+              iconName: 'activity',
+              description: 'Tanggung jawab umum dalam menyelenggarakan upaya kesehatan perseorangan dan masyarakat.',
+              children: [
+                {
+                  id: 'umum',
+                  label: 'Umum & Akses',
+                  type: 'leaf',
+                  content: {
+                    uu: 'UU 17/2023 Pasal 6(1), 7(1), 9, 15: Pemda bertanggung jawab merencanakan, mengatur, membina, dan mengawasi upaya kesehatan yang bermutu, aman, efisien, merata, dan terjangkau. Termasuk ketersediaan akses Fasyankes.',
+                    pp: 'PP 28/2024 Pasal 2(1), 1147(1): Melakukan pembinaan dan pengawasan. Menyusun perencanaan kebutuhan Fasyankes di wilayahnya.'
+                  }
+                },
+                {
+                  id: 'primer_lanjutan',
+                  label: 'Primer & Lanjutan',
+                  type: 'leaf',
+                  content: {
+                    uu: 'UU 17/2023 Pasal 28, 30, 38: Wajib menyediakan akses Pelayanan Kesehatan Primer (Puskesmas) dan Lanjutan (RS) di seluruh wilayah. Mengembangkan pusat pelayanan unggulan.',
+                    pp: 'PP 28/2024 Pasal 803, 811: Mendirikan Puskesmas di setiap kecamatan. Menyediakan Rumah Sakit berdasarkan kebutuhan, menjamin pembiayaan bagi fakir miskin.'
+                  }
+                },
+                {
+                  id: 'tradisional',
+                  label: 'Kesehatan Tradisional',
+                  type: 'leaf',
+                  content: {
+                    uu: 'UU 17/2023 Pasal 162: Bertanggung jawab atas ketersediaan Pelayanan Kesehatan Tradisional.',
+                    pp: 'PP 28/2024 Pasal 493: Koordinasi pelaksanaan, penyusunan kebijakan daerah, perizinan praktik, dan penyediaan sumber daya kesehatan tradisional.'
+                  }
+                },
+                {
+                  id: 'indra',
+                  label: 'Kesehatan Indra',
+                  type: 'leaf',
+                  content: {
+                    uu: 'UU 17/2023 Pasal 71(2), 72(2): Penyelenggaraan upaya kesehatan penglihatan dan pendengaran. Menetapkan gangguan tertentu sebagai prioritas daerah.',
+                    pp: '-'
+                  }
+                },
+                {
+                  id: 'jiwa',
+                  label: 'Kesehatan Jiwa',
+                  type: 'leaf',
+                  content: {
+                    uu: 'UU 17/2023 Pasal 77(1): Menjamin ketersediaan, aksesibilitas, mutu upaya kesehatan jiwa. Memberi pelindungan pada ODGJ dan penanganan ODGJ terlantar.',
+                    pp: 'PP 28/2024 Pasal 176: Penetapan kebijakan keswa kabupaten/kota, penyediaan layanan di FKTP dan RS, penghapusan pasung/stigma.'
+                  }
+                },
+                {
+                  id: 'disabilitas',
+                  label: 'Pelayanan Disabilitas',
+                  type: 'leaf',
+                  content: {
+                    uu: 'UU 17/2023 Pasal 53: Menjamin penyandang disabilitas mempunyai hak yang sama. Upaya kesehatan dilakukan oleh Pemda dan masyarakat.',
+                    pp: 'PP 28/2024 Pasal 92, 93: Penyediaan layanan primer/lanjutan yang aksesibel, rehabilitasi, pendidikan inklusif, dan pengumpulan data disabilitas.'
+                  }
+                }
+              ]
+            },
+            {
+              id: 'siklus_hidup',
+              label: 'Siklus Hidup & Gizi',
+              type: 'category',
+              iconName: 'heart-pulse',
+              description: 'Pelayanan kesehatan berdasarkan siklus hidup manusia dan pemenuhan gizi.',
+              children: [
+                {
+                  id: 'kia',
+                  label: 'Ibu & Anak (KIA)',
+                  type: 'leaf',
+                  content: {
+                    uu: 'UU 17/2023 Pasal 40-46: Menjamin yankes ibu hamil, bersalin, nifas. Menjamin hak bayi atas ASI eksklusif dan imunisasi dasar lengkap.',
+                    pp: 'PP 28/2024 Pasal 13, 21: Menyediakan tempat tunggu kelahiran, rujukan maternal, pengawasan tempat pengasuhan anak, koordinasi perlindungan anak.'
+                  }
+                },
+                {
+                  id: 'remaja_lansia',
+                  label: 'Remaja, Dewasa, Lansia',
+                  type: 'leaf',
+                  content: {
+                    uu: 'UU 17/2023 Pasal 50-52: Penyelenggaraan upaya kesehatan remaja, dewasa, dan lansia (Geriatri) yang sesuai standar.',
+                    pp: 'PP 28/2024 Pasal 53, 59, 79: Edukasi kespro remaja, skrining kesehatan dewasa/lansia, penyediaan fasilitas ramah lansia (long term care).'
+                  }
+                },
+                {
+                  id: 'gizi',
+                  label: 'Gizi Masyarakat',
+                  type: 'leaf',
+                  content: {
+                    uu: 'UU 17/2023 Pasal 64-68: Bertanggung jawab atas ketersediaan pangan bergizi, pemenuhan gizi keluarga miskin/darurat, dan edukasi gizi.',
+                    pp: 'PP 28/2024 Pasal 142: Menjamin keamanan pangan, intervensi gizi spesifik dan sensitif untuk stunting dan gizi buruk.'
+                  }
+                },
+                {
+                  id: 'reproduksi',
+                  label: 'Kesehatan Reproduksi',
+                  type: 'leaf',
+                  content: {
+                    uu: 'UU 17/2023 Pasal 56, 61, 63: Yankes reproduksi, KB, perlindungan dari aborsi tidak aman.',
+                    pp: 'PP 28/2024 Pasal 128: Memfasilitasi layanan kespro, ketersediaan alat kontrasepsi, dan pemantauan kualitas layanan KB.'
+                  }
+                }
+              ]
+            },
+            {
+              id: 'p2p_lingkungan',
+              label: 'Penyakit & Lingkungan',
+              type: 'category',
+              iconName: 'shield-alert',
+              description: 'Pencegahan penyakit menular/tidak menular dan kesehatan lingkungan.',
+              children: [
+                {
+                  id: 'wabah_klb',
+                  label: 'Wabah, KLB & Bencana',
+                  type: 'leaf',
+                  content: {
+                    uu: 'UU 17/2023 Pasal 8, 109, 352: Kewaspadaan dini, penanggulangan KLB/Wabah, dan pemulihan pasca-wabah. Ketersediaan sumber daya saat bencana.',
+                    pp: 'PP 28/2024 Pasal 1038, 1050: Menyusun rencana kontingensi wabah. Mitigasi risiko kesehatan akibat bencana alam dan non-alam.'
+                  }
+                },
+                {
+                  id: 'p2p',
+                  label: 'Pencegahan Penyakit (P2P)',
+                  type: 'leaf',
+                  content: {
+                    uu: 'UU 17/2023 Pasal 86, 88: Penanggulangan penyakit menular (HIV, TBC, dll) dan tidak menular (Hipertensi, Diabetes). KIE faktor risiko.',
+                    pp: 'PP 28/2024 Pasal 193, 200: Penetapan kawasan pangan sehat (rendah gula/garam). Deteksi dini faktor risiko PTM. Surveilans penyakit.'
+                  }
+                },
+                {
+                  id: 'lingkungan',
+                  label: 'Kesehatan Lingkungan',
+                  type: 'leaf',
+                  content: {
+                    uu: 'UU 17/2023 Pasal 9: Bertanggung jawab atas ketersediaan lingkungan sehat (Air, Udara, Tanah, Pangan).',
+                    pp: 'PP 28/2024 Pasal 249: Penetapan baku mutu kesling, pengawasan Tiku (Tempat Fasilitas Umum), TPM (Tempat Pengolahan Makanan), sanitasi total berbasis masyarakat.'
+                  }
+                },
+                {
+                  id: 'ktr',
+                  label: 'Kawasan Tanpa Rokok (KTR)',
+                  type: 'leaf',
+                  content: {
+                    uu: 'UU 17/2023 Pasal 151(2): Wajib menetapkan dan mengimplementasikan KTR di wilayahnya.',
+                    pp: 'PP 28/2024 Pasal 443, 461: Penetapan Perda KTR. Menyediakan layanan upaya berhenti merokok (UBM).'
+                  }
+                },
+                {
+                  id: 'kesjaor',
+                  label: 'Kesehatan Kerja & Olahraga',
+                  type: 'leaf',
+                  content: {
+                    uu: 'UU 17/2023 Pasal 98, 103: Upaya kesehatan kerja terintegrasi K3. Upaya kesehatan olahraga.',
+                    pp: 'PP 28/2024 Pasal 243: Pembinaan Pos UKK (Upaya Kesehatan Kerja) sektor informal. Peningkatan kesehatan olahraga masyarakat.'
+                  }
+                }
+              ]
+            },
+            {
+              id: 'sdmk',
+              label: 'SDM Kesehatan',
+              type: 'category',
+              iconName: 'users',
+              description: 'Pengelolaan Tenaga Medis dan Tenaga Kesehatan.',
+              children: [
+                {
+                  id: 'perencanaan_sdm',
+                  label: 'Perencanaan & Distribusi',
+                  type: 'leaf',
+                  content: {
+                    uu: 'UU 17/2023 Pasal 10-13, 228: Bertanggung jawab atas ketersediaan, pemerataan, dan pemenuhan SDMK sesuai kebutuhan wilayah.',
+                    pp: 'PP 28/2024 Pasal 568, 618: Wajib menyusun dokumen perencanaan kebutuhan SDMK. Wajib memenuhi kebutuhan SDM di Puskesmas dan RSUD.'
+                  }
+                },
+                {
+                  id: 'kompetensi',
+                  label: 'Mutu & Kompetensi',
+                  type: 'leaf',
+                  content: {
+                    uu: 'UU 17/2023 Pasal 12: Pelatihan dan peningkatan kompetensi tenaga medis/nakes.',
+                    pp: 'PP 28/2024 Pasal 544: Pelatihan kompetensi tambahan jika tenaga tidak tersedia. Izin praktik (SIP).'
+                  }
+                },
+                {
+                  id: 'kesejahteraan',
+                  label: 'Kesejahteraan & Insentif',
+                  type: 'leaf',
+                  content: {
+                    uu: 'UU 17/2023 Pasal 10(2), 229: Memberikan insentif fiskal/non-fiskal bagi nakes terutama di daerah terpencil/tidak diminati.',
+                    pp: 'PP 28/2024 Pasal 623: Tunjangan daerah bagi peserta penugasan khusus.'
+                  }
+                }
+              ]
+            },
+            {
+              id: 'farmasi_alkes',
+              label: 'Farmasi & Alkes',
+              type: 'category',
+              iconName: 'pill',
+              description: 'Ketersediaan obat, vaksin, dan alat kesehatan.',
+              children: [
+                {
+                  id: 'ketersediaan_obat',
+                  label: 'Ketersediaan & Pemerataan',
+                  type: 'leaf',
+                  content: {
+                    uu: 'UU 17/2023 Pasal 314, 317: Menjamin ketersediaan, pemerataan, dan keterjangkauan perbekalan kesehatan dan obat esensial.',
+                    pp: 'PP 28/2024 Pasal 906: Pengelolaan rantai pasok obat publik. Instalasi Farmasi Kabupaten/Kota.'
+                  }
+                },
+                {
+                  id: 'pengawasan_obat',
+                  label: 'Pengawasan & Keamanan',
+                  type: 'leaf',
+                  content: {
+                    uu: 'UU 17/2023 Pasal 138, 337: Mengawasi produksi dan peredaran sediaan farmasi/alkes dan PKRT. Memastikan keamanan produk.',
+                    pp: 'PP 28/2024 Pasal 944: Mitigasi risiko sediaan farmasi dalam kondisi darurat/bencana.'
+                  }
+                }
+              ]
+            },
+            {
+              id: 'manajemen_lain',
+              label: 'Manajemen & Lainnya',
+              type: 'category',
+              iconName: 'file-text',
+              description: 'Pendanaan, Peran Masyarakat, dan Layanan Khusus.',
+              children: [
+                {
+                  id: 'pendanaan',
+                  label: 'Pendanaan Kesehatan',
+                  type: 'leaf',
+                  content: {
+                    uu: 'UU 17/2023 Pasal 403-405: Menyediakan anggaran kesehatan (non-gaji) sesuai prioritas. Pendanaan bagi korban kekerasan/hukum.',
+                    pp: 'PP 28/2024 Pasal 1125, 1133: Alokasi APBD berbasis kinerja untuk program strategis nasional dan daerah.'
+                  }
+                },
+                {
+                  id: 'peran_masyarakat',
+                  label: 'Peran Serta Masyarakat',
+                  type: 'leaf',
+                  content: {
+                    uu: 'UU 17/2023 Pasal 14, 35: Memberdayakan masyarakat (UKBM/Posyandu).',
+                    pp: 'PP 28/2024 Pasal 1146: Membuat kebijakan partisipasi masyarakat, insentif kader Posyandu.'
+                  }
+                },
+                {
+                  id: 'darah_transplantasi',
+                  label: 'Darah & Transplantasi',
+                  type: 'leaf',
+                  content: {
+                    uu: 'UU 17/2023 Pasal 118, 132: Penyelenggaraan pelayanan darah (UDD PMI/RS) dan transplantasi organ.',
+                    pp: 'PP 28/2024 Pasal 300, 380: Menjamin pembiayaan pelayanan darah. Koordinasi jejaring transplantasi.'
+                  }
+                },
+                {
+                  id: 'hukum_forensik',
+                  label: 'Kesehatan & Hukum',
+                  type: 'leaf',
+                  content: {
+                    uu: 'UU 17/2023 Pasal 155, 404: Pelayanan kedokteran untuk kepentingan hukum (Visum et Repertum).',
+                    pp: 'PP 28/2024 Pasal 465, 1132: Pembiayaan visum bagi korban tindak pidana yang kurang mampu.'
+                  }
+                }
+              ]
+            }
+          ]
+        };
+
+        // --- ICONS (SVG Strings) ---
+        const icons = {
+            'book-open': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>',
+            'activity': '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>',
+            'users': '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>',
+            'shield-alert': '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>',
+            'heart-pulse': '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path><path d="M12 5 9.04 11l6.92-2L12 19"></path></svg>',
+            'pill': '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"></path><path d="m8.5 8.5 7 7"></path></svg>',
+            'file-text': '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>',
+            'chevron-right': '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>',
+            'chevron-down': '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>'
+        };
+
+        // --- STATE MANAGEMENT ---
+        let state = {
+            scale: 1,
+            pos: { x: 0, y: 0 },
+            expanded: { 'root': true, 'ukp_ukm': true },
+            selected: null
+        };
+
+        const canvasContainer = document.getElementById('canvas-container');
+        const layer = document.getElementById('mindmap-layer');
+        const detailPanel = document.getElementById('detail-panel');
+
+        // --- RENDERING ENGINE ---
+
+        function init() {
+            render();
+            centerView();
+            // Initial expansion for demo
+            if(mindMapData.children && mindMapData.children[0]) {
+                toggleExpand(mindMapData.children[0].id, false); 
+            }
+        }
+
+        function render() {
+            layer.innerHTML = '';
+            const treeRoot = createTreeNode(mindMapData, 0);
+            layer.appendChild(treeRoot);
+            updatePanel();
+        }
+
+        function createTreeNode(node, level) {
+            const container = document.createElement('div');
+            container.className = 'flex flex-col items-center node-enter';
+
+            // Vertical Connector (Input)
+            if (level > 0) {
+                const connector = document.createElement('div');
+                connector.className = 'h-6 w-px bg-slate-300 -mt-2 mb-2';
+                container.appendChild(connector);
+            }
+
+            // Node Card
+            const card = document.createElement('div');
+            
+            // Styles based on level
+            let baseClasses = "flex flex-col items-start gap-2 relative z-10 transition-all duration-300 cursor-pointer shadow-sm border-l-4 group select-none";
+            let specificClasses = "";
+            let widthClass = "";
+
+            if (level === 0) {
+                specificClasses = "p-4 rounded-lg bg-white border-slate-600 shadow-md mb-6 w-full max-w-md mx-auto";
+            } else if (level === 1) {
+                specificClasses = "p-3 rounded-lg bg-emerald-50 border-emerald-500 w-64 transform hover:-translate-y-1";
+            } else {
+                specificClasses = "p-2 rounded bg-white border-blue-400 hover:bg-blue-50 w-60 text-sm";
+            }
+
+            // Active state
+            if (state.selected === node.id) {
+                specificClasses += " ring-2 ring-offset-1 ring-blue-500 bg-blue-50";
+            }
+
+            card.className = `${baseClasses} ${specificClasses}`;
+            card.onclick = (e) => {
+                e.stopPropagation();
+                selectNode(node);
+                if (node.children && node.children.length > 0 && !state.expanded[node.id]) {
+                    toggleExpand(node.id);
+                }
+            };
+
+            // Card Header
+            const header = document.createElement('div');
+            header.className = "flex items-center justify-between w-full";
+            
+            const titleGroup = document.createElement('div');
+            titleGroup.className = "flex items-center gap-2 font-semibold text-slate-800";
+            
+            if (node.iconName && icons[node.iconName]) {
+                const iconSpan = document.createElement('span');
+                iconSpan.className = "text-slate-600";
+                iconSpan.innerHTML = icons[node.iconName];
+                titleGroup.appendChild(iconSpan);
+            }
+            
+            const labelSpan = document.createElement('span');
+            labelSpan.className = "leading-tight";
+            labelSpan.innerText = node.label;
+            titleGroup.appendChild(labelSpan);
+            
+            header.appendChild(titleGroup);
+
+            // Expand Button
+            if (node.children && node.children.length > 0) {
+                const btn = document.createElement('button');
+                btn.className = "p-1 rounded-full hover:bg-slate-200 text-slate-500 transition-transform";
+                const isExpanded = state.expanded[node.id];
+                btn.innerHTML = isExpanded ? icons['chevron-down'] : icons['chevron-right'];
+                btn.onclick = (e) => {
+                    e.stopPropagation();
+                    toggleExpand(node.id);
+                };
+                header.appendChild(btn);
+            }
+
+            card.appendChild(header);
+
+            // Description (Level 0 & 1 only)
+            if (level < 2 && node.description) {
+                const desc = document.createElement('p');
+                desc.className = "text-xs text-slate-500 mt-1 leading-snug";
+                desc.innerText = node.description;
+                card.appendChild(desc);
+            }
+
+            container.appendChild(card);
+
+            // Children Rendering
+            if (node.children && node.children.length > 0 && state.expanded[node.id]) {
+                const childrenWrapper = document.createElement('div');
+                childrenWrapper.className = "flex flex-col items-center mt-2 relative";
+
+                // Connector to Children
+                const connector = document.createElement('div');
+                connector.className = "h-4 w-px bg-slate-300";
+                childrenWrapper.appendChild(connector);
+
+                // Horizontal Line
+                if (node.children.length > 1) {
+                    const hLine = document.createElement('div');
+                    hLine.className = "w-[90%] h-px bg-slate-300 mb-2";
+                    childrenWrapper.appendChild(hLine);
+                }
+
+                // Children Container
+                const childrenRow = document.createElement('div');
+                childrenRow.className = `flex flex-wrap justify-center gap-4 ${level === 0 ? 'gap-8' : ''}`;
+                
+                node.children.forEach(child => {
+                    const childNode = createTreeNode(child, level + 1);
+                    childrenRow.appendChild(childNode);
+                });
+                
+                childrenWrapper.appendChild(childrenRow);
+                container.appendChild(childrenWrapper);
+            }
+
+            return container;
+        }
+
+        // --- INTERACTION LOGIC ---
+
+        function toggleExpand(id, shouldRender = true) {
+            state.expanded[id] = !state.expanded[id];
+            if(shouldRender) render();
+        }
+
+        function selectNode(node) {
+            state.selected = node.id;
+            state.selectedData = node;
+            render(); // Re-render to update active styling
+            openPanel();
+        }
+
+        function openPanel() {
+            detailPanel.classList.remove('translate-x-full');
+            detailPanel.classList.add('translate-x-0');
+            updatePanel();
+        }
+
+        function closePanel() {
+            detailPanel.classList.add('translate-x-full');
+            detailPanel.classList.remove('translate-x-0');
+            state.selected = null;
+            state.selectedData = null;
+            render();
+        }
+
+        function updatePanel() {
+            if (!state.selectedData) return;
+            const node = state.selectedData;
+
+            // Update Header
+            const iconContainer = document.getElementById('panel-icon');
+            iconContainer.innerHTML = node.iconName && icons[node.iconName] ? icons[node.iconName] : '';
+            document.getElementById('panel-title').innerText = node.label;
+
+            // Update Content
+            const contentDiv = document.getElementById('panel-content');
+            contentDiv.innerHTML = '';
+
+            // Description
+            if (node.description) {
+                const descBox = document.createElement('div');
+                descBox.className = "bg-blue-50 p-4 rounded-lg border border-blue-100 text-sm text-blue-800";
+                descBox.innerText = node.description;
+                contentDiv.appendChild(descBox);
+            }
+
+            // Detail Content (UU & PP)
+            if (node.content) {
+                // Section UU
+                const sectionUU = document.createElement('div');
+                sectionUU.innerHTML = `
+                    <h3 class="text-sm font-bold text-slate-500 uppercase mb-2 flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-orange-500"></span>
+                        Pengaturan dalam Regulasi (UU 17/2023)
+                    </h3>
+                    <div class="bg-orange-50 p-4 rounded-lg border-l-4 border-orange-400 text-slate-700 text-sm leading-relaxed">
+                        ${node.content.uu}
+                    </div>
+                `;
+                contentDiv.appendChild(sectionUU);
+
+                // Section PP
+                const sectionPP = document.createElement('div');
+                sectionPP.innerHTML = `
+                    <h3 class="text-sm font-bold text-slate-500 uppercase mb-2 flex items-center gap-2 mt-6">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                        Regulasi Turunan (PP 28/2024)
+                    </h3>
+                    <div class="bg-emerald-50 p-4 rounded-lg border-l-4 border-emerald-400 text-slate-700 text-sm leading-relaxed">
+                        ${node.content.pp}
+                    </div>
+                `;
+                contentDiv.appendChild(sectionPP);
+            } else if (node.children) {
+                const emptyState = document.createElement('div');
+                emptyState.className = "text-center py-10 text-slate-400";
+                emptyState.innerHTML = `<p>Kategori Utama</p><p class="text-xs mt-2">Klik tanda (+) di diagram untuk melihat sub-materi.</p>`;
+                contentDiv.appendChild(emptyState);
+            }
+        }
+
+        // --- ZOOM & PAN ---
+        let isDragging = false;
+        let startPos = { x: 0, y: 0 };
+
+        function updateTransform() {
+            layer.style.transform = `translate(${state.pos.x}px, ${state.pos.y}px) scale(${state.scale})`;
+        }
+
+        function zoom(delta) {
+            const newScale = Math.min(Math.max(state.scale + delta, 0.4), 2);
+            state.scale = newScale;
+            updateTransform();
+        }
+
+        function resetView() {
+            state.scale = 1;
+            state.pos = { x: 0, y: 0 };
+            updateTransform();
+        }
+        
+        function centerView() {
+            // Simple centering logic
+            const containerWidth = canvasContainer.clientWidth;
+            state.pos.x = 0; // Center X handled by flex layout usually, but we can offset if needed
+            state.pos.y = 0;
+            updateTransform();
+        }
+
+        // Mouse Events for Pan
+        canvasContainer.addEventListener('mousedown', (e) => {
+            if (e.target === canvasContainer || e.target === layer) {
+                isDragging = true;
+                startPos = { x: e.clientX - state.pos.x, y: e.clientY - state.pos.y };
+                canvasContainer.classList.add('cursor-grabbing');
+                canvasContainer.classList.remove('cursor-grab');
+            }
+        });
+
+        window.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            e.preventDefault();
+            state.pos.x = e.clientX - startPos.x;
+            state.pos.y = e.clientY - startPos.y;
+            updateTransform();
+        });
+
+        window.addEventListener('mouseup', () => {
+            isDragging = false;
+            canvasContainer.classList.remove('cursor-grabbing');
+            canvasContainer.classList.add('cursor-grab');
+        });
+
+        // Wheel Zoom
+        canvasContainer.addEventListener('wheel', (e) => {
+            if (e.ctrlKey) {
+                e.preventDefault();
+                zoom(e.deltaY > 0 ? -0.1 : 0.1);
+            }
+        });
+
+        // Initialize App
+        init();
+
+    </script>
+    
+</body>
+</html>

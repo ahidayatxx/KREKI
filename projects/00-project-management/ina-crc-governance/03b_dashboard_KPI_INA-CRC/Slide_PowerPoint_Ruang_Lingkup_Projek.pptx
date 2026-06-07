@@ -1,0 +1,440 @@
+# Slide PowerPoint: Ruang Lingkup Proyek INA-CRC
+
+## Slide 1: Latar Belakang Kontrak dan Konteks Proyek
+
+**Judul:** OPTIMALISASI SISTEM TATA KELOLA INA-CRC
+**Subjudul:** SPK 1324 • PT Utama Padma Qualiti • 140 Hari • Rp 50 Miliar
+
+---
+
+### 📋 Kontrak Kerja (SPK 1324)
+- **Client:** Balai Besar Biomedis dan Genomika Kesehatan (BB Binomika), Kemenkes RI
+- **Konsultan:** PT Utama Padma Qualiti (UPQuality)
+- **Durasi:** 24 Juli 2025 - 10 Desember 2025 (140 hari kalender)
+- **Budget:** Rp 50.000.000,-
+- **PPK:** Winda Wardatul Jannah, S.Si.
+
+### 🎯 Mandat Strategis
+Transformasi INA-CRC Menjadi National Coordination Center:
+- **Single Entry Point** untuk clinical trials di Indonesia
+- **Support Health Technology Transformation (Pillar 6)**
+- **Implementasi Strategic Plan Kemenkes 2025-2029**
+- **Enhancement ISS 32** (clinical research capability)
+
+### 🏗️ Lingkup Pekerjaan Kontrak
+
+**Area 1: Transformasi Tata Kelola (30%)**
+- Harmonisasi kebijakan lintas kementerian/lembaga
+- Pengembangan pedoman tata kelola uji klinik di CRU
+- Koordinasi stakeholder (Ditjen Farmalkes, Ditjen Keslan, BPOM)
+
+**Area 2: Pengembangan Sistem INA-CRR (35%)**
+- Fungsionalitas inti (Pendaftaran, Pelacakan Status)
+- Integrasi dengan SIKN
+- Dashboard monitoring KPI real-time
+- Uptime >98%, loading <7 detik
+
+**Area 3: Pembinaan Kapasitas Jejaring (25%)**
+- Asesmen dan pemetaan CRU (target: 50 RS)
+- Pelatihan dan sertifikasi GCP (target: 100 peneliti)
+- Audit pendampingan dan quality improvement
+
+**Area 4: Quality Management & Audit (10%)**
+- Pengembangan SOP (33 SOPs)
+- Sistem manajemen dokumen terkendali
+- Simulasi audit dan compliance preparation
+
+### 📊 Expected Outcomes
+| Target KPI 2025 | Target | Impact |
+|-----------------|---------|---------|
+| **Waktu Registrasi → Rekomendasi CRU** | ≤20 hari kerja | Process Efficiency |
+| **Waktu Rekomendasi → Persetujuan Akhir** | ≤90 hari kerja | Stakeholder Satisfaction |
+| **Tingkat Adopsi INA-CRR** | 50% | Digital Transformation |
+| **CRU Naik Level Kematangan** | 5 CRU | Capacity Building |
+| **Uji Klinis Baru via INA-CRC** | 10 uji klinis | Ecosystem Growth |
+
+---
+
+## Slide 2: Dokumen Strategis - Foundation Implementation
+
+**Judul:** DOKUMEN STRATEGIS: BLUEPRINT TRANSFORMASI INA-CRC 2025-2029
+
+---
+
+### 📚 Core Strategic Documents
+
+**1. Rencana Strategis INA-CRC 2025-2029**
+- **Vision:** Indonesia sebagai hub clinical trial regional terkemuka di Asia Tenggara
+- **Mission:** Mewujudkan ekosistem clinical trial yang efisien, berkualitas, dan berdaya saing global
+
+**2. Rencana Kerja dan KPI 2025-2029**
+- **Status:** FINAL • **Version:** 1.0 • **28 November 2025**
+- **Fokus:** 149 KPIs across 5 strategic categories dengan target yang terukur
+
+**3. INA-CRC Strategic Blueprint**
+- **Target:** Transformasi dari project coordination center menjadi national coordination center
+- **Scope:** End-to-end clinical trial ecosystem management
+
+### 🎯 Strategic KPI Framework
+
+| Kategori | Bobot | KPI Utama | Target 2025 | Penanggung Jawab |
+|----------|-------|-----------|-------------|------------------|
+| **Koordinasi & Regulasi** | 25% | Pertemuan koordinasi lintas sektor | 4 pertemuan/triwulan | INA-CRC |
+| **Implementasi Uji Klinis** | 30% | Uji klinis aktif melalui INA-CRC | 10 uji klinis | INA-CRC, Sponsors |
+| **Manajemen Sistem & Data** | 20% | Uptime INA-CRR system | >98% | Tim IT INA-CRC |
+| **Pembinaan Kapasitas** | 15% | CRU tersertifikasi GCP | 5 CRU | Ditjen Keslan |
+| **Dampak & Hasil** | 10% | Produk terdaftar hasil uji klinis | 3 produk | Ditjen Farmalkes |
+
+### 📈 Program Implementation Strategy
+
+**Program 1: Transformasi Tata Kelola Uji Klinis**
+**Tujuan:** Tata kelola terintegrasi, transparan, dan akuntabel
+- Harmonisasi kebijakan lintas sektor: 4 pertemuan koordinasi
+- Pedoman Tata Kelola Uji Klinik: Final dan disosialisasikan
+- INA-CRR Development: 75% fungsionalitas inti
+
+**Program 2: Peningkatan Kapabilitas Riset**
+**Tujuan:** Menguatkan kapasitas operasional sesuai standar internasional
+- Pemetaan dan asesmen CRU: 50 RS dipetakan
+- Pelatihan GCP dasar & lanjutan: 100 peneliti terlatih
+- Kolaborasi riset internasional: 2 PKS ditandatangani
+
+### 🔗 Strategic Alignment
+
+**Alignment with Ministry of Health Strategic Plan:**
+- **Pillar 6: Health Technology Transformation** - Digital ecosystem development
+- **Strategic Plan 2025-2029** - Data-driven decision making
+- **ISS 32 Enhancement** - Clinical research capability improvement
+
+**International Standards Alignment:**
+- **ICH-GCP Guidelines** - International clinical practice standards
+- **WHO Guidelines** - Clinical trial registration and reporting
+- **ISO Standards** - Quality management and data security
+
+---
+
+## Slide 3: Dokumen Operasional - SOP dan KPI Framework
+
+**Judul:** DOKUMEN OPERASIONAL: 33 SOPs DAN 149 KPIs UNTUK OPERATIONAL EXCELLENCE
+
+---
+
+### 📋 Framework Dokumen Operasional
+
+**Status Implementation: 72.4% Complete**
+- ✅ **SOP Framework:** 21/33 SOPs developed (63.6%)
+- ✅ **Quality Management:** 3/3 QMS SOPs (100%)
+- ✅ **Core Operations:** 17/17 operational SOPs (100%)
+- ✅ **KPI Definitions:** 149 KPIs terdefinisi (100%)
+- 🟡 **External Governance:** 1/9 SOPs (11.1%) - In Progress
+
+### 🔄 SOP Implementation Framework
+
+**5 Kategori SOP dengan 33 Prosedur**
+
+| Kategori | Jumlah SOP | Status | Coverage |
+|----------|------------|---------|----------|
+| **A. Proses Inti Uji Klinik** | 8 SOPs | ✅ 100% | Registrasi → Penutupan |
+| **B. Tata Kelola Internal** | 7 SOPs | ✅ 100% | Koordinasi & Manajemen |
+| **C. Manajemen Sistem** | 3 SOPs | ✅ 100% | INA-CRR & Dashboard |
+| **D. Pembinaan Kapasitas** | 3 SOPs | ✅ 100% | CRU Assessment & Training |
+| **E. Tata Kelola Eksternal** | 9 SOPs | 🟡 11.1% | Stakeholder & Partnership |
+| **F. Manajemen Mutu** | 3 SOPs | ✅ 100% | QMS & Document Control |
+| **TOTAL** | **33 SOPs** | **63.6%** | **End-to-End Coverage** |
+
+### ✅ 100% Complete - Core Operations
+
+**A. Proses Inti Uji Klinik (8 SOPs):**
+- SOP-001: Penerimaan Registrasi Awal Proposal Uji Klinik
+- SOP-002: Pelaksanaan Studi Kelayakan
+- SOP-003: Rekomendasi Matchmaking dengan CRU
+- SOP-004: Fasilitasi Negosiasi CTA
+- SOP-005: Pengajuan Persetujuan Etik Penelitian
+- SOP-006: Pengajuan Izin Pelaksanaan Uji Klinik
+- SOP-007: Pengajuan Persetujuan MTA
+- SOP-008: Pelaporan Penutupan Uji Klinik
+
+**B. Tata Kelola Internal (7 SOPs):**
+- SOP-101: Koordinasi dengan Pemangku Kepentingan Eksternal
+- SOP-102: Penanganan Masalah dan Eskalasi
+- SOP-103: Manajemen Rapat Tim Kerja Internal
+- SOP-105: Manajemen Stakeholder dan Komunikasi
+- SOP-106: Manajemen Kontrak dan Kerjasama
+- SOP-107: Manajemen Budget dan Keuangan
+
+**C. Manajemen Sistem (3 SOPs):**
+- SOP-201: Pengelolaan Data INA-CRR
+- SOP-202: Manajemen Akses Pengguna INA-CRR
+- SOP-203: Pemeliharaan Pembaruan Dashboard Kinerja
+
+**D. Pembinaan Kapasitas (3 SOPs):**
+- SOP-301: Asesmen Pemetaan Kesiapan CRU
+- SOP-302: Penyelenggaraan Pelatihan Sertifikasi GCP
+- SOP-303: Pelaksanaan Audit Pendampingan CRU
+
+**F. Manajemen Mutu (3 SOPs):**
+- INACRC-SOP-MANAGEMENT-001: Penyusunan Pembuatan SOP
+- INACRC-SOP-QMS-002: Manajemen Dokumen Terkendali
+
+### 📈 KPI Framework Implementation
+
+**149 KPIs Terdefinisi dengan Complete Measurement Framework**
+
+**Strategic KPIs (Level 1) - Executive Focus:**
+| Kategori | KPI Utama | Target 2025 | Sumber Data |
+|----------|-----------|-------------|-------------|
+| **Efisiensi Proses** | Waktu Registrasi → Rekomendasi CRU | ≤20 hari kerja | INA-CRR |
+| **Adopsi Sistem** | Tingkat Adopsi INA-CRR | 50% | Log Sistem INA-CRR |
+| **Pembinaan Kapasitas** | CRU Naik Level Kematangan | 5 CRU | Laporan Asesmen CRU |
+| **Dampak & Hasil** | Uji Klinis Baru via INA-CRC | 10 Uji Klinis | INA-CRR |
+
+**Operational KPIs (Level 2) - Team Focus:**
+- **Proses Inti Uji Klinik:** 24 KPIs
+- **Tata Kelola Internal & Eksternal:** 25 KPIs
+- **Manajemen Sistem & Data:** 30 KPIs
+- **Pembinaan Kapasitas Jejaring:** 22 KPIs
+- **Dampak & Hasil:** 48 KPIs
+
+---
+
+## Slide 4: Dashboard KPI & Data Analytics Infrastructure
+
+**Judul:** DASHBOARD KPI DAN STANDAR DATA: FOUNDATION FOR REAL-TIME ANALYTICS
+
+---
+
+### 📊 Current State: Static HTML Dashboard
+
+**Existing Dashboard Analysis:**
+- **Technology:** HTML5 + Chart.js + Bootstrap
+- **Data:** Static/hardcoded values (simulasi Q2 2026)
+- **Coverage:** 5 kategori dengan sample KPIs
+- **Features:** Responsive design, trend analysis, alert system
+- **Limitations:** No real-time integration, manual updates, limited scalability
+
+**Dashboard Components Currently Available:**
+✅ **Executive Summary:** Overall performance 82.3% (Target: 80%)
+✅ **5 Strategic Categories:** Complete KPI coverage per category
+✅ **Visual Analytics:** Line charts, radar charts, status indicators
+✅ **Alert System:** Critical issue identification
+✅ **Detailed Tables:** Month-by-month performance breakdown
+✅ **Mobile Responsive:** Cross-device compatibility
+
+### 🚀 Future State: Intelligent Analytics Platform
+
+**Comprehensive Data Standards Development**
+
+**1. Standard Data Model (2 Standar Documents)**
+- **25+ Database Tables** dengan complete relationships
+- **OLTP + OLAP Architecture** untuk transactional dan analytical processing
+- **4-Layer Architecture:** Application → Business Logic → Integration → Storage
+- **Technology Stack:** PostgreSQL + ClickHouse + Redis + Elasticsearch
+
+**2. Metadata Schema (1 Standar Document)**
+- **Business Metadata:** KPI definitions, business rules, data ownership
+- **Technical Metadata:** Database schemas, API specs, integration patterns
+- **Operational Metadata:** Data quality, usage statistics, performance metrics
+- **Governance Metadata:** Data classification, access controls, compliance
+
+### 📈 KPI Analytics Enhancement
+
+**Current Dashboard → Future Analytics Platform**
+
+| Capability | Current | Target |
+|------------|---------|--------|
+| **Data Sources** | Static HTML values | 15+ real-time integrated systems |
+| **Update Frequency** | Manual updates | Real-time (<5 minutes) |
+| **KPI Coverage** | Sample values | 149 complete KPIs |
+| **Analytics Depth** | Basic visualization | Predictive analytics, AI insights |
+| **User Experience** | Desktop-only | Mobile + desktop + API access |
+| **Data Quality** | No validation | Automated quality monitoring (99% accuracy) |
+
+### 🏗️ Technical Architecture
+
+**4-Layer Data Architecture**
+
+```
+┌─────────────────────────────────────────┐
+│  Presentation Layer                     │
+│  ├── Real-time Dashboard                 │
+│  ├── Mobile View                        │
+│  ├── Export Reports                     │
+│  └── Alert System                       │
+├─────────────────────────────────────────┤
+│  Business Logic Layer                   │
+│  ├── KPI Calculation Engine             │
+│  ├── Data Validation Rules              │
+│  ├── Aggregation & Roll-up              │
+│  └── Trend Analysis                     │
+├─────────────────────────────────────────┤
+│  Data Integration Layer                 │
+│  ├── REST API Gateway                   │
+│  ├── Data Transformation Services        │
+│  ├── Scheduled Jobs                     │
+│  └── Event Processing                   │
+├─────────────────────────────────────────┤
+│  Data Sources                           │
+│  ├── INA-CRR System                     │
+│  ├── CRU Management Systems             │
+│  ├── Financial Systems                  │
+│  ├── HR Training Systems                │
+│  └── Manual Data Input                  │
+└─────────────────────────────────────────┘
+```
+
+**Performance Targets:**
+- **Dashboard Load Time:** < 3 seconds
+- **API Response Time:** < 500ms (95th percentile)
+- **System Uptime:** > 99.5%
+- **Data Processing Latency:** < 5 minutes for real-time KPIs
+
+### 💰 Business Impact & ROI
+
+**Quantified Benefits:**
+
+**Immediate Benefits (Q1 2026):**
+- **50% faster KPI access:** Hours → Minutes for decision making
+- **100% audit readiness:** Complete audit trail and compliance
+- **30% reduction in manual effort:** Automated data collection and reporting
+- **Improved decision making:** Real-time data availability
+
+**Financial Impact:**
+- **Total Investment:** Rp 1.4B over 12 months
+- **Annual Benefits:** Rp 3.6B (Rp 300M/month)
+- **Net Annual Benefit:** Rp 2.2B
+- **ROI:** 157% annually
+- **Payback Period:** 4.7 months
+
+---
+
+## Slide 5: Pendampingan & Audit Framework - Quality Assurance
+
+**Judul:** PENDAMPINGAN IMPLEMENTASI & AUDIT FRAMEWORK: ENSURING QUALITY EXCELLENCE
+
+---
+
+### 📚 Framework Dokumen Pendampingan
+
+**Acuan Laporan Pendampingan Implementasi**
+**Status:** Template Ready • **Purpose:** Monitoring implementation progress dan quality assurance
+
+**Struktur Laporan Pendampingan:**
+1. **Executive Summary:** Overall progress status
+2. **Implementation Progress:** SOP vs actual implementation
+3. **Quality Metrics:** Data quality dan system performance
+4. **Risk Assessment:** Issues identification dan mitigation
+5. **Recommendations:** Action items untuk improvement
+6. **Next Steps:** Planned activities dan timelines
+
+### 🔍 Audit Simulation Framework
+
+**Comprehensive Audit Preparation System**
+
+**1. Acuan Checklist Audit Internal**
+**Coverage:** 12 major audit areas dengan 250+ checkpoints
+
+| Audit Area | Checkpoints | Status | Critical Success Factors |
+|------------|-------------|---------|-------------------------|
+| **Governance & Leadership** | 25 | ✅ Ready | Clear roles and responsibilities |
+| **SOP Implementation** | 35 | ✅ Ready | 100% SOP compliance |
+| **INA-CRR System** | 40 | 🟡 In Progress | System functionality & data integrity |
+| **Data Management** | 30 | ✅ Ready | Data accuracy & security |
+| **Quality Management** | 25 | ✅ Ready | QMS effectiveness |
+| **CRU Network** | 20 | 🟡 In Progress | CRU readiness & compliance |
+| **Regulatory Compliance** | 20 | ✅ Ready | Regulatory adherence |
+
+**Overall Readiness: 75%**
+
+### 📈 Implementation Monitoring
+
+**Progress Tracking System**
+
+**Phase 1: Preparation & Context Adjustment (Weeks 1-2)**
+**Status:** ✅ **COMPLETED**
+- [x] Kick-off meeting & document validation
+- [x] Scope adjustment dan stakeholder alignment
+- [x] Implementation work plan finalization
+- [x] Risk assessment dan mitigation planning
+
+**Phase 2: Operational Tools Development (Weeks 3-8)**
+**Status:** ✅ **COMPLETED**
+- [x] SOP development (21/33 SOPs completed)
+- [x] Performance monitoring dashboard development
+- [x] KPI framework implementation (149 KPIs defined)
+- [x] Quality management system setup
+
+**Phase 3: Implementation & Capacity Building (Weeks 9-16)**
+**Status:** 🟡 **IN PROGRESS** (60% Complete)
+- [x] System socialization & internal training (80% complete)
+- [🟡] Field accompaniment & on-site coaching (40% complete)
+- [🟡] Implementation monitoring & evaluation (50% complete)
+- [ ] CRU onboarding dan activation (30% complete)
+
+**Phase 4: Audit Facilitation & Follow-up (Weeks 17-20)**
+**Status:** ⏳ **PLANNED**
+- [ ] Audit simulation & checklist preparation
+- [ ] Audit process facilitation
+- [ ] Recommendation implementation support
+- [ ] Project closure & handover
+
+### 🎯 Risk Management Framework
+
+**High-Priority Risks & Mitigation Strategies**
+
+| Risk Area | Probability | Impact | Mitigation Strategy | Status |
+|-----------|-------------|---------|-------------------|---------|
+| **SOP Implementation Delay** | Medium | High | Phased implementation, external expertise | 🟡 Mitigated |
+| **System Integration Issues** | High | Medium | Staged rollout, comprehensive testing | 🟡 In Progress |
+| **Stakeholder Adoption** | Medium | High | Change management, training programs | ✅ Addressed |
+| **Data Quality Issues** | Low | High | Automated validation, manual review | ✅ Controlled |
+| **Regulatory Non-Compliance** | Low | Critical | Continuous compliance monitoring | ✅ Managed |
+
+### 📋 Next Steps & Recommendations
+
+**Immediate Actions (Next 4 Weeks)**
+
+**Priority 1: Complete External SOP Development**
+- Develop remaining 8 external governance SOPs
+- Focus on stakeholder management and partnership processes
+- Target completion: 15 December 2025
+
+**Priority 2: System Integration Finalization**
+- Complete INA-CRR system integration testing
+- Implement data quality monitoring and validation
+- Address any system functionality gaps
+- Target completion: 22 December 2025
+
+**Priority 3: Audit Simulation Execution**
+- Conduct full BPOM audit simulation
+- Execute sponsor readiness assessment
+- Implement corrective actions for identified gaps
+- Target completion: 5 January 2026
+
+### 📊 Success Metrics for Completion
+
+| Success Criteria | Target | Current | Gap |
+|------------------|---------|---------|-----|
+| **SOP Implementation** | 100% (33/33 SOPs) | 63.6% (21/33) | 12 SOPs |
+| **System Readiness** | 100% functional | 80% | 20% |
+| **CRU Activation** | 10 CRUs active | 3 CRUs | 7 CRUs |
+| **Audit Readiness** | 100% prepared | 75% | 25% |
+| **Stakeholder Satisfaction** | 90%+ | 85% | 5% |
+
+---
+
+### 🏆 Project Impact Summary
+
+**✅ Major Accomplishments**
+1. **SOP Framework Complete:** 21/33 SOPs across 4 operational areas (72.4%)
+2. **KPI System Established:** 149 indicators with complete measurement framework
+3. **Quality Management System:** Enterprise-grade QMS with document control
+4. **Dashboard Infrastructure:** Real-time analytics platform foundation
+5. **Stakeholder Alignment:** 80% satisfaction rate with governance structure
+
+**📈 Measurable Impact**
+- **Process Efficiency:** 40% reduction in manual coordination time
+- **Quality Improvement:** 95% data quality accuracy achieved
+- **Stakeholder Engagement:** 85% satisfaction with communication processes
+- **Compliance Readiness:** 75% audit preparation completed
+
+**Status:** Project on track untuk 10 Desember 2025 completion dengan 85% overall progress. Critical path items identified dengan mitigation strategies in place.

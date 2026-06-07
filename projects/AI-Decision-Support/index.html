@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Pengambilan Keputusan Penerimaan Pasien IGD - RS Budhi Asih</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="30" r="1.5" fill="rgba(255,255,255,0.1)"/><circle cx="30" cy="70" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="70" cy="80" r="2.5" fill="rgba(255,255,255,0.1)"/></svg>');
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-20px); }
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            animation: slideDown 1s ease-out;
+        }
+
+        .hero .subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            opacity: 0.9;
+            animation: slideUp 1s ease-out 0.2s both;
+        }
+
+        .hero .hospital-name {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #ffd700;
+            margin-bottom: 30px;
+            animation: slideUp 1s ease-out 0.4s both;
+        }
+
+        .hero .description {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            opacity: 0.9;
+            animation: slideUp 1s ease-out 0.6s both;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Navigation Buttons */
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 50px;
+            animation: fadeIn 1s ease-out 0.8s both;
+        }
+
+        .nav-btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .nav-btn:hover::before {
+            left: 100%;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Overview Section */
+        .overview {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #7f8c8d;
+            margin-bottom: 60px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .feature-desc {
+            color: #7f8c8d;
+            line-height: 1.6;
+        }
+
+        /* Benefits Section */
+        .benefits {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 25px;
+            border-radius: 15px;
+            background: linear-gradient(135deg, #f8f9fa, #ffffff);
+            border: 1px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+
+        .benefit-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .benefit-icon {
+            font-size: 2rem;
+            margin-right: 20px;
+            color: #27ae60;
+            flex-shrink: 0;
+        }
+
+        .benefit-content h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .benefit-content p {
+            color: #7f8c8d;
+            font-size: 0.95rem;
+        }
+
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .cta p {
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 18px 35px;
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(231, 76, 60, 0.3);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(231, 76, 60, 0.4);
+        }
+
+        .cta-btn.secondary {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.3);
+        }
+
+        .cta-btn.secondary:hover {
+            box-shadow: 0 15px 35px rgba(52, 152, 219, 0.4);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero .hospital-name { font-size: 1.5rem; }
+            .nav-buttons { flex-direction: column; align-items: center; }
+            .nav-btn { width: 250px; }
+            .features-grid { grid-template-columns: 1fr; }
+            .benefits-grid { grid-template-columns: 1fr; }
+            .cta-buttons { flex-direction: column; align-items: center; }
+            .cta-btn { width: 250px; }
+        }
+
+        /* Floating Animation */
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="floating">🏥 Sistem Pengambilan Keputusan</h1>
+            <p class="subtitle">Penerimaan Pasien IGD Berbasis AI</p>
+            <p class="hospital-name">RS Budhi Asih</p>
+            <p class="description">
+                Solusi teknologi terdepan untuk mengoptimalkan proses penerimaan pasien di Instalasi Gawat Darurat dengan sistem pengambilan keputusan otomatis berbasis data pre-hospital dan algoritma cerdas.
+            </p>
+            <div class="nav-buttons">
+                <a href="#overview" class="nav-btn">📊 Lihat Overview</a>
+                <a href="#benefits" class="nav-btn">✨ Manfaat Sistem</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Overview Section -->
+    <section class="overview" id="overview">
+        <div class="container">
+            <h2 class="section-title">Ruang Lingkup Proyek</h2>
+            <p class="section-subtitle">Dua komponen utama sistem yang akan dikembangkan</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📋</div>
+                    <h3 class="feature-title">Informasi Pre-Hospital</h3>
+                    <p class="feature-desc">
+                        Sistem pengumpulan dan validasi data pasien yang komprehensif dari ambulans atau fasilitas pengirim, mencakup data pasien, kondisi klinis, riwayat medis, dan kebutuhan logistik.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="feature-title">Alur Keputusan Otomatis</h3>
+                    <p class="feature-desc">
+                        Algoritma AI yang menganalisis data pre-hospital, mencocokkan dengan kapasitas real-time RS, dan memberikan rekomendasi keputusan (Terima/Rujuk/Standby) dengan confidence score tinggi.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits" id="benefits">
+        <div class="container">
+            <h2 class="section-title">Manfaat Implementasi</h2>
+            <p class="section-subtitle">Dampak positif untuk operasional RS Budhi Asih</p>
+            
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <div class="benefit-icon">⚡</div>
+                    <div class="benefit-content">
+                        <h3>Efisiensi Operasional</h3>
+                        <p>Mengurangi waktu pengambilan keputusan dari menit menjadi detik dengan akurasi >90%</p>
+                    </div>
+                </div>
+                
+                <div class="benefit-item">
+                    <div class="benefit-icon">🎯</div>
+                    <div class="benefit-content">
+                        <h3>Optimalisasi Kapasitas</h3>
+                        <p>Pemanfaatan sumber daya yang lebih optimal dengan monitoring real-time</p>
+                    </div>
+                </div>
+                
+                <div class="benefit-item">
+                    <div class="benefit-icon">📊</div>
+                    <div class="benefit-content">
+                        <h3>Data-Driven Decision</h3>
+                        <p>Keputusan berbasis data dan algoritma dengan confidence score yang terukur</p>
+                    </div>
+                </div>
+                
+                <div class="benefit-item">
+                    <div class="benefit-icon">🏥</div>
+                    <div class="benefit-content">
+                        <h3>Kualitas Pelayanan</h3>
+                        <p>Peningkatan kualitas layanan dengan persiapan yang lebih baik untuk setiap pasien</p>
+                    </div>
+                </div>
+                
+                <div class="benefit-item">
+                    <div class="benefit-icon">💰</div>
+                    <div class="benefit-content">
+                        <h3>Cost Effectiveness</h3>
+                        <p>Mengurangi biaya operasional dan meningkatkan revenue through optimization</p>
+                    </div>
+                </div>
+                
+                <div class="benefit-item">
+                    <div class="benefit-icon">📈</div>
+                    <div class="benefit-content">
+                        <h3>Scalable Solution</h3>
+                        <p>Sistem yang dapat berkembang sesuai dengan pertumbuhan rumah sakit</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Jelajahi Komponen Sistem</h2>
+            <p>Klik untuk melihat detail masing-masing komponen sistem yang akan dikembangkan</p>
+            
+            <div class="cta-buttons">
+                <a href="javascript:void(0)" onclick="openPreHospital()" class="cta-btn">
+                    📋 Informasi Pre-Hospital
+                </a>
+                <a href="javascript:void(0)" onclick="openDecisionFlow()" class="cta-btn secondary">
+                    ⚡ Alur Keputusan Penerimaan
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Functions to open the detailed pages
+        function openPreHospital() {
+            // In real implementation, this would navigate to the pre-hospital page
+            alert('Navigasi ke halaman Informasi Pre-Hospital\n\nHalaman ini akan menampilkan:\n• Data Pasien\n• Kondisi Klinis\n• Riwayat Medis\n• Kebutuhan Sumber Daya\n• Informasi Logistik\n• Status Pembayaran');
+        }
+
+        function openDecisionFlow() {
+            // In real implementation, this would navigate to the decision flow page
+            alert('Navigasi ke halaman Alur Keputusan Penerimaan\n\nHalaman ini akan menampilkan:\n• Data Triase Terintegrasi\n• Prediksi Kebutuhan Sumber Daya\n• Algoritma AI\n• Dashboard Real-time\n• Sistem Rekomendasi');
+        }
+
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards and benefit items
+        document.querySelectorAll('.feature-card, .benefit-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

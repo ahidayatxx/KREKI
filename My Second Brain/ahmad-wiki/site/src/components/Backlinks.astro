@@ -1,0 +1,25 @@
+---
+interface BacklinkEntry {
+  slug: string;
+  title: string;
+}
+
+interface Props {
+  links: BacklinkEntry[];
+}
+
+const { links = [] } = Astro.props;
+---
+
+{links.length > 0 && (
+  <section class="backlinks">
+    <h3>Pages that link here</h3>
+    <ul>
+      {links.map(link => (
+        <li>
+          <a href={`/wiki/${link.slug}`}>{link.title}</a>
+        </li>
+      ))}
+    </ul>
+  </section>
+)}

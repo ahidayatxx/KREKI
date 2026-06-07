@@ -1,0 +1,718 @@
+{
+  "resourceType": "Bundle",
+  "id": "bundle-igd-case-5",
+  "type": "collection",
+  "timestamp": "2025-01-15T22:00:00+07:00",
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "Patient",
+        "id": "patient-005",
+        "identifier": [
+          {
+            "use": "official",
+            "system": "https://fhir.kemkes.go.id/id/nik",
+            "value": "3175678901234567"
+          },
+          {
+            "use": "usual",
+            "system": "http://rsud-jakarta.kemkes.go.id/identifier/mr",
+            "value": "MR202501005"
+          }
+        ],
+        "name": [
+          {
+            "text": "Dewi Kusuma",
+            "family": "Kusuma",
+            "given": ["Dewi"]
+          }
+        ],
+        "gender": "female",
+        "birthDate": "1988-11-20",
+        "address": [
+          {
+            "line": ["Jl. Raya Bogor No. 888"],
+            "city": "Jakarta Timur",
+            "postalCode": "13560",
+            "country": "ID"
+          }
+        ],
+        "telecom": [
+          {
+            "system": "phone",
+            "value": "+62813456789"
+          }
+        ],
+        "maritalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-MaritalStatus",
+              "code": "M",
+              "display": "Married"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Encounter",
+        "id": "encounter-005",
+        "identifier": [
+          {
+            "system": "http://rsud-jakarta.kemkes.go.id/encounter",
+            "value": "ENC202501005"
+          }
+        ],
+        "status": "finished",
+        "class": {
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+          "code": "EMER",
+          "display": "emergency"
+        },
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "50849002",
+                "display": "Emergency room visit"
+              }
+            ]
+          }
+        ],
+        "subject": {
+          "reference": "Patient/patient-005"
+        },
+        "period": {
+          "start": "2025-01-15T22:00:00+07:00",
+          "end": "2025-01-16T00:45:00+07:00"
+        },
+        "location": [
+          {
+            "location": {
+              "display": "IGD RSUD Jakarta Timur"
+            },
+            "extension": [
+              {
+                "url": "https://fhir.kemkes.go.id/r4/StructureDefinition/ServiceClass",
+                "extension": [
+                  {
+                    "url": "value",
+                    "valueCodeableConcept": {
+                      "coding": [
+                        {
+                          "system": "http://terminology.kemkes.go.id/CodeSystem/LocationServiceClass-Outpatient",
+                          "code": "reguler",
+                          "display": "Kelas Reguler"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "participant": [
+          {
+            "type": [
+              {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/v3-ParticipationType",
+                    "code": "ATND",
+                    "display": "attender"
+                  }
+                ]
+              }
+            ],
+            "individual": {
+              "display": "dr. Hendra Pratama, Sp.PD"
+            }
+          }
+        ],
+        "diagnosis": [
+          {
+            "condition": {
+              "reference": "Condition/condition-005"
+            },
+            "use": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/diagnosis-role",
+                  "code": "CC",
+                  "display": "Chief Complaint"
+                }
+              ]
+            }
+          },
+          {
+            "condition": {
+              "reference": "Condition/diagnosis-005"
+            },
+            "use": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/diagnosis-role",
+                  "code": "AD",
+                  "display": "Admission diagnosis"
+                }
+              ]
+            }
+          }
+        ],
+        "hospitalization": {
+          "dischargeDisposition": {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/discharge-disposition",
+                "code": "home",
+                "display": "Home"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Condition",
+        "id": "condition-005",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.kemkes.go.id",
+                "code": "chief-complaint",
+                "display": "Chief Complaint"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "271681002",
+              "display": "Stomach ache"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/patient-005"
+        },
+        "encounter": {
+          "reference": "Encounter/encounter-005"
+        },
+        "onsetDateTime": "2025-01-15T19:30:00+07:00"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Condition",
+        "id": "diagnosis-005",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/R4/codesystem-condition-category.html",
+                "code": "encounter-diagnosis",
+                "display": "Encounter Diagnosis"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/sid/icd-10",
+              "code": "K29.1",
+              "display": "Other acute gastritis"
+            },
+            {
+              "system": "http://snomed.info/sct",
+              "code": "235653007",
+              "display": "Acute gastritis"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/patient-005"
+        },
+        "encounter": {
+          "reference": "Encounter/encounter-005"
+        },
+        "recordedDate": "2025-01-15T23:30:00+07:00"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "AllergyIntolerance",
+        "id": "allergy-005",
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical",
+              "code": "active",
+              "display": "Active"
+            }
+          ]
+        },
+        "category": [
+          "medication"
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://sys-ids.kemkes.go.id/kfa",
+              "code": "91000235",
+              "display": "Aspirin"
+            }
+          ]
+        },
+        "patient": {
+          "reference": "Patient/patient-005"
+        },
+        "encounter": {
+          "reference": "Encounter/encounter-005"
+        },
+        "recordedDate": "2025-01-15T22:15:00+07:00",
+        "reaction": [
+          {
+            "manifestation": [
+              {
+                "coding": [
+                  {
+                    "system": "http://snomed.info/sct",
+                    "code": "271807003",
+                    "display": "Eruption of skin"
+                  }
+                ]
+              }
+            ],
+            "severity": "moderate"
+          }
+        ]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-triase-005",
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "75910-0",
+              "display": "Canadian triage and acuity scale"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/patient-005"
+        },
+        "encounter": {
+          "reference": "Encounter/encounter-005"
+        },
+        "effectiveDateTime": "2025-01-15T22:05:00+07:00",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "LA6115-5",
+              "display": "4"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-pain-005",
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "1172399009",
+              "display": "Numeric rating scale score"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/patient-005"
+        },
+        "encounter": {
+          "reference": "Encounter/encounter-005"
+        },
+        "effectiveDateTime": "2025-01-15T22:10:00+07:00",
+        "valueInteger": 7,
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "69695003",
+              "display": "Stomach structure"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-bp-systolic-005",
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "8480-6",
+              "display": "Systolic blood pressure"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/patient-005"
+        },
+        "encounter": {
+          "reference": "Encounter/encounter-005"
+        },
+        "effectiveDateTime": "2025-01-15T22:10:00+07:00",
+        "valueQuantity": {
+          "value": 110,
+          "unit": "mm[Hg]",
+          "system": "http://unitsofmeasure.org",
+          "code": "mm[Hg]"
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-bp-diastolic-005",
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "8462-4",
+              "display": "Diastolic blood pressure"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/patient-005"
+        },
+        "encounter": {
+          "reference": "Encounter/encounter-005"
+        },
+        "effectiveDateTime": "2025-01-15T22:10:00+07:00",
+        "valueQuantity": {
+          "value": 70,
+          "unit": "mm[Hg]",
+          "system": "http://unitsofmeasure.org",
+          "code": "mm[Hg]"
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "MedicationRequest",
+        "id": "medreq-005a",
+        "identifier": [
+          {
+            "system": "http://rsud-jakarta.kemkes.go.id/prescription",
+            "value": "RX202501005A"
+          }
+        ],
+        "status": "completed",
+        "intent": "order",
+        "medicationCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://sys-ids.kemkes.go.id/kfa",
+              "code": "93005678",
+              "display": "Omeprazole 20 mg Kapsul"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/patient-005"
+        },
+        "encounter": {
+          "reference": "Encounter/encounter-005"
+        },
+        "authoredOn": "2025-01-15T23:45:00+07:00",
+        "requester": {
+          "display": "dr. Hendra Pratama, Sp.PD"
+        },
+        "dosageInstruction": [
+          {
+            "text": "2 x sehari 1 kapsul, 30 menit sebelum makan",
+            "timing": {
+              "repeat": {
+                "frequency": 2,
+                "period": 1,
+                "periodUnit": "d"
+              }
+            },
+            "route": {
+              "coding": [
+                {
+                  "system": "http://www.whocc.no/atc",
+                  "code": "O",
+                  "display": "Oral"
+                }
+              ]
+            },
+            "doseAndRate": [
+              {
+                "doseQuantity": {
+                  "value": 1,
+                  "unit": "kapsul",
+                  "system": "http://unitsofmeasure.org",
+                  "code": "1"
+                }
+              }
+            ],
+            "additionalInstruction": [
+              {
+                "coding": [
+                  {
+                    "system": "http://snomed.info/sct",
+                    "code": "311504000",
+                    "display": "With or after food"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "dispenseRequest": {
+          "quantity": {
+            "value": 14,
+            "unit": "kapsul",
+            "system": "http://unitsofmeasure.org",
+            "code": "1"
+          }
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "MedicationRequest",
+        "id": "medreq-005b",
+        "identifier": [
+          {
+            "system": "http://rsud-jakarta.kemkes.go.id/prescription",
+            "value": "RX202501005B"
+          }
+        ],
+        "status": "completed",
+        "intent": "order",
+        "medicationCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://sys-ids.kemkes.go.id/kfa",
+              "code": "93006789",
+              "display": "Sucralfate 500 mg Tablet"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/patient-005"
+        },
+        "encounter": {
+          "reference": "Encounter/encounter-005"
+        },
+        "authoredOn": "2025-01-15T23:45:00+07:00",
+        "requester": {
+          "display": "dr. Hendra Pratama, Sp.PD"
+        },
+        "dosageInstruction": [
+          {
+            "text": "4 x sehari 1 tablet, 1 jam sebelum makan dan menjelang tidur",
+            "timing": {
+              "repeat": {
+                "frequency": 4,
+                "period": 1,
+                "periodUnit": "d"
+              }
+            },
+            "route": {
+              "coding": [
+                {
+                  "system": "http://www.whocc.no/atc",
+                  "code": "O",
+                  "display": "Oral"
+                }
+              ]
+            },
+            "doseAndRate": [
+              {
+                "doseQuantity": {
+                  "value": 1,
+                  "unit": "tablet",
+                  "system": "http://unitsofmeasure.org",
+                  "code": "1"
+                }
+              }
+            ]
+          }
+        ],
+        "dispenseRequest": {
+          "quantity": {
+            "value": 28,
+            "unit": "tablet",
+            "system": "http://unitsofmeasure.org",
+            "code": "1"
+          }
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "CarePlan",
+        "id": "careplan-005",
+        "status": "active",
+        "intent": "plan",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.kemkes.go.id",
+                "code": "TK000068",
+                "display": "Emergency care plan"
+              }
+            ]
+          }
+        ],
+        "title": "Rencana Perawatan Gastritis Akut",
+        "description": "Diet lunak, hindari makanan pedas dan asam, minum obat teratur",
+        "subject": {
+          "reference": "Patient/patient-005"
+        },
+        "encounter": {
+          "reference": "Encounter/encounter-005"
+        },
+        "created": "2025-01-16T00:00:00+07:00",
+        "author": {
+          "display": "dr. Hendra Pratama, Sp.PD"
+        },
+        "activity": [
+          {
+            "detail": {
+              "kind": "ServiceRequest",
+              "code": {
+                "coding": [
+                  {
+                    "system": "http://snomed.info/sct",
+                    "code": "182964004",
+                    "display": "Dietary advice"
+                  }
+                ]
+              },
+              "status": "not-started",
+              "description": "Diet lunak, hindari makanan pedas, asam, dan berlemak. Makan dalam porsi kecil tapi sering."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ServiceRequest",
+        "id": "followup-005",
+        "status": "active",
+        "intent": "order",
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "185389009",
+              "display": "Follow-up visit"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/patient-005"
+        },
+        "encounter": {
+          "reference": "Encounter/encounter-005"
+        },
+        "occurrenceDateTime": "2025-01-22T14:00:00+07:00",
+        "authoredOn": "2025-01-16T00:30:00+07:00",
+        "performer": [
+          {
+            "display": "Poli Penyakit Dalam RSUD Jakarta Timur"
+          }
+        ],
+        "locationCode": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-RoleCode",
+                "code": "PC",
+                "display": "Primary care clinic"
+              }
+            ]
+          }
+        ],
+        "patientInstruction": "Kontrol 1 minggu lagi jika keluhan tidak membaik atau muncul gejala baru",
+        "note": [
+          {
+            "text": "Edukasi diet dan gaya hidup sehat, hindari stress"
+          }
+        ]
+      }
+    }
+  ]
+}

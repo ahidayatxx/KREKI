@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Program Magister Manajemen Informasi Kesehatan - Panduan Penyelenggara</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            /* Executive Color Palette */
+            --primary-blue: #1e40af;
+            --primary-dark: #1e3a8a;
+            --accent-gold: #f59e0b;
+            --success-green: #059669;
+            --alert-red: #dc2626;
+
+            /* Neutral Scale */
+            --gray-50: #f8fafc;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
+            --gray-400: #94a3b8;
+            --gray-500: #64748b;
+            --gray-600: #475569;
+            --gray-700: #334155;
+            --gray-800: #1e293b;
+            --gray-900: #0f172a;
+
+            /* Typography */
+            --font-executive: 'Inter', system-ui, sans-serif;
+
+            /* Spacing & Layout */
+            --container-max: 1400px;
+            --section-padding: 5rem;
+            --card-padding: 2rem;
+            --border-radius: 1rem;
+
+            /* Shadows */
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-executive);
+            line-height: 1.6;
+            color: var(--gray-700);
+            background: var(--gray-50);
+            overflow-x: hidden;
+        }
+
+        /* Executive Header */
+        .exec-header {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .exec-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1.5" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23dots)"/></svg>');
+            pointer-events: none;
+        }
+
+        .exec-content {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .exec-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        .exec-subtitle {
+            font-size: 1.5rem;
+            font-weight: 300;
+            opacity: 0.95;
+            margin-bottom: 3rem;
+        }
+
+        .exec-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.75rem 1.5rem;
+            border-radius: 2rem;
+            font-size: 1.125rem;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* Executive Dashboard */
+        .exec-dashboard {
+            background: white;
+            margin: -3rem auto 0;
+            max-width: calc(var(--container-max) - 4rem);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-xl);
+            padding: 3rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .metric-card {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            border: 1px solid var(--gray-200);
+            transition: all 0.3s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .metric-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary-blue);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-label {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--gray-600);
+            margin-bottom: 0.25rem;
+        }
+
+        .metric-desc {
+            font-size: 0.875rem;
+            color: var(--gray-500);
+        }
+
+        /* Container */
+        .container {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Section */
+        .section {
+            padding: var(--section-padding) 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.25rem;
+            color: var(--gray-600);
+            max-width: 800px;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+
+        /* Executive Cards */
+        .exec-card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--gray-200);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .exec-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--gray-100) 0%, var(--gray-200) 100%);
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .card-body {
+            padding: 2rem;
+        }
+
+        /* Strategic Grid */
+        .strategic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        /* Market Opportunity */
+        .opportunity-card {
+            background: linear-gradient(135deg, var(--success-green) 0%, #047857 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .opportunity-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+        }
+
+        .opportunity-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .opportunity-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .opportunity-desc {
+            font-size: 1.125rem;
+            opacity: 0.95;
+            line-height: 1.6;
+        }
+
+        /* Investment Overview */
+        .investment-table {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+        }
+
+        .table-header {
+            background: var(--primary-blue);
+            color: white;
+            padding: 1.5rem 2rem;
+            text-align: center;
+        }
+
+        .table-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: var(--gray-800);
+            color: white;
+            font-weight: 600;
+            padding: 1.25rem 1rem;
+            text-align: left;
+            font-size: 1rem;
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--gray-200);
+            vertical-align: top;
+        }
+
+        tr:hover {
+            background: var(--gray-50);
+        }
+
+        .cost-high {
+            color: var(--alert-red);
+            font-weight: 600;
+        }
+
+        .cost-medium {
+            color: var(--accent-gold);
+            font-weight: 600;
+        }
+
+        .cost-low {
+            color: var(--success-green);
+            font-weight: 600;
+        }
+
+        /* ROI Calculator */
+        .roi-calculator {
+            background: linear-gradient(135deg, var(--accent-gold) 0%, #d97706 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: var(--border-radius);
+            margin: 3rem 0;
+        }
+
+        .roi-title {
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .roi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .roi-item {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .roi-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .roi-label {
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            margin: 3rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 2rem;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--primary-blue), var(--success-green));
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            padding-left: 5rem;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: 1rem;
+            top: 1rem;
+            width: 2rem;
+            height: 2rem;
+            background: var(--primary-blue);
+            border: 4px solid white;
+            border-radius: 50%;
+            box-shadow: var(--shadow-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            border-left: 4px solid var(--primary-blue);
+        }
+
+        .timeline-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 1rem;
+        }
+
+        .timeline-duration {
+            display: inline-block;
+            background: var(--primary-blue);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-desc {
+            color: var(--gray-600);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-deliverables {
+            background: var(--gray-50);
+            padding: 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .timeline-deliverables h5 {
+            font-weight: 600;
+            color: var(--gray-800);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-deliverables ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .timeline-deliverables li {
+            color: var(--gray-600);
+            margin-bottom: 0.25rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .timeline-deliverables li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--success-green);
+            font-weight: 700;
+        }
+
+        /* Risk Assessment */
+        .risk-matrix {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+
+        .risk-card {
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .risk-low {
+            background: linear-gradient(135deg, var(--success-green) 0%, #047857 100%);
+        }
+
+        .risk-medium {
+            background: linear-gradient(135deg, var(--accent-gold) 0%, #d97706 100%);
+        }
+
+        .risk-high {
+            background: linear-gradient(135deg, var(--alert-red) 0%, #b91c1c 100%);
+        }
+
+        .risk-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .risk-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .risk-desc {
+            font-size: 0.875rem;
+            opacity: 0.95;
+            line-height: 1.5;
+        }
+
+        /* Call to Action */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            border-radius: var(--border-radius);
+            margin: 4rem 0;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .cta-subtitle {
+            font-size: 1.25rem;
+            opacity: 0.95;
+            margin-bottom: 2rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: white;
+            color: var(--primary-blue);
+            text-decoration: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .cta-button:hover {
+            background: transparent;
+            color: white;
+            border-color: white;
+        }
+
+        .cta-button.secondary {
+            background: transparent;
+            color: white;
+            border-color: white;
+        }
+
+        .cta-button.secondary:hover {
+            background: white;
+            color: var(--primary-blue);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .exec-title {
+                font-size: 2.5rem;
+            }
+
+            .exec-subtitle {
+                font-size: 1.25rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            :root {
+                --section-padding: 3rem;
+                --card-padding: 1.5rem;
+            }
+
+            .exec-header {
+                padding: 3rem 1rem;
+            }
+
+            .exec-title {
+                font-size: 2rem;
+            }
+
+            .exec-subtitle {
+                font-size: 1.125rem;
+            }
+
+            .exec-dashboard {
+                margin: -2rem 1rem 0;
+                padding: 2rem;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .metric-card {
+                padding: 1.5rem 1rem;
+            }
+
+            .metric-number {
+                font-size: 2rem;
+            }
+
+            .strategic-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .timeline::before {
+                left: 1rem;
+            }
+
+            .timeline-item {
+                padding-left: 3rem;
+            }
+
+            .timeline-marker {
+                left: 0.5rem;
+                width: 1.5rem;
+                height: 1.5rem;
+                font-size: 0.75rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cta-button {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .roi-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .risk-matrix {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            .cta-section {
+                background: var(--gray-100) !important;
+                color: var(--gray-900) !important;
+            }
+
+            .exec-header {
+                background: var(--gray-100) !important;
+                color: var(--gray-900) !important;
+            }
+
+            .timeline-marker {
+                background: var(--gray-400) !important;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Executive Header -->
+    <header class="exec-header">
+        <div class="exec-content">
+            <h1 class="exec-title">Program Magister Manajemen Informasi Kesehatan</h1>
+            <p class="exec-subtitle">Peluang Strategis untuk Institusi Pendidikan Tinggi</p>
+            <span class="exec-badge">
+                <i class="fas fa-certificate"></i>
+                KKNI Level 8 - Terakreditasi
+            </span>
+        </div>
+    </header>
+
+    <!-- Executive Dashboard -->
+    <div class="exec-dashboard">
+        <div class="dashboard-grid">
+            <div class="metric-card">
+                <span class="metric-number">₹2.5M</span>
+                <div class="metric-label">Potensi Revenue/Tahun</div>
+                <div class="metric-desc">Dengan 60 mahasiswa aktif</div>
+            </div>
+            <div class="metric-card">
+                <span class="metric-number">18-24</span>
+                <div class="metric-label">Bulan Setup</div>
+                <div class="metric-desc">Dari perencanaan hingga operasional</div>
+            </div>
+            <div class="metric-card">
+                <span class="metric-number">85%</span>
+                <div class="metric-label">Absorption Rate</div>
+                <div class="metric-desc">Lulusan terserap dalam 6 bulan</div>
+            </div>
+            <div class="metric-card">
+                <span class="metric-number">300%</span>
+                <div class="metric-label">ROI dalam 5 Tahun</div>
+                <div class="metric-desc">Return on Investment</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Market Opportunity -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Peluang Pasar Digital Health</h2>
+                <p class="section-subtitle">Sektor kesehatan digital Indonesia mengalami pertumbuhan eksponensial dengan kebutuhan tenaga ahli yang sangat tinggi</p>
+            </div>
+
+            <div class="strategic-grid">
+                <div class="opportunity-card">
+                    <i class="fas fa-chart-line opportunity-icon"></i>
+                    <h3 class="opportunity-title">Pertumbuhan 40% per Tahun</h3>
+                    <p class="opportunity-desc">Market kesehatan digital Indonesia diprediksi tumbuh 40% annually hingga 2028, menciptakan kebutuhan urgent untuk tenaga ahli manajemen informasi kesehatan</p>
+                </div>
+
+                <div class="opportunity-card" style="background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-dark) 100%);">
+                    <i class="fas fa-users opportunity-icon"></i>
+                    <h3 class="opportunity-title">Gap 15,000 Profesional</h3>
+                    <p class="opportunity-desc">Kekurangan tenaga ahli manajemen informasi kesehatan di Indonesia mencapai 15,000 orang, dengan proyeksi kebutuhan terus meningkat</p>
+                </div>
+
+                <div class="opportunity-card" style="background: linear-gradient(135deg, var(--accent-gold) 0%, #d97706 100%);">
+                    <i class="fas fa-building opportunity-icon"></i>
+                    <h3 class="opportunity-title">First Mover Advantage</h3>
+                    <p class="opportunity-desc">Hanya 5 institusi di Indonesia yang menyelenggarakan program serupa, memberikan kesempatan emas untuk menjadi pioneer di wilayah Anda</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Investment Overview -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Overview Investasi & Operasional</h2>
+                <p class="section-subtitle">Analisis komprehensif kebutuhan investasi dan struktur operasional program</p>
+            </div>
+
+            <div class="investment-table">
+                <div class="table-header">
+                    <h3 class="table-title">Breakdown Investasi Awal</h3>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Komponen</th>
+                            <th>Investasi Awal</th>
+                            <th>Operasional/Tahun</th>
+                            <th>Prioritas</th>
+                            <th>Timeline</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Rekrutmen & Training Dosen</strong></td>
+                            <td class="cost-high">Rp 500M - 750M</td>
+                            <td class="cost-medium">Rp 200M - 300M</td>
+                            <td><span style="color: var(--alert-red);">●</span> Critical</td>
+                            <td>6-12 bulan</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Infrastruktur IT & Lab</strong></td>
+                            <td class="cost-high">Rp 300M - 500M</td>
+                            <td class="cost-low">Rp 50M - 100M</td>
+                            <td><span style="color: var(--alert-red);">●</span> Critical</td>
+                            <td>3-6 bulan</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Perizinan & Akreditasi</strong></td>
+                            <td class="cost-medium">Rp 100M - 200M</td>
+                            <td class="cost-low">Rp 25M - 50M</td>
+                            <td><span style="color: var(--accent-gold);">●</span> High</td>
+                            <td>6-12 bulan</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Kemitraan Industri</strong></td>
+                            <td class="cost-low">Rp 50M - 100M</td>
+                            <td class="cost-low">Rp 100M - 150M</td>
+                            <td><span style="color: var(--success-green);">●</span> Medium</td>
+                            <td>3-6 bulan</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Marketing & Recruitment</strong></td>
+                            <td class="cost-medium">Rp 75M - 125M</td>
+                            <td class="cost-medium">Rp 150M - 200M</td>
+                            <td><span style="color: var(--accent-gold);">●</span> High</td>
+                            <td>Ongoing</td>
+                        </tr>
+                        <tr style="background: var(--gray-100); font-weight: 700;">
+                            <td><strong>TOTAL INVESTASI</strong></td>
+                            <td><strong>Rp 1.025M - 1.675M</strong></td>
+                            <td><strong>Rp 525M - 800M</strong></td>
+                            <td>-</td>
+                            <td>12-18 bulan</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- ROI Projection -->
+    <section class="section">
+        <div class="container">
+            <div class="roi-calculator">
+                <h3 class="roi-title">
+                    <i class="fas fa-calculator"></i>
+                    Proyeksi Return on Investment (ROI)
+                </h3>
+                <div class="roi-grid">
+                    <div class="roi-item">
+                        <span class="roi-number">Break Even</span>
+                        <span class="roi-label">Tahun ke-3</span>
+                    </div>
+                    <div class="roi-item">
+                        <span class="roi-number">300%</span>
+                        <span class="roi-label">ROI dalam 5 tahun</span>
+                    </div>
+                    <div class="roi-item">
+                        <span class="roi-number">Rp 2.5M</span>
+                        <span class="roi-label">Revenue/tahun (mature)</span>
+                    </div>
+                    <div class="roi-item">
+                        <span class="roi-number">45%</span>
+                        <span class="roi-label">Profit margin target</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Implementation Timeline -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Roadmap Implementasi Strategis</h2>
+                <p class="section-subtitle">Timeline komprehensif dari konsep hingga operasional penuh dengan milestone kunci</p>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker">1</div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Fase Konseptualisasi & Perencanaan</h3>
+                        <span class="timeline-duration">Bulan 1-6</span>
+                        <p class="timeline-desc">
+                            Pengembangan business case, analisis kelayakan finansial, dan penyusunan proposal program.
+                            Fase kritis untuk memastikan alignment dengan visi strategis institusi.
+                        </p>
+                        <div class="timeline-deliverables">
+                            <h5>Key Deliverables:</h5>
+                            <ul>
+                                <li>Business Plan & Financial Model</li>
+                                <li>Curriculum Framework & Academic Structure</li>
+                                <li>Stakeholder Mapping & Partnership Strategy</li>
+                                <li>Regulatory Compliance Roadmap</li>
+                                <li>Resource Requirements Analysis</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker">2</div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Fase Persiapan & Pengembangan</h3>
+                        <span class="timeline-duration">Bulan 6-12</span>
+                        <p class="timeline-desc">
+                            Rekrutmen tim akademik, pengembangan infrastruktur, dan pembangunan kemitraan strategis.
+                            Fokus pada pembentukan foundation yang solid untuk operasional program.
+                        </p>
+                        <div class="timeline-deliverables">
+                            <h5>Key Deliverables:</h5>
+                            <ul>
+                                <li>Faculty Recruitment & Training Program</li>
+                                <li>IT Infrastructure & Laboratory Setup</li>
+                                <li>Industry Partnership Agreements</li>
+                                <li>Detailed Curriculum & Syllabus Development</li>
+                                <li>Quality Assurance Framework</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker">3</div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Fase Perizinan & Akreditasi</h3>
+                        <span class="timeline-duration">Bulan 12-18</span>
+                        <p class="timeline-desc">
+                            Proses formal perizinan dengan Kemendikbudristek, persiapan visitasi, dan pemenuhan standar akreditasi.
+                            Tahap yang menentukan legitimasi dan kredibilitas program.
+                        </p>
+                        <div class="timeline-deliverables">
+                            <h5>Key Deliverables:</h5>
+                            <ul>
+                                <li>Program Licensing Application</li>
+                                <li>Accreditation Documentation</li>
+                                <li>Site Visit Preparation & Execution</li>
+                                <li>Quality Management System Implementation</li>
+                                <li>Student Recruitment Strategy</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker">4</div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Fase Soft Launch & Operasional</h3>
+                        <span class="timeline-duration">Bulan 18-24</span>
+                        <p class="timeline-desc">
+                            Peluncuran program dengan angkatan pertama, monitoring intensif, dan optimisasi operasional.
+                            Periode pembelajaran dan penyesuaian untuk mencapai standar kualitas optimal.
+                        </p>
+                        <div class="timeline-deliverables">
+                            <h5>Key Deliverables:</h5>
+                            <ul>
+                                <li>First Cohort Onboarding</li>
+                                <li>Academic Operations Launch</li>
+                                <li>Performance Monitoring System</li>
+                                <li>Continuous Improvement Process</li>
+                                <li>Stakeholder Feedback Integration</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker">5</div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Fase Scale-Up & Optimisasi</h3>
+                        <span class="timeline-duration">Tahun 3-5</span>
+                        <p class="timeline-desc">
+                            Ekspansi program, peningkatan kualitas, dan pencapaian target ROI. Fase maturity dengan fokus pada
+                            sustainability dan competitive advantage jangka panjang.
+                        </p>
+                        <div class="timeline-deliverables">
+                            <h5>Key Deliverables:</h5>
+                            <ul>
+                                <li>Program Capacity Expansion</li>
+                                <li>Advanced Accreditation Achievement</li>
+                                <li>Research & Publication Portfolio</li>
+                                <li>Alumni Network Development</li>
+                                <li>Market Leadership Position</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Risk Assessment -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Analisis Risiko & Mitigasi</h2>
+                <p class="section-subtitle">Identifikasi risiko strategis dan langkah-langkah mitigasi yang diperlukan</p>
+            </div>
+
+            <div class="risk-matrix">
+                <div class="risk-card risk-low">
+                    <i class="fas fa-shield-check risk-icon"></i>
+                    <h4 class="risk-title">Risiko Rendah</h4>
+                    <p class="risk-desc">
+                        <strong>Market Demand:</strong> Kebutuhan pasar yang tinggi dan terus berkembang memastikan sustainability program.
+                        <br><br>
+                        <strong>Mitigasi:</strong> Monitoring tren industri dan adaptasi kurikulum berkala.
+                    </p>
+                </div>
+
+                <div class="risk-card risk-medium">
+                    <i class="fas fa-exclamation-triangle risk-icon"></i>
+                    <h4 class="risk-title">Risiko Sedang</h4>
+                    <p class="risk-desc">
+                        <strong>Faculty Availability:</strong> Keterbatasan dosen berpengalaman di bidang health informatics.
+                        <br><br>
+                        <strong>Mitigasi:</strong> Program visiting professor dan kemitraan dengan institusi internasional.
+                    </p>
+                </div>
+
+                <div class="risk-card risk-high">
+                    <i class="fas fa-alert-triangle risk-icon"></i>
+                    <h4 class="risk-title">Risiko Tinggi</h4>
+                    <p class="risk-desc">
+                        <strong>Initial Investment:</strong> Investasi awal yang signifikan dengan payback period 3 tahun.
+                        <br><br>
+                        <strong>Mitigasi:</strong> Phased investment approach dan strategic partnership untuk cost sharing.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Competitive Advantage -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Keunggulan Kompetitif</h2>
+                <p class="section-subtitle">Faktor-faktor yang memberikan competitive advantage dalam market pendidikan tinggi</p>
+            </div>
+
+            <div class="strategic-grid">
+                <div class="exec-card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fas fa-trophy" style="color: var(--accent-gold);"></i>
+                            First Mover Advantage
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative;">
+                                <i class="fas fa-check" style="position: absolute; left: 0; color: var(--success-green);"></i>
+                                Hanya 5 institusi competitor di seluruh Indonesia
+                            </li>
+                            <li style="margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative;">
+                                <i class="fas fa-check" style="position: absolute; left: 0; color: var(--success-green);"></i>
+                                Kesempatan menjadi market leader di region
+                            </li>
+                            <li style="margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative;">
+                                <i class="fas fa-check" style="position: absolute; left: 0; color: var(--success-green);"></i>
+                                Brand recognition sebagai pioneer
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="exec-card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fas fa-network-wired" style="color: var(--primary-blue);"></i>
+                            Industry Integration
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative;">
+                                <i class="fas fa-check" style="position: absolute; left: 0; color: var(--success-green);"></i>
+                                Direct partnership dengan rumah sakit dan tech companies
+                            </li>
+                            <li style="margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative;">
+                                <i class="fas fa-check" style="position: absolute; left: 0; color: var(--success-green);"></i>
+                                Real-world project dan internship guaranteed
+                            </li>
+                            <li style="margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative;">
+                                <i class="fas fa-check" style="position: absolute; left: 0; color: var(--success-green);"></i>
+                                Job placement rate 85%+ within 6 months
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="exec-card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fas fa-brain" style="color: var(--success-green);"></i>
+                            Curriculum Innovation
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative;">
+                                <i class="fas fa-check" style="position: absolute; left: 0; color: var(--success-green);"></i>
+                                Fokus pada AI, machine learning, dan emerging technologies
+                            </li>
+                            <li style="margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative;">
+                                <i class="fas fa-check" style="position: absolute; left: 0; color: var(--success-green);"></i>
+                                Hands-on approach dengan real healthcare data
+                            </li>
+                            <li style="margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative;">
+                                <i class="fas fa-check" style="position: absolute; left: 0; color: var(--success-green);"></i>
+                                International best practices integration
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="section">
+        <div class="container">
+            <div class="cta-section">
+                <h2 class="cta-title">Siap Memimpin Transformasi Digital Kesehatan?</h2>
+                <p class="cta-subtitle">
+                    Bergabunglah dengan institusi-institusi pioneer yang telah memulai perjalanan menuju masa depan kesehatan digital Indonesia
+                </p>
+                <div class="cta-buttons">
+                    <a href="#" class="cta-button">
+                        <i class="fas fa-calendar"></i>
+                        Jadwalkan Konsultasi Strategis
+                    </a>
+                    <a href="#" class="cta-button secondary">
+                        <i class="fas fa-download"></i>
+                        Download Full Business Plan
+                    </a>
+                    <a href="#" class="cta-button secondary">
+                        <i class="fas fa-phone"></i>
+                        Hubungi Tim Ahli
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Executive Footer -->
+    <footer style="background: var(--gray-900); color: var(--gray-300); padding: 3rem 2rem 1rem;">
+        <div class="container">
+            <div style="text-align: center; max-width: 800px; margin: 0 auto;">
+                <h3 style="color: white; font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">
+                    Program Magister Manajemen Informasi Kesehatan
+                </h3>
+                <p style="margin-bottom: 2rem; line-height: 1.6;">
+                    Investasi strategis untuk masa depan institusi pendidikan Anda. Bergabunglah dengan revolusi kesehatan digital Indonesia.
+                </p>
+                <div style="border-top: 1px solid var(--gray-700); padding-top: 1.5rem; font-size: 0.875rem; color: var(--gray-400);">
+                    <p>&copy; 2024 Program Studi Magister Manajemen Informasi Kesehatan. Dikembangkan sesuai Permendikbudristek No. 53/2023.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.querySelectorAll('.metric-card, .opportunity-card, .exec-card, .timeline-item, .risk-card').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Dynamic counter animation for metrics
+        function animateValue(element, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const current = Math.floor(progress * (end - start) + start);
+                element.textContent = current.toLocaleString();
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        // Animate metrics when they come into view
+        const metricsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const numberElement = entry.target.querySelector('.metric-number');
+                    if (numberElement && !numberElement.classList.contains('animated')) {
+                        numberElement.classList.add('animated');
+                        const text = numberElement.textContent;
+                        const number = parseInt(text.replace(/[^\d]/g, ''));
+                        if (!isNaN(number) && number > 0) {
+                            numberElement.textContent = '0';
+                            animateValue(numberElement, 0, number, 2000);
+                        }
+                    }
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.metric-card').forEach(card => {
+            metricsObserver.observe(card);
+        });
+
+        // Print functionality
+        function printBusinessPlan() {
+            window.print();
+        }
+
+        // Enhanced mobile experience - prevent zoom on double tap
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function (event) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+
+        // Add loading states for CTA buttons
+        document.querySelectorAll('.cta-button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                if (this.href === '#') {
+                    e.preventDefault();
+                    const originalText = this.innerHTML;
+                    this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
+                    this.style.pointerEvents = 'none';
+
+                    // Simulate loading
+                    setTimeout(() => {
+                        this.innerHTML = originalText;
+                        this.style.pointerEvents = 'auto';
+                        alert('Fungsi ini akan terhubung dengan sistem CRM atau contact form yang sesuai.');
+                    }, 1500);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+{
+  "name": "Minimal Gemini Upload",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "upload",
+        "responseMode": "responseNode"
+      },
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        240,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://generativelanguage.googleapis.com/v1beta/fileSearchStores/n8ndocumentsstore-f7cqp3cqctc6/documents:list",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "key",
+              "value": "AIzaSyAmi8rLTrz3JCQZ2JoBgGSzOtXO_MDgUk8"
+            }
+          ]
+        }
+      },
+      "name": "List Files",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        460,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { \"files\": $json.documents || [] } }}"
+      },
+      "name": "Response",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        680,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "List Files",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "List Files": {
+      "main": [
+        [
+          {
+            "node": "Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}

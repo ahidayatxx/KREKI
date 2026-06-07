@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presentasi Pembaruan Petunjuk Teknis Telemedisin - Dr. Ahmad Hidayat (Versi Cetak)</title>
+    <style>
+        /* Base Styles - Print Version */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: white;
+            color: #333;
+            line-height: 1.6;
+            font-size: 11pt;
+        }
+
+        /* Print Container */
+        .print-container {
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 15mm;
+        }
+
+        /* Slide Management */
+        .slide {
+            page-break-after: always;
+            margin-bottom: 20mm;
+            padding: 15mm;
+            border: 1px solid #e0e0e0;
+            box-sizing: border-box;
+            break-inside: avoid;
+        }
+
+        .slide:last-child {
+            page-break-after: auto;
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 20pt;
+            color: #1e3c72;
+            margin-bottom: 10px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-size: 14pt;
+            color: #2a5298;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        h3 {
+            font-size: 13pt;
+            color: #1e3c72;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        h4 {
+            font-size: 11pt;
+            color: #2c3e50;
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+
+        p {
+            font-size: 10pt;
+            line-height: 1.6;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        /* Slide Header */
+        .slide-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .subtitle {
+            font-size: 12pt;
+            color: #666;
+            margin-bottom: 10px;
+            font-weight: 400;
+        }
+
+        /* Slide Title */
+        .slide-title {
+            background: #2a5298;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 14pt;
+            margin-bottom: 20px;
+            font-weight: 600;
+            text-align: center;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        /* Speaker Info */
+        .speaker-info {
+            background: #f0f0f0;
+            color: #333;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            border-left: 4px solid #764ba2;
+        }
+
+        .speaker-info h3 {
+            color: #764ba2;
+            font-size: 14pt;
+            margin-bottom: 8px;
+        }
+
+        .speaker-info p {
+            color: #555;
+            font-size: 11pt;
+            margin-bottom: 5px;
+        }
+
+        /* Event Info */
+        .event-info {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #2a5298;
+        }
+
+        .event-info h3 {
+            color: #2a5298;
+            margin-bottom: 12px;
+            font-size: 14pt;
+            text-align: center;
+        }
+
+        .event-details {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .event-detail {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+        }
+
+        .event-detail h4 {
+            color: #3498db;
+            margin-bottom: 6px;
+            font-size: 11pt;
+        }
+
+        /* Grid Systems - All Single Column */
+        .framework-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .goals-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .two-column-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .three-column-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        /* Cards & Boxes */
+        .framework-card {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #2a5298;
+            margin-bottom: 15px;
+            break-inside: avoid;
+            page-break-inside: avoid;
+        }
+
+        .goal-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #27ae60;
+            margin-bottom: 15px;
+            break-inside: avoid;
+            page-break-inside: avoid;
+            text-align: left;
+        }
+
+        .info-box {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+            margin: 15px 0;
+            break-inside: avoid;
+            page-break-inside: avoid;
+        }
+
+        .alert-box {
+            background: #fff9e6;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #ffc107;
+            margin: 15px 0;
+            break-inside: avoid;
+            page-break-inside: avoid;
+        }
+
+        .warning-box {
+            background: #f8d7da;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #dc3545;
+            margin: 15px 0;
+            break-inside: avoid;
+            page-break-inside: avoid;
+        }
+
+        .success-box {
+            background: #d4edda;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #28a745;
+            margin: 15px 0;
+            break-inside: avoid;
+            page-break-inside: avoid;
+        }
+
+        /* Topic Cards */
+        .topic-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #2a5298;
+            margin-bottom: 15px;
+            break-inside: avoid;
+            page-break-inside: avoid;
+        }
+
+        .topic-number {
+            background: #2a5298;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 11pt;
+            margin-bottom: 8px;
+        }
+
+        /* Tables */
+        .criteria-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 10pt;
+            break-inside: avoid;
+            page-break-inside: avoid;
+        }
+
+        .criteria-table th {
+            background: #2a5298;
+            color: white;
+            padding: 10px;
+            font-size: 11pt;
+            border: 1px solid #ccc;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        .criteria-table td {
+            padding: 10px;
+            border: 1px solid #e0e0e0;
+            vertical-align: top;
+        }
+
+        .criteria-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        /* Lists */
+        ul, ol {
+            margin: 8px 0;
+            padding-left: 15px;
+        }
+
+        li {
+            margin: 5px 0;
+            font-size: 10pt;
+            line-height: 1.6;
+            color: #2c3e50;
+        }
+
+        /* Online Version Link */
+        .online-version-link {
+            background: #e8f4f8;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #0c5460;
+            text-align: center;
+        }
+
+        .online-version-link h4 {
+            color: #0c5460;
+            font-size: 11pt;
+            margin-bottom: 8px;
+        }
+
+        .online-version-link p {
+            font-size: 10pt;
+            color: #555;
+            margin: 5px 0;
+        }
+
+        .online-version-link a {
+            color: #0c5460;
+            text-decoration: underline;
+            word-break: break-all;
+        }
+
+        /* Thank You Slide */
+        .thank-you-content {
+            text-align: center;
+            padding: 40px 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            position: relative;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .thank-you-main h1 {
+            font-size: 24pt;
+            color: #2a5298;
+            margin-bottom: 20px;
+        }
+
+        .closing-message {
+            font-size: 14pt;
+            color: #2c3e50;
+            margin-top: 20px;
+            font-style: italic;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #2a5298;
+        }
+
+        /* Page Number */
+        .page-number {
+            text-align: right;
+            margin-top: 15px;
+            padding-top: 8px;
+            border-top: 1px solid #e0e0e0;
+            font-size: 9pt;
+            color: #999;
+        }
+
+        /* Print Optimization */
+        @media print {
+            body {
+                background: white;
+                font-size: 10pt;
+            }
+
+            .slide {
+                page-break-after: always;
+                margin: 0;
+                padding: 15mm;
+                border: none;
+            }
+
+            .slide:last-child {
+                page-break-after: auto;
+            }
+
+            /* Preserve colors */
+            * {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            /* Prevent breaking inside elements */
+            .framework-card,
+            .goal-card,
+            .info-box,
+            .alert-box,
+            .warning-box,
+            .success-box,
+            .topic-card,
+            .criteria-table,
+            .online-version-link {
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+
+            /* Adjust links untuk print */
+            a[href]:after {
+                content: " (" attr(href) ")";
+                font-size: 8pt;
+                color: #666;
+            }
+        }
+
+        @page {
+            size: A4;
+            margin: 15mm;
+        }
+    </style>
+</head>
+<body>
+    <div class="print-container">
+
+        <!-- Slide 1: Title Slide - Informasi Undangan -->
+        <div class="slide">
+            <div class="slide-header">
+                <h1>📋 KAJIAN PEMBARUAN PETUNJUK TEKNIS TELEMEDISIN</h1>
+                <p class="subtitle">Wawancara dengan Narasumber Kunci</p>
+            </div>
+
+            <div class="online-version-link">
+                <h4>🌐 Versi Interaktif Online</h4>
+                <p>Untuk pengalaman presentasi yang lebih interaktif, kunjungi:</p>
+                <p><a href="presentasi-ahmad-hidayat.html" target="_blank">presentasi-ahmad-hidayat.html</a></p>
+            </div>
+
+            <div class="speaker-info">
+                <h3>📅 Rabu, 15 Oktober 2025</h3>
+                <p><strong>dr. Ahmad Hidayat, MSc, MBA</strong></p>
+                <p>Technical Working Group SATUSEHAT</p>
+            </div>
+
+            <div class="page-number">Halaman 1 dari 11</div>
+        </div>
+
+        <!-- Slide 2: Tujuan Kegiatan -->
+        <div class="slide">
+            <div class="slide-title">
+                <span>🎯</span>
+                <span>TUJUAN KEGIATAN</span>
+            </div>
+
+            <div class="framework-card" style="background: #f8f9fa; border-left-color: #27ae60;">
+                <h3 style="color: #27ae60; margin-bottom: 15px; text-align: center; font-size: 14pt;">📋 Tujuan Utama Wawancara</h3>
+
+                <div class="goals-grid">
+                    <div class="goal-card">
+                        <h4>💬 Masukan & Pandangan</h4>
+                        <p>Menggali masukan dan pandangan dari narasumber terkait implementasi dan tantangan penerapan telemedisin</p>
+                    </div>
+                    <div class="goal-card">
+                        <h4>⚖️ Identifikasi Regulasi</h4>
+                        <p>Mengidentifikasi aspek regulasi yang perlu disesuaikan dalam pembaruan juknis</p>
+                    </div>
+                    <div class="goal-card">
+                        <h4>📝 Rekomendasi Teknis</h4>
+                        <p>Menyusun rekomendasi teknis dan kebijakan berbasis hasil wawancara</p>
+                    </div>
+                    <div class="goal-card">
+                        <h4>🤝 Kolaborasi Lintas Sektor</h4>
+                        <p>Memperkuat kolaborasi lintas sektor dalam penyusunan juknis yang adaptif</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="success-box">
+                <h3>✅ Hasil yang Diharapkan</h3>
+                <ul>
+                    <li><strong>Dokumen ringkasan hasil wawancara</strong> (transkrip dan analisis tematik)</li>
+                    <li><strong>Daftar isu strategis</strong> dan rekomendasi pembaruan juknis telemedisin</li>
+                    <li><strong>Bahan masukan</strong> untuk penyusunan draft Juknis Telemedisin terintegrasi</li>
+                </ul>
+            </div>
+
+            <div class="page-number">Halaman 2 dari 11</div>
+        </div>
+
+        <!-- Slide 3: Ruang Lingkup Pembahasan -->
+        <div class="slide">
+            <div class="slide-title">
+                <span>📋</span>
+                <span>RUANG LINGKUP PEMBAHASAN</span>
+            </div>
+
+            <div class="success-box">
+                <h3>🎯 Fokus Utama: INTEGRASI TELEMEDISIN DALAM LAYANAN KOMPREHENISIF</h3>
+                <p><strong>Narasumber menekankan bahwa telemedisin harus menjadi satu kesatuan alur pelayanan yang terintegrasi dengan sistem pelayanan kesehatan yang sudah ada di Fasyankes, bukan sebagai layanan yang terpisah atau berdiri sendiri.</strong></p>
+            </div>
+
+            <div class="info-box">
+                <h3>📋 7 Topik Utama Wawancara</h3>
+                <p>Berikut adalah topik-topik utama yang akan dibahas dalam sesi wawancara:</p>
+            </div>
+
+            <div class="three-column-grid">
+                <div class="framework-card" style="border-left-color: #e74c3c; text-align: left;">
+                    <h4 style="color: #e74c3c;">📜 1. Kesesuaian Regulasi</h4>
+                    <p>Definisi klinis dan integrasi alur pelayanan</p>
+                </div>
+                <div class="framework-card" style="border-left-color: #3498db; text-align: left;">
+                    <h4 style="color: #3498db;">⚖️ 2. Legal, Etika, dan PDP</h4>
+                    <p>Pendekatan terintegrasi UU PDP</p>
+                </div>
+                <div class="framework-card" style="border-left-color: #27ae60; text-align: left;">
+                    <h4 style="color: #27ae60;">🏥 3. Standar Minimal</h4>
+                    <p>Rujukan standar dan perangkat spesifik</p>
+                </div>
+            </div>
+
+            <div class="three-column-grid">
+                <div class="framework-card" style="border-left-color: #f39c12; text-align: left;">
+                    <h4 style="color: #f39c12;">🔍 4. Kriteria Penyakit</h4>
+                    <p>Batasan dan rambu-rambu jelas</p>
+                </div>
+                <div class="framework-card" style="border-left-color: #9b59b6; text-align: left;">
+                    <h4 style="color: #9b59b6;">🔐 5. Tata Kelola Sistem</h4>
+                    <p>Arsitektur terintegrasi dan RME</p>
+                </div>
+                <div class="framework-card" style="border-left-color: #34495e; text-align: left;">
+                    <h4 style="color: #34495e;">💰 6. Pendanaan</h4>
+                    <p>Arsitektur pembiayaan komprehensif</p>
+                </div>
+            </div>
+
+            <div class="alert-box">
+                <h3>🚀 7. Tantangan dan Proyeksi Masa Depan</h3>
+                <p>Kesiapan menghadapi emerging technology dan peran regulatory sandbox</p>
+            </div>
+
+            <div class="page-number">Halaman 3 dari 11</div>
+        </div>
+
+        <!-- Slide 4: Topik 1 - Kesesuaian Regulasi -->
+        <div class="slide">
+            <div class="slide-title">
+                <span>📜</span>
+                <span>1. KESESUAIAN REGULASI NASIONAL</span>
+            </div>
+
+            <div class="success-box">
+                <h3>🎯 Masukan Utama Narasumber</h3>
+                <p><strong>Pendekatan integrasi pelayanan - Telemedisin harus diintegrasikan ke dalam alur pelayanan kesehatan yang sudah berlaku, dan tidak dipisahkan sebagai satu layanan yang berdiri sendiri.</strong></p>
+            </div>
+
+            <div class="framework-grid">
+                <div class="framework-card" style="border-left-color: #e74c3c;">
+                    <h3 style="color: #e74c3c;">🔍 Fokus Pembahasan</h3>
+                    <ul>
+                        <li><strong>Definisi Klinis yang Jelas:</strong> Kriteria membedakan telemedisin (layanan klinis) vs telekonsultasi</li>
+                        <li><strong>Integrasi Alur Pelayanan:</strong> Telemedisin sebagai bagian dari sistem kesehatan yang ada</li>
+                        <li><strong>Evaluasi Juknis vs Regulasi:</strong> Sinkronisasi dengan Permenkes terbaru</li>
+                        <li><strong>Harmonisasi Standar:</strong> Kesesuaian dengan pelayanan kesehatan konvensional</li>
+                    </ul>
+                </div>
+
+                <div class="framework-card" style="border-left-color: #3498db;">
+                    <h3 style="color: #3498db;">📋 Aspek Evaluasi</h3>
+                    <ul>
+                        <li><strong>Kompatibilitas:</strong> Permenkes No. 20/2019, Permenkes No. 22/2023</li>
+                        <li><strong>Gap Analysis:</strong> Identifikasi ketidaksesuaian antar regulasi</li>
+                        <li><strong>Sinkronisasi:</strong> Kebijakan transformasi digital kesehatan nasional</li>
+                        <li><strong>Konsistensi:</strong> Standar pelayanan yang berlaku di Fasyankes</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="warning-box">
+                <h3>💡 Pertanyaan Kunci untuk Diskusi</h3>
+                <p>• Bagaimana memastikan telemedisin menjadi bagian integral dari alur pelayanan yang ada?<br>
+                   • Apa batasan klinis yang perlu didefinisikan secara jelas?<br>
+                   • Bagaimana harmonisasi dengan regulasi lain yang terkait?</p>
+            </div>
+
+            <div class="page-number">Halaman 4 dari 11</div>
+        </div>
+
+        <!-- Slide 5: Topik 2 - Aspek Legal, Etika, dan PDP -->
+        <div class="slide">
+            <div class="slide-title">
+                <span>⚖️</span>
+                <span>2. LEGAL, ETIKA, DAN PERLINDUNGAN DATA PRIBADI</span>
+            </div>
+
+            <div class="success-box">
+                <h3>🎯 Masukan Utama Narasumber</h3>
+                <p><strong>Pendekatan terintegrasi UU PDP - Fasyankes tidak menerapkan pendekatan khusus yang terpisah untuk telemedisin. Pemenuhan UU PDP harus menjadi satu kesatuan dengan ketentuan yang berlaku pada setiap Fasyankes.</strong></p>
+            </div>
+
+            <div class="framework-grid">
+                <div class="framework-card" style="border-left-color: #e74c3c;">
+                    <h3 style="color: #e74c3c;">🔐 Pendekatan Terintegrasi UU PDP</h3>
+                    <ul>
+                        <li><strong>Fasyankes sebagai Data Controller:</strong> Bertanggung jawab penuh atas pemenuhan UU PDP</li>
+                        <li><strong>Inklusif Telemedisin:</strong> Layanan telemedisin dicakup dalam upaya pemenuhan UU PDP keseluruhan</li>
+                        <li><strong>Informed Consent Khusus:</strong> Perhatian khusus pada informed consent untuk layanan digital</li>
+                        <li><strong>Jenis Data:</strong> Klarifikasi data yang dapat disimpan dan ditransfer</li>
+                    </ul>
+                </div>
+
+                <div class="framework-card" style="border-left-color: #3498db;">
+                    <h3 style="color: #3498db;">⚖️ Aspek Legal dan Etika</h3>
+                    <ul>
+                        <li><strong>Legalitas Praktik:</strong> Validitas tindakan medis melalui telemedisin</li>
+                        <li><strong>Kode Etik Profesi:</strong> Etika tenaga kesehatan dalam layanan digital</li>
+                        <li><strong>Perlindungan Hukum:</strong> Keamanan bagi tenaga kesehatan dan pasien</li>
+                        <li><strong>Persetujuan Digital:</strong> Mekanisme informed consent elektronik</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="alert-box">
+                <h3>💡 Fokus Pembahasan</h3>
+                <p>• Bagaimana implementasi UU PDP secara terintegrasi di Fasyankes?<br>
+                   • Perlakuan data medis dalam konteks telemedisin vs konvensional<br>
+                   • Standar informed consent untuk pelayanan digital<br>
+                   • Mekanisme perlindungan hukum bagi praktisi telemedisin</p>
+            </div>
+
+            <div class="page-number">Halaman 5 dari 11</div>
+        </div>
+
+        <!-- Slide 6: Topik 3 - Standar Minimal Pelayanan -->
+        <div class="slide">
+            <div class="slide-title">
+                <span>🏥</span>
+                <span>3. STANDAR MINIMAL PELAYANAN</span>
+            </div>
+
+            <div class="success-box">
+                <h3>🎯 Masukan Utama Narasumber</h3>
+                <p><strong>Rujukan standar minimal yang jelas di tingkat nasional - Perlu ada kejelasan mengenai rujukan yang digunakan Fasyankes dalam penyusunan standar minimal pelayanan, termasuk peran kolegium.</strong></p>
+            </div>
+
+            <div class="framework-grid">
+                <div class="framework-card" style="border-left-color: #27ae60;">
+                    <h3 style="color: #27ae60;">👥 Aspek SDM Kesehatan</h3>
+                    <ul>
+                        <li><strong>Kompetensi dan Sertifikasi:</strong> Standar kompetensi tenaga kesehatan untuk telemedisin</li>
+                        <li><strong>Rasio Ketersediaan:</strong> Jumlah SDM yang dibutuhkan untuk mendukung layanan</li>
+                        <li><strong>Peran Kolegium:</strong> Standar profesi dari masing-masing kolegium kedokteran</li>
+                        <li><strong>Pelatihan Khusus:</strong> Persiapan tenaga kesehatan untuk layanan digital</li>
+                    </ul>
+                </div>
+
+                <div class="framework-card" style="border-left-color: #3498db;">
+                    <h3 style="color: #3498db;">🔧 Sarana Prasarana dan Peralatan</h3>
+                    <ul>
+                        <li><strong>Spesifikasi Teknis:</strong> Bandwidth, perangkat, ruang praktik yang memadai</li>
+                        <li><strong>Standar Aplikasi:</strong> Fitur wajib, keamanan, user interface</li>
+                        <li><strong>Medical Device Terintegrasi:</strong> Alat diagnostik digital, teknologi medis</li>
+                        <li><strong>Perangkat Spesifik Telemedisin:</strong> Peralatan yang belum tercakup dalam standar saat ini</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="alert-box">
+                <h3>💡 Fokus Pembahasan</h3>
+                <p>• Standar minimal apa yang menjadi rujukan nasional?<br>
+                   • Bagaimana peran kolegium dalam menetapkan standar?<br>
+                   • Peralatan medis spesifik untuk telemedisin mana yang perlu diatur?<br>
+                   • Standar aplikasi telemedisin seperti apa yang layak?</p>
+            </div>
+
+            <div class="warning-box">
+                <h3>🔍 Pertanyaan Kunci</h3>
+                <p>• SOP standar minimal apa yang perlu dibuat oleh Fasyankes?<br>
+                   • Bagaimana memastikan kualitas dan keselamatan pelayanan?<br>
+                   • Standar kompetensi apa yang diperlukan untuk praktisi telemedisin?</p>
+            </div>
+
+            <div class="page-number">Halaman 6 dari 11</div>
+        </div>
+
+        <!-- Slide 7: Topik 4 - Jenis Penyakit -->
+        <div class="slide">
+            <div class="slide-title">
+                <span>🔍</span>
+                <span>4. JENIS PENYAKIT YANG DAPAT DILAYANI</span>
+            </div>
+
+            <div class="success-box">
+                <h3>🎯 Masukan Utama Narasumber</h3>
+                <p><strong>Batasan dan rambu-rambu yang jelas - Ketentuan ini harus memberikan rambu-rambu mengenai apa saja yang bisa dilayani, termasuk kejelasan kapan harus melakukan rujukan dan kapan harus tatap muka.</strong></p>
+            </div>
+
+            <table class="criteria-table">
+                <thead>
+                    <tr>
+                        <th>Kategori</th>
+                        <th>Kondisi yang Dapat Dilayani</th>
+                        <th>Kondisi TIDAK Dapat Dilayani</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Kasus Rutin</strong></td>
+                        <td>• Follow-up kontrol kronis<br>• Konsultasi penyakit ringan<br>• Edukasi kesehatan</td>
+                        <td>• Kasus pertama kali dengan gejala berat</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Kondisi Kronis</strong></td>
+                        <td>• Kontrol rutin diabetes<br>• Hipertensi stabil<br>• Asma terkontrol</td>
+                        <td>• Exaserbasi akut<br>• Kondisi tidak stabil</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Kasus Darurat</strong></td>
+                        <td>• Triase awal untuk rujukan<br>• Konsultasi second opinion</td>
+                        <td>• Gawat darurat medis<br>• Trauma berat<br>• Serangan jantung/stroke</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="framework-grid">
+                <div class="framework-card" style="border-left-color: #f39c12;">
+                    <h3 style="color: #f39c12;">📋 Kriteria Klinis</h3>
+                    <ul>
+                        <li><strong>Kategorisasi Penyakit:</strong> Berdasarkan tingkat keparahan dan kesesuaian</li>
+                        <li><strong>Kriteria Telekonsultasi:</strong> Kondisi medis yang dapat ditangani jarak jauh</li>
+                        <li><strong>Batasan & Kontraindikasi:</strong> Kondisi emergensi, pemeriksaan fisik kompleks</li>
+                        <li><strong>Keterkaitan SMP:</strong> Standar pelayanan minimum yang dapat dilakukan</li>
+                    </ul>
+                </div>
+
+                <div class="framework-card" style="border-left-color: #e74c3c;">
+                    <h3 style="color: #e74c3c;">⚠️ Protokol Kritis</h3>
+                    <ul>
+                        <li><strong>Mekanisme Rujukan:</strong> Kapan harus merujuk ke layanan tatap muka</li>
+                        <li><strong>Protokol Triase:</strong> Assessment awal melalui platform digital</li>
+                        <li><strong>Kriteria Tatap Muka:</strong> Indikasi wajib pemeriksaan fisik langsung</li>
+                        <li><strong>Escalation Pathway:</strong> Alur penanganan kasus berat</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="alert-box">
+                <h3>💡 Pertanyaan Kunci</h3>
+                <p>• Batasan klinis yang bagaimana yang perlu ditetapkan?<br>
+                   • Protokol rujukan seperti apa yang efektif?<br>
+                   • Bagaimana memastikan keselamatan pasien dalam triase digital?</p>
+            </div>
+
+            <div class="page-number">Halaman 7 dari 11</div>
+        </div>
+
+        <!-- Slide 8: Topik 5 - Tata Kelola Sistem -->
+        <div class="slide">
+            <div class="slide-title">
+                <span>🔐</span>
+                <span>5. TATA KELOLA SISTEM & INTEROPERABILITAS DATA</span>
+            </div>
+
+            <div class="success-box">
+                <h3>🎯 Masukan Utama Narasumber</h3>
+                <p><strong>Arsitektur teknologi terintegrasi - Telemedisin harus didesain sebagai satu kesatuan arsitektur dengan sistem informasi yang sudah ada di Fasyankes, dan tidak menjadi arsitektur yang terpisah.</strong></p>
+            </div>
+
+            <div class="framework-grid">
+                <div class="framework-card" style="border-left-color: #9b59b6;">
+                    <h3 style="color: #9b59b6;">🏗️ Arsitektur Sistem Terintegrasi</h3>
+                    <ul>
+                        <li><strong>Satuan Arsitektur:</strong> Terintegrasi dengan sistem informasi Fasyankes yang ada</li>
+                        <li><strong>Standar Data & Metadata RME:</strong> Standar khusus pelayanan telemedisin dalam RME</li>
+                        <li><strong>Playbook RME:</strong> Buku pedoman penerapan RME yang mencakup telemedisin</li>
+                        <li><strong>Standar Terminologi:</strong> Kesepakatan standar kode klasifikasi penyakit digital</li>
+                    </ul>
+                </div>
+
+                <div class="framework-card" style="border-left-color: #3498db;">
+                    <h3 style="color: #3498db;">🔐 Keamanan & Interoperabilitas</h3>
+                    <ul>
+                        <li><strong>Standar Keamanan Siber:</strong> Enkripsi data kesehatan dan protokol backup</li>
+                        <li><strong>Interoperabilitas FHIR:</strong> Standar pertukaran data antarplatform telemedisin</li>
+                        <li><strong>Disaster Recovery:</strong> Mekanisme pemulihan data medis</li>
+                        <li><strong>Data Sharing:</strong> Pertukaran data antarplatform yang berbeda</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="alert-box">
+                <h3>📋 Standar Interoperabilitas</h3>
+                <p><strong>Fasyankes ke Fasyankes:</strong> Standar komunikasi antar fasilitas kesehatan<br>
+                   <strong>Fasyankes ke Masyarakat:</strong> Akses pasien dan pelayanan publik</p>
+            </div>
+
+            <div class="warning-box">
+                <h3>💡 Pertanyaan Kunci</h3>
+                <p>• Bagaimana arsitektur sistem yang terintegrasi dengan RME?<br>
+                   • Standar data dan metadata seperti apa yang diperlukan?<br>
+                   • Bagaimana implementasi playbook RME di Fasyankes?<br>
+                   • Standar terminologi mana yang akan digunakan secara nasional?</p>
+            </div>
+
+            <div class="info-box">
+                <h3>🎯 Target Implementasi</h3>
+                <p>• Sistem yang seamless dengan infrastruktur yang ada<br>
+                   • Standar data yang kompatibel dengan sistem nasional<br>
+                   • Interoperabilitas yang mendukung pertukaran data aman</p>
+            </div>
+
+            <div class="page-number">Halaman 8 dari 11</div>
+        </div>
+
+        <!-- Slide 9: Topik 6 - Model Pendanaan -->
+        <div class="slide">
+            <div class="slide-title">
+                <span>💰</span>
+                <span>6. MODEL PENDANAAN & INSENTIF</span>
+            </div>
+
+            <div class="success-box">
+                <h3>🎯 Masukan Utama Narasumber</h3>
+                <p><strong>Arsitektur pembiayaan komprehensif - Skema pembiayaan yang berlaku saat ini dinilai belum bisa mencerminkan kesatuan yang utuh di mana telemedisin menjadi bagian dari modalitas pelayanan yang juga di-cover dalam pembiayaan.</strong></p>
+            </div>
+
+            <table class="criteria-table">
+                <thead>
+                    <tr>
+                        <th>Komponen</th>
+                        <th>Situasi Saat Ini</th>
+                        <th>Tujuan Pembaruan</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Tarif Layanan</strong></td>
+                        <td>• Terbatas untuk kasus tertentu<br>• Belum komprehensif</td>
+                        <td>• Integrasi penuh dengan JKN<br>• Tarif yang adil</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Coverage BPJS</strong></td>
+                        <td>• Parsial<br>• Banyak pengecualian</td>
+                        <td>• Universal coverage<br>• Sesuai standar pelayanan</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Insentif Nakes</strong></td>
+                        <td>• Belum jelas<br>• Tidak standar</td>
+                        <td>• Insentif proporsional<br>• Standar nasional</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="framework-grid">
+                <div class="framework-card" style="border-left-color: #34495e;">
+                    <h3 style="color: #34495e;">💡 Fokus Pembaruan</h3>
+                    <ul>
+                        <li><strong>Skema Tarif Layanan:</strong> Konsultasi, follow-up, second opinion</li>
+                        <li><strong>Integrasi BPJS:</strong> Coverage komprehensif untuk layanan telemedisin</li>
+                        <li><strong>Model Pembiayaan Infrastruktur:</strong> Pengembangan di daerah 3T</li>
+                        <li><strong>Insentif Tenaga Kesehatan:</strong> Standar insentif yang jelas</li>
+                        <li><strong>Mekanisme Klaim:</strong> Verifikasi layanan telemedisin yang efisien</li>
+                    </ul>
+                </div>
+
+                <div class="framework-card" style="border-left-color: #27ae60;">
+                    <h3 style="color: #27ae60;">📊 Analisis Cost-Effectiveness</h3>
+                    <ul>
+                        <li><strong>Effisiensi Biaya:</strong> Perbandingan dengan layanan konvensional</li>
+                        <li><strong>ROI Telemedisin:</strong> Return on investment untuk Fasyankes</li>
+                        <li><strong>Cost-Benefit Analysis:</strong> Manfaat ekonomi jangka panjang</li>
+                        <li><strong>Sustainability Model:</strong> Model bisnis yang berkelanjutan</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="warning-box">
+                <h3>💡 Pertanyaan Kunci</h3>
+                <p>• Bagaimana arsitektur pembiayaan yang terintegrasi dan komprehensif?<br>
+                   • Model insentif seperti apa yang adil bagi tenaga kesehatan?<br>
+                   • Bagaimana memastikan sustainability layanan telemedisin?</p>
+            </div>
+
+            <div class="page-number">Halaman 9 dari 11</div>
+        </div>
+
+        <!-- Slide 10: Topik 7 - Tantangan & Proyeksi Masa Depan -->
+        <div class="slide">
+            <div class="slide-title">
+                <span>🚀</span>
+                <span>7. TANTANGAN & PROYEKSI 5 TAHUN KE DEPAN</span>
+            </div>
+
+            <div class="success-box">
+                <h3>🎯 Masukan Utama Narasumber</h3>
+                <p><strong>Kesiapan menghadapi emerging technology - Juknis harus memberikan ruang untuk teknologi-teknologi baru yang akan terus berkembang di masa depan. Peran regulatory sandbox sangat relevan untuk modalitas baru.</strong></p>
+            </div>
+
+            <div class="two-column-grid">
+                <div class="framework-card" style="border-left-color: #e74c3c;">
+                    <h3 style="color: #e74c3c;">⚠️ Tantangan Implementasi</h3>
+                    <ul>
+                        <li><strong>Adopsi Teknologi:</strong> Hambatan adopsi oleh tenaga kesehatan dan masyarakat</li>
+                        <li><strong>Kesenjangan Digital:</strong> Infrastruktur antar daerah (urban vs rural)</li>
+                        <li><strong>Resistensi Budaya:</strong> Hambatan kultural terhadap layanan digital</li>
+                        <li><strong>Kompleksitas Regulasi:</strong> Birokrasi perizinan yang berbelit</li>
+                    </ul>
+                </div>
+
+                <div class="framework-card" style="border-left-color: #f39c12;">
+                    <h3 style="color: #f39c12;">💡 Usulan Perbaikan</h3>
+                    <ul>
+                        <li><strong>Literasi Digital:</strong> Program peningkatan kapasitas tenaga kesehatan</li>
+                        <li><strong>Insentif Daerah 3T:</strong> Akselerasi adopsi di daerah terpencil</li>
+                        <li><strong>Simplifikasi Proses:</strong> Penyederhanaan perizinan dan standarisasi</li>
+                        <li><strong>Kolaborasi Multipihak:</strong> Pemerintah, swasta, akademisi bersama</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="framework-card" style="border-left-color: #9b59b6;">
+                <h3 style="color: #9b59b6;">🔮 Proyeksi 5 Tahun ke Depan</h3>
+                <div class="three-column-grid">
+                    <div>
+                        <h4 style="color: #9b59b6;">🎯 Target Cakupan</h4>
+                        <ul>
+                            <li>Cakupan layanan nasional 80%</li>
+                            <li>Integrasi dengan 90% Fasyankes</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="color: #9b59b6;">🤖 Teknologi AI/ML</h4>
+                        <ul>
+                            <li>Diagnostik berbasis AI</li>
+                            <li>Machine learning untuk triase</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="color: #9b59b6;">🏥 Spesialisasi</h4>
+                        <ul>
+                            <li>Telepsikiatri</li>
+                            <li>Teleradiologi</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="alert-box">
+                <h3>🚀 Regulatory Sandbox & Emerging Technology</h3>
+                <ul>
+                    <li><strong>IoMT (Internet of Medical Things):</strong> Perangkat medis terkoneksi</li>
+                    <li><strong>Wearable Devices:</strong> Monitoring kesehatan real-time</li>
+                    <li><strong>AI Diagnostik:</strong> Machine learning untuk diagnosis</li>
+                    <li><strong>Blockchain:</strong> Keamanan dan integritas data medis</li>
+                </ul>
+            </div>
+
+            <div class="page-number">Halaman 10 dari 11</div>
+        </div>
+
+        <!-- Slide 11: Kesimpulan -->
+        <div class="slide">
+            <div class="slide-title">
+                <span>📝</span>
+                <span>KESIMPULAN MASUKAN NARASUMBER</span>
+            </div>
+
+            <div class="success-box">
+                <h3>🎯 Tema Sentral: INTEGRASI TELEMEDISIN DALAM SISTEM KESEHATAN</h3>
+                <p><strong>dr. Ahmad Hidayat secara konsisten menekankan bahwa telemedisin harus menjadi bagian integral dari sistem pelayanan kesehatan yang ada, bukan entitas terpisah.</strong></p>
+            </div>
+
+            <div class="framework-grid">
+                <div class="framework-card" style="border-left-color: #e74c3c;">
+                    <h3 style="color: #e74c3c;">🔍 Integrasi Pelayanan</h3>
+                    <ul>
+                        <li>Telemedisin sebagai bagian dari alur pelayanan klinis yang ada</li>
+                        <li>Tidak dipisahkan sebagai layanan mandiri</li>
+                        <li>Definisi klinis yang jelas vs telekonsultasi</li>
+                    </ul>
+                </div>
+
+                <div class="framework-card" style="border-left-color: #3498db;">
+                    <h3 style="color: #3498db;">⚖️ Pendekatan Terpadu</h3>
+                    <ul>
+                        <li>UU PDP berlaku terintegrasi untuk semua layanan Fasyankes</li>
+                        <li>Tidak ada pendekatan khusus terpisah untuk telemedisin</li>
+                        <li>Standar minimal mengacu pada rujukan nasional</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="framework-grid">
+                <div class="framework-card" style="border-left-color: #27ae60;">
+                    <h3 style="color: #27ae60;">🏗️ Arsitektur Sistem</h3>
+                    <ul>
+                        <li>Satu kesatuan arsitektur dengan sistem informasi Fasyankes</li>
+                        <li>Standar data dan metadata RME terintegrasi</li>
+                        <li>Playbook RME mencakup pelayanan telemedisin</li>
+                    </ul>
+                </div>
+
+                <div class="framework-card" style="border-left-color: #f39c12;">
+                    <h3 style="color: #f39c12;">💰 Pembiayaan Komprehensif</h3>
+                    <ul>
+                        <li>Arsitektur pembiayaan yang utuh dan terintegrasi</li>
+                        <li>Telemedisin sebagai modalitas pelayanan yang di-cover</li>
+                        <li>Model insentif yang proporsional dan standar</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="alert-box">
+                <h3>🚀 Persiapan Masa Depan</h3>
+                <ul>
+                    <li><strong>Regulatory Sandbox:</strong> Menyiapkan ruang untuk emerging technology</li>
+                    <li><strong>Standar yang Adaptif:</strong> Juknis yang dapat mengakomodasi teknologi baru</li>
+                    <li><strong>Batasan Jelas:</strong> Kriteria klinis, protokol rujukan, dan kapan harus tatap muka</li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <h3>📋 Rekomendasi Utama</h3>
+                <p><strong>Juknis Telemedisin harus disusun dengan pendekatan integrasi sistem, bukan sebagai regulasi terpisah, dengan fokus pada keselamatan pasien, kualitas pelayanan, dan sustainability implementasi.</strong></p>
+            </div>
+
+            <div class="page-number">Halaman 11 dari 11</div>
+        </div>
+
+        <!-- Slide 12: Penutup -->
+        <div class="slide">
+            <div class="thank-you-content">
+                <div class="thank-you-main">
+                    <h1>🙏 Terima Kasih</h1>
+                </div>
+
+                <div class="closing-message">
+                    <p>🎯 <em>"Telemedisin bukan pengganti pelayanan konvensional, melainkan modalitas pelayanan yang terintegrasi untuk meningkatkan akses dan kualitas pelayanan kesehatan digital di Indonesia."</em></p>
+                </div>
+            </div>
+
+            <div class="page-number">Halaman 12 dari 12</div>
+        </div>
+
+    </div>
+
+    <script>
+        // Optional: Update page numbers automatically
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.slide');
+            const totalSlides = slides.length;
+
+            slides.forEach((slide, index) => {
+                const pageNumber = slide.querySelector('.page-number');
+                if (pageNumber) {
+                    pageNumber.textContent = `Halaman ${index + 1} dari ${totalSlides}`;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

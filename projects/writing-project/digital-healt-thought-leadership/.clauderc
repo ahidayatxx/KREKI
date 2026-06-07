@@ -1,0 +1,18 @@
+{
+  "mcpServers": {
+    "perplexity": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-perplexity"],
+      "env": {
+        "PERPLEXITY_API_KEY": "YOUR_PERPLEXITY_API_KEY"
+      }
+    },
+    "tavily": {
+      "command": "npx",
+      "args": ["-y", "@tavily/mcp-server"],
+      "env": {
+        "TAVILY_API_KEY": "YOUR_TAVILY_API_KEY"
+      }
+    }
+  }
+}

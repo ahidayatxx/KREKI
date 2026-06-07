@@ -1,0 +1,122 @@
+{
+  "name": "Simple Binary Upload to Gemini",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "upload"
+      },
+      "id": "webhook-1",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [200, 200]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://generativelanguage.googleapis.com/v1beta/files",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer AIzaSyAmi8rLTrz3JCQZ2JoBgGSzOtXO_MDgUk8"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/octet-stream"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "file",
+              "value": "={{ $binary.data }}"
+            }
+          ]
+        }
+      },
+      "id": "http-1",
+      "name": "Upload File",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [400, 200]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://generativelanguage.googleapis.com/v1beta/fileSearchStores/n8ndocumentsstore-f7cqp3cqctc6:importFile",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer AIzaSyAmi8rLTrz3JCQZ2JoBgGSzOtXO_MDgUk8"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={ \"fileName\": \"{{ $json.name }}\" }"
+      },
+      "id": "http-2",
+      "name": "Import to Store",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [600, 200]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { \"success\": true, \"fileId\": \"{{ $json.name }}\" } }}"
+      },
+      "id": "respond-1",
+      "name": "Response",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [800, 200]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Upload File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload File": {
+      "main": [
+        [
+          {
+            "node": "Import to Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Import to Store": {
+      "main": [
+        [
+          {
+            "node": "Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}

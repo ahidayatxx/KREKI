@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="theme-color" content="#00A9E0">
+    <title>Infografis | Arah Kebijakan IDI Cabang Kota Depok</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #00A9E0;
+            --color-secondary: #F5821F;
+            --color-tertiary: #A9CD3E;
+            --color-accent1: #E7497F;
+            --color-accent2: #915DA3;
+            --color-text: #333333;
+            --color-bg-light: #f8f9fa;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--color-bg-light);
+            color: var(--color-text);
+        }
+        .bg-primary { background-color: var(--color-primary); }
+        .bg-secondary { background-color: var(--color-secondary); }
+        .bg-tertiary { background-color: var(--color-tertiary); }
+        .bg-accent1 { background-color: var(--color-accent1); }
+        .bg-accent2 { background-color: var(--color-accent2); }
+        .text-primary { color: var(--color-primary); }
+        .text-secondary { color: var(--color-secondary); }
+        .text-tertiary { color: var(--color-tertiary); }
+        .text-accent1 { color: var(--color-accent1); }
+        .text-accent2 { color: var(--color-accent2); }
+        .border-primary { border-color: var(--color-primary); }
+        
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        .chart-container-horizontal {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 400px;
+            max-height: 450px;
+        }
+        @media (max-width: 768px) {
+            .chart-container {
+                height: 300px;
+                max-height: 350px;
+            }
+             .chart-container-horizontal {
+                height: 350px;
+                max-height: 400px;
+            }
+        }
+        .stat-card {
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            padding: 1.5rem;
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        .stat-label {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #6B7280;
+            margin-top: 0.5rem;
+        }
+
+        /* Mobile-first improvements */
+        .mobile-scroll {
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
+        }
+
+        .touch-friendly {
+            min-height: 44px;
+            min-width: 44px;
+            cursor: pointer;
+        }
+
+        .prevent-zoom {
+            touch-action: manipulation;
+        }
+
+        /* Mobile typography */
+        @media (max-width: 640px) {
+            html {
+                font-size: 14px;
+            }
+
+            h1 {
+                font-size: 1.75rem !important;
+                line-height: 1.2;
+            }
+
+            h2 {
+                font-size: 1.5rem !important;
+                line-height: 1.2;
+            }
+
+            h3 {
+                font-size: 1.25rem !important;
+                line-height: 1.3;
+            }
+
+            h4 {
+                font-size: 1.125rem !important;
+                line-height: 1.3;
+            }
+
+            p {
+                font-size: 0.875rem !important;
+                line-height: 1.5;
+            }
+
+            .stat-number {
+                font-size: 2rem !important;
+            }
+
+            .stat-label {
+                font-size: 0.75rem !important;
+            }
+        }
+
+        /* Mobile spacing */
+        @media (max-width: 640px) {
+            .container {
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+            }
+
+            .p-6 {
+                padding: 1rem !important;
+            }
+
+            .mb-4 {
+                margin-bottom: 0.75rem !important;
+            }
+
+            .mb-6 {
+                margin-bottom: 1rem !important;
+            }
+
+            .mb-8 {
+                margin-bottom: 1.5rem !important;
+            }
+
+            .gap-6 {
+                gap: 1rem !important;
+            }
+
+            .gap-8 {
+                gap: 1.5rem !important;
+            }
+        }
+
+        /* Mobile grid improvements */
+        @media (max-width: 640px) {
+            .grid-cols-3 {
+                grid-template-columns: 1fr !important;
+                gap: 0.75rem !important;
+            }
+
+            .stat-card {
+                padding: 1rem !important;
+            }
+        }
+
+        /* Mobile chart containers */
+        @media (max-width: 640px) {
+            .chart-container {
+                height: 250px !important;
+                max-height: 280px !important;
+                margin-bottom: 1rem;
+            }
+
+            .chart-container-horizontal {
+                height: 280px !important;
+                max-height: 320px !important;
+                margin-bottom: 1rem;
+            }
+        }
+
+        /* Mobile touch improvements */
+        @media (max-width: 640px) {
+            button, .touch-target {
+                min-height: 44px;
+                min-width: 44px;
+            }
+
+            .mobile-tap {
+                cursor: pointer;
+                -webkit-tap-highlight-color: rgba(0, 169, 224, 0.1);
+            }
+        }
+
+        /* Prevent horizontal scroll on mobile */
+        @media (max-width: 640px) {
+            body {
+                overflow-x: hidden;
+            }
+
+            main {
+                overflow-x: hidden;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <div class="container mx-auto p-4 sm:p-6 md:p-8 max-w-7xl mobile-scroll">
+        
+        <header class="text-center mb-8 sm:mb-10 md:mb-16 mobile-tap">
+            <h1 class="text-3xl md:text-5xl font-bold text-primary mb-2">Profil dan Arah Kebijakan</h1>
+            <h2 class="text-2xl md:text-4xl font-semibold text-gray-700">IDI Cabang Kota Depok</h2>
+        </header>
+
+        <main class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 prevent-zoom">
+
+            <section class="col-span-1 sm:col-span-2 lg:col-span-3 bg-white rounded-lg shadow-md p-4 sm:p-6 mobile-tap">
+                <h3 class="text-2xl font-bold text-primary mb-4">Konteks Ekosistem Kesehatan Depok</h3>
+                <p class="text-gray-600 mb-6">
+                    IDI Cabang Kota Depok beroperasi di lingkungan yang unik sebagai penyangga Jakarta sekaligus kota pendidikan. Dengan populasi layanan yang besar dan beragamnya infrastruktur kesehatan, kami melayani audiens dan stakeholder yang dinamis.
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
+                    <div class="stat-card bg-primary text-white touch-friendly mobile-tap">
+                        <div class="stat-number">Jutaan</div>
+                        <div class="stat-label text-gray-200">Penduduk Dilayani</div>
+                    </div>
+                    <div class="stat-card bg-secondary text-white touch-friendly mobile-tap">
+                        <div class="stat-number">Pusat</div>
+                        <div class="stat-label text-gray-200">Pendidikan & Akademis</div>
+                    </div>
+                    <div class="stat-card bg-tertiary text-white touch-friendly mobile-tap">
+                        <div class="stat-number">Modern</div>
+                        <div class="stat-label text-gray-200">Karakteristik Pasien</div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="bg-white rounded-lg shadow-md p-4 sm:p-6 mobile-tap">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">Target Audiens Primer (Anggota)</h3>
+                <p class="text-gray-600 mb-4">Komposisi anggota kami beragam, mencakup dokter dari berbagai lini praktik dan jenjang karier, yang membutuhkan pendekatan yang inklusif.</p>
+                <div class="chart-container">
+                    <canvas id="audiensChart"></canvas>
+                </div>
+            </section>
+
+            <section class="col-span-1 sm:col-span-2 lg:col-span-2 bg-white rounded-lg shadow-md p-4 sm:p-6 mobile-tap">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">Jejaring Stakeholder Eksternal</h3>
+                <p class="text-gray-600 mb-4">Kesuksesan kami bergantung pada kolaborasi erat dengan berbagai pemangku kepentingan di ekosistem kesehatan Kota Depok.</p>
+                <div class="flex flex-col items-center justify-center h-full min-h-[250px] sm:min-h-[300px] space-y-3 sm:space-y-4">
+                    <div class="flex flex-col sm:flex-row space-x-0 sm:space-x-4 md:space-x-8 space-y-3 sm:space-y-0">
+                        <div class="text-center p-3 border-2 border-tertiary rounded-lg shadow-sm">
+                            <span class="text-4xl">🏛️</span>
+                            <p class="font-semibold text-tertiary">Pemerintah Daerah</p>
+                            <span class="text-xs text-gray-500">(Dinkes, BPJS)</span>
+                        </div>
+                        <div class="text-center p-3 border-2 border-accent2 rounded-lg shadow-sm">
+                            <span class="text-4xl">🎓</span>
+                            <p class="font-semibold text-accent2">Institusi Pendidikan</p>
+                            <span class="text-xs text-gray-500">(FKUI, dll)</span>
+                        </div>
+                    </div>
+                    <div class="border-l-2 border-r-2 border-gray-300 border-dashed h-8 w-px"></div>
+                    <div class="relative p-4 bg-primary text-white rounded-full shadow-lg z-10 w-40 text-center">
+                        <p class="font-bold text-lg">IDI KOTA DEPOK</p>
+                    </div>
+                    <div class="border-l-2 border-r-2 border-gray-300 border-dashed h-8 w-px"></div>
+                    <div class="flex flex-col sm:flex-row space-x-0 sm:space-x-4 md:space-x-8 space-y-3 sm:space-y-0">
+                        <div class="text-center p-3 border-2 border-secondary rounded-lg shadow-sm">
+                            <span class="text-4xl">👨‍👩‍👧‍👦</span>
+                            <p class="font-semibold text-secondary">Masyarakat</D>
+                            <span class="text-xs text-gray-500">(Pasien, Komunitas)</span>
+                        </div>
+                        <div class="text-center p-3 border-2 border-accent1 rounded-lg shadow-sm">
+                            <span class="text-4xl">📰</span>
+                            <p class="font-semibold text-accent1">Media</p>
+                            <span class="text-xs text-gray-500">(Lokal & Nasional)</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="md:col-span-2 lg:col-span-3 text-center mt-8">
+                <h3 class="text-3xl font-bold text-primary">Tiga Pilar Strategis IDI Depok</h3>
+                <p class="text-lg text-gray-600 mt-2 max-w-3xl mx-auto">Visi kami ditopang oleh tiga pilar utama yang menjadi fokus kerja organisasi dalam melayani anggota dan masyarakat.</p>
+            </section>
+
+            <section class="bg-white rounded-lg shadow-md p-4 sm:p-6 flex flex-col mobile-tap touch-friendly">
+                <h3 class="text-xl font-bold text-primary mb-2">Pilar 1: Rumah Besar Profesi</h3>
+                <p class="text-gray-600 mb-4 flex-grow">Membangun komunitas dokter yang solid, inklusif, dan saling mendukung melalui program kekeluargaan, mentorship, dan berbagi pengetahuan.</p>
+                <div class="stat-card bg-gray-50 mb-4">
+                    <div class="stat-number text-primary">Tinggi</div>
+                    <div class="stat-label">Target Partisipasi Anggota</div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="pilar1Chart"></canvas>
+                </div>
+            </section>
+
+            <section class="bg-white rounded-lg shadow-md p-4 sm:p-6 flex flex-col mobile-tap touch-friendly">
+                <h3 class="text-xl font-bold text-secondary mb-2">Pilar 2: Pengawal Regulasi</h3>
+                <p class="text-gray-600 mb-4 flex-grow">Memastikan implementasi UU Kesehatan (UU 17/2023) yang adil dan praktis bagi dokter melalui advokasi, monitoring, dan dukungan kepatuhan.</p>
+                <p class="text-gray-600 mb-4 font-semibold">Area Fokus Utama Advokasi:</p>
+                <div class="chart-container-horizontal">
+                    <canvas id="pilar2Chart"></canvas>
+                </div>
+            </section>
+
+            <section class="bg-white rounded-lg shadow-md p-4 sm:p-6 flex flex-col mobile-tap touch-friendly">
+                <h3 class="text-xl font-bold text-tertiary mb-2">Pilar 3: Penjaga Marwah & Pelindung</h3>
+                <p class="text-gray-600 mb-4 flex-grow">Mempertahankan dignitas profesi dan memberikan perlindungan komprehensif melalui bantuan hukum, manajemen krisis, dan penegakan etik.</p>
+                 <div class="stat-card bg-gray-50 mb-4">
+                    <div class="stat-number text-tertiary">Cepat</div>
+                    <div class="stat-label">Target Respon Krisis Anggota</div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="pilar3Chart"></canvas>
+                </div>
+            </section>
+            
+            <section class="col-span-1 sm:col-span-2 lg:col-span-3 bg-white rounded-lg shadow-md p-4 sm:p-6 mobile-tap">
+                <h3 class="text-2xl font-bold text-primary mb-4">Target Kinerja Utama (KPI) Organisasi</h3>
+                <p class="text-gray-600 mb-6">Kami mengukur kesuksesan melalui metrik yang jelas, berfokus pada pertumbuhan, keterlibatan anggota, dan efektivitas perlindungan.</p>
+                <div class="chart-container h-[400px] max-h-[450px]">
+                    <canvas id="kpiChart"></canvas>
+                </div>
+            </section>
+
+            <section class="col-span-1 sm:col-span-2 lg:col-span-3 bg-white rounded-lg shadow-md p-4 sm:p-6 mobile-tap">
+                <h3 class="text-2xl font-bold text-accent2 mb-6">Linimasa Program Kerja Prioritas</h3>
+                <p class="text-gray-600 mb-8">Aktivitas organisasi dirancang secara terstruktur dalam siklus bulanan, triwulanan, dan tahunan untuk memastikan kesinambungan program.</p>
+                <div class="relative pl-4 sm:pl-6 border-l-4 border-accent2">
+                    <div class="mb-8 ml-4">
+                        <div class="absolute -left-[9px] sm:-left-[11px] mt-1.5 h-4 w-4 sm:h-5 sm:w-5 rounded-full bg-accent2 border-4 border-white"></div>
+                        <h4 class="text-xl font-semibold text-accent2">Bulanan</h4>
+                        <p class="text-gray-600">Member gathering, seminar, dan program continuing education (P2KB) untuk menjaga kekeluargaan dan kompetensi.</p>
+                    </div>
+                    <div class="mb-8 ml-4">
+                        <div class="absolute -left-[9px] sm:-left-[11px] mt-1.5 h-4 w-4 sm:h-5 sm:w-5 rounded-full bg-accent2 border-4 border-white"></div>
+                        <h4 class="text-xl font-semibold text-accent2">Triwulanan</h4>
+                        <p class="text-gray-600">Sesi update regulasi, diskusi kebijakan, dan forum advokasi untuk merespon isu-isu strategis.</p>
+                    </div>
+                    <div class="mb-0 ml-4">
+                        <div class="absolute -left-[9px] sm:-left-[11px] mt-1.5 h-4 w-4 sm:h-5 sm:w-5 rounded-full bg-accent2 border-4 border-white"></div>
+                        <h4 class="text-xl font-semibold text-accent2">Tahunan</h4>
+                        <p class="text-gray-600">Musyawarah Cabang (Muscab), kampanye advokasi skala besar, dan publikasi riset atau laporan tahunan.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="md:col-span-2 lg:col-span-3 text-center mt-8">
+                <h3 class="text-3xl font-bold text-primary">Keunggulan Kompetitif Kami</h3>
+                <p class="text-lg text-gray-600 mt-2 max-w-3xl mx-auto">Empat faktor utama membedakan IDI Kota Depok dalam memberikan nilai tambah bagi anggotanya.</p>
+            </section>
+
+            <div class="stat-card col-span-1 sm:col-span-2 lg:col-span-1 border-t-4 border-primary touch-friendly mobile-tap">
+                <span class="text-4xl">🔬</span>
+                <h4 class="text-lg font-bold text-primary mt-2">Kombinasi Academic Rigor & Practical Wisdom</h4>
+                <p class="text-gray-600 text-sm mt-1">Memadukan kekuatan akademis dari universitas terkemuka dengan kearifan praktik di lapangan.</p>
+            </div>
+            
+            <div class="stat-card col-span-1 sm:col-span-2 lg:col-span-1 border-t-4 border-secondary touch-friendly mobile-tap">
+                <span class="text-4xl">📱</span>
+                <h4 class="text-lg font-bold text-secondary mt-2">Digital Presence & Komunikasi Modern</h4>
+                <p class="text-gray-600 text-sm mt-1">Menggunakan platform digital untuk komunikasi yang cepat, transparan, dan menjangkau semua anggota.</p>
+            </div>
+            
+            <div class="stat-card col-span-1 sm:col-span-2 lg:col-span-1 border-t-4 border-tertiary touch-friendly mobile-tap">
+                <span class="text-4xl">📣</span>
+                <h4 class="text-lg font-bold text-tertiary mt-2">Advokasi Proaktif Berbasis Bukti</h4>
+                <p class="text-gray-600 text-sm mt-1">Tidak hanya reaktif, tetapi proaktif memberikan masukan kebijakan berdasarkan data dan bukti ilmiah.</p>
+            </div>
+            
+            <div class="stat-card col-span-1 sm:col-span-2 lg:col-span-2 border-t-4 border-accent1 touch-friendly mobile-tap">
+                <span class="text-4xl">🤝</span>
+                <h4 class="text-lg font-bold text-accent1 mt-2">Pendekatan Keanggotaan Inklusif</h4>
+                <p class="text-gray-600 text-sm mt-1">Merangkul semua dokter, dari dokter muda, umum, spesialis, hingga akademisi, dalam satu rumah besar.</p>
+            </div>
+            
+            <div class="stat-card col-span-1 sm:col-span-2 lg:col-span-1 border-t-4 border-accent2 touch-friendly mobile-tap">
+                <span class="text-4xl">⚡</span>
+                <h4 class="text-lg font-bold text-accent2 mt-2">Respon Cepat & Adaptif</h4>
+                <p class="text-gray-600 text-sm mt-1">Adaptasi cepat terhadap perubahan regulasi dan krisis yang dihadapi anggota.</p>
+            </div>
+
+        </main>
+
+        <footer class="text-center mt-16 pt-8 border-t border-gray-300">
+            <p class="text-gray-600 max-w-3xl mx-auto">IDI Cabang Kota Depok diposisikan sebagai organisasi profesi yang modern, responsif, dan berfokus pada solusi praktis untuk tantangan dokter di era UU 17/2023. Dengan memanfaatkan keunikan ekosistem Depok, kami bertujuan menjadi model bagi cabang IDI lainnya.</p>
+            <p class="text-gray-500 text-sm mt-4">© 2025 Ikatan Dokter Indonesia Cabang Kota Depok</p>
+        </footer>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const colorPrimary = '#00A9E0';
+            const colorSecondary = '#F5821F';
+            const colorTertiary = '#A9CD3E';
+            const colorAccent1 = '#E7497F';
+            const colorAccent2 = '#915DA3';
+            const colorText = '#333333';
+            
+            const tooltipTitleCallback = (tooltipItems) => {
+                const item = tooltipItems[0];
+                let label = item.chart.data.labels[item.dataIndex];
+                if (Array.isArray(label)) {
+                    return label.join(' ');
+                } else {
+                    return label;
+                }
+            };
+
+            const commonTooltipOptions = {
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            title: tooltipTitleCallback
+                        },
+                        backgroundColor: '#FFFFFF',
+                        titleColor: '#333333',
+                        bodyColor: '#333333',
+                        borderColor: '#DDDDDD',
+                        borderWidth: 1,
+                        padding: 10,
+                        displayColors: true
+                    },
+                    legend: {
+                        labels: {
+                            color: colorText
+                        }
+                    }
+                }
+            };
+
+            function processLabels(labels) {
+                return labels.map(label => {
+                    if (typeof label === 'string' && label.length > 16) {
+                        const words = label.split(' ');
+                        const newLabel = [];
+                        let line = '';
+                        words.forEach(word => {
+                            if ((line + word).length > 16 && line.length > 0) {
+                                newLabel.push(line.trim());
+                                line = word + ' ';
+                            } else {
+                                line += word + ' ';
+                            }
+                        });
+                        if (line.length > 0) {
+                            newLabel.push(line.trim());
+                        }
+                        return newLabel;
+                    }
+                    return label;
+                });
+            }
+
+            if (document.getElementById('audiensChart')) {
+                const ctx = document.getElementById('audiensChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Dokter Umum', 'Dokter Spesialis', 'Dokter Akademis', 'Dokter Muda'],
+                        datasets: [{
+                            data: [35, 30, 20, 15],
+                            backgroundColor: [colorPrimary, colorSecondary, colorTertiary, colorAccent1],
+                            borderColor: '#FFFFFF',
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        devicePixelRatio: window.devicePixelRatio || 1,
+                        interaction: {
+                            intersect: false,
+                            mode: 'nearest'
+                        },
+                        plugins: {
+                            ...commonTooltipOptions.plugins,
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    color: colorText
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            if (document.getElementById('pilar1Chart')) {
+                const ctx = document.getElementById('pilar1Chart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'radar',
+                    data: {
+                        labels: ['Kekeluargaan', 'Mentorship', ['Knowledge', 'Sharing'], 'Kolaborasi', ['Professional', 'Development']],
+                        datasets: [{
+                            label: 'Fokus Inisiatif Pilar 1',
+                            data: [8, 7, 8, 7, 9],
+                            backgroundColor: 'rgba(0, 169, 224, 0.2)',
+                            borderColor: colorPrimary,
+                            pointBackgroundColor: colorPrimary,
+                            pointBorderColor: '#fff',
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderColor: colorPrimary
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            r: {
+                                angleLines: { color: '#DDDDDD' },
+                                grid: { color: '#DDDDDD' },
+                                pointLabels: { color: colorText, font: { size: 12 } },
+                                ticks: {
+                                    backdropColor: 'transparent',
+                                    color: colorText,
+                                    stepSize: 2
+                                }
+                            }
+                        },
+                        plugins: {
+                             ...commonTooltipOptions.plugins,
+                             legend: {
+                                 position: 'bottom',
+                                 labels: {
+                                    color: colorText
+                                 }
+                             }
+                        }
+                    }
+                });
+            }
+
+            if (document.getElementById('pilar2Chart')) {
+                const ctx = document.getElementById('pilar2Chart').getContext('2d');
+                const pilar2Labels = processLabels([
+                    'Professional liability & medical malpractice', 
+                    'Standar kompetensi & re-sertifikasi', 
+                    'Quality assurance & patient safety',
+                    'Regulasi praktik telemedicine', 
+                    'Sistem rujukan & kolaborasi interprofesional'
+                ]);
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: pilar2Labels,
+                        datasets: [{
+                            label: 'Tingkat Prioritas Advokasi',
+                            data: [90, 85, 80, 75, 70],
+                            backgroundColor: colorSecondary,
+                            borderColor: colorSecondary,
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            x: {
+                                grid: { display: false },
+                                ticks: { color: colorText }
+                            },
+                            y: {
+                                grid: { display: true, color: '#EEEEEE' },
+                                ticks: { color: colorText, autoSkip: false }
+                            }
+                        },
+                        plugins: {
+                            ...commonTooltipOptions.plugins,
+                            legend: {
+                                display: false
+                            }
+                        }
+                    }
+                });
+            }
+
+            if (document.getElementById('pilar3Chart')) {
+                const ctx = document.getElementById('pilar3Chart').getContext('2d');
+                const pilar3Labels = processLabels([
+                    'Bantuan hukum dalam kasus malpractice', 
+                    'Mediation services untuk konflik', 
+                    'Professional liability insurance guidance', 
+                    'Emotional support dan counseling'
+                ]);
+                
+                new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: pilar3Labels,
+                        datasets: [{
+                            label: 'Proporsi Layanan Perlindungan',
+                            data: [35, 30, 20, 15],
+                            backgroundColor: [colorTertiary, colorAccent2, colorPrimary, colorAccent1],
+                            borderColor: '#FFFFFF',
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            ...commonTooltipOptions.plugins,
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    color: colorText
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            if (document.getElementById('kpiChart')) {
+                const ctx = document.getElementById('kpiChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: [['Tingkat', 'Pertumbuhan'], ['Tingkat', 'Engagement'], ['Tingkat', 'Retention'], ['Efektivitas', 'Perlindungan']],
+                        datasets: [{
+                            label: 'Target (%)',
+                            data: [20, 75, 85, 80],
+                            backgroundColor: colorPrimary,
+                            borderColor: colorPrimary,
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 100,
+                                grid: { color: '#EEEEEE' },
+                                ticks: { 
+                                    color: colorText,
+                                    callback: function(value) {
+                                        return value + '%'
+                                    }
+                                }
+                            },
+                            x: {
+                                grid: { display: false },
+                                ticks: { color: colorText, autoSkip: false }
+                            }
+                        },
+                        plugins: {
+                            ...commonTooltipOptions.plugins,
+                             legend: {
+                                 position: 'bottom',
+                                 labels: {
+                                    color: colorText
+                                 }
+                             }
+                        }
+                    }
+                });
+            }
+
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chatbot - Claude Assistant</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .chat-container {
+            width: 100%;
+            max-width: 800px;
+            height: 600px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .chat-header h1 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .chat-header p {
+            opacity: 0.9;
+            font-size: 14px;
+        }
+
+        .connection-status {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #4ade80;
+            animation: pulse 2s infinite;
+        }
+
+        .status-dot.disconnected {
+            background: #f87171;
+            animation: none;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            background: #f8fafc;
+        }
+
+        .message {
+            display: flex;
+            gap: 12px;
+            max-width: 85%;
+            animation: messageSlide 0.3s ease-out;
+        }
+
+        @keyframes messageSlide {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message.user {
+            align-self: flex-end;
+            flex-direction: row-reverse;
+        }
+
+        .message-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .message.user .message-avatar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .message.ai .message-avatar {
+            background: linear-gradient(135deg, #4ade80 0%, #16a34a 100%);
+            color: white;
+        }
+
+        .message-content {
+            background: white;
+            padding: 12px 16px;
+            border-radius: 18px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            word-wrap: break-word;
+        }
+
+        .message.user .message-content {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .message-time {
+            font-size: 11px;
+            color: #64748b;
+            margin-top: 4px;
+            text-align: right;
+        }
+
+        .message.user .message-time {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .typing-indicator {
+            display: flex;
+            gap: 12px;
+            max-width: 85%;
+            opacity: 0;
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        .typing-dots {
+            background: white;
+            padding: 16px 20px;
+            border-radius: 18px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            gap: 4px;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #94a3b8;
+            animation: typingBounce 1.4s ease-in-out infinite both;
+        }
+
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes typingBounce {
+            0%, 80%, 100% {
+                transform: scale(0);
+            }
+            40% {
+                transform: scale(1);
+            }
+        }
+
+        .chat-input-container {
+            padding: 20px;
+            background: white;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .chat-input-wrapper {
+            display: flex;
+            gap: 12px;
+            align-items: flex-end;
+        }
+
+        .chat-input {
+            flex: 1;
+            min-height: 44px;
+            max-height: 120px;
+            padding: 12px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 22px;
+            resize: none;
+            font-family: inherit;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .chat-input:focus {
+            border-color: #667eea;
+        }
+
+        .send-button {
+            width: 44px;
+            height: 44px;
+            border: none;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .send-button:hover {
+            transform: scale(1.05);
+        }
+
+        .send-button:disabled {
+            background: #94a3b8;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .config-panel {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: white;
+            padding: 16px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            max-width: 300px;
+        }
+
+        .config-panel h3 {
+            margin-bottom: 12px;
+            font-size: 16px;
+            color: #1e293b;
+        }
+
+        .config-input {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .config-button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-right: 8px;
+        }
+
+        .error-message {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #dc2626;
+            padding: 12px;
+            border-radius: 8px;
+            margin: 16px 20px;
+            font-size: 14px;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .chat-container {
+                height: calc(100vh - 20px);
+                border-radius: 12px;
+            }
+
+            .chat-header h1 {
+                font-size: 20px;
+            }
+
+            .config-panel {
+                position: relative;
+                top: auto;
+                left: auto;
+                margin-bottom: 16px;
+                max-width: none;
+            }
+
+            .message {
+                max-width: 95%;
+            }
+
+            .connection-status {
+                position: static;
+                justify-content: center;
+                margin-top: 8px;
+            }
+        }
+
+        /* Scrollbar Styling */
+        .chat-messages::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .chat-messages::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body>
+    <div class="config-panel" id="configPanel">
+        <h3>🔧 Configuration</h3>
+        <input type="text" id="webhookUrl" class="config-input" placeholder="n8n Webhook URL" value="https://n8n-jzx3s9q1s367.pempek.sumopod.my.id/webhook/claude-ai-assistant-ultimate-unique-ahmad-2025-final">
+        <input type="text" id="userId" class="config-input" placeholder="User ID" value="">
+        <button class="config-button" onclick="saveConfig()">Save</button>
+        <button class="config-button" onclick="toggleConfig()">Hide</button>
+    </div>
+
+    <div class="chat-container">
+        <div class="chat-header">
+            <h1>🤖 AI Assistant</h1>
+            <p>Asisten AI berbahasa Indonesia - Powered by Claude</p>
+            <div class="connection-status">
+                <div class="status-dot" id="statusDot"></div>
+                <span id="statusText">Ready</span>
+            </div>
+        </div>
+
+        <div class="chat-messages" id="chatMessages">
+            <div class="message ai">
+                <div class="message-avatar">🤖</div>
+                <div class="message-content">
+                    <div>Halo! Saya adalah asisten AI yang siap membantu Anda. Silakan tanyakan apa saja yang ingin Anda ketahui! 😊</div>
+                    <div class="message-time" id="welcomeTime"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chat-input-container">
+            <div class="chat-input-wrapper">
+                <textarea 
+                    class="chat-input" 
+                    id="messageInput" 
+                    placeholder="Ketik pesan Anda di sini..."
+                    rows="1"
+                    maxlength="2000"
+                ></textarea>
+                <button class="send-button" id="sendButton" onclick="sendMessage()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Configuration
+        let config = {
+            webhookUrl: 'https://n8n-jzx3s9q1s367.pempek.sumopod.my.id/webhook/claude-ai-assistant-ultimate-unique-ahmad-2025-final',
+            userId: 'user_' + Math.random().toString(36).substr(2, 9),
+            sessionId: 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9)
+        };
+
+        // Load config from localStorage
+        function loadConfig() {
+            const saved = localStorage.getItem('chatbot-config');
+            console.log('🔍 DEBUG: Saved config from localStorage:', saved);
+            if (saved) {
+                const savedConfig = JSON.parse(saved);
+                console.log('🔍 DEBUG: Parsed saved config:', savedConfig);
+                config = { ...config, ...savedConfig };
+                document.getElementById('webhookUrl').value = config.webhookUrl;
+                document.getElementById('userId').value = config.userId;
+            }
+            console.log('🔍 DEBUG: Final loaded config:', config);
+        }
+
+        // Save config to localStorage
+        function saveConfig() {
+            config.webhookUrl = document.getElementById('webhookUrl').value;
+            config.userId = document.getElementById('userId').value || config.userId;
+            
+            localStorage.setItem('chatbot-config', JSON.stringify(config));
+            
+            updateStatus('ready', 'Configuration saved');
+            setTimeout(() => updateStatus('ready', 'Ready'), 2000);
+        }
+
+        // Toggle config panel
+        function toggleConfig() {
+            const panel = document.getElementById('configPanel');
+            panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+        }
+
+        // Update connection status
+        function updateStatus(status, text) {
+            const dot = document.getElementById('statusDot');
+            const statusText = document.getElementById('statusText');
+            
+            dot.className = `status-dot ${status === 'connected' ? '' : status === 'error' ? 'disconnected' : ''}`;
+            statusText.textContent = text;
+        }
+
+        // Auto-resize textarea
+        function autoResize(textarea) {
+            textarea.style.height = 'auto';
+            textarea.style.height = Math.min(textarea.scrollHeight, 120) + 'px';
+        }
+
+        // Format time
+        function formatTime() {
+            return new Date().toLocaleTimeString('id-ID', { 
+                hour: '2-digit', 
+                minute: '2-digit' 
+            });
+        }
+
+        // Add message to chat
+        function addMessage(content, isUser = false, timestamp = null) {
+            const messagesContainer = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${isUser ? 'user' : 'ai'}`;
+            
+            const time = timestamp || formatTime();
+            
+            messageDiv.innerHTML = `
+                <div class="message-avatar">${isUser ? '👤' : '🤖'}</div>
+                <div class="message-content">
+                    <div>${content}</div>
+                    <div class="message-time">${time}</div>
+                </div>
+            `;
+            
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        // Show typing indicator
+        function showTyping() {
+            const messagesContainer = document.getElementById('chatMessages');
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'typing-indicator';
+            typingDiv.id = 'typingIndicator';
+            
+            typingDiv.innerHTML = `
+                <div class="message-avatar">🤖</div>
+                <div class="typing-dots">
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                </div>
+            `;
+            
+            messagesContainer.appendChild(typingDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        // Hide typing indicator
+        function hideTyping() {
+            const typing = document.getElementById('typingIndicator');
+            if (typing) {
+                typing.remove();
+            }
+        }
+
+        // Show error message
+        function showError(message) {
+            const messagesContainer = document.getElementById('chatMessages');
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error-message';
+            errorDiv.innerHTML = `⚠️ ${message}`;
+            
+            messagesContainer.appendChild(errorDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            
+            // Remove error after 10 seconds
+            setTimeout(() => {
+                if (errorDiv.parentNode) {
+                    errorDiv.remove();
+                }
+            }, 10000);
+        }
+
+        // Send message to n8n webhook
+        async function sendToWebhook(message) {
+            if (!config.webhookUrl) {
+                throw new Error('Please configure the webhook URL first');
+            }
+
+            console.log('🔍 DEBUG: Sending to webhook:', config.webhookUrl);
+            console.log('🔍 DEBUG: Full config object:', config);
+            console.log('🔍 DEBUG: Request payload:', {
+                message: message,
+                user_id: config.userId,
+                session_id: config.sessionId
+            });
+            
+            // Force show current URL in chat
+            addMessage(`🔍 DEBUG: Calling ${config.webhookUrl}`, false);
+
+            const response = await fetch(config.webhookUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    message: message,
+                    user_id: config.userId,
+                    session_id: config.sessionId
+                })
+            });
+
+            console.log('Response status:', response.status);
+            console.log('Response headers:', response.headers);
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error('Error response body:', errorText);
+                
+                let errorData;
+                try {
+                    errorData = JSON.parse(errorText);
+                } catch (e) {
+                    errorData = { message: errorText };
+                }
+                
+                throw new Error(errorData.message || `HTTP ${response.status}: ${response.statusText}`);
+            }
+
+            const responseText = await response.text();
+            console.log('Raw response text:', responseText);
+            
+            let data;
+            try {
+                data = JSON.parse(responseText);
+            } catch (e) {
+                console.error('Failed to parse JSON response:', e);
+                throw new Error('Invalid JSON response from server');
+            }
+            
+            if (data.status === 'error') {
+                throw new Error(data.message || 'Unknown error occurred');
+            }
+
+            return data;
+        }
+
+        // Send message
+        async function sendMessage() {
+            const input = document.getElementById('messageInput');
+            const sendButton = document.getElementById('sendButton');
+            const message = input.value.trim();
+
+            if (!message) return;
+
+            // Disable input and button
+            input.disabled = true;
+            sendButton.disabled = true;
+            updateStatus('connecting', 'Sending...');
+
+            // Add user message
+            addMessage(message, true);
+            input.value = '';
+            autoResize(input);
+
+            // Show typing indicator
+            showTyping();
+
+            try {
+                const response = await sendToWebhook(message);
+                hideTyping();
+                
+                // Debug: log the full response
+                console.log('Full API Response:', response);
+                
+                // Handle different response formats
+                let aiMessage = '';
+                
+                console.log('🔍 DEBUG: Response type:', typeof response);
+                console.log('🔍 DEBUG: Is array:', Array.isArray(response));
+                
+                // Handle n8n array response format [{"status": "success", "response": "text"}]
+                if (Array.isArray(response) && response.length > 0) {
+                    const firstItem = response[0];
+                    console.log('🔍 DEBUG: First array item:', firstItem);
+                    
+                    if (firstItem && typeof firstItem === 'object') {
+                        if (firstItem.response) {
+                            aiMessage = firstItem.response;
+                        } else if (firstItem.output) {
+                            aiMessage = firstItem.output;
+                        } else if (firstItem.text) {
+                            aiMessage = firstItem.text;
+                        } else if (firstItem.message && firstItem.message !== "Workflow was started") {
+                            aiMessage = firstItem.message;
+                        }
+                    }
+                }
+                // Handle direct object response {"status": "success", "response": "text"}
+                else if (response && typeof response === 'object') {
+                    if (response.response) {
+                        aiMessage = response.response;
+                    } else if (response.output) {
+                        aiMessage = response.output;
+                    } else if (response.text) {
+                        aiMessage = response.text;
+                    } else if (response.data) {
+                        aiMessage = response.data;
+                    } else if (response.message && response.message !== "Workflow was started") {
+                        aiMessage = response.message;
+                    }
+                }
+                // Handle direct string response
+                else if (typeof response === 'string') {
+                    aiMessage = response;
+                }
+                
+                // Fallback if still empty
+                if (!aiMessage) {
+                    aiMessage = `Debug: Could not extract message. Response: ${JSON.stringify(response, null, 2)}`;
+                    console.warn('Could not parse response:', response);
+                }
+                
+                // Add AI response
+                addMessage(aiMessage);
+                updateStatus('connected', 'Connected');
+
+            } catch (error) {
+                hideTyping();
+                showError(`Failed to send message: ${error.message}`);
+                updateStatus('error', 'Error');
+                console.error('Chat error:', error);
+            }
+
+            // Re-enable input and button
+            input.disabled = false;
+            sendButton.disabled = false;
+            input.focus();
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            loadConfig();
+            
+            // Set welcome message time
+            document.getElementById('welcomeTime').textContent = formatTime();
+
+            // Input event listeners
+            const input = document.getElementById('messageInput');
+            
+            input.addEventListener('input', function() {
+                autoResize(this);
+            });
+
+            input.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    sendMessage();
+                }
+            });
+
+            // Hide config panel after 5 seconds since webhook is pre-configured
+            setTimeout(() => {
+                toggleConfig();
+                updateStatus('ready', 'Ready to chat');
+            }, 5000);
+
+            // Focus input
+            input.focus();
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            const messagesContainer = document.getElementById('chatMessages');
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        });
+    </script>
+</body>
+</html>

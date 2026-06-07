@@ -1,0 +1,1867 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Program Studi Magister Manajemen Informasi Kesehatan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            /* Primary Colors */
+            --primary-color: #2563eb;
+            --primary-dark: #1d4ed8;
+            --primary-light: #3b82f6;
+
+            /* Accent Colors */
+            --accent-color: #10b981;
+            --accent-dark: #059669;
+            --warning-color: #f59e0b;
+            --error-color: #ef4444;
+
+            /* Neutral Colors */
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-400: #9ca3af;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --gray-900: #111827;
+
+            /* Typography */
+            --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
+
+            /* Layout */
+            --container-padding: 1rem;
+            --border-radius: 0.75rem;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+
+            /* Transitions */
+            --transition-fast: 0.15s ease;
+            --transition-normal: 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            line-height: 1.6;
+            color: var(--gray-700);
+            background-color: var(--gray-50);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--gray-200);
+            z-index: 1000;
+            transition: var(--transition-normal);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--container-padding);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 4rem;
+        }
+
+        .nav-brand {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--gray-600);
+            cursor: pointer;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--gray-600);
+            font-weight: 500;
+            transition: var(--transition-fast);
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary-color);
+            background-color: var(--gray-100);
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 4rem;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 4rem var(--container-padding);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            opacity: 0.8;
+            margin-top: 0.25rem;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--container-padding);
+        }
+
+        /* Section */
+        .section {
+            padding: 4rem 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.125rem;
+            color: var(--gray-600);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--gray-200);
+            transition: var(--transition-normal);
+            overflow: hidden;
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .card-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--gray-200);
+            background-color: var(--gray-50);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--gray-900);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .card-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        /* Grids */
+        .grid-2 {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+
+        .grid-3 {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+
+        .grid-4 {
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+
+        /* Profile Cards */
+        .profile-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .profile-card {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .profile-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .profile-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-description {
+            font-size: 0.875rem;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+
+        /* CPL Section */
+        .cpl-section {
+            background: white;
+            margin: 2rem 0;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+        }
+
+        .cpl-header {
+            background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-dark) 100%);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .cpl-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .cpl-body {
+            padding: 2rem;
+        }
+
+        .cpl-items {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .cpl-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--gray-50);
+            border-radius: 0.5rem;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .cpl-code {
+            background: var(--accent-color);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            min-width: 2.5rem;
+            text-align: center;
+        }
+
+        .cpl-text {
+            flex: 1;
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+
+        /* Course Table */
+        .course-table {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            margin: 2rem 0;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.875rem;
+        }
+
+        th {
+            background-color: var(--gray-800);
+            color: white;
+            font-weight: 600;
+            padding: 1rem 0.75rem;
+            text-align: left;
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--gray-200);
+            vertical-align: top;
+        }
+
+        tr:hover {
+            background-color: var(--gray-50);
+        }
+
+        .course-code {
+            font-family: monospace;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .sks-badge {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .course-type {
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .type-inti {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .type-pilihan {
+            background: var(--warning-color);
+            color: white;
+        }
+
+        .type-metodologi {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .type-penunjang {
+            background: var(--gray-500);
+            color: white;
+        }
+
+        /* Features */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .feature {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            text-align: center;
+            border-top: 4px solid var(--primary-color);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--gray-900);
+        }
+
+        .feature-description {
+            font-size: 0.875rem;
+            color: var(--gray-600);
+            line-height: 1.5;
+        }
+
+        /* Accordion */
+        .accordion {
+            margin: 2rem 0;
+        }
+
+        .accordion-item {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .accordion-header {
+            background: var(--gray-50);
+            border: none;
+            width: 100%;
+            padding: 1.25rem;
+            text-align: left;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--gray-900);
+            cursor: pointer;
+            transition: var(--transition-fast);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .accordion-header:hover {
+            background: var(--gray-100);
+        }
+
+        .accordion-header.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .accordion-icon {
+            transition: var(--transition-fast);
+        }
+
+        .accordion-header.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            display: none;
+            padding: 1.5rem;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .accordion-content.active {
+            display: block;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            margin: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 1rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--gray-200);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 3rem;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: 0.5rem;
+            top: 0.5rem;
+            width: 1rem;
+            height: 1rem;
+            background: var(--primary-color);
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .timeline-title {
+            font-weight: 600;
+            color: var(--gray-900);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-description {
+            font-size: 0.875rem;
+            color: var(--gray-600);
+            line-height: 1.5;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--gray-900);
+            color: var(--gray-300);
+            padding: 3rem var(--container-padding) 1rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .footer-text {
+            font-size: 0.875rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-link {
+            color: var(--gray-300);
+            text-decoration: none;
+            transition: var(--transition-fast);
+        }
+
+        .footer-link:hover {
+            color: var(--primary-light);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--gray-700);
+            padding-top: 1rem;
+            font-size: 0.75rem;
+            color: var(--gray-400);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 4rem;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                gap: 0;
+                padding: 1rem;
+                box-shadow: var(--shadow-lg);
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: var(--transition-normal);
+            }
+
+            .nav-menu.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .nav-link {
+                padding: 0.75rem 1rem;
+                border-bottom: 1px solid var(--gray-200);
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.125rem;
+            }
+
+            .section-title {
+                font-size: 1.75rem;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .profile-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .grid-2,
+            .grid-3,
+            .grid-4 {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline::before {
+                left: 0.75rem;
+            }
+
+            .timeline-item {
+                padding-left: 2.5rem;
+            }
+
+            .timeline-marker {
+                left: 0.25rem;
+            }
+
+            .footer-links {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            :root {
+                --container-padding: 0.75rem;
+            }
+
+            .hero {
+                padding: 3rem var(--container-padding);
+            }
+
+            .section {
+                padding: 3rem 0;
+            }
+
+            .card-body,
+            .card-header {
+                padding: 1rem;
+            }
+
+            .feature,
+            .profile-card {
+                padding: 1.5rem;
+            }
+
+            .hero-stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+
+            .stat-number {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Utility Classes */
+        .text-center { text-align: center; }
+        .text-primary { color: var(--primary-color); }
+        .text-accent { color: var(--accent-color); }
+        .text-muted { color: var(--gray-500); }
+        .font-medium { font-weight: 500; }
+        .font-semibold { font-weight: 600; }
+        .font-bold { font-weight: 700; }
+        .mb-0 { margin-bottom: 0; }
+        .mb-1 { margin-bottom: 0.25rem; }
+        .mb-2 { margin-bottom: 0.5rem; }
+        .mb-3 { margin-bottom: 0.75rem; }
+        .mb-4 { margin-bottom: 1rem; }
+        .mb-6 { margin-bottom: 1.5rem; }
+        .mt-2 { margin-top: 0.5rem; }
+        .mt-4 { margin-top: 1rem; }
+        .mt-6 { margin-top: 1.5rem; }
+
+        /* Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        /* Loading States */
+        .loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .spinner {
+            width: 1rem;
+            height: 1rem;
+            border: 2px solid var(--gray-300);
+            border-top: 2px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="#" class="nav-brand">
+                <i class="fas fa-graduation-cap"></i>
+                MMIK Program
+            </a>
+
+            <button class="nav-toggle" id="navToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#overview" class="nav-link active">Overview</a></li>
+                <li><a href="#profiles" class="nav-link">Profil Lulusan</a></li>
+                <li><a href="#cpl" class="nav-link">Capaian Pembelajaran</a></li>
+                <li><a href="#curriculum" class="nav-link">Kurikulum</a></li>
+                <li><a href="#features" class="nav-link">Keunggulan</a></li>
+                <li><a href="#implementation" class="nav-link">Implementasi</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="overview">
+        <div class="hero-content">
+            <h1 class="hero-title">Program Studi Magister Manajemen Informasi Kesehatan</h1>
+            <p class="hero-subtitle">Membangun Pemimpin Transformasi Digital Kesehatan Indonesia</p>
+
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number">54</span>
+                    <span class="stat-label">Total SKS</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">3</span>
+                    <span class="stat-label">Semester</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">8</span>
+                    <span class="stat-label">Profil Lulusan</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">KKNI 8</span>
+                    <span class="stat-label">Level Kualifikasi</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Program Overview -->
+    <section class="section" id="program-overview">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Landasan Program</h2>
+                <p class="section-subtitle">Program studi yang dirancang berdasarkan regulasi terkini dan kebutuhan industri kesehatan digital</p>
+            </div>
+
+            <div class="features">
+                <div class="feature">
+                    <i class="fas fa-book-open feature-icon"></i>
+                    <h3 class="feature-title">Basis Regulasi</h3>
+                    <p class="feature-description">Berdasarkan UU No. 12/2012, Perpres No. 8/2012, dan Permendikbudristek No. 53/2023</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-industry feature-icon"></i>
+                    <h3 class="feature-title">Industri 4.0 Ready</h3>
+                    <p class="feature-description">Kurikulum yang disesuaikan dengan perkembangan teknologi dan kebutuhan industri terkini</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-award feature-icon"></i>
+                    <h3 class="feature-title">KKNI Level 8</h3>
+                    <p class="feature-description">Standar kualifikasi magister sesuai Kerangka Kualifikasi Nasional Indonesia</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-globe feature-icon"></i>
+                    <h3 class="feature-title">Standar Internasional</h3>
+                    <p class="feature-description">Mengadopsi best practices dan standar internasional dalam manajemen informasi kesehatan</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Graduate Profiles -->
+    <section class="section" id="profiles">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Profil Lulusan</h2>
+                <p class="section-subtitle">Delapan profil lulusan yang disesuaikan dengan kebutuhan transformasi digital kesehatan</p>
+            </div>
+
+            <div class="profile-grid">
+                <div class="profile-card">
+                    <i class="fas fa-search-plus profile-icon"></i>
+                    <h3 class="profile-title">Analis Sistem Informasi Kesehatan Senior</h3>
+                    <p class="profile-description">Mampu menganalisis, merancang, dan mengevaluasi sistem informasi kesehatan kompleks</p>
+                </div>
+
+                <div class="profile-card">
+                    <i class="fas fa-database profile-icon"></i>
+                    <h3 class="profile-title">Manajer Data Kesehatan Strategis</h3>
+                    <p class="profile-description">Memiliki keahlian mengelola dan menganalisis data kesehatan untuk pengambilan keputusan strategis</p>
+                </div>
+
+                <div class="profile-card">
+                    <i class="fas fa-microscope profile-icon"></i>
+                    <h3 class="profile-title">Peneliti Informatika Kesehatan</h3>
+                    <p class="profile-description">Mampu melakukan penelitian inovatif dan berkontribusi pada pengembangan ilmu pengetahuan</p>
+                </div>
+
+                <div class="profile-card">
+                    <i class="fas fa-digital-tachograph profile-icon"></i>
+                    <h3 class="profile-title">Konsultan Transformasi Digital Kesehatan</h3>
+                    <p class="profile-description">Memberikan konsultasi strategis untuk transformasi digital organisasi kesehatan</p>
+                </div>
+
+                <div class="profile-card">
+                    <i class="fas fa-lightbulb profile-icon"></i>
+                    <h3 class="profile-title">Pemimpin Inovasi Teknologi Kesehatan</h3>
+                    <p class="profile-description">Memimpin pengembangan dan implementasi solusi teknologi kesehatan inovatif</p>
+                </div>
+
+                <div class="profile-card">
+                    <i class="fas fa-shield-alt profile-icon"></i>
+                    <h3 class="profile-title">Direktur Keamanan Informasi Kesehatan</h3>
+                    <p class="profile-description">Merancang dan mengimplementasikan strategi keamanan siber untuk melindungi aset informasi kesehatan</p>
+                </div>
+
+                <div class="profile-card">
+                    <i class="fas fa-drafting-compass profile-icon"></i>
+                    <h3 class="profile-title">Arsitek Solusi Kesehatan Digital</h3>
+                    <p class="profile-description">Merancang dan mengembangkan arsitektur solusi teknologi kesehatan yang scalable dan interoperable</p>
+                </div>
+
+                <div class="profile-card">
+                    <i class="fas fa-tasks profile-icon"></i>
+                    <h3 class="profile-title">Manajer Program Kesehatan Digital</h3>
+                    <p class="profile-description">Mengelola implementasi dan operasi program kesehatan digital skala besar dengan fokus pencapaian outcomes</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Learning Outcomes -->
+    <section class="section" id="cpl">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Capaian Pembelajaran Lulusan (CPL)</h2>
+                <p class="section-subtitle">Berbasis KKNI Level 8 dan Permendikbudristek No. 53 Tahun 2023</p>
+            </div>
+
+            <div class="card-grid grid-2">
+                <!-- Sikap -->
+                <div class="cpl-section">
+                    <div class="cpl-header">
+                        <h3 class="cpl-title">
+                            <i class="fas fa-heart"></i>
+                            SIKAP
+                        </h3>
+                        <p class="text-center">Nilai-nilai dan etika profesional</p>
+                    </div>
+                    <div class="cpl-body">
+                        <div class="cpl-items">
+                            <div class="cpl-item">
+                                <span class="cpl-code">S1</span>
+                                <p class="cpl-text">Bertakwa kepada Tuhan Yang Maha Esa dan mampu menunjukkan sikap religius dalam menjalankan profesi di bidang manajemen informasi kesehatan</p>
+                            </div>
+                            <div class="cpl-item">
+                                <span class="cpl-code">S2</span>
+                                <p class="cpl-text">Menjunjung tinggi nilai kemanusiaan dan etika profesional dalam mengelola informasi kesehatan dengan mempertimbangkan aspek kerahasiaan dan privasi pasien</p>
+                            </div>
+                            <div class="cpl-item">
+                                <span class="cpl-code">S3</span>
+                                <p class="cpl-text">Berperan sebagai warga negara yang bangga dan cinta tanah air dengan berkontribusi pada peningkatan kualitas sistem kesehatan nasional</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pengetahuan -->
+                <div class="cpl-section">
+                    <div class="cpl-header" style="background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);">
+                        <h3 class="cpl-title">
+                            <i class="fas fa-brain"></i>
+                            PENGETAHUAN
+                        </h3>
+                        <p class="text-center">Penguasaan bidang ilmu</p>
+                    </div>
+                    <div class="cpl-body">
+                        <div class="cpl-items">
+                            <div class="cpl-item" style="border-left-color: var(--primary-color);">
+                                <span class="cpl-code" style="background: var(--primary-color);">P1</span>
+                                <p class="cpl-text">Menguasai teori dan konsep lanjutan manajemen informasi kesehatan, termasuk arsitektur sistem, interoperabilitas, dan standar internasional</p>
+                            </div>
+                            <div class="cpl-item" style="border-left-color: var(--primary-color);">
+                                <span class="cpl-code" style="background: var(--primary-color);">P2</span>
+                                <p class="cpl-text">Menguasai metodologi penelitian kuantitatif dan kualitatif yang relevan untuk pengembangan ilmu pengetahuan di bidang informatika kesehatan</p>
+                            </div>
+                            <div class="cpl-item" style="border-left-color: var(--primary-color);">
+                                <span class="cpl-code" style="background: var(--primary-color);">P3</span>
+                                <p class="cpl-text">Menguasai konsep dan aplikasi analitik data kesehatan tingkat lanjutan, termasuk kecerdasan buatan dan pembelajaran mesin untuk prediksi dan optimasi pelayanan kesehatan</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Keterampilan Umum -->
+                <div class="cpl-section">
+                    <div class="cpl-header" style="background: linear-gradient(135deg, var(--warning-color) 0%, #d97706 100%);">
+                        <h3 class="cpl-title">
+                            <i class="fas fa-cogs"></i>
+                            KETERAMPILAN UMUM
+                        </h3>
+                        <p class="text-center">Kemampuan kerja umum</p>
+                    </div>
+                    <div class="cpl-body">
+                        <div class="cpl-items">
+                            <div class="cpl-item" style="border-left-color: var(--warning-color);">
+                                <span class="cpl-code" style="background: var(--warning-color);">KU1</span>
+                                <p class="cpl-text">Mampu mengembangkan pemikiran logis, kritis, sistematis, dan kreatif melalui penelitian ilmiah, penciptaan desain atau karya seni</p>
+                            </div>
+                            <div class="cpl-item" style="border-left-color: var(--warning-color);">
+                                <span class="cpl-code" style="background: var(--warning-color);">KU2</span>
+                                <p class="cpl-text">Mampu melakukan validasi akademik atau kajian sesuai bidang keahliannya dalam menyelesaikan masalah di masyarakat atau industri</p>
+                            </div>
+                            <div class="cpl-item" style="border-left-color: var(--warning-color);">
+                                <span class="cpl-code" style="background: var(--warning-color);">KU3</span>
+                                <p class="cpl-text">Mampu menyusun ide, hasil pemikiran, dan argumen saintifik secara bertanggung jawab dan berdasarkan etika akademik</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Keterampilan Khusus -->
+                <div class="cpl-section">
+                    <div class="cpl-header" style="background: linear-gradient(135deg, var(--error-color) 0%, #dc2626 100%);">
+                        <h3 class="cpl-title">
+                            <i class="fas fa-star"></i>
+                            KETERAMPILAN KHUSUS
+                        </h3>
+                        <p class="text-center">Kemampuan kerja spesifik</p>
+                    </div>
+                    <div class="cpl-body">
+                        <div class="cpl-items">
+                            <div class="cpl-item" style="border-left-color: var(--error-color);">
+                                <span class="cpl-code" style="background: var(--error-color);">KK1</span>
+                                <p class="cpl-text">Mampu merancang, mengimplementasikan, dan mengevaluasi sistem informasi kesehatan terintegrasi yang memenuhi standar nasional dan internasional</p>
+                            </div>
+                            <div class="cpl-item" style="border-left-color: var(--error-color);">
+                                <span class="cpl-code" style="background: var(--error-color);">KK2</span>
+                                <p class="cpl-text">Mampu melakukan analisis data kesehatan kompleks menggunakan metode statistik lanjutan, pembelajaran mesin, dan kecerdasan buatan</p>
+                            </div>
+                            <div class="cpl-item" style="border-left-color: var(--error-color);">
+                                <span class="cpl-code" style="background: var(--error-color);">KK3</span>
+                                <p class="cpl-text">Mampu mengembangkan dan mengimplementasikan strategi keamanan siber yang komprehensif untuk melindungi data dan sistem informasi kesehatan</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Curriculum Structure -->
+    <section class="section" id="curriculum">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Struktur Kurikulum</h2>
+                <p class="section-subtitle">Distribusi mata kuliah berdasarkan semester dan bobot SKS</p>
+            </div>
+
+            <!-- Semester Overview -->
+            <div class="card mb-6">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-chart-pie"></i>
+                        Distribusi SKS Berdasarkan Komponen
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="course-table">
+                        <div class="table-responsive">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Komponen</th>
+                                        <th>SKS</th>
+                                        <th>Persentase</th>
+                                        <th>Keterangan</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Mata Kuliah Inti</strong></td>
+                                        <td><span class="sks-badge">30</span></td>
+                                        <td>55,6%</td>
+                                        <td>Fondasi dan spesialisasi inti</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Mata Kuliah Pilihan</strong></td>
+                                        <td><span class="sks-badge">12</span></td>
+                                        <td>22,2%</td>
+                                        <td>Spesialisasi sesuai minat</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Penelitian & Metodologi</strong></td>
+                                        <td><span class="sks-badge">8</span></td>
+                                        <td>14,8%</td>
+                                        <td>Metodologi, proposal, tesis</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Mata Kuliah Penunjang</strong></td>
+                                        <td><span class="sks-badge">4</span></td>
+                                        <td>7,4%</td>
+                                        <td>Kepemimpinan, etika, keterampilan penunjang</td>
+                                    </tr>
+                                    <tr style="background-color: var(--gray-100); font-weight: 600;">
+                                        <td><strong>TOTAL</strong></td>
+                                        <td><span class="sks-badge" style="background: var(--accent-color);">54</span></td>
+                                        <td><strong>100%</strong></td>
+                                        <td>Sesuai standar minimum</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Semester Timeline -->
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Semester 1 - FONDASI (18 SKS)</h3>
+                        <div class="timeline-description">
+                            <p class="mb-3"><strong>Fokus:</strong> Membangun fondasi pengetahuan manajemen informasi kesehatan</p>
+                            <div class="course-table">
+                                <div class="table-responsive">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Kode</th>
+                                                <th>Mata Kuliah</th>
+                                                <th>SKS</th>
+                                                <th>Jenis</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><span class="course-code">MMIK6101</span></td>
+                                                <td>Sistem Informasi Kesehatan Terintegrasi</td>
+                                                <td><span class="sks-badge">3</span></td>
+                                                <td><span class="course-type type-inti">Inti</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="course-code">MMIK6102</span></td>
+                                                <td>Analisis Data Kesehatan dan Data Besar</td>
+                                                <td><span class="sks-badge">3</span></td>
+                                                <td><span class="course-type type-inti">Inti</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="course-code">MMIK6103</span></td>
+                                                <td>Metodologi Penelitian Informatika Kesehatan</td>
+                                                <td><span class="sks-badge">3</span></td>
+                                                <td><span class="course-type type-metodologi">Metodologi</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="course-code">MMIK6104</span></td>
+                                                <td>Manajemen Strategis Organisasi Kesehatan</td>
+                                                <td><span class="sks-badge">3</span></td>
+                                                <td><span class="course-type type-inti">Inti</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="course-code">MMIK6105</span></td>
+                                                <td>Etika dan Hukum Informasi Kesehatan</td>
+                                                <td><span class="sks-badge">2</span></td>
+                                                <td><span class="course-type type-penunjang">Penunjang</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="course-code">MMIK6106</span></td>
+                                                <td>Inovasi Kesehatan Digital dan Teknologi Terkini</td>
+                                                <td><span class="sks-badge">3</span></td>
+                                                <td><span class="course-type type-inti">Inti</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="course-code">MMIK6107</span></td>
+                                                <td>Praktikum Analitik dan Visualisasi Data Kesehatan</td>
+                                                <td><span class="sks-badge">1</span></td>
+                                                <td><span class="course-type type-inti">Inti</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Semester 2 - SPESIALISASI (18 SKS)</h3>
+                        <div class="timeline-description">
+                            <p class="mb-3"><strong>Fokus:</strong> Pengembangan keahlian spesialisasi dan penelitian</p>
+                            <div class="course-table">
+                                <div class="table-responsive">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Kode</th>
+                                                <th>Mata Kuliah</th>
+                                                <th>SKS</th>
+                                                <th>Jenis</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><span class="course-code">MMIK6201</span></td>
+                                                <td>Keamanan Informasi Kesehatan</td>
+                                                <td><span class="sks-badge">3</span></td>
+                                                <td><span class="course-type type-inti">Inti</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="course-code">MMIK6202</span></td>
+                                                <td>Kebijakan dan Regulasi Informasi Kesehatan</td>
+                                                <td><span class="sks-badge">3</span></td>
+                                                <td><span class="course-type type-inti">Inti</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="course-code">MMIK6203</span></td>
+                                                <td>Kecerdasan Buatan dan Pembelajaran Mesin dalam Kesehatan</td>
+                                                <td><span class="sks-badge">3</span></td>
+                                                <td><span class="course-type type-inti">Inti</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="course-code">MMIK6204</span></td>
+                                                <td>Manajemen Proyek Lanjutan untuk Teknologi Kesehatan</td>
+                                                <td><span class="sks-badge">3</span></td>
+                                                <td><span class="course-type type-inti">Inti</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="course-code">MMIK6205</span></td>
+                                                <td>Mata Kuliah Pilihan I</td>
+                                                <td><span class="sks-badge">3</span></td>
+                                                <td><span class="course-type type-pilihan">Pilihan</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="course-code">MMIK6206</span></td>
+                                                <td>Seminar Proposal Tesis</td>
+                                                <td><span class="sks-badge">3</span></td>
+                                                <td><span class="course-type type-metodologi">Metodologi</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Semester 3 - SPESIALISASI LANJUTAN & TESIS (18 SKS)</h3>
+                        <div class="timeline-description">
+                            <p class="mb-3"><strong>Fokus:</strong> Pendalaman spesialisasi, kepemimpinan, dan penyelesaian tesis</p>
+                            <div class="course-table">
+                                <div class="table-responsive">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Kode</th>
+                                                <th>Mata Kuliah</th>
+                                                <th>SKS</th>
+                                                <th>Jenis</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><span class="course-code">MMIK6301</span></td>
+                                                <td>Transformasi Digital dalam Layanan Kesehatan</td>
+                                                <td><span class="sks-badge">3</span></td>
+                                                <td><span class="course-type type-inti">Inti</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="course-code">MMIK6302</span></td>
+                                                <td>Kepemimpinan dalam Manajemen Informasi Kesehatan</td>
+                                                <td><span class="sks-badge">2</span></td>
+                                                <td><span class="course-type type-penunjang">Penunjang</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="course-code">MMIK6303</span></td>
+                                                <td>Mata Kuliah Pilihan II</td>
+                                                <td><span class="sks-badge">3</span></td>
+                                                <td><span class="course-type type-pilihan">Pilihan</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="course-code">MMIK6304</span></td>
+                                                <td>Mata Kuliah Pilihan III</td>
+                                                <td><span class="sks-badge">3</span></td>
+                                                <td><span class="course-type type-pilihan">Pilihan</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="course-code">MMIK6305</span></td>
+                                                <td>Mata Kuliah Pilihan IV</td>
+                                                <td><span class="sks-badge">3</span></td>
+                                                <td><span class="course-type type-pilihan">Pilihan</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="course-code">MMIK6306</span></td>
+                                                <td>Tesis</td>
+                                                <td><span class="sks-badge">4</span></td>
+                                                <td><span class="course-type type-metodologi">Metodologi</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Elective Courses -->
+            <div class="accordion">
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>
+                            <i class="fas fa-laptop-code"></i>
+                            Kelompok A: Teknologi Terkini
+                        </span>
+                        <i class="fas fa-chevron-down accordion-icon"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="course-table">
+                            <div class="table-responsive">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Kode</th>
+                                            <th>Mata Kuliah</th>
+                                            <th>SKS</th>
+                                            <th>Deskripsi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><span class="course-code">MMIK6401</span></td>
+                                            <td>Realitas Maya dan Realitas Tertambah dalam Kesehatan</td>
+                                            <td><span class="sks-badge">3</span></td>
+                                            <td>Aplikasi VR/AR untuk simulasi medis, pelatihan, rehabilitasi</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="course-code">MMIK6402</span></td>
+                                            <td>Rumah Sakit Cerdas dan Sistem IoT Kesehatan</td>
+                                            <td><span class="sks-badge">3</span></td>
+                                            <td>Implementasi IoT untuk monitoring dan otomasi rumah sakit</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="course-code">MMIK6403</span></td>
+                                            <td>Rantai Blok untuk Keamanan Data Kesehatan</td>
+                                            <td><span class="sks-badge">3</span></td>
+                                            <td>Teknologi blockchain untuk integritas dan keamanan data</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="course-code">MMIK6404</span></td>
+                                            <td>Komputasi Awan dan Edge Computing untuk Kesehatan</td>
+                                            <td><span class="sks-badge">3</span></td>
+                                            <td>Infrastruktur cloud dan edge untuk sistem kesehatan</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>
+                            <i class="fas fa-robot"></i>
+                            Kelompok B: Analitik dan Kecerdasan Buatan
+                        </span>
+                        <i class="fas fa-chevron-down accordion-icon"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="course-table">
+                            <div class="table-responsive">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Kode</th>
+                                            <th>Mata Kuliah</th>
+                                            <th>SKS</th>
+                                            <th>Deskripsi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><span class="course-code">MMIK6501</span></td>
+                                            <td>Kedokteran Presisi dan Informatika Genomik</td>
+                                            <td><span class="sks-badge">3</span></td>
+                                            <td>Analisis data genomik untuk kedokteran personal</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="course-code">MMIK6502</span></td>
+                                            <td>Pengolahan Citra Medis dan Computer Vision</td>
+                                            <td><span class="sks-badge">3</span></td>
+                                            <td>AI untuk analisis citra radiologi dan patologi</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="course-code">MMIK6503</span></td>
+                                            <td>Pemrosesan Bahasa Alami untuk Data Kesehatan</td>
+                                            <td><span class="sks-badge">3</span></td>
+                                            <td>NLP untuk ekstraksi informasi dari rekam medis</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="course-code">MMIK6504</span></td>
+                                            <td>Sistem Pendukung Keputusan Klinis Berbasis AI</td>
+                                            <td><span class="sks-badge">3</span></td>
+                                            <td>Pengembangan CDSS menggunakan machine learning</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>
+                            <i class="fas fa-balance-scale"></i>
+                            Kelompok C: Manajemen dan Kebijakan
+                        </span>
+                        <i class="fas fa-chevron-down accordion-icon"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="course-table">
+                            <div class="table-responsive">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Kode</th>
+                                            <th>Mata Kuliah</th>
+                                            <th>SKS</th>
+                                            <th>Deskripsi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><span class="course-code">MMIK6601</span></td>
+                                            <td>Ekonomi Kesehatan dan Analitik Nilai</td>
+                                            <td><span class="sks-badge">3</span></td>
+                                            <td>Analisis ekonomi dan value-based healthcare</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="course-code">MMIK6602</span></td>
+                                            <td>Manajemen Kualitas dan Keselamatan Pasien Digital</td>
+                                            <td><span class="sks-badge">3</span></td>
+                                            <td>Sistem digital untuk quality improvement dan patient safety</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="course-code">MMIK6603</span></td>
+                                            <td>Informatika Kesehatan Global dan Lintas Batas</td>
+                                            <td><span class="sks-badge">3</span></td>
+                                            <td>Standar internasional dan pertukaran data global</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="course-code">MMIK6604</span></td>
+                                            <td>Kesehatan Mental Digital dan Informatika Perilaku</td>
+                                            <td><span class="sks-badge">3</span></td>
+                                            <td>Digital therapeutics dan behavioral analytics</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features & Advantages -->
+    <section class="section" id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Keunggulan Program</h2>
+                <p class="section-subtitle">Faktor-faktor yang menjadikan program ini unggul dan relevan dengan kebutuhan industri</p>
+            </div>
+
+            <div class="features">
+                <div class="feature">
+                    <i class="fas fa-certificate feature-icon"></i>
+                    <h3 class="feature-title">Kurikulum Berbasis KKNI Level 8</h3>
+                    <p class="feature-description">Sesuai dengan kebutuhan industri kesehatan di era transformasi digital</p>
+                </div>
+
+                <div class="feature">
+                    <i class="fas fa-puzzle-piece feature-icon"></i>
+                    <h3 class="feature-title">Pendekatan Interdisipliner</h3>
+                    <p class="feature-description">Mengintegrasikan bidang kesehatan, teknologi informasi, dan manajemen</p>
+                </div>
+
+                <div class="feature">
+                    <i class="fas fa-flask feature-icon"></i>
+                    <h3 class="feature-title">Fokus pada Penelitian dan Inovasi</h3>
+                    <p class="feature-description">Pengembangan solusi masalah informasi kesehatan di Indonesia</p>
+                </div>
+
+                <div class="feature">
+                    <i class="fas fa-project-diagram feature-icon"></i>
+                    <h3 class="feature-title">Pembelajaran Berbasis Proyek</h3>
+                    <p class="feature-description">Pengalaman nyata dalam mengelola proyek teknologi informasi kesehatan</p>
+                </div>
+
+                <div class="feature">
+                    <i class="fas fa-handshake feature-icon"></i>
+                    <h3 class="feature-title">Kolaborasi dengan Industri</h3>
+                    <p class="feature-description">Menjembatani teori dan praktik melalui kemitraan dengan fasilitas kesehatan</p>
+                </div>
+
+                <div class="feature">
+                    <i class="fas fa-chart-line feature-icon"></i>
+                    <h3 class="feature-title">Kemampuan Analisis Data Kesehatan</h3>
+                    <p class="feature-description">Penguasaan big data, kecerdasan buatan, dan pembelajaran mesin yang kuat</p>
+                </div>
+
+                <div class="feature">
+                    <i class="fas fa-lightbulb feature-icon"></i>
+                    <h3 class="feature-title">Pengembangan Jiwa Entrepreneurship</h3>
+                    <p class="feature-description">Menciptakan solusi inovatif dalam bidang kesehatan digital</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Implementation Roadmap -->
+    <section class="section" id="implementation">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Panduan Implementasi untuk Penyelenggara</h2>
+                <p class="section-subtitle">Langkah-langkah strategis untuk memulai program studi</p>
+            </div>
+
+            <div class="card-grid grid-2">
+                <!-- Prerequisites -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fas fa-checklist"></i>
+                            Prasyarat Penyelenggaraan
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="cpl-items">
+                            <div class="cpl-item">
+                                <span class="cpl-code">01</span>
+                                <p class="cpl-text">Izin penyelenggaraan program studi dari Kemendikbudristek</p>
+                            </div>
+                            <div class="cpl-item">
+                                <span class="cpl-code">02</span>
+                                <p class="cpl-text">Dosen dengan kualifikasi minimal S3 di bidang terkait (min. 5 orang)</p>
+                            </div>
+                            <div class="cpl-item">
+                                <span class="cpl-code">03</span>
+                                <p class="cpl-text">Fasilitas laboratorium komputer dan jaringan yang memadai</p>
+                            </div>
+                            <div class="cpl-item">
+                                <span class="cpl-code">04</span>
+                                <p class="cpl-text">Kerjasama dengan rumah sakit atau fasilitas kesehatan</p>
+                            </div>
+                            <div class="cpl-item">
+                                <span class="cpl-code">05</span>
+                                <p class="cpl-text">Akses ke database dan software analisis data kesehatan</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Implementation Steps -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fas fa-route"></i>
+                            Tahapan Implementasi
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-marker"></div>
+                                <div class="timeline-content">
+                                    <h4 class="timeline-title">Fase Persiapan (6-12 bulan)</h4>
+                                    <p class="timeline-description">Penyusunan proposal, rekrutmen dosen, pengembangan kurikulum detail</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-marker"></div>
+                                <div class="timeline-content">
+                                    <h4 class="timeline-title">Fase Perizinan (6-9 bulan)</h4>
+                                    <p class="timeline-description">Pengajuan izin, visitasi, pemenuhan standar akreditasi</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-marker"></div>
+                                <div class="timeline-content">
+                                    <h4 class="timeline-title">Fase Soft Opening (1 tahun)</h4>
+                                    <p class="timeline-description">Rekrutmen mahasiswa angkatan pertama, evaluasi implementasi</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-marker"></div>
+                                <div class="timeline-content">
+                                    <h4 class="timeline-title">Fase Pengembangan (2-3 tahun)</h4>
+                                    <p class="timeline-description">Pengembangan program, akreditasi, peningkatan kualitas</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Success Metrics -->
+            <div class="card mt-6">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-chart-bar"></i>
+                        Indikator Keberhasilan Program
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="course-table">
+                        <div class="table-responsive">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Aspek</th>
+                                        <th>Indikator</th>
+                                        <th>Target Tahun 1</th>
+                                        <th>Target Tahun 3</th>
+                                        <th>Target Tahun 5</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Akreditasi</strong></td>
+                                        <td>Peringkat akreditasi BAN-PT</td>
+                                        <td>C (Baik)</td>
+                                        <td>B (Baik Sekali)</td>
+                                        <td>A (Unggul)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Mahasiswa</strong></td>
+                                        <td>Jumlah mahasiswa aktif</td>
+                                        <td>15-20 orang</td>
+                                        <td>45-60 orang</td>
+                                        <td>60-75 orang</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Lulusan</strong></td>
+                                        <td>Masa tunggu kerja</td>
+                                        <td>-</td>
+                                        <td>< 6 bulan</td>
+                                        <td>< 3 bulan</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Penelitian</strong></td>
+                                        <td>Publikasi ilmiah per tahun</td>
+                                        <td>3-5 publikasi</td>
+                                        <td>10-15 publikasi</td>
+                                        <td>20-25 publikasi</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Kemitraan</strong></td>
+                                        <td>Jumlah mitra industri</td>
+                                        <td>3-5 mitra</td>
+                                        <td>8-10 mitra</td>
+                                        <td>15-20 mitra</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <h3 class="footer-title">Program Studi Magister Manajemen Informasi Kesehatan</h3>
+            <p class="footer-text">
+                Membangun masa depan kesehatan digital Indonesia melalui pendidikan berkualitas tinggi,
+                penelitian inovatif, dan kolaborasi industri yang berkelanjutan.
+            </p>
+
+            <div class="footer-links">
+                <a href="#overview" class="footer-link">Overview</a>
+                <a href="#profiles" class="footer-link">Profil Lulusan</a>
+                <a href="#cpl" class="footer-link">Capaian Pembelajaran</a>
+                <a href="#curriculum" class="footer-link">Kurikulum</a>
+                <a href="#features" class="footer-link">Keunggulan</a>
+                <a href="#implementation" class="footer-link">Implementasi</a>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 Program Studi Magister Manajemen Informasi Kesehatan. Dikembangkan berdasarkan Permendikbudristek No. 53 Tahun 2023.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation toggle for mobile
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+
+                    // Close mobile menu if open
+                    navMenu.classList.remove('active');
+
+                    // Update active nav link
+                    document.querySelectorAll('.nav-link').forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                }
+            });
+        });
+
+        // Accordion functionality
+        function toggleAccordion(button) {
+            const content = button.nextElementSibling;
+            const isActive = button.classList.contains('active');
+
+            // Close all accordions
+            document.querySelectorAll('.accordion-header').forEach(header => {
+                header.classList.remove('active');
+                header.nextElementSibling.classList.remove('active');
+            });
+
+            // Open clicked accordion if it wasn't active
+            if (!isActive) {
+                button.classList.add('active');
+                content.classList.add('active');
+            }
+        }
+
+        // Scroll spy for navigation
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const scrollPos = window.scrollY + 100;
+
+            sections.forEach(section => {
+                const top = section.offsetTop;
+                const height = section.offsetHeight;
+                const id = section.getAttribute('id');
+
+                if (scrollPos >= top && scrollPos < top + height) {
+                    document.querySelectorAll('.nav-link').forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${id}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        });
+
+        // Add animation classes on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in-up');
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.querySelectorAll('.feature, .profile-card, .cpl-section, .timeline-item').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Enhanced mobile experience
+        let touchStartY = 0;
+        let touchEndY = 0;
+
+        document.addEventListener('touchstart', e => {
+            touchStartY = e.changedTouches[0].screenY;
+        });
+
+        document.addEventListener('touchend', e => {
+            touchEndY = e.changedTouches[0].screenY;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartY - touchEndY;
+
+            if (Math.abs(diff) > swipeThreshold) {
+                // Optional: Add swipe navigation between sections
+                console.log(diff > 0 ? 'Swipe up' : 'Swipe down');
+            }
+        }
+
+        // Print functionality for curriculum details
+        function printCurriculum() {
+            window.print();
+        }
+
+        // Add print styles
+        const printStyles = document.createElement('style');
+        printStyles.textContent = `
+            @media print {
+                .nav, .footer { display: none; }
+                .section { page-break-inside: avoid; }
+                .card { border: 1px solid #000; margin-bottom: 1rem; }
+                .hero { background: #f5f5f5 !important; color: #000 !important; }
+            }
+        `;
+        document.head.appendChild(printStyles);
+    </script>
+</body>
+</html>

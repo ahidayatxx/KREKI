@@ -1,0 +1,1139 @@
+{
+  "ideal_customer_profile": {
+    "profile_metadata": {
+      "consultant_name": "Dr. Ahmad Hidayat, MSc, MBA",
+      "specialization": "Digital Health Governance & Clinical Research Expert",
+      "geographic_focus": "Indonesia (primary), Southeast Asia (secondary)",
+      "last_updated": "2025-01-08",
+      "version": "1.0"
+    },
+
+    "primary_icp_segments": [
+      {
+        "segment_id": "ICP-01",
+        "segment_name": "Government Digital Health Transformation Leaders",
+        "priority_tier": "tier_1_flagship",
+        "
+_fit_score": 95,
+
+        "firmographic_profile": {
+          "organization_type": [
+            "Ministry of Health (national/provincial)",
+            "National health agencies (BPJS Kesehatan, BGSI)",
+            "District/municipal health offices",
+            "Regulatory authorities for healthcare"
+          ],
+          "organization_size": "500+ employees",
+          "budget_range": "$100K - $2M+ (project-based or multi-year programs)",
+          "geographic_location": "Indonesia (Jakarta, provincial capitals)",
+          "reporting_structure": "Government hierarchy with ministerial oversight",
+          "procurement_process": "Formal tender, direct appointment, or technical assistance programs"
+        },
+
+        "demographic_profile": {
+          "decision_maker_titles": [
+            "Director General of Health Services",
+            "Director of Health Information Systems",
+            "Head of Digital Health Transformation Division",
+            "Secretary General of Ministry of Health",
+            "Head of Provincial Health Office",
+            "Chief of Health Data Governance Unit"
+          ],
+          "influencer_titles": [
+            "Technical advisors to ministers",
+            "Working group coordinators",
+            "Project directors for digital health initiatives",
+            "IT/health informatics managers"
+          ],
+          "decision_making_unit": "Committee-based with ministerial approval (3-8 stakeholders)",
+          "typical_education": "Medical degree, public health master's, health administration",
+          "professional_background": "Clinical practice + health administration, or pure health policy"
+        },
+
+        "psychographic_profile": {
+          "primary_pain_points": [
+            "Fragmented health information systems across facilities and regions",
+            "Lack of interoperability standards implementation expertise",
+            "Political pressure to demonstrate digital health progress",
+            "Stakeholder resistance to change from traditional systems",
+            "Limited internal capacity for evidence-based policy development",
+            "International donor/development partner coordination complexity",
+            "Need to balance innovation with regulatory prudence"
+          ],
+          "primary_goals": [
+            "Successful nationwide SATUSEHAT implementation and adoption",
+            "Development of sustainable digital health governance frameworks",
+            "Stakeholder consensus on regulatory standards and policies",
+            "Demonstration of measurable health system improvements",
+            "International recognition for digital health leadership",
+            "Legacy achievement in health system transformation"
+          ],
+          "values_and_motivations": [
+            "Public service commitment and national health improvement",
+            "Evidence-based policy making",
+            "Collaborative multi-stakeholder approaches",
+            "Alignment with international best practices",
+            "Risk mitigation and compliance assurance",
+            "Long-term sustainable solutions over quick wins"
+          ],
+          "information_sources": [
+            "Ministry working group discussions",
+            "International WHO/ITU/development partner reports",
+            "Peer government digital health initiatives",
+            "Academic research and white papers",
+            "Consulting firm proposals and recommendations"
+          ]
+        },
+
+        "behavioral_profile": {
+          "buying_triggers": [
+            "New ministerial mandate or presidential directive",
+            "International development funding availability",
+            "SATUSEHAT expansion to new regions or use cases",
+            "Regulatory sandbox evaluation cycles",
+            "Performance pressure from oversight bodies",
+            "National health crisis requiring rapid system upgrade"
+          ],
+          "decision_timeline": "6-18 months (policy cycles, budget approval, procurement)",
+          "buying_process_stages": [
+            "Internal needs assessment and stakeholder consultation",
+            "Budget allocation and approval",
+            "Terms of reference development",
+            "Vendor/consultant shortlisting",
+            "Proposal evaluation and selection",
+            "Contract negotiation and approval",
+            "Implementation and monitoring"
+          ],
+          "decision_criteria": [
+            {
+              "criterion": "Policy alignment and regulatory credibility",
+              "weight": "35%",
+              "evaluation": "Track record in government advisory, understanding of bureaucratic processes"
+            },
+            {
+              "criterion": "Stakeholder management capability",
+              "weight": "25%",
+              "evaluation": "Demonstrated consensus-building across government, providers, industry"
+            },
+            {
+              "criterion": "International standards expertise",
+              "weight": "20%",
+              "evaluation": "Knowledge of WHO, HL7 FHIR, global digital health frameworks"
+            },
+            {
+              "criterion": "Implementation pragmatism",
+              "weight": "15%",
+              "evaluation": "Understanding of Indonesia's healthcare system constraints and cultural context"
+            },
+            {
+              "criterion": "Value for budget",
+              "weight": "5%",
+              "evaluation": "Competitive pricing within government procurement norms"
+            }
+          ],
+          "objections_and_concerns": [
+            "Potential conflict of interest with private sector consulting",
+            "Availability and time commitment given multiple engagements",
+            "Knowledge transfer and local capacity building commitment",
+            "Alignment with political priorities of current administration"
+          ]
+        },
+
+        "engagement_preferences": {
+          "preferred_communication_channels": [
+            "Formal proposals and presentations to committees",
+            "One-on-one ministerial/director briefings",
+            "Working group participation and facilitation",
+            "White papers and policy briefs",
+            "Official government email and correspondence"
+          ],
+          "meeting_cadence": "Monthly steering committee + bi-weekly technical meetings",
+          "reporting_expectations": "Formal progress reports, deliverable documentation, presentation slides",
+          "relationship_building": "Long-term trusted advisor relationship over transactional engagement"
+        },
+
+        "value_proposition_messaging": {
+          "primary_message": "Navigate Indonesia's digital health transformation with confidence through evidence-based governance frameworks, multi-stakeholder consensus building, and alignment with international standards—delivered by the trusted insider who chairs SATUSEHAT's Technical Working Group and shapes the nation's digital health regulatory landscape.",
+          "key_differentiators_to_emphasize": [
+            "Dual role as policy architect and implementation advisor",
+            "30+ years relationship capital across government ecosystem",
+            "International credibility through Australia Awards Fellowship",
+            "Proven track record in SATUSEHAT and regulatory sandbox development"
+          ],
+          "proof_points_to_highlight": [
+            "Chairman of SATUSEHAT TWG - direct policy influence",
+            "Expert Panel Member for MOH Regulatory Sandbox",
+            "BGSI genomic data governance framework architect",
+            "Monash University Australia Awards Fellow on digital health governance"
+          ]
+        },
+
+        "typical_project_scope": {
+          "engagement_types": [
+            "Strategic advisory for national digital health roadmap",
+            "SATUSEHAT implementation frameworks and rollout support",
+            "Regulatory sandbox policy development and evaluation",
+            "Stakeholder consensus building facilitation",
+            "Data governance and privacy framework design",
+            "Capacity building for government health IT teams"
+          ],
+          "contract_value_range": "$150K - $1.5M",
+          "duration": "12-36 months (retained or multi-phase)",
+          "success_metrics": [
+            "Policy adoption by ministerial decree",
+            "Stakeholder consensus achievement (measured by endorsements)",
+            "SATUSEHAT adoption rates across target facilities",
+            "Regulatory sandbox approval throughput",
+            "International recognition (WHO, development partners)",
+            "Local team capability enhancement"
+          ]
+        },
+
+        "disqualification_criteria": {
+          "red_flags": [
+            "Purely vendor-driven agenda without policy alignment",
+            "Unrealistic timelines ignoring bureaucratic processes",
+            "Inadequate budget for comprehensive governance work",
+            "Lack of ministerial/director-level sponsorship",
+            "Conflicting political agendas within decision-making unit",
+            "Expectation of guaranteed regulatory outcomes"
+          ]
+        }
+      },
+
+      {
+        "segment_id": "ICP-02",
+        "segment_name": "Digital Health Innovation Companies (Healthtech/MedTech)",
+        "priority_tier": "tier_1_strategic",
+        "ideal_fit_score": 88,
+
+        "firmographic_profile": {
+          "organization_type": [
+            "Digital therapeutics platforms",
+            "Telemedicine/telehealth providers",
+            "Health information system vendors",
+            "Medical device manufacturers with digital components",
+            "Genomics and precision medicine companies",
+            "AI/ML health analytics companies"
+          ],
+          "organization_size": "20-500 employees (growth-stage startups to mid-market)",
+          "revenue_range": "$2M - $50M ARR",
+          "funding_stage": "Series A through pre-IPO",
+          "geographic_location": "Indonesia-based or international entering Indonesian market",
+          "growth_trajectory": "High-growth (30%+ YoY) with expansion plans",
+          "technology_maturity": "MVP deployed with early clinical validation or market traction"
+        },
+
+        "demographic_profile": {
+          "decision_maker_titles": [
+            "CEO/Co-Founder",
+            "Chief Regulatory Affairs Officer",
+            "VP of Market Access & Government Relations",
+            "Chief Medical Officer",
+            "Head of Indonesia/Southeast Asia Operations"
+          ],
+          "influencer_titles": [
+            "VP of Product",
+            "Head of Clinical Affairs",
+            "Regulatory Affairs Manager",
+            "Board members with healthcare background"
+          ],
+          "decision_making_unit": "C-suite + investors (2-5 stakeholders)",
+          "typical_education": "MD, PhD, MBA, engineering degrees",
+          "professional_background": "Mix of clinical, tech entrepreneurship, pharma/MedTech regulatory affairs"
+        },
+
+        "psychographic_profile": {
+          "primary_pain_points": [
+            "Navigating Indonesia's evolving digital health regulatory landscape",
+            "Uncertainty about SATUSEHAT integration requirements and timeline",
+            "Regulatory sandbox application strategy and success probability",
+            "Lack of insider knowledge on MOH decision-making processes",
+            "Evidence generation requirements for regulatory approval unclear",
+            "Competitive disadvantage vs. established players with government relationships",
+            "International investors demanding regulatory clarity and market access timelines"
+          ],
+          "primary_goals": [
+            "Achieve regulatory approval and market authorization swiftly",
+            "Successful SATUSEHAT integration to unlock hospital contracts",
+            "Build credibility with Indonesian healthcare stakeholders",
+            "De-risk market entry investment through expert guidance",
+            "Accelerate product-market fit in Indonesian healthcare context",
+            "Demonstrate regulatory pathway to investors for next funding round"
+          ],
+          "values_and_motivations": [
+            "Healthcare impact at scale",
+            "First-mover advantage in emerging digital health market",
+            "Evidence-based innovation",
+            "Sustainable business model aligned with government priorities",
+            "Patient outcomes improvement measurability",
+            "Exit potential (acquisition or IPO)"
+          ],
+          "information_sources": [
+            "Venture capital firms and accelerator networks",
+            "Industry conferences (HIMSS, digital health summits)",
+            "Regulatory consultants and law firms",
+            "Peer founder networks and startup communities",
+            "International digital health publications and reports"
+          ]
+        },
+
+        "behavioral_profile": {
+          "buying_triggers": [
+            "Investor requirement for regulatory pathway before next funding round",
+            "Product development milestone requiring regulatory clarity",
+            "Competitor gaining regulatory approval or market access",
+            "SATUSEHAT integration deadline approaching",
+            "Failed regulatory submission requiring expert intervention",
+            "Major hospital RFP requiring compliance certification"
+          ],
+          "decision_timeline": "1-6 months (startup urgency vs. budget constraints)",
+          "buying_process_stages": [
+            "Initial consultation to assess regulatory pathway",
+            "Proposal review and reference checking",
+            "Stakeholder alignment (founders, investors, board)",
+            "Contract negotiation (often with equity/success fee discussion)",
+            "Rapid onboarding and sprint-based engagement"
+          ],
+          "decision_criteria": [
+            {
+              "criterion": "Regulatory insider access and influence",
+              "weight": "40%",
+              "evaluation": "Direct relationship with MOH decision-makers, SATUSEHAT TWG, sandbox evaluators"
+            },
+            {
+              "criterion": "Track record of successful approvals",
+              "weight": "25%",
+              "evaluation": "Case studies of similar companies achieving regulatory milestones"
+            },
+            {
+              "criterion": "Speed and responsiveness",
+              "weight": "20%",
+              "evaluation": "Startup-compatible agility vs. traditional consultant bureaucracy"
+            },
+            {
+              "criterion": "Strategic guidance beyond compliance",
+              "weight": "10%",
+              "evaluation": "Market positioning, stakeholder strategy, partnership opportunities"
+            },
+            {
+              "criterion": "Cost-effectiveness and flexible payment",
+              "weight": "5%",
+              "evaluation": "Retainer + success fees, equity consideration for early-stage"
+            }
+          ],
+          "objections_and_concerns": [
+            "Cost vs. early-stage budget constraints",
+            "Time commitment required from internal team",
+            "Confidentiality and IP protection given government advisory role",
+            "Guarantee expectations on regulatory approval outcomes",
+            "Exclusivity concerns if serving competing companies"
+          ]
+        },
+
+        "engagement_preferences": {
+          "preferred_communication_channels": [
+            "Video calls and WhatsApp for rapid communication",
+            "Slack/Teams channels for project collaboration",
+            "Monthly in-person strategic sessions",
+            "Email for formal documentation and submissions",
+            "LinkedIn for thought leadership and network introductions"
+          ],
+          "meeting_cadence": "Weekly sprints during active regulatory process, bi-weekly for ongoing advisory",
+          "reporting_expectations": "Dashboard-style progress tracking, key milestone alerts, investor-ready updates",
+          "relationship_building": "Trusted strategic advisor, potential board observer/advisor role"
+        },
+
+        "value_proposition_messaging": {
+          "primary_message": "Accelerate your market entry and regulatory approval in Indonesia with the only advisor who simultaneously shapes digital health policy as SATUSEHAT TWG Chairman and Regulatory Sandbox Expert—turning insider knowledge into your competitive advantage for faster time-to-market and higher approval probability.",
+          "key_differentiators_to_emphasize": [
+            "Direct access to MOH decision-makers and regulatory evaluators",
+            "Real-time policy insights from chairing SATUSEHAT technical development",
+            "Regulatory sandbox navigation expertise as Expert Panel Member",
+            "Network for stakeholder endorsements (medical associations, KOLs)"
+          ],
+          "proof_points_to_highlight": [
+            "Regulatory pathway success stories (if available, maintain confidentiality)",
+            "SATUSEHAT integration frameworks and standards authorship",
+            "Active role in shaping regulatory sandbox evaluation criteria",
+            "International standards expertise for global compliance alignment"
+          ]
+        },
+
+        "typical_project_scope": {
+          "engagement_types": [
+            "Regulatory pathway strategy and roadmap",
+            "SATUSEHAT integration assessment and implementation support",
+            "Regulatory sandbox application preparation and advocacy",
+            "Evidence generation framework for clinical validation",
+            "Stakeholder engagement and endorsement strategy",
+            "Government relations and partnership facilitation"
+          ],
+          "contract_value_range": "$25K - $250K (depending on stage and scope)",
+          "duration": "3-12 months (intensive during regulatory process)",
+          "payment_structure": "Retainer + milestone bonuses or success fees",
+          "success_metrics": [
+            "Regulatory approval/authorization achievement",
+            "SATUSEHAT integration certification",
+            "Sandbox acceptance and successful evaluation",
+            "Key stakeholder endorsements secured",
+            "Hospital/provider pilot partnerships established",
+            "Time-to-market acceleration vs. baseline"
+          ]
+        },
+
+        "disqualification_criteria": {
+          "red_flags": [
+            "Unethical business practices or questionable clinical claims",
+            "Inadequate clinical evidence or scientific rigor",
+            "Expectation of regulatory outcome guarantees",
+            "Unwillingness to invest in proper evidence generation",
+            "Unrealistic timeline expectations ignoring regulatory process",
+            "Financial instability threatening project continuity",
+            "Misalignment with Indonesian healthcare priorities"
+          ]
+        }
+      },
+
+      {
+        "segment_id": "ICP-03",
+        "segment_name": "Healthcare Provider Networks & Hospital Systems",
+        "priority_tier": "tier_2_volume",
+        "ideal_fit_score": 82,
+
+        "firmographic_profile": {
+          "organization_type": [
+            "Multi-hospital networks (5+ facilities)",
+            "Academic medical centers",
+            "Provincial/national hospital chains",
+            "Large primary care networks",
+            "Integrated delivery networks (IDNs)",
+            "Laboratory/diagnostic networks"
+          ],
+          "organization_size": "1,000+ employees, 200+ beds (for hospitals)",
+          "patient_volume": "100,000+ annual patient encounters",
+          "geographic_location": "Major Indonesian cities and provincial capitals",
+          "ownership_structure": "Government-owned, private, or foundation/trust",
+          "it_maturity_level": "Early EMR adoption to advanced digital health integration"
+        },
+
+        "demographic_profile": {
+          "decision_maker_titles": [
+            "Hospital Director/CEO",
+            "Chief Information Officer (CIO)",
+            "Chief Medical Information Officer (CMIO)",
+            "VP of Clinical Operations",
+            "Director of Quality and Patient Safety",
+            "Head of IT/Digital Transformation"
+          ],
+          "influencer_titles": [
+            "Department chairs (especially for academic centers)",
+            "Chief Nursing Officer",
+            "IT managers and system administrators",
+            "Clinical champions and early adopters"
+          ],
+          "decision_making_unit": "Executive team + medical staff leadership + IT (5-10 stakeholders)",
+          "typical_education": "MD/clinical degree + health administration master's, or IT/informatics background",
+          "professional_background": "Clinical practice + hospital management, or health IT implementation"
+        },
+
+        "psychographic_profile": {
+          "primary_pain_points": [
+            "SATUSEHAT integration mandate with limited internal expertise",
+            "Fragmented legacy systems requiring interoperability",
+            "Resistance from clinical staff to new digital workflows",
+            "Budget constraints for digital health infrastructure investment",
+            "Data governance and patient privacy compliance concerns",
+            "Unclear ROI on digital health initiatives",
+            "Competition from digitally advanced private hospitals"
+          ],
+          "primary_goals": [
+            "Successful SATUSEHAT integration achieving MOH compliance",
+            "Improved clinical quality metrics and patient outcomes",
+            "Operational efficiency through workflow digitization",
+            "Enhanced patient experience and satisfaction scores",
+            "Data-driven decision making for clinical and business operations",
+            "Competitive differentiation through digital health capabilities"
+          ],
+          "values_and_motivations": [
+            "Patient safety and quality of care",
+            "Regulatory compliance and accreditation maintenance",
+            "Operational sustainability and financial performance",
+            "Medical staff satisfaction and retention",
+            "Community trust and reputation",
+            "Innovation leadership in healthcare delivery"
+          ],
+          "information_sources": [
+            "Hospital association conferences and networks (PERSI, ARSADA)",
+            "Medical technology vendor presentations",
+            "Peer hospital site visits and case studies",
+            "MOH guidance documents and circulars",
+            "Healthcare IT publications and webinars"
+          ]
+        },
+
+        "behavioral_profile": {
+          "buying_triggers": [
+            "MOH SATUSEHAT integration deadline enforcement",
+            "Accreditation review requiring digital capabilities",
+            "Failed internal implementation attempts",
+            "New hospital CEO/CIO with digital transformation mandate",
+            "Capital investment approval for IT infrastructure",
+            "Competitive pressure from digitally advanced competitors"
+          ],
+          "decision_timeline": "6-18 months (budget cycles, committee approvals)",
+          "buying_process_stages": [
+            "Needs assessment and current state analysis",
+            "Budget proposal and approval process",
+            "RFP/vendor evaluation (if procurement requires)",
+            "Pilot/proof-of-concept for major initiatives",
+            "Contract negotiation and approval",
+            "Phased implementation with change management"
+          ],
+          "decision_criteria": [
+            {
+              "criterion": "SATUSEHAT integration expertise",
+              "weight": "30%",
+              "evaluation": "Proven track record of successful hospital integrations"
+            },
+            {
+              "criterion": "Change management and training capability",
+              "weight": "25%",
+              "evaluation": "Ability to drive clinical staff adoption and workflow transformation"
+            },
+            {
+              "criterion": "Implementation pragmatism",
+              "weight": "20%",
+              "evaluation": "Understanding of hospital operations and clinical realities"
+            },
+            {
+              "criterion": "Data governance framework",
+              "weight": "15%",
+              "evaluation": "Privacy, security, and compliance assurance"
+            },
+            {
+              "criterion": "Cost and ROI",
+              "weight": "10%",
+              "evaluation": "Budget fit and demonstrable value realization"
+            }
+          ],
+          "objections_and_concerns": [
+            "Disruption to clinical operations during implementation",
+            "Internal IT team capability and capacity for sustainment",
+            "Hidden costs and scope creep",
+            "Vendor lock-in with proprietary solutions",
+            "Dependency on external consultant for ongoing support"
+          ]
+        },
+
+        "engagement_preferences": {
+          "preferred_communication_channels": [
+            "In-person workshops and training sessions",
+            "Formal presentations to medical staff and board",
+            "Email and project management tools",
+            "Regular steering committee meetings",
+            "On-site implementation support visits"
+          ],
+          "meeting_cadence": "Weekly during implementation, monthly for ongoing advisory",
+          "reporting_expectations": "Project dashboards, milestone reports, ROI tracking, training completion metrics",
+          "relationship_building": "Implementation partner with knowledge transfer to internal team"
+        },
+
+        "value_proposition_messaging": {
+          "primary_message": "Transform SATUSEHAT compliance from regulatory burden to competitive advantage with implementation frameworks designed by the national policy architect—ensuring smooth integration, clinical adoption, and measurable improvements in care quality and operational efficiency.",
+          "key_differentiators_to_emphasize": [
+            "Insider understanding of SATUSEHAT technical architecture and evolution",
+            "Clinical workflow sensitivity from 30+ years healthcare experience",
+            "Change management expertise for provider organizations",
+            "Data governance frameworks balancing compliance and usability"
+          ],
+          "proof_points_to_highlight": [
+            "Hospital SATUSEHAT integration case studies (if available)",
+            "Training programs for clinical and IT staff",
+            "SATUSEHAT TWG insights for anticipating future requirements",
+            "Multi-hospital network implementation experience"
+          ]
+        },
+
+        "typical_project_scope": {
+          "engagement_types": [
+            "SATUSEHAT integration strategy and roadmap",
+            "Digital health maturity assessment",
+            "Interoperability architecture design",
+            "Data governance and privacy framework",
+            "Clinical workflow redesign for digital integration",
+            "Staff training and change management programs"
+          ],
+          "contract_value_range": "$50K - $300K (per hospital or network-wide)",
+          "duration": "6-18 months (assessment through post-implementation support)",
+          "success_metrics": [
+            "SATUSEHAT integration go-live and compliance achievement",
+            "Clinical staff adoption rates (target: 80%+ active use)",
+            "Data quality and completeness metrics",
+            "Operational efficiency improvements (reduced documentation time, etc.)",
+            "Patient satisfaction score improvements",
+            "Internal team capability enhancement for sustainment"
+          ]
+        },
+
+        "disqualification_criteria": {
+          "red_flags": [
+            "Unrealistic expectations of instant transformation",
+            "Lack of executive sponsorship for change management",
+            "Inadequate budget for comprehensive implementation",
+            "Unwillingness to invest in staff training and change management",
+            "Expecting consultant to bypass necessary clinical engagement",
+            "Accreditation-only motivation without genuine digital transformation intent"
+          ]
+        }
+      },
+
+      {
+        "segment_id": "ICP-04",
+        "segment_name": "Clinical Research Organizations & Academic Institutions",
+        "priority_tier": "tier_2_steady",
+        "ideal_fit_score": 85,
+
+        "firmographic_profile": {
+          "organization_type": [
+            "Contract research organizations (CROs)",
+            "Academic medical research centers",
+            "Clinical trial sites and networks",
+            "Pharmaceutical companies (clinical development divisions)",
+            "Biotech companies conducting clinical trials",
+            "Research hospitals and university medical centers"
+          ],
+          "organization_size": "50-2,000 employees (research staff)",
+          "research_portfolio": "Multi-site clinical trials, investigator-initiated studies",
+          "regulatory_scope": "Indonesian BPOM submissions, international multi-country trials",
+          "geographic_location": "Indonesia (Java-based primarily) with multi-site reach",
+          "research_phase_focus": "Phase II-IV clinical trials predominantly"
+        },
+
+        "demographic_profile": {
+          "decision_maker_titles": [
+            "Chief Medical Officer / Medical Director",
+            "VP of Clinical Operations",
+            "Director of Regulatory Affairs",
+            "Head of Research & Development",
+            "Principal Investigator (for academic sites)",
+            "Clinical Research Director"
+          ],
+          "influencer_titles": [
+            "Quality assurance managers",
+            "Clinical research coordinators",
+            "Institutional review board (IRB) chairs",
+            "Study monitors and CRAs"
+          ],
+          "decision_making_unit": "Medical leadership + regulatory + quality (3-6 stakeholders)",
+          "typical_education": "MD/PhD with clinical research training, regulatory affairs certifications",
+          "professional_background": "Clinical practice + research methodology, or pharma/CRO regulatory affairs"
+        },
+
+        "psychographic_profile": {
+          "primary_pain_points": [
+            "GCP compliance gaps and audit findings",
+            "Research governance framework deficiencies",
+            "Staff turnover requiring continuous GCP training",
+            "Multi-site coordination and quality consistency challenges",
+            "Regulatory inspection preparedness and anxiety",
+            "Ethics committee processes and documentation",
+            "International sponsor requirements vs. local capabilities"
+          ],
+          "primary_goals": [
+            "Achieve GCP compliance and zero major audit findings",
+            "Establish robust research governance infrastructure",
+            "Build sustainable internal research quality systems",
+            "Attract international sponsors and high-value trials",
+            "Reduce protocol violations and data quality issues",
+            "Enhance institutional reputation for research excellence"
+          ],
+          "values_and_motivations": [
+            "Patient safety in research",
+            "Scientific integrity and data quality",
+            "Regulatory compliance and ethical conduct",
+            "Professional development of research staff",
+            "Institutional research capacity building",
+            "Contribution to medical evidence and innovation"
+          ],
+          "information_sources": [
+            "Regulatory authority (BPOM) guidance documents",
+            "ICH GCP guidelines and updates",
+            "Clinical research professional associations",
+            "Sponsor company requirements and SOPs",
+            "Peer institution best practices"
+          ]
+        },
+
+        "behavioral_profile": {
+          "buying_triggers": [
+            "Regulatory inspection announcement or failed inspection",
+            "Sponsor audit findings requiring remediation",
+            "New major clinical trial award requiring GCP certification",
+            "Staff expansion requiring GCP training programs",
+            "Research governance accreditation pursuit",
+            "International collaboration requiring compliance upgrade"
+          ],
+          "decision_timeline": "2-6 months (depending on urgency of compliance need)",
+          "buying_process_stages": [
+            "Compliance gap assessment or audit response planning",
+            "Training needs analysis",
+            "Budget approval (often from research grants or institutional funds)",
+            "Trainer/consultant evaluation and selection",
+            "Program design and customization",
+            "Delivery and post-training assessment"
+          ],
+          "decision_criteria": [
+            {
+              "criterion": "GCP expertise and certification credentials",
+              "weight": "35%",
+              "evaluation": "International GCP training experience, regulatory agency recognition"
+            },
+            {
+              "criterion": "Research governance framework knowledge",
+              "weight": "25%",
+              "evaluation": "Multi-site coordination, ethics committee processes, quality systems"
+            },
+            {
+              "criterion": "Training effectiveness and participant satisfaction",
+              "weight": "20%",
+              "evaluation": "Engaging delivery, practical case studies, post-training competency"
+            },
+            {
+              "criterion": "Indonesia-specific regulatory context",
+              "weight": "15%",
+              "evaluation": "BPOM requirements, local IRB processes, Indonesian trial landscape"
+            },
+            {
+              "criterion": "Value and flexibility",
+              "weight": "5%",
+              "evaluation": "Competitive pricing, customizable programs, ongoing support"
+            }
+          ],
+          "objections_and_concerns": [
+            "Generic international training not applicable to Indonesian context",
+            "One-time training without sustainable capability building",
+            "Cost vs. available research/training budgets",
+            "Scheduling challenges with research staff availability",
+            "Certification validity and sponsor acceptance"
+          ]
+        },
+
+        "engagement_preferences": {
+          "preferred_communication_channels": [
+            "Email for formal training arrangements",
+            "In-person training sessions (preferred over virtual)",
+            "WhatsApp for coordination and quick questions",
+            "Post-training consultation via email/phone",
+            "Annual refresher training programs"
+          ],
+          "meeting_cadence": "Training delivery schedule (multi-day intensive or modular), quarterly refreshers",
+          "reporting_expectations": "Training certificates, competency assessment results, training materials",
+          "relationship_building": "Trusted training provider with ongoing advisory relationship"
+        },
+
+        "value_proposition_messaging": {
+          "primary_message": "Build world-class clinical research capabilities with GCP training and governance frameworks from Indonesia's leading expert—combining international standards with deep understanding of local regulatory requirements and practical research challenges, backed by decades of INA-CRC and UPQuality consulting experience.",
+          "key_differentiators_to_emphasize": [
+            "INA-CRC and UPQuality consulting credentials",
+            "International GCP standards + Indonesian regulatory context integration",
+            "Practical implementation focus beyond theoretical compliance",
+            "Multi-site research coordination expertise"
+          ],
+          "proof_points_to_highlight": [
+            "INA-CRC consultant track record",
+            "GCP training programs delivered (number of participants, institutions)",
+            "Research governance frameworks implemented",
+            "International collaboration facilitation (if applicable)"
+          ]
+        },
+
+        "typical_project_scope": {
+          "engagement_types": [
+            "GCP training programs (investigators, coordinators, monitors)",
+            "Research governance framework design and implementation",
+            "Ethics committee capacity building and SOP development",
+            "Multi-site research coordination systems",
+            "Regulatory inspection preparedness",
+            "Quality assurance and audit readiness programs"
+          ],
+          "contract_value_range": "$10K - $100K (depending on program scope and participant numbers)",
+          "duration": "1-6 months (training delivery + framework implementation)",
+          "payment_structure": "Per-participant fees for training, project-based for governance consulting",
+          "success_metrics": [
+            "Training completion and certification rates",
+            "Post-training competency assessment scores",
+            "Audit findings reduction in subsequent inspections",
+            "Protocol violations and data quality improvements",
+            "Sponsor satisfaction and trial awards",
+            "Institutional accreditation achievement"
+          ]
+        },
+
+        "disqualification_criteria": {
+          "red_flags": [
+            "Seeking shortcuts or compliance appearance without substance",
+            "Unwilling to invest in proper training time and resources",
+            "Expecting certification without participant competency demonstration",
+            "Inadequate leadership commitment to research quality culture",
+            "Budget constraints making comprehensive training unfeasible"
+          ]
+        }
+      },
+
+      {
+        "segment_id": "ICP-05",
+        "segment_name": "International Development Partners & Academic Collaborators",
+        "priority_tier": "tier_3_strategic",
+        "ideal_fit_score": 78,
+
+        "firmographic_profile": {
+          "organization_type": [
+            "Bilateral development agencies (AusAid, USAID, GIZ, etc.)",
+            "International academic institutions (universities, research centers)",
+            "Global health foundations (Gates, Wellcome, etc.)",
+            "Multilateral organizations (WHO, World Bank, ADB)",
+            "Technical assistance programs",
+            "International research consortia"
+          ],
+          "organization_size": "Varies (focus on program/project team size: 5-50)",
+          "budget_range": "$500K - $10M+ (multi-year programs)",
+          "geographic_focus": "Indonesia or Southeast Asia regional programs",
+          "program_duration": "Typically 2-5 year cycles",
+          "collaboration_model": "Partnership-based, co-creation, knowledge exchange"
+        },
+
+        "demographic_profile": {
+          "decision_maker_titles": [
+            "Country Director / Regional Director",
+            "Program Manager for Health/Digital Health",
+            "Principal Investigator (for research grants)",
+            "Partnership Development Director",
+            "Technical Advisor for Health Systems Strengthening"
+          ],
+          "influencer_titles": [
+            "Local implementing partner representatives",
+            "Advisory board members",
+            "Donor headquarters program officers",
+            "Academic collaborators from partner institutions"
+          ],
+          "decision_making_unit": "Program team + headquarters approval + partner consensus (4-8 stakeholders)",
+          "typical_education": "PhD, DrPH, or master's in public health, global health, development",
+          "professional_background": "International development, global health research, technical assistance"
+        },
+
+        "psychographic_profile": {
+          "primary_pain_points": [
+            "Limited understanding of Indonesia's digital health policy landscape",
+            "Difficulty identifying credible local partners with international standards",
+            "Bridging international donor priorities with local government agendas",
+            "Ensuring sustainability beyond program funding period",
+            "Demonstrating measurable impact for donor reporting",
+            "Navigating Indonesian bureaucratic and political dynamics",
+            "Knowledge transfer and local capacity building effectiveness"
+          ],
+          "primary_goals": [
+            "Successful program implementation with measurable health outcomes",
+            "Strong partnership with Indonesian government for sustainability",
+            "Knowledge generation and publication for global dissemination",
+            "Capacity building of local institutions and professionals",
+            "Demonstration of innovation and scalability",
+            "Stakeholder satisfaction (donors, government, communities)"
+          ],
+          "values_and_motivations": [
+            "Global health equity and impact",
+            "Evidence-based development approaches",
+            "Local ownership and sustainability",
+            "Knowledge sharing and capacity building",
+            "Innovation and learning",
+            "Collaborative partnership over donor-recipient hierarchy"
+          ],
+          "information_sources": [
+            "Academic journals and global health publications",
+            "Development sector conferences and networks",
+            "WHO and international agency reports",
+            "Local partner recommendations and networks",
+            "Previous program evaluations and lessons learned"
+          ]
+        },
+
+        "behavioral_profile": {
+          "buying_triggers": [
+            "New program funding approval requiring local expertise",
+            "Mid-term review indicating need for technical assistance",
+            "Government partnership requirement for in-country expert",
+            "Research grant award requiring Indonesian co-investigator",
+            "Program design phase requiring context assessment",
+            "Knowledge translation initiative requiring local champion"
+          ],
+          "decision_timeline": "3-12 months (proposal development, approvals, contracting)",
+          "buying_process_stages": [
+            "Preliminary discussion and needs assessment",
+            "Proposal co-development or technical input",
+            "Due diligence and reference checking",
+            "Budget negotiation and scope agreement",
+            "Contracting (often complex with institutional agreements)",
+            "Collaborative implementation with regular review"
+          ],
+          "decision_criteria": [
+            {
+              "criterion": "Indonesia digital health context expertise",
+              "weight": "30%",
+              "evaluation": "Deep understanding of local ecosystem, policy landscape, stakeholders"
+            },
+            {
+              "criterion": "International standards and academic credibility",
+              "weight": "25%",
+              "evaluation": "Publications, international education, global health network"
+            },
+            {
+              "criterion": "Government relationship and partnership facilitation",
+              "weight": "25%",
+              "evaluation": "Access to decision-makers, trusted advisor status, convening power"
+            },
+            {
+              "criterion": "Research collaboration capabilities",
+              "weight": "15%",
+              "evaluation": "Academic writing, methodology rigor, ethics compliance"
+            },
+            {
+              "criterion": "Value alignment and cultural fit",
+              "weight": "5%",
+              "evaluation": "Commitment to capacity building, partnership orientation"
+            }
+          ],
+          "objections_and_concerns": [
+            "Potential conflict of interest with government advisory roles",
+            "Availability and time commitment given multiple engagements",
+            "Institutional affiliation requirements for co-investigator roles",
+            "Intellectual property and publication rights",
+            "Budget constraints within program allocations"
+          ]
+        },
+
+        "engagement_preferences": {
+          "preferred_communication_channels": [
+            "Email for formal correspondence and documentation",
+            "Video conferences for international team coordination",
+            "In-person meetings during program missions and reviews",
+            "Shared collaboration platforms (Google Drive, Teams, etc.)",
+            "WhatsApp for urgent coordination"
+          ],
+          "meeting_cadence": "Monthly program meetings, quarterly review missions, annual evaluations",
+          "reporting_expectations": "Technical reports, academic manuscripts, policy briefs, donor presentations",
+          "relationship_building": "Long-term collaborative partnership with mutual learning"
+        },
+
+        "value_proposition_messaging": {
+          "primary_message": "Bridge international development priorities and Indonesian digital health realities through partnership with a trusted insider-outsider—combining policy-level access (SATUSEHAT TWG Chairman, MOH Regulatory Sandbox Expert) with international academic credibility (Australia Awards Fellow, UNSW/Monash affiliations) to ensure program impact, government ownership, and sustainable capacity building.",
+          "key_differentiators_to_emphasize": [
+            "Rare combination of government insider access + international academic network",
+            "Track record of facilitating international-local partnerships",
+            "Australia Awards Fellow credibility with international development sector",
+            "Emerging research profile (PhD pathway, VDHIC framework development)"
+          ],
+          "proof_points_to_highlight": [
+            "Australia Awards Fellowship with Monash University",
+            "VDHIC framework as collaborative international effort",
+            "Government advisory roles ensuring policy alignment and sustainability",
+            "International education and network (UNSW, South Wales, potential French collaborations)"
+          ]
+        },
+
+        "typical_project_scope": {
+          "engagement_types": [
+            "Co-investigator or local principal investigator for research grants",
+            "Technical advisor for digital health programs",
+            "Context expert for program design and evaluation",
+            "Government partnership facilitation and stakeholder engagement",
+            "Capacity building program design and delivery",
+            "Knowledge translation and policy brief development"
+          ],
+          "contract_value_range": "$30K - $200K (annually for multi-year programs)",
+          "duration": "12-60 months (aligned with program cycles)",
+          "payment_structure": "Retainer, deliverable-based, or institutional subcontract",
+          "success_metrics": [
+            "Research outputs (publications, conference presentations)",
+            "Program adoption by Indonesian government (policy uptake)",
+            "Capacity building outcomes (local team capabilities)",
+            "Stakeholder satisfaction (government, partners, donors)",
+            "Sustainability indicators (post-program continuation)",
+            "Knowledge dissemination (reports, briefs, workshops)"
+          ]
+        },
+
+        "disqualification_criteria": {
+          "red_flags": [
+            "Extractive research approach without local capacity building",
+            "Unrealistic program design ignoring Indonesian context",
+            "Insufficient budget for quality local partnership",
+            "Timeline pressures incompatible with government engagement",
+            "Conflicting agendas between donor and Indonesian priorities",
+            "Lack of commitment to knowledge sharing and co-authorship"
+          ]
+        }
+      }
+    ],
+
+    "cross_segment_insights": {
+      "common_pain_points_across_segments": [
+        "Navigating Indonesia's evolving digital health regulatory landscape",
+        "Balancing international best practices with local context constraints",
+        "Stakeholder alignment and consensus building complexity",
+        "Limited internal capacity for digital health governance",
+        "Need for evidence-based decision making in uncertainty",
+        "Sustainability and long-term capability building concerns"
+      ],
+
+      "universal_buying_criteria": [
+        "Government relationship capital and policy influence",
+        "International standards expertise with local adaptation capability",
+        "Implementation pragmatism and contextual understanding",
+        "Track record and credible proof points",
+        "Stakeholder management and consensus building skills"
+      ],
+
+      "consistent_differentiators_valued": [
+        "SATUSEHAT Technical Working Group Chairman authority",
+        "MOH Regulatory Sandbox Expert Panel insider knowledge",
+        "30+ years relationship capital across ecosystem",
+        "Australia Awards Fellowship international credibility",
+        "Dual insider-outsider perspective enabling objective advice"
+      ]
+    },
+
+    "anti_personas": {
+      "avoid_these_customer_types": [
+        {
+          "type": "Compliance-Only Seekers",
+          "description": "Organizations seeking superficial compliance appearances without genuine commitment to digital health transformation or governance substance",
+          "why_avoid": "Misaligned values, reputational risk, unsustainable outcomes, potential ethical concerns"
+        },
+        {
+          "type": "Unrealistic Timeline Demanders",
+          "description": "Clients expecting immediate regulatory outcomes or ignoring necessary stakeholder engagement processes inherent to Indonesian context",
+          "why_avoid": "Impossible expectations, inevitable dissatisfaction, damage to government relationships"
+        },
+        {
+          "type": "Budget-Constrained Cherry Pickers",
+          "description": "Organizations wanting premium insider access and expertise at entry-level pricing, or expecting pro-bono government advocacy",
+          "why_avoid": "Undervalues expertise, unsustainable engagement, scope creep, payment issues"
+        },
+        {
+          "type": "Unethical Business Practitioners",
+          "description": "Companies with questionable clinical claims, regulatory evasion intent, or misalignment with patient safety and healthcare ethics",
+          "why_avoid": "Reputational damage, government relationship jeopardy, ethical conflicts, legal risks"
+        },
+        {
+          "type": "Dependency-Creating Chronic Clients",
+          "description": "Organizations unwilling to invest in internal capability building, expecting perpetual consultant dependency",
+          "why_avoid": "Limited scalability, unsustainable model, mission misalignment (capacity building is core value)"
+        }
+      ]
+    },
+
+    "qualification_framework": {
+      "bant_assessment": {
+        "budget": {
+          "minimum_thresholds": {
+            "government_advisory": "$100K+ annual or program budget",
+            "corporate_consulting": "$25K+ project budget",
+            "training_programs": "$10K+ program budget",
+            "research_collaboration": "$30K+ annual contribution"
+          },
+          "qualification_questions": [
+            "Has budget been allocated or approved for this initiative?",
+            "What is the expected investment range for achieving your goals?",
+            "Are there donor, investor, or board funding commitments?"
+          ]
+        },
+        "authority": {
+          "decision_maker_access": "Direct engagement with C-suite, ministerial level, or program director",
+          "decision_making_process": "Clear understanding of approval chain and timeline",
+          "qualification_questions": [
+            "Who are the key decision-makers for this engagement?",
+            "What is the approval process and typical timeline?",
+            "Do you have authority to commit to this project, or who else needs to be involved?"
+          ]
+        },
+        "need": {
+          "problem_severity": "Clear pain point with measurable impact if unsolved",
+          "solution_urgency": "Defined trigger or deadline driving action",
+          "qualification_questions": [
+            "What specific challenge prompted you to reach out now?",
+            "What happens if this problem remains unsolved in the next 6-12 months?",
+            "Have you attempted to address this internally or with other consultants?"
+          ]
+        },
+        "timeline": {
+          "decision_timeline": "Within 6 months for initial commitment",
+          "implementation_readiness": "Stakeholder alignment and resource availability",
+          "qualification_questions": [
+            "What is your target timeline for engagement start and key milestones?",
+            "Are there external deadlines (regulatory, investor, program cycles) driving timing?",
+            "Is your organization ready to commit resources (team time, data access) for implementation?"
+          ]
+        }
+      },
+
+      "fit_score_calculation": {
+        "scoring_dimensions": [
+          {
+            "dimension": "Strategic Value Alignment",
+            "weight": "25%",
+            "criteria": "Government policy influence potential, long-term relationship opportunity, mission alignment (capacity building, health impact)"
+          },
+          {
+            "dimension": "Financial Attractiveness",
+            "weight": "20%",
+            "criteria": "Contract value, payment reliability, profitability margin, scalability potential"
+          },
+          {
+            "dimension": "Expertise Match",
+            "weight": "20%",
+            "criteria": "Directly leverages core differentiators (SATUSEHAT, regulatory sandbox, GCP, genomic governance)"
+          },
+          {
+            "dimension": "Implementation Feasibility",
+            "weight": "20%",
+            "criteria": "Realistic timeline, adequate budget, stakeholder readiness, manageable scope"
+          },
+          {
+            "dimension": "Reputation & Learning Value",
+            "weight": "15%",
+            "criteria": "Reference potential, thought leadership opportunity, international visibility, knowledge generation"
+          }
+        ],
+        "minimum_viable_score": "60/100 to proceed with proposal",
+        "ideal_score_range": "80-100 for priority pursuit"
+      }
+    },
+
+    "engagement_prioritization_matrix": {
+      "tier_1_flagship_clients": {
+        "characteristics": "High strategic value + high revenue potential + strong expertise match",
+        "examples": "National government digital health programs, major regulatory sandbox initiatives, international development partnerships",
+        "resource_allocation": "Senior personal time commitment, customized solutions, thought leadership integration",
+        "relationship_investment": "Long-term trusted advisor, proactive value delivery, regular strategic sessions"
+      },
+      "tier_2_core_business": {
+        "characteristics": "Moderate-high revenue + proven delivery model + sustainable repeat potential",
+        "examples": "Hospital network SATUSEHAT implementations, GCP training programs, healthtech regulatory advisory",
+        "resource_allocation": "Balanced personal involvement + team leverage, systematized delivery where possible",
+        "relationship_investment": "Professional service provider, responsive execution, quality assurance"
+      },
+      "tier_3_strategic_bets": {
+        "characteristics": "High learning/reputation value + emerging market + mission alignment, even if lower immediate revenue",
+        "examples": "PhD research collaborations, autism intervention research, VDHIC framework applications, new international partnerships",
+        "resource_allocation": "Selective time investment, co-creation approach, leverage for long-term positioning",
+        "relationship_investment": "Collaborative partner, knowledge exchange, mutual benefit orientation"
+      },
+      "tier_4_decline_or_refer": {
+        "characteristics": "Low fit score, resource-intensive with limited strategic value, misaligned expectations",
+        "examples": "Small-budget transactional requests, one-off training without governance context, clients in anti-persona categories",
+        "resource_allocation": "Minimal time investment, polite decline or referral to alternative providers",
+        "relationship_investment": "Professional courtesy, potential future reconsideration if circumstances change"
+      }
+    }
+  }
+}

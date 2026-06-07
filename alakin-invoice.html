@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice - Ahmad Hidayat</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; -webkit-print-color-adjust: exact; }
+        .editable { cursor: text; border-bottom: 1px dashed #cbd5e1; transition: all 0.2s; }
+        .editable:hover { background-color: #f1f5f9; border-bottom-color: #94a3b8; }
+        .editable:focus { outline: none; background-color: #e2e8f0; border-bottom: 2px solid #3b82f6; }
+        
+        @media print {
+            .no-print { display: none !important; }
+            body { background-color: white; }
+            .shadow-lg { box-shadow: none !important; }
+            .editable { border-bottom: none !important; }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen py-10 px-4 sm:px-6">
+
+    <div class="max-w-4xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
+        
+        <!-- Toolbar -->
+        <div class="no-print bg-slate-800 text-white p-4 flex justify-between items-center">
+            <div class="text-sm opacity-90">
+                <span class="font-bold text-yellow-400">Tip:</span> Click any text below to edit details (Dates, Amounts, Address).
+            </div>
+            <button onclick="window.print()" class="bg-blue-600 hover:bg-blue-500 text-white font-medium py-2 px-4 rounded transition-colors flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+                </svg>
+                Print / Save as PDF
+            </button>
+        </div>
+
+        <!-- Invoice Content -->
+        <div class="p-8 md:p-12">
+            
+            <!-- Header -->
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-12">
+                <div>
+                    <h1 class="text-4xl font-bold text-slate-800 tracking-tight">INVOICE</h1>
+                    <p class="text-slate-500 mt-1 font-medium"># <span contenteditable="true" class="editable">INV-2026-001</span></p>
+                </div>
+                <div class="mt-4 md:mt-0 text-right">
+                    <div class="text-slate-500 text-sm font-medium uppercase tracking-wider mb-1">Date</div>
+                    <div contenteditable="true" class="editable text-lg font-semibold text-slate-800">January 31, 2026</div>
+                </div>
+            </div>
+
+            <!-- Addresses -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-12">
+                <!-- From -->
+                <div>
+                    <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">From</h3>
+                    <div class="text-slate-700">
+                        <p class="font-bold text-lg text-slate-900 mb-1" contenteditable="true" class="editable">Ahmad Hidayat</p>
+                        <div contenteditable="true" class="editable whitespace-pre-line leading-relaxed">JT. RTM No. 196 Kelapa Dua
+RT 011 RW 010 Kel. Tugu
+Kec. Cimanggis, Depok
+Indonesia</div>
+                    </div>
+                </div>
+
+                <!-- To -->
+                <div>
+                    <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Bill To</h3>
+                    <div class="text-slate-700">
+                        <p class="font-bold text-lg text-slate-900 mb-1" contenteditable="true" class="editable">TECH2HEAL</p>
+                        <div contenteditable="true" class="editable whitespace-pre-line leading-relaxed text-slate-700">28, avenue des Pépinières
+94260 Fresnes
+France</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Line Items Table -->
+            <div class="mb-10">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr>
+                            <th class="py-3 border-b-2 border-slate-200 text-xs font-bold text-slate-400 uppercase tracking-wider w-3/4">Description</th>
+                            <th class="py-3 border-b-2 border-slate-200 text-xs font-bold text-slate-400 uppercase tracking-wider text-right w-1/4">Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-slate-700">
+                        <!-- Item 1 -->
+                        <tr>
+                            <td class="py-4 border-b border-slate-100">
+                                <div contenteditable="true" class="editable font-medium text-base text-slate-800 mb-1">Consulting Services</div>
+                                <div contenteditable="true" class="editable text-sm text-slate-500">
+                                    Period: December 13, 2025 - December 31, 2025 (Pro-rated)
+                                </div>
+                            </td>
+                            <td class="py-4 border-b border-slate-100 text-right font-medium">
+                                <span class="currency-symbol">IDR </span> <span contenteditable="true" class="editable item-amount" oninput="calculateTotal()">6,129,032.26</span>
+                            </td>
+                        </tr>
+                        <!-- Item 2 -->
+                        <tr>
+                            <td class="py-4 border-b border-slate-100">
+                                <div contenteditable="true" class="editable font-medium text-base text-slate-800 mb-1">Consulting Services</div>
+                                <div contenteditable="true" class="editable text-sm text-slate-500">
+                                    Period: January 1, 2026 - January 31, 2026 (Full Month)
+                                </div>
+                            </td>
+                            <td class="py-4 border-b border-slate-100 text-right font-medium">
+                                <span class="currency-symbol">IDR </span> <span contenteditable="true" class="editable item-amount" oninput="calculateTotal()">10,000,000.00</span>
+                            </td>
+                        </tr>
+                        <!-- Item 3 -->
+                        <tr>
+                            <td class="py-4 border-b border-slate-100">
+                                <div contenteditable="true" class="editable font-medium text-base text-slate-800 mb-1">Operational Support</div>
+                                <div contenteditable="true" class="editable text-sm text-slate-500">
+                                    Communication and connectivity
+                                </div>
+                            </td>
+                            <td class="py-4 border-b border-slate-100 text-right font-medium">
+                                <span class="currency-symbol">IDR </span> <span contenteditable="true" class="editable item-amount" oninput="calculateTotal()">500,000.00</span>
+                            </td>
+                        </tr>
+                        <!-- Extra rows if needed -->
+                        <tr class="no-print opacity-50 hover:opacity-100 transition-opacity">
+                            <td class="py-2 text-xs text-blue-500 cursor-pointer" onclick="toggleRow(this)">+ Add another line item (Click to enable)</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Totals -->
+            <div class="flex justify-end mb-12">
+                <div class="w-full md:w-1/2 lg:w-1/3">
+                    <div class="flex justify-between py-2 border-b border-slate-100">
+                        <span class="font-medium text-slate-600">Subtotal</span>
+                        <span class="font-medium text-slate-900"><span class="currency-symbol">IDR </span> <span id="subtotal">0.00</span></span>
+                    </div>
+                    <div class="flex justify-between py-4">
+                        <span class="font-bold text-xl text-slate-900">Total</span>
+                        <span class="font-bold text-xl text-blue-600"><span class="currency-symbol">IDR </span> <span id="total">0.00</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bank Details -->
+            <div class="bg-slate-50 p-6 rounded-lg border border-slate-100 mb-12">
+                <h3 class="text-sm font-bold text-slate-800 uppercase tracking-wider mb-4">Payment Information</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-y-3 gap-x-8 text-sm">
+                    <div class="flex justify-between md:justify-start gap-4">
+                        <span class="text-slate-500 w-24">Bank Name:</span>
+                        <span contenteditable="true" class="editable font-medium text-slate-700">Bank Mandiri</span>
+                    </div>
+                    <div class="flex justify-between md:justify-start gap-4">
+                        <span class="text-slate-500 w-24">Acc Name:</span>
+                        <span contenteditable="true" class="editable font-medium text-slate-700">Ahmad Hidayat</span>
+                    </div>
+                    <div class="flex justify-between md:justify-start gap-4">
+                        <span class="text-slate-500 w-24">Acc Number:</span>
+                        <span contenteditable="true" class="editable font-medium text-slate-700">120-00-9800145-1</span>
+                    </div>
+                    <div class="flex justify-between md:justify-start gap-4">
+                        <span class="text-slate-500 w-24">SWIFT/Code:</span>
+                        <span contenteditable="true" class="editable font-medium text-slate-700">BMRIIDJAXXX</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Signature -->
+            <div class="flex justify-start mb-12 break-inside-avoid">
+                <div class="text-left">
+                    <p class="text-slate-500 mb-20">Best Regards,</p>
+                    <div class="border-b border-slate-800 w-56 mb-2"></div>
+                    <p contenteditable="true" class="editable font-bold text-slate-700">Ahmad Hidayat</p>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="pt-8 border-t border-slate-100 text-center text-slate-400 text-sm">
+                <p contenteditable="true" class="editable">Thank you for your business.</p>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- Currency Toggle for convenience -->
+    <div class="no-print fixed bottom-4 right-4 bg-white p-3 rounded shadow-lg border border-gray-200 text-xs">
+        <label class="font-bold block mb-1">Currency:</label>
+        <select onchange="changeCurrency(this.value)" class="border rounded p-1">
+            <option value="$">USD ($)</option>
+            <option value="IDR " selected>IDR (Rp)</option>
+            <option value="€">EUR (€)</option>
+            <option value="£">GBP (£)</option>
+            <option value="SGD ">SGD</option>
+        </select>
+    </div>
+
+    <script>
+        function calculateTotal() {
+            const amounts = document.querySelectorAll('.item-amount');
+            let total = 0;
+
+            amounts.forEach(item => {
+                // Remove commas and non-numeric chars except dot
+                let val = item.innerText.replace(/[^0-9.]/g, '');
+                let num = parseFloat(val);
+                if (!isNaN(num)) {
+                    total += num;
+                }
+            });
+
+            // Format Subtotal (Standard 2 decimals)
+            const subtotalFormatted = total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            document.getElementById('subtotal').innerText = subtotalFormatted;
+
+            // Apply Rounding Logic for IDR
+            // "Round down total amount below IDR 499.99 to IDR 000.00 and any total amount below IDR 999.00 to IDR 500.00"
+            // This is effectively Math.floor(total / 500) * 500
+            
+            // Check if currency is IDR to apply specific rounding, otherwise keep standard
+            const currencySymbol = document.querySelector('.currency-symbol').innerText;
+            let finalTotal = total;
+
+            if (currencySymbol.includes('IDR')) {
+                finalTotal = Math.floor(total / 500) * 500;
+            }
+
+            const totalFormatted = finalTotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            document.getElementById('total').innerText = totalFormatted;
+        }
+
+        function changeCurrency(symbol) {
+            const symbols = document.querySelectorAll('.currency-symbol');
+            symbols.forEach(s => s.innerText = symbol);
+            calculateTotal(); // Recalculate to apply/remove rounding
+        }
+
+        function toggleRow(el) {
+            // Simple function to make the 'add row' placeholder text look like a real row input
+            const row = el.parentElement;
+            row.classList.remove('opacity-50', 'no-print', 'hover:opacity-100', 'transition-opacity');
+            row.innerHTML = `
+                <td class="py-4 border-b border-slate-100">
+                    <div contenteditable="true" class="editable font-medium text-base text-slate-800 mb-1">Additional Service</div>
+                    <div contenteditable="true" class="editable text-sm text-slate-500">Description...</div>
+                </td>
+                <td class="py-4 border-b border-slate-100 text-right font-medium">
+                    <span class="currency-symbol">${document.querySelector('.currency-symbol').innerText}</span> <span contenteditable="true" class="editable item-amount" oninput="calculateTotal()">0.00</span>
+                </td>
+            `;
+        }
+
+        // Initial Calc
+        calculateTotal();
+    </script>
+</body>
+</html>

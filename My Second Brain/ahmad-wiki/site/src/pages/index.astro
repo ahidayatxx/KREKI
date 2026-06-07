@@ -1,0 +1,152 @@
+---
+import { getCollection } from 'astro:content';
+import '../styles/global.css';
+
+const allPages = await getCollection('wiki');
+const pages = allPages.filter(p => !p.id.startsWith('_meta/'));
+
+const categoryInfo: Record<string, { label: string; description: string }> = {
+  entities: { label: 'Entities', description: 'Named real-world things: people, organizations, platforms, frameworks' },
+  concepts: { label: 'Concepts', description: 'Abstract technical, policy, or theoretical ideas' },
+  domains: { label: 'Domains', description: 'High-level synthesis pages for five canonical work domains' },
+  sources: { label: 'Sources', description: 'One summary page per ingested raw document' },
+  workstreams: { label: 'Workstreams', description: 'Active and historical project and engagement pages' },
+  outputs: { label: 'Outputs', description: 'Filed query answers, analyses, comparisons' },
+  synthesis: { label: 'Synthesis', description: 'Cross-source synthesis pages connecting multiple concepts and domains' },
+};
+
+const grouped: Record<string, { slug: string; title: string }[]> = {};
+for (const key of Object.keys(categoryInfo)) {
+  grouped[key] = [];
+}
+
+for (const page of pages) {
+  const parts = page.id.split('/');
+  const category = parts.length > 1 ? parts[0] : 'uncategorized';
+  const slug = parts.pop()!;
+  const data = page.data as any;
+  const title = data.name || data.title || slug.replace(/-/g, ' ');
+
+  if (!grouped[category]) grouped[category] = [];
+  grouped[category].push({ slug, title });
+}
+
+for (const key of Object.keys(grouped)) {
+  grouped[key].sort((a, b) => a.title.localeCompare(b.title));
+}
+
+const totalPages = pages.length;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ahmad Wiki — Second Brain</title>
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <a href="/" class="sidebar-title">Ahmad Wiki</a>
+          <span class="sidebar-subtitle">Second Brain</span>
+        </div>
+      </aside>
+      <main class="main-content">
+        <div class="content-area">
+          <h1>Ahmad Hidayat — Second Brain Wiki</h1>
+          <p class="home-subtitle">{totalPages} pages across {Object.keys(categoryInfo).length} categories</p>
+          <hr />
+
+          <div class="home-grid">
+            {Object.entries(categoryInfo).map(([key, info]) => grouped[key]?.length > 0 && (
+              <section class="home-category">
+                <h2>{info.label} <span class="count">({grouped[key].length})</span></h2>
+                <p class="home-category-desc">{info.description}</p>
+                <ul class="home-page-list">
+                  {grouped[key].map(page => (
+                    <li>
+                      <a href={`/wiki/${page.slug}`}>{page.title}</a>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            ))}
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>
+
+<style>
+  .sidebar-header {
+    padding: 0 1.25rem 1rem;
+    border-bottom: 1px solid var(--color-border-light);
+  }
+
+  .sidebar-title {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .sidebar-title:hover {
+    text-decoration: none;
+    color: var(--color-accent);
+  }
+
+  .sidebar-subtitle {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+  }
+
+  .home-subtitle {
+    font-size: 1.1rem;
+    color: var(--color-text-muted);
+    margin-bottom: 0;
+  }
+
+  .home-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-top: 1.5rem;
+  }
+
+  .home-category h2 {
+    font-size: 1.2rem;
+    margin-bottom: 0.2em;
+  }
+
+  .home-category h2 .count {
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: var(--color-text-muted);
+  }
+
+  .home-category-desc {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    margin-bottom: 0.8em;
+  }
+
+  .home-page-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .home-page-list li {
+    padding: 0.25em 0;
+  }
+
+  .home-page-list li::before {
+    content: "• ";
+    color: var(--color-accent);
+  }
+</style>

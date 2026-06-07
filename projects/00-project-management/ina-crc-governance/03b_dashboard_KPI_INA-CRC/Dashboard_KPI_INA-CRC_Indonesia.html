@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard KPI INA-CRC - 30 Juni 2026</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary-color: #2C5282;
+            --secondary-color: #6C757D;
+            --success-color: #28A745;
+            --warning-color: #FFC107;
+            --danger-color: #DC3545;
+            --info-color: #17A2B8;
+            --light-color: #F8F9FA;
+            --dark-color: #212529;
+        }
+
+        body {
+            font-family: 'Arial', 'Helvetica', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
+            color: var(--dark-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            background: var(--primary-color);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            color: white !important;
+        }
+
+        .main-container {
+            margin: 20px auto;
+            max-width: 1400px;
+        }
+
+        .card {
+            border: none;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-header {
+            border-bottom: 2px solid #e9ecef;
+            font-weight: 600;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        }
+
+        .kpi-value {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #2c3e50;
+            text-align: center;
+            padding: 20px 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .kpi-target {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #34495e;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .progress {
+            height: 25px;
+            background-color: #e9ecef;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, var(--primary-color), #1e88e5);
+            border-radius: 15px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            line-height: 25px;
+        }
+
+        .trend-indicator {
+            font-size: 1.5rem;
+            margin-left: 10px;
+        }
+
+        .trend-up { color: var(--success-color); }
+        .trend-down { color: var(--danger-color); }
+        .trend-stable { color: var(--info-color); }
+
+        .status-badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .status-excellent {
+            background-color: var(--success-color);
+            color: white;
+        }
+
+        .status-good {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .status-warning {
+            background-color: var(--warning-color);
+            color: white;
+        }
+
+        .status-critical {
+            background-color: var(--danger-color);
+            color: white;
+        }
+
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .insights-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 30px;
+        }
+
+        .chart-container {
+            height: 400px;
+            position: relative;
+            margin-top: 30px;
+        }
+
+        .footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .metric-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .alert-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .alert-box.show {
+            display: block;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .text-bahasa {
+            font-family: 'Arial', 'Helvetica', sans-serif;
+            line-height: 1.6;
+        }
+
+        .insights-card .kpi-value {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            text-align: center;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-hospital me-2"></i>
+                Dashboard KPI INA-CRC
+            </a>
+            <span class="navbar-text ms-auto">
+                <i class="fas fa-calendar me-2"></i>
+                30 Juni 2026
+            </span>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Executive Summary -->
+        <div class="card insights-card mb-4">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <h2><i class="fas fa-chart-line me-2 text-bahasa"></i> Ringkasan Eksekutif</h2>
+                        <p class="text-bahasa">Performa keseluruhan sistem INA-CRC per 30 Juni 2026 menunjukkan pencapaian yang solid dengan target strategis yang telah ditetapkan.</p>
+                    </div>
+                    <div class="col-md-6 text-end">
+                        <div class="kpi-value text-bahasa" style="font-weight: 900; color: #2c3e50; text-shadow: 1px 1px 2px rgba(0,0,0,0.1);">82,3%</div>
+                        <div class="status-badge status-good ms-auto">ON TARGET</div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-3">
+                        <div class="text-center">
+                            <div class="kpi-value text-bahasa" style="font-weight: 900; color: #2c3e50; text-shadow: 1px 1px 2px rgba(0,0,0,0.1);">3.2%</div>
+                            <div class="kpi-target text-bahasa">vs Q1 2026</div>
+                        </div>
+                        <small class="text-muted">peningkatan dari Q1</small>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-center">
+                            <div class="kpi-value text-bahasa" style="font-weight: 900; color: #2c3e50; text-shadow: 1px 1px 2px rgba(0,0,0,0.1);">82.3%</div>
+                            <div class="kpi-target text-bahasa">Target 80%</div>
+                        </div>
+                        <small class="text-muted">target kuartal</small>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <!-- Alert for Critical Issues -->
+        <div id="alertBox" class="alert-box">
+            <div class="row align-items-center">
+                <div class="col-md-10">
+                    <h5><i class="fas fa-exclamation-triangle me-2"></i> Tindakan Kritis Diperlukan!</h5>
+                    <p class="text-bahasa">Waktu respon sistem untuk query regulator telah melebihi target 48 jam. Disarankan untuk segera mengambil tindakan korektif dan mengoptimalkan proses respons.</p>
+                </div>
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-warning btn-sm" onclick="dismissAlert()">
+                        <i class="fas fa-times me-1"></i> Tutup
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Performance Metrics Grid -->
+        <div class="row">
+            <!-- Koordinasi & Regulasi -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h4><i class="fas fa-users me-2"></i> Koordinasi & Regulasi</h4>
+                    </div>
+                    <div class="card-body text-center">
+                        <div class="kpi-value text-bahasa">87,5%</div>
+                        <div class="kpi-target text-bahasa">Target: 85%</div>
+                        <div class="trend-indicator">
+                            <i class="fas fa-arrow-up trend-up"></i>
+                        </div>
+                        <p class="text-bahasa mt-2">Pertemuan stakeholder bulanan: 12/12 | Respon tepat waktu: 89%</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Implementasi Uji Klinis -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-info text-white">
+                        <h4><i class="fas fa-flask me-2"></i> Implementasi Uji Klinis</h4>
+                    </div>
+                    <div class="card-body text-center">
+                        <div class="kpi-value text-bahasa">78,8%</div>
+                        <div class="kpi-target text-bahasa">Target: 80%</div>
+                        <div class="trend-indicator">
+                            <i class="fas fa-arrow-up trend-up"></i>
+                        </div>
+                        <p class="text-bahasa mt-2">Uji klinis aktif: 42/50 | Tingkat kepatuhan: 79%</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Manajemen Sistem & Data -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-success text-white">
+                        <h4><i class="fas fa-server me-2"></i> Manajemen Sistem & Data</h4>
+                    </div>
+                    <div class="card-body text-center">
+                        <div class="kpi-value text-bahasa">85,2%</div>
+                        <div class="kpi-target text-bahasa">Target: 90%</div>
+                        <div class="trend-indicator">
+                            <i class="fas fa-arrow-up trend-up"></i>
+                        </div>
+                        <p class="text-bahasa mt-2">Uptime sistem: 99,5% | Akurasi data: 98%</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pembinaan Kapasitas -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-warning text-white">
+                        <h4><i class="fas fa-graduation-cap me-2"></i> Pembinaan Kapasitas</h4>
+                    </div>
+                    <div class="card-body text-center">
+                        <div class="kpi-value text-bahasa">76,4%</div>
+                        <div class="kpi-target text-bahasa">Target: 80%</div>
+                        <div class="trend-indicator">
+                            <i class="fas fa-arrow-up trend-up"></i>
+                        </div>
+                        <p class="text-bahasa mt-2">CRU tersertifikasi: 28/35 | Sesi pelatihan: 15/24</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Impact & Outcome -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-secondary text-white">
+                        <h4><i class="fas fa-bullseye me-2"></i> Dampak & Hasil</h4>
+                    </div>
+                    <div class="card-body text-center">
+                        <div class="kpi-value text-bahasa">72,1%</div>
+                        <div class="kpi-target text-bahasa">Target: 70%</div>
+                        <div class="trend-indicator">
+                            <i class="fas fa-arrow-up trend-up"></i>
+                        </div>
+                        <p class="text-bahasa mt-2">Produk terdaftar: 5 | Publikasi ilmiah: 18</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Section -->
+        <div class="row mt-4">
+            <!-- Performance Trend Chart -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4><i class="fas fa-chart-line me-2"></i> Tren Performa Keseluruhan</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="performanceChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category Comparison Radar Chart -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4><i class="fas fa-chart-radar me-2"></i> Perbandingan Kategori KPI</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="categoryChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detailed Metrics Table -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header bg-dark text-white">
+                        <h4><i class="fas fa-table me-2"></i> Metrik Kinerja Detail (Q2 2026)</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th class="text-bahasa">Kategori KPI</th>
+                                        <th class="text-bahasa">Metrik Utama</th>
+                                        <th class="text-bahasa">Target</th>
+                                        <th class="text-bahasa">Aktual</th>
+                                        <th class="text-bahasa">Pencapaian</th>
+                                        <th class="text-bahasa">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="table-light">
+                                        <td class="text-bahasa">Koordinasi & Regulasi</td>
+                                        <td class="text-bahasa">Jumlah Pertemuan</td>
+                                        <td class="text-bahasa">85%</td>
+                                        <td class="text-bahasa">12</td>
+                                        <td class="text-bahasa">12/14 (86%)</td>
+                                        <td><span class="status-badge status-good">ON TARGET</span></td>
+                                    </tr>
+                                    <tr class="table-light">
+                                        <td class="text-bahasa">Regulasi</td>
+                                        <td class="text-bahasa">Waktu Approval</td>
+                                        <td class="text-bahasa">≤60 hari</td>
+                                        <td class="text-bahasa">42 hari</td>
+                                        <td><span class="status-badge status-good">EXCELLENT</span></td>
+                                    </tr>
+                                    <tr class="table-light">
+                                        <td class="text-bahasa">Implementasi</td>
+                                        <td class="text-bahasa">Uji Klinis Aktif</td>
+                                        <td class="text-bahasa">50</td>
+                                        <td class="text-bahasa">42</td>
+                                        <td><span class="status-badge status-good">ON TARGET</span></td>
+                                    </tr>
+                                    <tr class="table-light">
+                                        <td class="text-bahasa">Sistem</td>
+                                        <td class="text-bahasa">Uptime System</td>
+                                        <td class="text-bahasa">≥99%</td>
+                                        <td class="text-bahasa">99,5%</td>
+                                        <td><span class="status-badge status-excellent">EXCELLENT</span></td>
+                                    </tr>
+                                    <tr class="table-light">
+                                        <td class="text-bahasa">Pembinaan</td>
+                                        <td class="text-bahasa">CRU Tersertifikasi</td>
+                                        <td class="text-bahasa">35</td>
+                                        <td class="text-bahasa">28</td>
+                                        <td><span class="status-badge status-warning">DI BAWAH TARGET</span></td>
+                                    </tr>
+                                    <tr class="table-light">
+                                        <td class="text-bahasa">Dampak</td>
+                                        <td class="text-bahasa">Produk Inovatif</td>
+                                        <td class="text-bahasa">8</td>
+                                        <td class="text-bahasa">5</td>
+                                        <td><span class="status-badge status-warning">DI BAWAH TARGET</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Insights & Recommendations -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card insights-card">
+                    <div class="card-header bg-dark text-white">
+                        <h4><i class="fas fa-lightbulb me-2"></i> Wawasan Utama & Rekomendasi</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5 class="section-title text-bahasa">
+                                    <i class="fas fa-star text-warning me-2"></i> Wawasan Kinerja
+                                </h5>
+                                <ul class="text-bahasa">
+                                    <li>Performa keseluruhan meningkat dari Q1 2025 (77,3%) ke Q2 2026 (82,3%)</li>
+                                    <li>Sistem dan data management menunjukkan performa terbaik dengan target 85%</li>
+                                    <li>Koordinasi stakeholder mencapai tingkat kepuasan yang sangat baik (87,5%)</li>
+                                    <li>Perlu perhatian pada pembinaan kapasitas yang masih di bawah target (76,4%)</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h5 class="section-title text-bahasa">
+                                    <i class="fas fa-tasks text-info me-2"></i> Rekomendasi Prioritas
+                                </h5>
+                                <ul class="text-bahasa">
+                                    <li><strong>Sistem Responsi:</strong> Optimalisasi alur respons sistem untuk regulator hingga ≤24 jam</li>
+                                    <li><strong>Peningkatan CRU:</strong> Intensifikasi program percepatan untuk mencapai target 35 CRU tersertifikasi</li>
+                                    <li><strong>Analisis Prediktif:</strong> Implementasi sistem prediksi untuk early detection masalah kinerja</li>
+                                </ul>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-center">
+                    <p class="mb-0">
+                        <i class="fas fa-copyright me-2"></i> © 2026 Indonesia Clinical Research Center (INA-CRC)
+                    </p>
+                    <p class="mb-0 text-muted">
+                        Sistem KPI Monitoring Dashboard - Versi 1.0
+                    </p>
+                </div>
+                <div class="col-md-6 text-center">
+                    <p class="mb-0">
+                        <i class="fas fa-info-circle me-2"></i> Diperbarui oleh Tim Manajemen Kinerja INA-CRC
+                    </p>
+                    <p class="mb-0 text-muted">
+                        Terakhir diperbarui: 30 Juni 2026, 14:30 WIB
+                    </p>
+                </div>
+            </div>
+        </div>
+        </div>
+    </footer>
+
+    <script>
+        // Performance Trend Chart
+        const ctxPerformance = document.getElementById('performanceChart').getContext('2d');
+        const performanceChart = new Chart(ctxPerformance, {
+            type: 'line',
+            data: {
+                labels: ['Okt 2025', 'Nov 2025', 'Des 2025', 'Jan 2026', 'Feb 2026', 'Mar 2026', 'Apr 2026', 'Mei 2026', 'Jun 2026'],
+                datasets: [{
+                    label: 'Pencapaian KPI',
+                    data: [77.3, 78.1, 78.5, 79.2, 80.3, 81.4, 82.3],
+                    borderColor: '#2C5282',
+                    backgroundColor: 'rgba(44, 82, 130, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                }, {
+                    label: 'Target',
+                    data: [80, 80, 80, 80, 80, 80, 80, 80, 80],
+                    borderColor: '#6C757D',
+                    borderDash: [5, 5],
+                    tension: 0,
+                    fill: false
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                    },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false,
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100,
+                    title: 'Pencapaian (%)',
+                    ticks: {
+                        callback: function(value) {
+                            return value + '%';
+                        }
+                    }
+                }
+            }
+        });
+
+        // Category Comparison Chart
+        const ctxCategory = document.getElementById('categoryChart').getContext('2d');
+        const categoryChart = new Chart(ctxCategory, {
+            type: 'radar',
+            data: {
+                labels: ['Koordinasi & Regulasi', 'Implementasi Uji Klinis', 'Sistem & Data', 'Pembinaan Kapasitas', 'Dampak & Hasil'],
+                datasets: [{
+                    label: 'Aktual Q2 2026',
+                    data: [87.5, 78.8, 85.2, 76.4],
+                    borderColor: 'rgba(44, 82, 130, 1)',
+                    backgroundColor: 'rgba(44, 82, 130, 0.2)',
+                    pointBackgroundColor: '#fff',
+                    pointBorderColor: '#fff'
+                }, {
+                    label: 'Target Q2 2026',
+                    data: [85, 85, 85, 85, 85],
+                    borderColor: 'rgba(108, 117, 125, 1)',
+                    borderDash: [5, 5],
+                    backgroundColor: 'rgba(108, 117, 125, 0.1)',
+                    pointBackgroundColor: '#fff',
+                    pointBorderColor: '#fff'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                }
+                },
+                scales: {
+                    r: {
+                        angleLines: {
+                            display: false
+                        },
+                        pointLabels: {
+                            font: {
+                                size: 12
+                            }
+                        },
+                        ticks: {
+                            beginAtZero: true,
+                            max: 100
+                        }
+                    }
+                }
+            }
+        });
+
+        // Auto-refresh functionality
+        let lastUpdate = new Date('2026-06-30T14:30:00');
+
+        function updateLastUpdateTime() {
+            const now = new Date();
+            const timeDiff = Math.floor((now - lastUpdate) / 1000);
+            const minutes = Math.floor(timeDiff / 60);
+            const hours = Math.floor(minutes / 60);
+            const days = Math.floor(hours / 24);
+
+            let timeString;
+            if (days > 0) {
+                timeString = `${days} hari yang lalu`;
+            } else if (hours > 0) {
+                timeString = `${hours} jam yang lalu`;
+            } else {
+                timeString = `${minutes} menit yang lalu`;
+            }
+
+            document.querySelector('.update-time').textContent = `Terakhir Diperbarui: ${timeString}`;
+        }
+
+        setInterval(updateLastUpdateTime, 60000);
+
+        // Add hover effects to cards
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px) scale(1.02)';
+            });
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Check critical issues and show alert if needed
+        function checkCriticalIssues() {
+            // Simulated critical issue check
+            const systemResponseTime = 72; // hours
+            const targetTime = 48;
+
+            if (systemResponseTime > targetTime) {
+                document.getElementById('alertBox').classList.add('show');
+            }
+        }
+
+        // Initial check
+        checkCriticalIssues();
+
+        // Dismiss alert function
+        function dismissAlert() {
+            document.getElementById('alertBox').classList.remove('show');
+        }
+
+        // Navigation scroll effect
+        document.querySelectorAll('.navbar-brand').forEach(brand => {
+            brand.addEventListener('click', function(e) {
+                e.preventDefault();
+                const href = this.getAttribute('href');
+                if (href === '#') {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<!-- saved from url=(0040)http://idsd.depok.go.id/petapembangunan/ -->
+<html dir="ltr" class="esriLtr jimu-ltr id-id id dj_webkit dj_chrome dj_contentbox" data-qb-installed="true"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=EDGE">
+		<title>Peta Pembangunan Kota Depok</title>
+		<link rel="shortcut icon" href="http://idsd.depok.go.id/petapembangunan/images/shortcut.png">
+		<!--[if IE 8]>
+    <link rel="stylesheet" type="text/css"  href="jimu.js/css/jimu-ie.css" />
+    <![endif]-->
+		<style type="text/css">
+		*{box-sizing: border-box;}
+      body,html {
+        width:100%;
+        height:100%;
+        margin:0;
+        padding:0;
+        overflow:hidden;
+      }
+      #main-loading{
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        overflow: hidden;
+      }
+      #main-loading #ie-note{
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+      }
+      #main-loading #ie-note {
+        width: 586px;
+        height: 253px;
+        background-image: url('images/notes.png');
+        padding: 0 30px 40px 30px;
+        font-size: 14px;
+        color: #596679;
+      }
+      #ie-note .hint-title{
+        height: 40px;
+        line-height: 48px;
+        text-align: left;
+        font-weight: bold;
+      }
+      #ie-note .hint-img{
+        background-image: url('images/hint.png');
+        background-position: left;
+        padding-left: 40px;
+        margin-top: 20px;
+        background-repeat: no-repeat;
+        height: 30px;
+        text-align: left;
+        line-height: 30px;
+        font-weight: bold;
+      }
+      #ie-note span{
+        display: block;
+        line-height: 14px;
+      }
+      #main-page{
+        display: none;
+        width: 100%;
+        height: 100%;
+        position: relative;
+      }
+
+      #jimu-layout-manager{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+      }
+		</style>
+    <link rel="stylesheet" type="text/css" href="./Peta Pembangunan Kota Depok_files/loading.css">
+		<script type="text/javascript" charset="utf-8" src="./Peta Pembangunan Kota Depok_files/jsapi_ROOT.js"></script><script type="text/javascript" charset="utf-8" src="./Peta Pembangunan Kota Depok_files/svg.js"></script><script type="text/javascript" charset="utf-8" src="./Peta Pembangunan Kota Depok_files/validate.js"></script><script type="text/javascript" charset="utf-8" src="./Peta Pembangunan Kota Depok_files/loading.js"></script><script type="text/javascript" charset="utf-8" src="./Peta Pembangunan Kota Depok_files/common.js"></script><script type="text/javascript" charset="utf-8" src="./Peta Pembangunan Kota Depok_files/filters.js"></script><script type="text/javascript" charset="utf-8" src="./Peta Pembangunan Kota Depok_files/svgext.js"></script><script type="text/javascript" charset="utf-8" src="./Peta Pembangunan Kota Depok_files/main.js"></script><script type="text/javascript" charset="utf-8" src="./Peta Pembangunan Kota Depok_files/main(1).js"></script><script type="text/javascript" charset="utf-8" src="./Peta Pembangunan Kota Depok_files/preload.js"></script><script type="text/javascript" charset="utf-8" src="./Peta Pembangunan Kota Depok_files/main_ROOT.js"></script><script type="text/javascript" charset="utf-8" src="./Peta Pembangunan Kota Depok_files/ColorPicker.js"></script><script type="text/javascript" charset="utf-8" src="./Peta Pembangunan Kota Depok_files/colors.js"></script><script type="text/javascript" charset="utf-8" src="./Peta Pembangunan Kota Depok_files/ComboBox.js"></script><script type="text/javascript" charset="utf-8" src="./Peta Pembangunan Kota Depok_files/main(2).js"></script><script type="text/javascript" charset="utf-8" src="./Peta Pembangunan Kota Depok_files/main_ROOT(1).js"></script><script type="text/javascript" charset="utf-8" src="./Peta Pembangunan Kota Depok_files/csv.js"></script><script type="text/javascript" charset="utf-8" src="./Peta Pembangunan Kota Depok_files/CsvStore.js"></script><script>
+			/*******************************
+			* This is the function you can modify to customize the loading page
+			* This function will be invoked when one resource is loaded.
+			********************************/
+			// var progress;
+			// function loadingCallback(url, i, count) {
+			// 	var loading = document.getElementById('main-loading-bar');
+			// 	loading.setAttribute('title', url);
+			//   if(!progress){
+			//     progress = document.createElement('div');
+			//     progress.setAttribute('class', 'loading-progress');
+			//     loading.appendChild(progress);
+			//   }
+			//   progress.style.width = (((i - 1)/count) * 100) + '%';
+			// }
+		</script>
+	<link rel="stylesheet" type="text/css" href="./Peta Pembangunan Kota Depok_files/dojo.css"><link rel="stylesheet" type="text/css" href="./Peta Pembangunan Kota Depok_files/claro.css"><link rel="stylesheet" type="text/css" href="./Peta Pembangunan Kota Depok_files/esri.css"><link rel="stylesheet" type="text/css" href="./Peta Pembangunan Kota Depok_files/ResizeHandle.css"><link rel="stylesheet" type="text/css" href="./Peta Pembangunan Kota Depok_files/jimu-theme.css"><style type="text/css">.lf-progress {
+  -webkit-appearance: none;
+  -moz-apperance: none;
+  width: 100%;
+  /* margin: 0 10px; */
+  height: 4px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.lf-progress:focus {
+  outline: none;
+  border: none;
+}
+.lf-progress::-moz-range-track {
+  cursor: pointer;
+  background: none;
+  border: none;
+  outline: none;
+}
+.lf-progress::-webkit-slider-thumb {
+  -webkit-appearance: none !important;
+  height: 13px;
+  width: 13px;
+  border: 0;
+  border-radius: 50%;
+  background: #0fccce;
+  cursor: pointer;
+}
+.lf-progress::-moz-range-thumb {
+  -moz-appearance: none !important;
+  height: 13px;
+  width: 13px;
+  border: 0;
+  border-radius: 50%;
+  background: #0fccce;
+  cursor: pointer;
+}
+.lf-progress::-ms-track {
+  width: 100%;
+  height: 3px;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+.lf-progress::-ms-fill-lower {
+  background: #ccc;
+  border-radius: 3px;
+}
+.lf-progress::-ms-fill-upper {
+  background: #ccc;
+  border-radius: 3px;
+}
+.lf-progress::-ms-thumb {
+  border: 0;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  background: #0fccce;
+  cursor: pointer;
+}
+.lf-progress:focus::-ms-fill-lower {
+  background: #ccc;
+}
+.lf-progress:focus::-ms-fill-upper {
+  background: #ccc;
+}
+.lf-player-container :focus {
+  outline: 0;
+}
+.lf-popover {
+  position: relative;
+}
+
+.lf-popover-content {
+  display: inline-block;
+  position: absolute;
+  opacity: 1;
+  visibility: visible;
+  transform: translate(0, -10px);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+  transition: all 0.3s cubic-bezier(0.75, -0.02, 0.2, 0.97);
+}
+
+.lf-popover-content.hidden {
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(0, 0px);
+}
+
+.lf-player-btn-container {
+  display: flex;
+  align-items: center;
+}
+.lf-player-btn {
+  cursor: pointer;
+  fill: #999;
+  width: 14px;
+}
+
+.lf-player-btn.active {
+  fill: #555;
+}
+
+.lf-popover {
+  position: relative;
+}
+
+.lf-popover-content {
+  display: inline-block;
+  position: absolute;
+  background-color: #ffffff;
+  opacity: 1;
+
+  transform: translate(0, -10px);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+  transition: all 0.3s cubic-bezier(0.75, -0.02, 0.2, 0.97);
+  padding: 10px;
+}
+
+.lf-popover-content.hidden {
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(0, 0px);
+}
+
+.lf-arrow {
+  position: absolute;
+  z-index: -1;
+  content: '';
+  bottom: -9px;
+  border-style: solid;
+  border-width: 10px 10px 0px 10px;
+}
+
+.lf-left-align,
+.lf-left-align .lfarrow {
+  left: 0;
+  right: unset;
+}
+
+.lf-right-align,
+.lf-right-align .lf-arrow {
+  right: 0;
+  left: unset;
+}
+
+.lf-text-input {
+  border: 1px #ccc solid;
+  border-radius: 5px;
+  padding: 3px;
+  width: 60px;
+  margin: 0;
+}
+
+.lf-color-picker {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 90px;
+}
+
+.lf-color-selectors {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.lf-color-component {
+  display: flex;
+  flex-direction: row;
+  font-size: 12px;
+  align-items: center;
+  justify-content: center;
+}
+
+.lf-color-component strong {
+  width: 40px;
+}
+
+.lf-color-component input[type='range'] {
+  margin: 0 0 0 10px;
+}
+
+.lf-color-component input[type='number'] {
+  width: 50px;
+  margin: 0 0 0 10px;
+}
+
+.lf-color-preview {
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 5px;
+}
+
+.lf-preview {
+  height: 60px;
+  width: 60px;
+}
+
+.lf-popover-snapshot {
+  width: 150px;
+}
+.lf-popover-snapshot h5 {
+  margin: 5px 0 10px 0;
+  font-size: 0.75rem;
+}
+.lf-popover-snapshot a {
+  display: block;
+  text-decoration: none;
+}
+.lf-popover-snapshot a:before {
+  content: '⥼';
+  margin-right: 5px;
+}
+.lf-popover-snapshot .lf-note {
+  display: block;
+  margin-top: 10px;
+  color: #999;
+}
+.lf-player-controls > div {
+  margin-right: 5px;
+  margin-left: 5px;
+}
+.lf-player-controls > div:first-child {
+  margin-left: 0px;
+}
+.lf-player-controls > div:last-child {
+  margin-right: 0px;
+}
+</style><style type="text/css">.lf-progress {
+  -webkit-appearance: none;
+  -moz-apperance: none;
+  width: 100%;
+  /* margin: 0 10px; */
+  height: 4px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.lf-progress:focus {
+  outline: none;
+  border: none;
+}
+.lf-progress::-moz-range-track {
+  cursor: pointer;
+  background: none;
+  border: none;
+  outline: none;
+}
+.lf-progress::-webkit-slider-thumb {
+  -webkit-appearance: none !important;
+  height: 13px;
+  width: 13px;
+  border: 0;
+  border-radius: 50%;
+  background: #0fccce;
+  cursor: pointer;
+}
+.lf-progress::-moz-range-thumb {
+  -moz-appearance: none !important;
+  height: 13px;
+  width: 13px;
+  border: 0;
+  border-radius: 50%;
+  background: #0fccce;
+  cursor: pointer;
+}
+.lf-progress::-ms-track {
+  width: 100%;
+  height: 3px;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+.lf-progress::-ms-fill-lower {
+  background: #ccc;
+  border-radius: 3px;
+}
+.lf-progress::-ms-fill-upper {
+  background: #ccc;
+  border-radius: 3px;
+}
+.lf-progress::-ms-thumb {
+  border: 0;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  background: #0fccce;
+  cursor: pointer;
+}
+.lf-progress:focus::-ms-fill-lower {
+  background: #ccc;
+}
+.lf-progress:focus::-ms-fill-upper {
+  background: #ccc;
+}
+.lf-player-container :focus {
+  outline: 0;
+}
+.lf-popover {
+  position: relative;
+}
+
+.lf-popover-content {
+  display: inline-block;
+  position: absolute;
+  opacity: 1;
+  visibility: visible;
+  transform: translate(0, -10px);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+  transition: all 0.3s cubic-bezier(0.75, -0.02, 0.2, 0.97);
+}
+
+.lf-popover-content.hidden {
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(0, 0px);
+}
+
+.lf-player-btn-container {
+  display: flex;
+  align-items: center;
+}
+.lf-player-btn {
+  cursor: pointer;
+  fill: #999;
+  width: 14px;
+}
+
+.lf-player-btn.active {
+  fill: #555;
+}
+
+.lf-popover {
+  position: relative;
+}
+
+.lf-popover-content {
+  display: inline-block;
+  position: absolute;
+  background-color: #ffffff;
+  opacity: 1;
+
+  transform: translate(0, -10px);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+  transition: all 0.3s cubic-bezier(0.75, -0.02, 0.2, 0.97);
+  padding: 10px;
+}
+
+.lf-popover-content.hidden {
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(0, 0px);
+}
+
+.lf-arrow {
+  position: absolute;
+  z-index: -1;
+  content: '';
+  bottom: -9px;
+  border-style: solid;
+  border-width: 10px 10px 0px 10px;
+}
+
+.lf-left-align,
+.lf-left-align .lfarrow {
+  left: 0;
+  right: unset;
+}
+
+.lf-right-align,
+.lf-right-align .lf-arrow {
+  right: 0;
+  left: unset;
+}
+
+.lf-text-input {
+  border: 1px #ccc solid;
+  border-radius: 5px;
+  padding: 3px;
+  width: 60px;
+  margin: 0;
+}
+
+.lf-color-picker {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 90px;
+}
+
+.lf-color-selectors {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.lf-color-component {
+  display: flex;
+  flex-direction: row;
+  font-size: 12px;
+  align-items: center;
+  justify-content: center;
+}
+
+.lf-color-component strong {
+  width: 40px;
+}
+
+.lf-color-component input[type='range'] {
+  margin: 0 0 0 10px;
+}
+
+.lf-color-component input[type='number'] {
+  width: 50px;
+  margin: 0 0 0 10px;
+}
+
+.lf-color-preview {
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 5px;
+}
+
+.lf-preview {
+  height: 60px;
+  width: 60px;
+}
+
+.lf-popover-snapshot {
+  width: 150px;
+}
+.lf-popover-snapshot h5 {
+  margin: 5px 0 10px 0;
+  font-size: 0.75rem;
+}
+.lf-popover-snapshot a {
+  display: block;
+  text-decoration: none;
+}
+.lf-popover-snapshot a:before {
+  content: '⥼';
+  margin-right: 5px;
+}
+.lf-popover-snapshot .lf-note {
+  display: block;
+  margin-top: 10px;
+  color: #999;
+}
+.lf-player-controls > div {
+  margin-right: 5px;
+  margin-left: 5px;
+}
+.lf-player-controls > div:first-child {
+  margin-left: 0px;
+}
+.lf-player-controls > div:last-child {
+  margin-right: 0px;
+}
+</style><style id="theme_FoldableTheme_style_common" type="text/css">.jimu-foldable-dijit{position: relative;}.jimu-foldable-dijit .jimu-panel-title{position: relative;}.jimu-foldable-dijit>.jimu-panel-content{position: absolute; left: 0; right: 0; bottom: 0; -ms-overflow-x: hidden; -ms-overflow-y: auto; overflow-x: hidden; overflow-y: auto;}.foldable-widget-frame{overflow: hidden;}.jimu-foldable-panel{position: absolute;}.jimu-foldable-panel>.jimu-panel-title{color: white; cursor: pointer; background-color: #485566; box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.4); position: relative; font-weight: bold;}.jimu-foldable-panel .title-label{height: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; position: absolute; left: 16px; right: 110px;}.jimu-foldable-panel .close-btn,.jimu-foldable-panel .max-btn,.jimu-foldable-panel .foldable-btn{width: 35px; height: 100%; border-radius: 11px; opacity: 1; background-position: center; background-repeat: no-repeat;}.jimu-foldable-panel .close-btn{background-image: url("/petapembangunan/themes/FoldableTheme/panels/FoldablePanel/images/x.png");}.jimu-foldable-panel .max-btn{background-image: url("/petapembangunan/themes/FoldableTheme/panels/FoldablePanel/images/max.png");}.jimu-foldable-panel .max-btn.maximized{background-image: url("/petapembangunan/themes/FoldableTheme/panels/FoldablePanel/images/normal.png");}.jimu-foldable-panel .foldable-btn{background-image: url("/petapembangunan/themes/FoldableTheme/panels/FoldablePanel/images/fold_up.png");}.jimu-foldable-panel .foldable-btn.folded{background-image: url("/petapembangunan/themes/FoldableTheme/panels/FoldablePanel/images/fold_down.png");}.jimu-ismobile .jimu-foldable-panel .foldable-btn{background-image: url("/petapembangunan/themes/FoldableTheme/panels/FoldablePanel/images/fold_down.png");}.jimu-ismobile .jimu-foldable-panel .foldable-btn.folded{background-image: url("/petapembangunan/themes/FoldableTheme/panels/FoldablePanel/images/fold_up.png");}.jimu-foldable-panel .jimu-widget-frame .foldable-btn{background-image: url("/petapembangunan/themes/FoldableTheme/panels/FoldablePanel/images/minus.png");}.jimu-foldable-panel .jimu-widget-frame .foldable-btn.folded{background-image: url("/petapembangunan/themes/FoldableTheme/panels/FoldablePanel/images/plus.png");}.jimu-foldable-panel .close-tip{position: absolute; left: 0; top: 0;}.foldable-widget-frame>.title{color: #86909c; background-color: #d9dde0; cursor: pointer;}.foldable-widget-frame>.title>.title-label{font-size: 14px;}.jimu-rtl .jimu-foldable-panel .title-label{left: 110px; right: 16px;}.jimu-dockable-panel{background-color: rgba(0, 0, 0, 0.8); overflow: visible;}.jimu-dockable-panel>.jimu-container{width: 100%; height: 100%; position: relative;}.jimu-dockable-panel>.bar{background-position: center center; background-repeat: no-repeat; cursor: pointer;}.jimu-dockable-panel>.bar.max{background-color: rgba(0, 0, 0, 0.8);}.jimu-dockable-panel>.bar.min{background-color: rgba(0, 0, 0, 0.6);}.jimu-dockable-panel>.bar.min:hover{background-color: rgba(0, 0, 0, 0.8);}.jimu-dockable-panel>.nav{width: 25px; height: 25px; background-position: center center; background-repeat: no-repeat; cursor: pointer;}.jimu-simple-panel{-moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px;}</style><link id="theme_FoldableTheme_style_green" rel="stylesheet" type="text/css" href="./Peta Pembangunan Kota Depok_files/style.css"></head>
+	<body class="claro jimu-main-font" data-scholarcy-content-script-executed="1" style="">
+
+		<div id="main-loading" style="display: none;">
+
+			<!-- This is section you can modify to customize the loading page -->
+			<div id="app-loading"></div>
+      <div id="loading-gif"></div>
+
+			<!-- //////////////////    END    ////////////////////////////// -->
+			<div id="ie-note" style="display:none;">
+        <div class="hint-title">Error</div>
+        <div class="hint-img">Your browser is currently not supported.</div>
+        <p class="hint-text">
+          <span>
+            Please note that creating presentations is not supported in Internet Explorer versions 6, 7.
+          </span>
+          <br>
+          <span>
+            We recommend upgrading to the latest Internet Explorer, Google Chrome, or Firefox.
+          </span>
+          <br>
+          <span>
+            If you are using IE 8 or later, make sure you turn off "Compatibility View".
+          </span>
+        </p>
+      </div>
+		</div>
+		<div id="main-page" style="display: block;">
+			<div id="jimu-layout-manager" widgetid="jimu-layout-manager" class="FoldableTheme green"><div id="map" style="position: absolute; background-color: rgb(238, 238, 238); overflow: hidden; min-width: 1px; min-height: 1px; inset: 40px 0px 0px; width: auto; height: auto; padding: 0px; z-index: auto;" class="map" data-zoom="13" data-scale="72223.819286" data-loaded=""><div class="jimu-loading-shelter" id="jimu_dijit_LoadingShelter_0" widgetid="jimu_dijit_LoadingShelter_0" style="width: 100%; height: 100%;">
+  <div class="loading-container">
+      <img data-dojo-attach-point="loadingImg" src="./Peta Pembangunan Kota Depok_files/loading.gif">
+      <p data-dojo-attach-point="textNode"></p>
+  </div>
+</div><div id="map_root" class="esriMapContainer" style="width: 1680px; height: 892px; direction: ltr;"><div id="map_container" class="esriMapContainer" style="position: absolute; cursor: default; clip: auto;"><div id="map_layers" class="esriMapLayers"><div id="map_OpenStreetMap" style="position: absolute; width: 1680px; height: 892px; overflow: visible; transform: translate(0px, 0px); display: block;"><div style="position: absolute; width: 1680px; height: 892px; overflow: visible; transition: -webkit-transform 500ms;"><img id="map_OpenStreetMap_tile_13_0_0" alt="" class="layerTile" src="./Peta Pembangunan Kota Depok_files/4239.png" style="width: 256px; height: 256px; visibility: visible; transform: translate(-157px, -227px);"><img id="map_OpenStreetMap_tile_13_1_0" alt="" class="layerTile" src="./Peta Pembangunan Kota Depok_files/4240.png" style="width: 256px; height: 256px; visibility: visible; transform: translate(-157px, 29px);"><img id="map_OpenStreetMap_tile_13_2_0" alt="" class="layerTile" src="./Peta Pembangunan Kota Depok_files/4241.png" style="width: 256px; height: 256px; visibility: visible; transform: translate(-157px, 285px);"><img id="map_OpenStreetMap_tile_13_3_0" alt="" class="layerTile" src="./Peta Pembangunan Kota Depok_files/4242.png" style="width: 256px; height: 256px; visibility: visible; transform: translate(-157px, 541px);"><img id="map_OpenStreetMap_tile_13_4_0" alt="" class="layerTile" src="./Peta Pembangunan Kota Depok_files/4243.png" style="width: 256px; height: 256px; visibility: visible; transform: translate(-157px, 797px);"><img id="map_OpenStreetMap_tile_13_0_1" alt="" class="layerTile" src="./Peta Pembangunan Kota Depok_files/4239(1).png" style="width: 256px; height: 256px; visibility: visible; transform: translate(99px, -227px);"><img id="map_OpenStreetMap_tile_13_1_1" alt="" class="layerTile" src="./Peta Pembangunan Kota Depok_files/4240(1).png" style="width: 256px; height: 256px; visibility: visible; transform: translate(99px, 29px);"><img id="map_OpenStreetMap_tile_13_2_1" alt="" class="layerTile" src="./Peta Pembangunan Kota Depok_files/4241(1).png" style="width: 256px; height: 256px; visibility: visible; transform: translate(99px, 285px);"><img id="map_OpenStreetMap_tile_13_3_1" alt="" class="layerTile" src="./Peta Pembangunan Kota Depok_files/4242(1).png" style="width: 256px; height: 256px; visibility: visible; transform: translate(99px, 541px);"><img id="map_OpenStreetMap_tile_13_4_1" alt="" class="layerTile" src="./Peta Pembangunan Kota Depok_files/4243(1).png" style="width: 256px; height: 256px; visibility: visible; transform: translate(99px, 797px);"><img id="map_OpenStreetMap_tile_13_0_2" alt="" class="layerTile" src="./Peta Pembangunan Kota Depok_files/4239(2).png" style="width: 256px; height: 256px; visibility: visible; transform: translate(355px, -227px);"><img id="map_OpenStreetMap_tile_13_1_2" alt="" class="layerTile" src="./Peta Pembangunan Kota Depok_files/4240(2).png" style="width: 256px; height: 256px; visibility: visible; transform: translate(355px, 29px);"><img id="map_OpenStreetMap_tile_13_2_2" alt="" class="layerTile" src="./Peta Pembangunan Kota Depok_files/4241(2).png" style="width: 256px; height: 256px; visibility: visible; transform: translate(355px, 285px);"><img id="map_OpenStreetMap_tile_13_3_2" alt="" class="layerTile" src="./Peta Pembangunan Kota Depok_files/4242(2).png" style="width: 256px; height: 256px; visibility: visible; transform: translate(355px, 541px);"><img id="map_OpenStreetMap_tile_13_4_2" alt="" class="layerTile" src="./Peta Pembangunan Kota Depok_files/4243(2).png" style="width: 256px; height: 256px; visibility: visible; transform: translate(355px, 797px);"><img id="map_OpenStreetMap_tile_13_0_3" alt="" class="layerTile" src="./Peta Pembangunan Kota Depok_files/4239(3).png" style="width: 256px; height: 256px; visibility: visible; transform: translate(611px, -227px);"><img id="map_OpenStreetMap_tile_13_1_3" alt="" class="layerTile" src="./Peta Pembangunan Kota Depok_files/4240(3).png" style="width: 256px; height: 256px; visibility: visible; transform: translate(611px, 29px);"><img id="map_OpenStreetMap_tile_13_2_3" alt="" class="layerTile" src="./Peta Pembangunan Kota Depok_files/4241(3).png" style="width: 256px; height: 256px; visibility: visible; transform: translate(611px, 285px);"><img id="map_OpenStreetMap_tile_13_3_3" alt="" class="layerTile" src="./Peta Pembangunan Kota Depok_files/4242(3).png" style="width: 256px; height: 256px; visibility: visible; transform: translate(611px, 541px);"><img id="map_OpenStreetMap_tile_13_4_3" alt="" class="layerTile" src="./Peta Pembangunan Kota Depok_files/4243(3).png" style="width: 256px; height: 256px; visibility: visible; transform: translate(611px, 797px);"><img id="map_OpenStreetMap_tile_13_0_4" alt="" class="layerTile" src="./Peta Pembangunan Kota Depok_files/4239(4).png" style="width: 256px; height: 256px; visibility: visible; transform: translate(867px, -227px);"><img id="map_OpenStreetMap_tile_13_1_4" alt="" class="layerTile" src="./Peta Pembangunan Kota Depok_files/4240(4).png" style="width: 256px; height: 256px; visibility: visible; transform: translate(867px, 29px);"><img id="map_OpenStreetMap_tile_13_2_4" alt="" class="layerTile" src="./Peta Pembangunan Kota Depok_files/4241(4).png" style="width: 256px; height: 256px; visibility: visible; transform: translate(867px, 285px);"><img id="map_OpenStreetMap_tile_13_3_4" alt="" class="layerTile" src="./Peta Pembangunan Kota Depok_files/4242(4).png" style="width: 256px; height: 256px; visibility: visible; transform: translate(867px, 541px);"><img id="map_OpenStreetMap_tile_13_4_4" alt="" class="layerTile" src="./Peta Pembangunan Kota Depok_files/4243(4).png" style="width: 256px; height: 256px; visibility: visible; transform: translate(867px, 797px);"><img id="map_OpenStreetMap_tile_13_0_5" alt="" class="layerTile" src="./Peta Pembangunan Kota Depok_files/4239(5).png" style="width: 256px; height: 256px; visibility: visible; transform: translate(1123px, -227px);"><img id="map_OpenStreetMap_tile_13_1_5" alt="" class="layerTile" src="./Peta Pembangunan Kota Depok_files/4240(5).png" style="width: 256px; height: 256px; visibility: visible; transform: translate(1123px, 29px);"><img id="map_OpenStreetMap_tile_13_2_5" alt="" class="layerTile" src="./Peta Pembangunan Kota Depok_files/4241(5).png" style="width: 256px; height: 256px; visibility: visible; transform: translate(1123px, 285px);"><img id="map_OpenStreetMap_tile_13_3_5" alt="" class="layerTile" src="./Peta Pembangunan Kota Depok_files/4242(5).png" style="width: 256px; height: 256px; visibility: visible; transform: translate(1123px, 541px);"><img id="map_OpenStreetMap_tile_13_4_5" alt="" class="layerTile" src="./Peta Pembangunan Kota Depok_files/4243(5).png" style="width: 256px; height: 256px; visibility: visible; transform: translate(1123px, 797px);"><img id="map_OpenStreetMap_tile_13_0_6" alt="" class="layerTile" src="./Peta Pembangunan Kota Depok_files/4239(6).png" style="width: 256px; height: 256px; visibility: visible; transform: translate(1379px, -227px);"><img id="map_OpenStreetMap_tile_13_1_6" alt="" class="layerTile" src="./Peta Pembangunan Kota Depok_files/4240(6).png" style="width: 256px; height: 256px; visibility: visible; transform: translate(1379px, 29px);"><img id="map_OpenStreetMap_tile_13_2_6" alt="" class="layerTile" src="./Peta Pembangunan Kota Depok_files/4241(6).png" style="width: 256px; height: 256px; visibility: visible; transform: translate(1379px, 285px);"><img id="map_OpenStreetMap_tile_13_3_6" alt="" class="layerTile" src="./Peta Pembangunan Kota Depok_files/4242(6).png" style="width: 256px; height: 256px; visibility: visible; transform: translate(1379px, 541px);"><img id="map_OpenStreetMap_tile_13_4_6" alt="" class="layerTile" src="./Peta Pembangunan Kota Depok_files/4243(6).png" style="width: 256px; height: 256px; visibility: visible; transform: translate(1379px, 797px);"><img id="map_OpenStreetMap_tile_13_0_7" alt="" class="layerTile" src="./Peta Pembangunan Kota Depok_files/4239(7).png" style="width: 256px; height: 256px; visibility: visible; transform: translate(1635px, -227px);"><img id="map_OpenStreetMap_tile_13_1_7" alt="" class="layerTile" src="./Peta Pembangunan Kota Depok_files/4240(7).png" style="width: 256px; height: 256px; visibility: visible; transform: translate(1635px, 29px);"><img id="map_OpenStreetMap_tile_13_2_7" alt="" class="layerTile" src="./Peta Pembangunan Kota Depok_files/4241(7).png" style="width: 256px; height: 256px; visibility: visible; transform: translate(1635px, 285px);"><img id="map_OpenStreetMap_tile_13_3_7" alt="" class="layerTile" src="./Peta Pembangunan Kota Depok_files/4242(7).png" style="width: 256px; height: 256px; visibility: visible; transform: translate(1635px, 541px);"><img id="map_OpenStreetMap_tile_13_4_7" alt="" class="layerTile" src="./Peta Pembangunan Kota Depok_files/4243(7).png" style="width: 256px; height: 256px; visibility: visible; transform: translate(1635px, 797px);"></div></div><svg overflow="hidden" width="1680" height="892" id="map_gc" style="overflow: visible; position: absolute;"><defs></defs><g id="map_graphics_layer" transform="matrix(1.00000000,0.00000000,0.00000000,1.00000000,0.00000000,0.00000000)" style="display: block;"><g></g></g></svg></div></div><div class="esriControlsBR"><span class="esriAttribution" style="max-width: 756px; cursor: default;"><span class="esriAttributionList"><span class="esriAttributionLastItem" style="display: inline;">Map data © OpenStreetMap contributors, CC-BY-SA<span class="esriAttributionDelim"> | </span></span></span></span><div class="logo-med"></div></div><div class="esriPopup" style="visibility: hidden;"><div class="esriPopupWrapper" style="position: absolute;"><div class="sizer"><div class="titlePane" style="user-select: none;"><div class="spinner hidden" title="Searching..."></div><div class="title"></div><div class="titleButton prev hidden" title="Previous feature"></div><div class="titleButton next hidden" title="Next feature"></div><div class="titleButton maximize" title="Maximize"></div><div class="titleButton close" title="Close"></div></div></div><div class="sizer content"><div class="contentPane"></div></div><div class="sizer"><div class="actionsPane"><div class="actionList hidden"><a title="Zoom" to="" class="action zoomTo" href="javascript:void(0);"><span>Zoom to</span></a></div></div></div><div class="pointer hidden"></div></div><div class="outerPointer hidden"></div></div><div id="map_zoom_slider" class="esriSimpleSlider esriSimpleSliderVertical esriSimpleSliderTL" style="z-index: 30;"><div class="esriSimpleSliderIncrementButton" title="Zoom In"><span>+</span></div><div class="esriSimpleSliderDecrementButton" title="Zoom Out"><span>–</span></div></div></div></div></div>
+		</div>
+
+		<script src="./Peta Pembangunan Kota Depok_files/env.js"></script>
+		<script type="text/javascript" src="./Peta Pembangunan Kota Depok_files/simpleLoader.js"></script>
+		<script type="text/javascript" src="./Peta Pembangunan Kota Depok_files/init.js"></script><script type="text/javascript" src="./Peta Pembangunan Kota Depok_files/caja-html-sanitizer-minified.js"></script><script type="text/javascript" src="./Peta Pembangunan Kota Depok_files/init(1).js"></script>
+	
+<span id="ctrlcCopy" style="display: inline-block; position: absolute; left: -9999em;"></span><script type="text/javascript" src="./Peta Pembangunan Kota Depok_files/FileSaver.js"></script></body></html>

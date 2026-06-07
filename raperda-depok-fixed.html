@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Raperda Kesehatan Kota Depok | Interactive Mind Map</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      overflow: hidden;
+      height: 100vh;
+      position: relative;
+    }
+
+    /* Canvas container */
+    #canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      cursor: grab;
+    }
+
+    #canvas.grabbing {
+      cursor: grabbing;
+    }
+
+    /* Viewport */
+    #viewport {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform-origin: center;
+      will-change: transform;
+    }
+
+    /* Node styles */
+    .node {
+      position: absolute;
+      background: white;
+      border-radius: 12px;
+      padding: 15px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+      min-width: 120px;
+      max-width: 200px;
+      z-index: 10;
+    }
+
+    .node:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+      z-index: 20;
+    }
+
+    .node.root {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .node.category {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      color: white;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+    }
+
+    .node.leaf {
+      background: white;
+      border: 2px solid #667eea;
+      color: #333;
+      padding: 12px 20px;
+    }
+
+    .node.selected {
+      ring: 4px solid #667eea;
+      box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.3);
+    }
+
+    /* Node content */
+    .node-label {
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .node-subtitle {
+      font-size: 12px;
+      opacity: 0.8;
+    }
+
+    /* Toggle button */
+    .toggle-btn {
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 24px;
+      height: 24px;
+      background: #667eea;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      transition: all 0.2s;
+    }
+
+    .toggle-btn:hover {
+      background: #764ba2;
+      transform: translateX(-50%) scale(1.1);
+    }
+
+    /* Connection lines */
+    #connections {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .connection {
+      stroke: #ccc;
+      stroke-width: 2;
+      fill: none;
+    }
+
+    /* Controls */
+    #controls {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: white;
+      padding: 10px 20px;
+      border-radius: 30px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      z-index: 100;
+    }
+
+    .control-btn {
+      background: #667eea;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      font-size: 18px;
+    }
+
+    .control-btn:hover {
+      background: #764ba2;
+      transform: scale(1.1);
+    }
+
+    .separator {
+      width: 1px;
+      height: 24px;
+      background: #ddd;
+    }
+
+    /* Detail panel */
+    #detailPanel {
+      position: fixed;
+      right: -400px;
+      top: 0;
+      width: 400px;
+      height: 100%;
+      background: white;
+      box-shadow: -4px 0 20px rgba(0,0,0,0.1);
+      transition: right 0.3s ease;
+      z-index: 100;
+      overflow-y: auto;
+    }
+
+    #detailPanel.open {
+      right: 0;
+    }
+
+    #detailPanel .header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 20px;
+      position: relative;
+    }
+
+    #detailPanel .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(255,255,255,0.2);
+      border: none;
+      color: white;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #detailPanel .content {
+      padding: 20px;
+    }
+
+    .regulation-card {
+      background: #f8f9fa;
+      border-left: 4px solid #667eea;
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: 5px;
+    }
+
+    .regulation-card h4 {
+      color: #667eea;
+      margin-bottom: 10px;
+    }
+
+    /* Instructions */
+    #instructions {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background: rgba(255,255,255,0.9);
+      padding: 10px 15px;
+      border-radius: 10px;
+      font-size: 14px;
+      color: #666;
+      z-index: 100;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Controls -->
+  <div id="controls">
+    <span style="font-weight: bold; color: #667eea;">Raperda Kesehatan Depok</span>
+    <div class="separator"></div>
+    <button class="control-btn" onclick="zoomIn()">+</button>
+    <button class="control-btn" onclick="zoomOut()">−</button>
+    <button class="control-btn" onclick="resetView()">⊙</button>
+    <div class="separator"></div>
+    <button class="control-btn" onclick="expandAll()">⊕</button>
+    <button class="control-btn" onclick="collapseAll()">⊖</button>
+  </div>
+
+  <!-- Canvas -->
+  <div id="canvas">
+    <svg id="connections"></svg>
+    <div id="viewport"></div>
+  </div>
+
+  <!-- Detail Panel -->
+  <div id="detailPanel">
+    <div class="header">
+      <button class="close-btn" onclick="closeDetail()">×</button>
+      <h2 id="detailTitle">Select a node</h2>
+      <p id="detailSubtitle">Click on any node to view details</p>
+    </div>
+    <div class="content" id="detailContent">
+      <p style="color: #666;">Select a node from the mind map to view detailed information about regulations and implementation guidelines.</p>
+    </div>
+  </div>
+
+  <!-- Instructions -->
+  <div id="instructions">
+    🖱️ Drag to pan • 🎯 Click nodes for details • 🔍 Scroll to zoom
+  </div>
+
+  <script>
+    // Mind map data
+    const mindMapData = {
+      id: 'root',
+      label: 'Tanggung Jawab Pemda',
+      subtitle: 'Raperda Kesehatan',
+      type: 'root',
+      children: [
+        {
+          id: 'ukp_ukm',
+          label: 'Upaya Kesehatan',
+          type: 'category',
+          children: [
+            {
+              id: 'umum',
+              label: 'Umum & Akses',
+              type: 'leaf',
+              content: {
+                uu: 'Pasal 6(1), 7(1): Bertanggung jawab merencanakan, mengatur, membina, dan mengawasi upaya kesehatan.',
+                pp: 'Pasal 2(1): Pembinaan & pengawasan serta perencanaan kebutuhan Fasilitas Pelayanan Kesehatan.'
+              }
+            },
+            {
+              id: 'primer',
+              label: 'Pelayanan Primer',
+              subtitle: 'Puskesmas',
+              type: 'leaf',
+              content: {
+                uu: 'Pasal 28: Wajib menyediakan akses Pelayanan Kesehatan Primer di seluruh wilayah.',
+                pp: 'Pasal 803: Mendirikan minimal satu Puskesmas di setiap kecamatan.'
+              }
+            },
+            {
+              id: 'lanjutan',
+              label: 'Pelayanan Lanjutan',
+              subtitle: 'Rumah Sakit',
+              type: 'leaf',
+              content: {
+                uu: 'Pasal 30: Menyediakan Pelayanan Kesehatan Lanjutan (Rumah Sakit).',
+                pp: 'Pasal 811: Menyediakan RS berdasarkan kebutuhan & menjamin pembiayaan orang miskin.'
+              }
+            }
+          ]
+        },
+        {
+          id: 'p2p_ling',
+          label: 'Penyakit & Lingkungan',
+          type: 'category',
+          children: [
+            {
+              id: 'p2p',
+              label: 'Pencegahan Penyakit',
+              type: 'leaf',
+              content: {
+                uu: 'Pasal 86: Pengendalian penyakit menular dan tidak menular.',
+                pp: 'Pasal 193: Kawasan pangan sehat dan gizi.'
+              }
+            },
+            {
+              id: 'kesling',
+              label: 'Kesehatan Lingkungan',
+              type: 'leaf',
+              content: {
+                uu: 'Pasal 9: Standar kesehatan lingkungan.',
+                pp: 'Pasal 249: Baku mutu kesehatan lingkungan.'
+              }
+            },
+            {
+              id: 'ktr',
+              label: 'Kawasan Tanpa Rokok',
+              type: 'leaf',
+              content: {
+                uu: 'Pasal 151: Penetapan Kawasan Tanpa Rokok (KTR).',
+                pp: 'Pasal 443: Peraturan Daerah KTR.'
+              }
+            }
+          ]
+        },
+        {
+          id: 'sdmk',
+          label: 'SDM Kesehatan',
+          type: 'category',
+          children: [
+            {
+              id: 'plan',
+              label: 'Perencanaan SDM',
+              type: 'leaf',
+              content: {
+                uu: 'Pasal 10: Pemerataan dan pengembangan SDM kesehatan.',
+                pp: 'Pasal 568: Dokumen perencanaan SDM kesehatan.'
+              }
+            },
+            {
+              id: 'mutu',
+              label: 'Kompetensi',
+              type: 'leaf',
+              content: {
+                uu: 'Pasal 12: Pendidikan dan pelatihan berkelanjutan.',
+                pp: 'Pasal 544: Izin praktik dan sertifikasi kompetensi.'
+              }
+            }
+          ]
+        },
+        {
+          id: 'manajemen',
+          label: 'Manajemen',
+          type: 'category',
+          children: [
+            {
+              id: 'dana',
+              label: 'Pendanaan',
+              type: 'leaf',
+              content: {
+                uu: 'Pasal 403: Anggaran kesehatan daerah minimal 10% APBD.',
+                pp: 'Pasal 1125: Sistem pembiayaan berbasis kinerja.'
+              }
+            },
+            {
+              id: 'masyarakat',
+              label: 'Peran Masyarakat',
+              type: 'leaf',
+              content: {
+                uu: 'Pasal 14: Pemberdayaan masyarakat di bidang kesehatan.',
+                pp: 'Pasal 1146: Insentif untuk kader kesehatan.'
+              }
+            }
+          ]
+        }
+      ]
+    };
+
+    // State
+    const state = {
+      scale: 1,
+      offsetX: 0,
+      offsetY: 0,
+      expanded: new Set(['root']),
+      selected: null,
+      isDragging: false,
+      dragStart: { x: 0, y: 0 },
+      nodePositions: new Map()
+    };
+
+    // DOM elements
+    const viewport = document.getElementById('viewport');
+    const canvas = document.getElementById('canvas');
+    const connections = document.getElementById('connections');
+    const detailPanel = document.getElementById('detailPanel');
+
+    // Initialize
+    function init() {
+      renderMindMap();
+      setupEventListeners();
+      centerView();
+    }
+
+    // Render mind map
+    function renderMindMap() {
+      viewport.innerHTML = '';
+      state.nodePositions.clear();
+
+      renderNode(mindMapData, 0, 0, 0);
+      updateConnections();
+    }
+
+    // Render single node
+    function renderNode(node, depth, parentX, parentY) {
+      const element = createNodeElement(node, depth);
+
+      // Calculate position
+      let x, y;
+      if (node.id === 'root') {
+        x = 0;
+        y = 0;
+      } else {
+        const angle = getNodeAngle(node, parentX, parentY);
+        const radius = depth === 1 ? 200 : 150;
+        x = parentX + Math.cos(angle) * radius;
+        y = parentY + Math.sin(angle) * radius;
+      }
+
+      // Position the element
+      element.style.left = x + 'px';
+      element.style.top = y + 'px';
+
+      // Store position
+      state.nodePositions.set(node.id, { x, y, element });
+
+      // Add to viewport
+      viewport.appendChild(element);
+
+      // Render children if expanded
+      if (node.children && state.expanded.has(node.id)) {
+        node.children.forEach((child, index) => {
+          renderNode(child, depth + 1, x, y);
+        });
+      }
+    }
+
+    // Get node angle for positioning
+    function getNodeAngle(node, parentX, parentY) {
+      const parent = findParentNode(mindMapData, node.id);
+      if (!parent || !parent.children) return 0;
+
+      const index = parent.children.indexOf(node);
+      const total = parent.children.length;
+
+      if (total === 1) return 0;
+
+      // Distribute children in a circle
+      return (index / total) * 2 * Math.PI - Math.PI / 2;
+    }
+
+    // Find parent node
+    function findParentNode(root, nodeId, parent = null) {
+      if (root.id === nodeId) return parent;
+
+      if (root.children) {
+        for (const child of root.children) {
+          const found = findParentNode(child, nodeId, root);
+          if (found) return found;
+        }
+      }
+
+      return null;
+    }
+
+    // Create node element
+    function createNodeElement(node, depth) {
+      const div = document.createElement('div');
+      div.className = `node ${node.type}`;
+      div.dataset.nodeId = node.id;
+
+      // Add content
+      let content = `<div class="node-label">${node.label}</div>`;
+      if (node.subtitle) {
+        content += `<div class="node-subtitle">${node.subtitle}</div>`;
+      }
+
+      // Add toggle button for nodes with children
+      if (node.children && node.children.length > 0) {
+        const isExpanded = state.expanded.has(node.id);
+        content += `<button class="toggle-btn">${isExpanded ? '−' : '+'}</button>`;
+      }
+
+      div.innerHTML = content;
+
+      // Add click handlers
+      div.addEventListener('click', (e) => {
+        if (e.target.classList.contains('toggle-btn')) {
+          toggleNode(node.id);
+        } else {
+          selectNode(node);
+        }
+      });
+
+      return div;
+    }
+
+    // Toggle node expansion
+    function toggleNode(nodeId) {
+      if (state.expanded.has(nodeId)) {
+        state.expanded.delete(nodeId);
+      } else {
+        state.expanded.add(nodeId);
+      }
+      renderMindMap();
+    }
+
+    // Select node
+    function selectNode(node) {
+      // Update selected state
+      document.querySelectorAll('.node').forEach(n => n.classList.remove('selected'));
+      const element = state.nodePositions.get(node.id)?.element;
+      if (element) element.classList.add('selected');
+
+      state.selected = node.id;
+      showDetail(node);
+    }
+
+    // Show detail panel
+    function showDetail(node) {
+      document.getElementById('detailTitle').textContent = node.label;
+      document.getElementById('detailSubtitle').textContent = node.subtitle || '';
+
+      const content = document.getElementById('detailContent');
+      content.innerHTML = '';
+
+      if (node.type === 'leaf' && node.content) {
+        // UU content
+        const uuCard = document.createElement('div');
+        uuCard.className = 'regulation-card';
+        uuCard.innerHTML = `
+          <h4>UU 17/2023</h4>
+          <p>${node.content.uu}</p>
+        `;
+        content.appendChild(uuCard);
+
+        // PP content
+        const ppCard = document.createElement('div');
+        ppCard.className = 'regulation-card';
+        ppCard.innerHTML = `
+          <h4>PP 28/2024</h4>
+          <p>${node.content.pp}</p>
+        `;
+        content.appendChild(ppCard);
+      } else if (node.children) {
+        const list = document.createElement('div');
+        list.innerHTML = '<h4 style="margin-bottom: 10px;">Sub-topik:</h4>';
+        const ul = document.createElement('ul');
+        ul.style.listStyle = 'none';
+        ul.style.padding = '0';
+
+        node.children.forEach(child => {
+          const li = document.createElement('li');
+          li.innerHTML = `<button onclick="quickSelect('${child.id}')" style="background: none; border: none; color: #667eea; cursor: pointer; text-align: left; padding: 5px;">${child.label}</button>`;
+          ul.appendChild(li);
+        });
+
+        list.appendChild(ul);
+        content.appendChild(list);
+      }
+
+      detailPanel.classList.add('open');
+    }
+
+    // Quick select from detail panel
+    function quickSelect(nodeId) {
+      // Expand parents if needed
+      expandToShow(nodeId);
+      const node = findNode(mindMapData, nodeId);
+      if (node) selectNode(node);
+    }
+
+    // Find node by ID
+    function findNode(root, nodeId) {
+      if (root.id === nodeId) return root;
+
+      if (root.children) {
+        for (const child of root.children) {
+          const found = findNode(child, nodeId);
+          if (found) return found;
+        }
+      }
+
+      return null;
+    }
+
+    // Expand tree to show node
+    function expandToShow(nodeId) {
+      const path = [];
+
+      function findPath(node, targetId, currentPath = []) {
+        if (node.id === targetId) {
+          return currentPath;
+        }
+
+        if (node.children) {
+          for (const child of node.children) {
+            const result = findPath(child, targetId, [...currentPath, node.id]);
+            if (result) return result;
+          }
+        }
+
+        return null;
+      }
+
+      const pathToNode = findPath(mindMapData, nodeId);
+      if (pathToNode) {
+        pathToNode.forEach(id => state.expanded.add(id));
+        renderMindMap();
+      }
+    }
+
+    // Update connections
+    function updateConnections() {
+      connections.innerHTML = '';
+
+      function drawConnections(node) {
+        if (node.children && state.expanded.has(node.id)) {
+          const parentPos = state.nodePositions.get(node.id);
+
+          node.children.forEach(child => {
+            const childPos = state.nodePositions.get(child.id);
+            if (parentPos && childPos) {
+              const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+              path.setAttribute('class', 'connection');
+              path.setAttribute('d', `M ${parentPos.x + 100} ${parentPos.y + 50} Q ${(parentPos.x + childPos.x) / 2} ${(parentPos.y + childPos.y) / 2} ${childPos.x + 75} ${childPos.y + 25}`);
+              connections.appendChild(path);
+            }
+            drawConnections(child);
+          });
+        }
+      }
+
+      drawConnections(mindMapData);
+    }
+
+    // Close detail panel
+    function closeDetail() {
+      detailPanel.classList.remove('open');
+      document.querySelectorAll('.node').forEach(n => n.classList.remove('selected'));
+      state.selected = null;
+    }
+
+    // Control functions
+    function zoomIn() {
+      state.scale = Math.min(state.scale * 1.2, 3);
+      updateTransform();
+    }
+
+    function zoomOut() {
+      state.scale = Math.max(state.scale / 1.2, 0.3);
+      updateTransform();
+    }
+
+    function resetView() {
+      state.scale = 1;
+      centerView();
+    }
+
+    function expandAll() {
+      function addAll(node) {
+        state.expanded.add(node.id);
+        if (node.children) node.children.forEach(addAll);
+      }
+      addAll(mindMapData);
+      renderMindMap();
+    }
+
+    function collapseAll() {
+      state.expanded = new Set(['root']);
+      renderMindMap();
+    }
+
+    // Transform update
+    function updateTransform() {
+      viewport.style.transform = `translate(calc(-50% + ${state.offsetX}px), calc(-50% + ${state.offsetY}px)) scale(${state.scale})`;
+    }
+
+    // Center view
+    function centerView() {
+      state.offsetX = 0;
+      state.offsetY = 0;
+      updateTransform();
+    }
+
+    // Setup event listeners
+    function setupEventListeners() {
+      // Pan
+      canvas.addEventListener('mousedown', (e) => {
+        if (e.target === canvas || e.target === viewport) {
+          state.isDragging = true;
+          state.dragStart.x = e.clientX - state.offsetX;
+          state.dragStart.y = e.clientY - state.offsetY;
+          canvas.classList.add('grabbing');
+        }
+      });
+
+      window.addEventListener('mousemove', (e) => {
+        if (state.isDragging) {
+          e.preventDefault();
+          state.offsetX = e.clientX - state.dragStart.x;
+          state.offsetY = e.clientY - state.dragStart.y;
+          updateTransform();
+        }
+      });
+
+      window.addEventListener('mouseup', () => {
+        state.isDragging = false;
+        canvas.classList.remove('grabbing');
+      });
+
+      // Zoom with wheel
+      canvas.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        const delta = e.deltaY > 0 ? 0.9 : 1.1;
+        state.scale = Math.max(0.3, Math.min(3, state.scale * delta));
+        updateTransform();
+      });
+
+      // Keyboard shortcuts
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeDetail();
+        if (e.ctrlKey || e.metaKey) {
+          if (e.key === '+' || e.key === '=') {
+            e.preventDefault();
+            zoomIn();
+          } else if (e.key === '-') {
+            e.preventDefault();
+            zoomOut();
+          } else if (e.key === '0') {
+            e.preventDefault();
+            resetView();
+          }
+        }
+      });
+    }
+
+    // Start
+    init();
+  </script>
+</body>
+</html>

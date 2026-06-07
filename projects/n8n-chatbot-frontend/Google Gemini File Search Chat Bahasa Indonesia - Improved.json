@@ -1,0 +1,235 @@
+{
+  "name": "Google Gemini File Search Chat Bahasa Indonesia - Improved",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "df5556cd-8e6e-4145-ad04-fa1b769fa7ff",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        432,
+        224
+      ],
+      "id": "3b110bbf-c2e1-49bf-994a-323fa0f674bc",
+      "name": "Webhook",
+      "webhookId": "df5556cd-8e6e-4145-ad04-fa1b769fa7ff"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Request Validator - Single source of truth for API key and store name\n  const input = $input.item.json || {};\n\n  // Extract from body if exists (webhook format)\n  const body = input.body || input;\n  const chatInput = body.chatInput;\n  const sessionId = body.sessionId;\n\n  // ============================================\n  // CONFIGURATION - Change values here\n  // ============================================\n  const GEMINI_API_KEY = \"AIzaSyAmi8rLTrz3JCQZ2JoBgGSzOtXO_MDgUk8\";\n  const FILE_SEARCH_STORE = \"fileSearchStores/n8ndocumentsstore-f7cqp3cqctc6\";\n  // ============================================\n\n  // Validation - check required fields\n  if (!chatInput || typeof chatInput !== 'string') {\n    return [{\n      json: {\n        error: true,\n        message: \"Missing or invalid 'chatInput' field. Please provide a valid message.\",\n        statusCode: 400,\n        timestamp: new Date().toISOString()\n      }\n    }];\n  }\n\n  if (!sessionId || typeof sessionId !== 'string') {\n    return [{\n      json: {\n        error: true,\n        message: \"Missing or invalid 'sessionId' field. Please provide a session identifier.\",\n        statusCode: 400,\n        timestamp: new Date().toISOString()\n      }\n    }];\n  }\n\n  // Return validated and cleaned data with configuration\n  return [{\n    json: {\n      chatInput: chatInput.trim(),\n      sessionId: sessionId,\n      store_name: FILE_SEARCH_STORE,\n      api_key: GEMINI_API_KEY,\n      timestamp: new Date().toISOString(),\n      validated: true\n    }\n  }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        656,
+        128
+      ],
+      "id": "712aa4a0-893d-4307-8072-9adc8f61d9c5",
+      "name": "Request Validator"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Prepare Agent Input - Merge conversation context with current query\n  const data = $json;\n  let enhancedPrompt = data.chatInput;\n  let originalQuery = data.chatInput;\n\n  // If conversation history exists, add context\n  if (data.hasHistory && data.conversationHistory?.messages?.length > 0) {\n    const recentMessages = data.conversationHistory.messages.slice(-5);\n    const context = recentMessages\n      .map(m => `${m.role === 'user' ? 'Pengguna' : 'Asisten'}: ${m.content}`)\n      .join('\\n');\n\n    enhancedPrompt = `KONTEKS PERCAKAPANAN SEBELUMNYA:\\n${context}\\n\\nPERTANYAAN SAAT INI:\\n${data.chatInput}`;\n  }\n\n  // Pass through all data including api_key and store_name\n  return [{\n    json: {\n      chatInput: enhancedPrompt,\n      originalQuery: originalQuery,\n      sessionId: data.sessionId,\n      store_name: data.store_name,\n      api_key: data.api_key,\n      timestamp: data.timestamp,\n      validated: data.validated\n    }\n  }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        864,
+        128
+      ],
+      "id": "88d18d7f-2886-4c41-984a-ddff6c0b7bca",
+      "name": "Session Manager (Optional)"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Prepare Agent Input - Merge conversation context with current query\n  const data = $json;\n  let enhancedPrompt = data.chatInput;\n  let originalQuery = data.chatInput;\n\n  // If conversation history exists, add context\n  if (data.hasHistory && data.conversationHistory?.messages?.length > 0) {\n    const recentMessages = data.conversationHistory.messages.slice(-5);\n    const context = recentMessages\n      .map(m => `${m.role === 'user' ? 'Pengguna' : 'Asisten'}: ${m.content}`)\n      .join('\\n');\n\n    enhancedPrompt = `KONTEKS PERCAKAPANAN SEBELUMNYA:\\n${context}\\n\\nPERTANYAAN SAAT INI:\\n${data.chatInput}`;\n  }\n\n  // Pass through all data including api_key and store_name\n  return [{\n    json: {\n      chatInput: enhancedPrompt,\n      originalQuery: originalQuery,\n      sessionId: data.sessionId,\n      store_name: data.store_name,\n      api_key: data.api_key,\n      timestamp: data.timestamp,\n      validated: data.validated\n    }\n  }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1072,
+        128
+      ],
+      "id": "1ae216e9-959a-46e4-b845-48cb11f04e2f",
+      "name": "Prepare Agent Input"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        864,
+        416
+      ],
+      "id": "8e95c47a-acd1-427c-9fd0-1552f7c3c2d0",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "IpI3Li8WjFHeBYrp",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={{ $json.api_key }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={\n  \"systemInstruction\": {\n    \"parts\": [\n      {\n        \"text\": \"RETRIEVAL ONLY MODE. You are a document search engine. 1. Search the attached files for information matching the query. 2. Return ONLY the relevant excerpts, facts, and source filenames. 3. Do not offer chatty greetings or filler. 4. If no information is found, output 'NO_DATA_FOUND'.\"\n      }\n    ]\n  },\n  \"contents\": [\n    {\n      \"parts\": [\n        {\n          \"text\": \"{{ $json.query || $('Request Validator').item.json.chatInput }}\" \n        }\n      ]\n    }\n  ],\n  \"tools\": [\n    {\n      \"fileSearch\": {\n        \"fileSearchStoreNames\": [\n          \"{{ $json.store_name }}\"\n        ]\n      }\n    }\n  ],\n  \"generationConfig\": {\n    \"temperature\": 0.0,\n    \"maxOutputTokens\": 2048\n  }\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.3,
+      "position": [
+        1616,
+        416
+      ],
+      "id": "788b20ac-3579-45b2-be29-5958f1073ade",
+      "name": "search_documents"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=ROLE: Bilingual Document Search Assistant (Indonesian & English)\n\nCORE OBJECTIVE:\nAnswer the user's question \"{{ $json.originalQuery || $json.chatInput }}\" using ONLY the information found in the \"{{ $json.store_name }}\" documents.\n\nCRITICAL LANGUAGE RULE (MUST FOLLOW):\n1. **DETECT:** specific language of the user's current question.\n2. **MIRROR:** You MUST reply in the EXACT SAME language as the user.\n   - IF User Input is Indonesian -> Output MUST be in Indonesian (Translate found info if needed).\n   - IF User Input is English -> Output MUST be in English (Translate found info if needed).\n3. **OVERRIDE:** The language of the documents does NOT matter. Only the user's language matters.\n\nOPERATIONAL RULES:\n1. You MUST call the 'search_documents' tool for every query.\n2. Use ONLY facts from the documents. Do not use outside knowledge.\n3. If information is missing, state it clearly in the user's language:\n   - (Indo): \"Informasi tidak ditemukan dalam dokumen.\"\n   - (Eng): \"Information not found in the documents.\"\n4. NO conversational filler (e.g., \"Here is the answer\", \"Hello\"). Go straight to the answer.\n5. Translate technical terms only if appropriate; otherwise keep original terms in brackets.\n\nTOOL REQUIREMENT: When calling search_documents, you MUST provide the query argument. Never call the tool without it.\n\nPROCEDURE:\n1. Invoke 'search_documents' to retrieve raw content.\n2. Analyze the retrieved content.\n3. Translate and Synthesize the content into the USER'S language.\n4. Output the final answer directly.\n\nOUTPUT FORMAT:\n- Direct answer.\n- Structured paragraphs.\n- Citations/References if available.",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        1296,
+        224
+      ],
+      "id": "55204ddf-961f-4dee-bfdc-d280611c6434",
+      "name": "Gemini RAG Agent"
+    },
+    {
+      "parameters": {
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        1888,
+        224
+      ],
+      "id": "ae1e385e-d0b0-46e7-9b4e-50c551eef331",
+      "name": "Respond to Webhook"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Request Validator",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Request Validator": {
+      "main": [
+        [
+          {
+            "node": "Session Manager (Optional)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Session Manager (Optional)": {
+      "main": [
+        [
+          {
+            "node": "Prepare Agent Input",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Agent Input": {
+      "main": [
+        [
+          {
+            "node": "Gemini RAG Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Gemini RAG Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "search_documents": {
+      "ai_tool": [
+        [
+          {
+            "node": "Gemini RAG Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gemini RAG Agent": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "60949123-54ad-44cc-bc3a-f83757b0ee1b",
+  "meta": {
+    "instanceId": "01bd438c14573b15f3b78ca25074fe88036c3beb1e51d671c0e39acf9c5d83ae"
+  },
+  "id": "i1f2sF04LPG5LoIL",
+  "tags": []
+}

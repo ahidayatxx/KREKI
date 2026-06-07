@@ -1,0 +1,168 @@
+{
+  "name": "Simple Test Chatbot",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "claude-chatbot-unique-2025",
+        "options": {
+          "noResponseBody": false
+        }
+      },
+      "id": "webhook-node",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "webhookId": "simple-chat-webhook"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Simple message extraction\nconst body = $input.all()[0].json.body || $input.all()[0].json;\n\n// Get message from different possible formats\nlet message = '';\nif (body.message) {\n  message = body.message;\n} else if (typeof body === 'string') {\n  message = body;\n} else {\n  message = 'Halo, apa kabar?'; // Default test message\n}\n\nreturn {\n  chatInput: message,\n  user_id: body.user_id || 'test_user',\n  session_id: body.session_id || 'test_session'\n};"
+      },
+      "id": "message-extractor",
+      "name": "Extract Message",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        200,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "model": "anthropic/claude-3-haiku",
+        "options": {
+          "maxTokens": 500,
+          "temperature": 0.7
+        }
+      },
+      "id": "openrouter-model",
+      "name": "OpenRouter Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        400,
+        200],
+      "credentials": {
+        "openRouterApi": {
+          "id": "i5hdWqtSltjOwu03",
+          "name": "OpenRouter account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "Anda adalah asisten AI yang ramah. Jawab dalam bahasa Indonesia dengan singkat dan jelas.\n\nPertanyaan: {{$json.chatInput}}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        400,
+        0
+      ],
+      "id": "simple-ai-agent",
+      "name": "Simple AI"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Simple response formatting\nconst aiOutput = $input.all()[0].json;\n\n// Extract response text\nlet responseText = '';\nif (aiOutput.output) {\n  responseText = aiOutput.output;\n} else if (aiOutput.text) {\n  responseText = aiOutput.text;\n} else {\n  responseText = JSON.stringify(aiOutput);\n}\n\n// Return simple response\nreturn {\n  response: responseText,\n  status: 'success'\n};"
+      },
+      "id": "simple-formatter",
+      "name": "Format Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        600,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json }}"
+      },
+      "id": "webhook-response",
+      "name": "Send Response",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        800,
+        0
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Extract Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Message": {
+      "main": [
+        [
+          {
+            "node": "Simple AI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Simple AI",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple AI": {
+      "main": [
+        [
+          {
+            "node": "Format Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Response": {
+      "main": [
+        [
+          {
+            "node": "Send Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "simple-test-v1",
+  "meta": {
+    "instanceId": "simple-test-chatbot"
+  },
+  "id": "SimpleTestChatbot",
+  "tags": ["test", "simple", "chatbot"]
+}

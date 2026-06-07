@@ -1,0 +1,507 @@
+{
+  "ideal_customer_profile": {
+    "primary_icp_segments": [
+      {
+        "segment_id": "ICP-01",
+        "segment_name": "AMANA Leadership and Management",
+        "priority_tier": "tier_1_flagship",
+
+        "firmographic_profile": {
+          "organization_type": ["Advisory firm", "Resource mobilization organization", "Public goods consultancy"],
+          "organization_stage": "Growth and institution-building phase",
+          "relationship": "Direct advisory relationship - primary responsibility",
+          "scope_of_engagement": "Strategic guidance, governance oversight, decision support across all AMANA activities"
+        },
+
+        "demographic_profile": {
+          "primary_titles": ["Managing Partner", "Director", "Senior Leadership", "Decision-makers"],
+          "seniority": "C-level and Director-level",
+          "decision_making_authority": "High - strategic and operational decision-making authority",
+          "influence_network": ["Board members", "Key partners", "Stakeholders", "Team members"]
+        },
+
+        "psychographic_profile": {
+          "primary_pain_points": [
+            "Strategic clarity on health sector positioning and differentiation",
+            "Independent judgment on key decisions without operational bias",
+            "Access to ASEAN health sector networks and partnership opportunities",
+            "Governance and ethical stewardship guidance aligned with SEED values",
+            "Building institution-grade credibility and legitimacy"
+          ],
+          "primary_goals": [
+            "Build high-impact, institution-grade advisory firm in public goods",
+            "Successfully mobilize resources for public goods delivery improvement",
+            "Strengthen institutional legitimacy and credibility in health sector",
+            "Navigate complex health sector landscape and policy environment",
+            "Develop internal leadership capability and organizational excellence"
+          ],
+          "values_and_motivations": [
+            "Public goods mission alignment and social impact focus",
+            "High-integrity service delivery with ethical standards",
+            "Excellence and professionalism in all client engagements",
+            "Stakeholder-centered approach and beneficiary focus",
+            "Long-term institution building over short-term gains"
+          ],
+          "fears_and_concerns": [
+            "Making strategic decisions without sufficient expert input",
+            "Missing partnership opportunities in ASEAN health sector",
+            "Lacking credibility with high-level stakeholders",
+            "Organizational growing pains and scaling challenges",
+            "Maintaining mission alignment while growing"
+          ]
+        },
+
+        "behavioral_profile": {
+          "buying_triggers": [
+            "Major strategic decisions or pivots",
+            "New market or sector entry opportunities",
+            "Partnership or collaboration possibilities",
+            "Organizational growth or scaling challenges",
+            "Credibility-building opportunities"
+          ],
+          "decision_timeline": "Varies by decision type - quick consultation for emerging issues, deliberative for major strategic shifts",
+          "buying_process_stages": [
+            "Identify need for advisory input",
+            "Consult with advisory board (formal sessions or ad-hoc)",
+            "Consider recommendations and options",
+            "Make decision with advisory input considered"
+          ],
+          "information_preferences": {
+            "preferred_formats": [
+              "Strategic advisory briefs",
+              "Policy analysis and recommendations",
+              "Governance frameworks and decision tools",
+              "Stakeholder mapping and engagement strategies"
+            ],
+            "trusted_sources": [
+              "Internal team expertise and experience",
+              "Trusted advisor insights and judgment",
+              "Evidence-based research and analysis",
+              "Case studies and best practices from similar contexts"
+            ],
+            "communication_style": "Direct, strategic, actionable with sufficient depth for informed decision-making"
+          }
+        },
+
+        "advisory_engagement_pattern": {
+          "formal_sessions": "Four formal advisory sessions per year covering comprehensive strategic review",
+          "ad_hoc_consultations": "Responsive advisory on emerging strategic matters as needed",
+          "expected_outputs": [
+            "Strategic guidance and independent judgment",
+            "Policy analysis and decision support",
+            "Stakeholder network access and introductions",
+            "Thought leadership content and representation"
+          ],
+          "success_metrics": [
+            "Strategic clarity achieved on key decisions",
+            "Successful partnerships facilitated through advisory connections",
+            "Enhanced credibility through advisory association",
+            "Organizational learning and capability development"
+          ]
+        }
+      },
+      {
+        "segment_id": "ICP-02",
+        "segment_name": "ASEAN Health Sector Policymakers",
+        "priority_tier": "tier_1_flagship",
+
+        "firmographic_profile": {
+          "organization_type": ["Ministries of Health", "Regional health authorities", "ASEAN health bodies", "Public health agencies"],
+          "geographic_focus": ["Indonesia", "ASEAN member states", "Regional institutions"],
+          "relationship": "Partnership and advisory relationship - bridge-building role"
+        },
+
+        "demographic_profile": {
+          "primary_titles": ["Minister", "Director-General", "Policy Advisor", "Senior Health Official", "ASEAN Health Representative"],
+          "seniority": "Senior government and regional officials",
+          "decision_making_authority": "High - policy and program decision-making",
+          "influence_network": ["Other health ministries", "Regional health initiatives", "Development partners", "Health sector stakeholders"]
+        },
+
+        "psychographic_profile": {
+          "primary_pain_points": [
+            "Navigating complex health policy landscape across ASEAN diversity",
+            "Building regional collaboration mechanisms and frameworks",
+            "Accessing technical expertise for digital health and health system strengthening",
+            "Mobilizing resources for health system improvements",
+            "Balancing national priorities with regional cooperation objectives"
+          ],
+          "primary_goals": [
+            "Improve health system performance and health outcomes",
+            "Strengthen regional health collaboration and learning",
+            "Implement effective digital health and health information systems",
+            "Attract and mobilize resources for health sector priorities",
+            "Build institutional capacity and governance frameworks"
+          ],
+          "values_and_motivations": [
+            "Health equity and universal health coverage",
+            "Regional solidarity and cooperation",
+            "Evidence-based policy-making",
+            "Sustainable development and health system resilience",
+            "International best practice adaptation to local context"
+          ],
+          "fears_and_concerns": [
+            "Policy decisions without sufficient evidence or technical input",
+            "Missing regional collaboration opportunities",
+            "Ineffective implementation of ambitious health initiatives",
+            "Resource constraints limiting health system improvements",
+            "Being left behind in digital health transformation"
+          ]
+        },
+
+        "behavioral_profile": {
+          "buying_triggers": [
+            "Major policy development or reform initiatives",
+            "Regional collaboration opportunities",
+            "Digital health and health information system investments",
+            "Resource mobilization and partnership needs",
+            "Learning and best practice exchange requirements"
+          ],
+          "decision_timeline": "Deliberative - policy processes require extensive consultation and stakeholder engagement",
+          "buying_process_stages": [
+            "Policy agenda setting",
+            "Stakeholder consultation and evidence gathering",
+            "Policy formulation and options analysis",
+            "Decision and implementation planning"
+          ],
+          "information_preferences": {
+            "preferred_formats": [
+              "Policy briefs and position papers",
+              "Evidence-based analysis and recommendations",
+              "Regional comparative analysis and case studies",
+              "Technical advisory and expertise input"
+            ],
+            "trusted_sources": [
+              "WHO and international health organizations",
+              "Regional health bodies and initiatives",
+              "Academic and research institutions",
+              "Other countries' health ministries and experiences",
+              "Technical advisors and experts"
+            ],
+            "communication_style": "Respectful, authoritative, evidence-based, culturally and politically sensitive"
+          }
+        },
+
+        "advisory_engagement_pattern": {
+          "engagement_role": "Bridge and advisor - connecting AMANA expertise to ASEAN policy needs",
+          "expected_outputs": [
+            "Policy analysis and advisory input",
+            "Regional stakeholder connections and network access",
+            "Technical expertise on digital health and health systems",
+            "Thought leadership on regional health issues",
+            "Partnership facilitation between AMANA and ASEAN institutions"
+          ],
+          "success_metrics": [
+            "Successful policy advisory contributions",
+            "Partnerships established between AMANA and ASEAN institutions",
+            "Enhanced understanding of ASEAN health policy landscape",
+            "AMANA positioned as valuable resource for ASEAN health sector"
+          ]
+        }
+      },
+      {
+        "segment_id": "ICP-03",
+        "segment_name": "Public Goods and Health Sector Partners",
+        "priority_tier": "tier_2_secondary",
+
+        "firmographic_profile": {
+          "organization_type": ["NGOs", "Development agencies", "Health sector organizations", "Foundations", "Academic institutions"],
+          "sector_focus": ["Public health", "Health system strengthening", "Digital health", "Health innovation", "Capacity building"],
+          "relationship": "Partnership and collaboration relationship"
+        },
+
+        "demographic_profile": {
+          "primary_titles": ["Country Director", "Program Manager", "Health Advisor", "Technical Lead", "Partnership Coordinator"],
+          "seniority": "Mid to senior level professionals",
+          "decision_making_authority": "Medium - program and partnership decisions",
+          "influence_network": ["Health sector stakeholders", "Donor community", "Government partners", "Technical experts"]
+        },
+
+        "psychographic_profile": {
+          "primary_pain_points": [
+            "Finding effective partners for health sector initiatives",
+            "Navigating complex health sector landscape in Indonesia/ASEAN",
+            "Accessing technical expertise and local knowledge",
+            "Demonstrating program impact and value",
+            "Building sustainable partnerships beyond project cycles"
+          ],
+          "primary_goals": [
+            "Implement effective health programs and interventions",
+            "Build local capacity and institutional strengthening",
+            "Demonstrate measurable health impact",
+            "Leverage partnerships for greater reach and effectiveness",
+            "Contribute to health system improvements"
+          ],
+          "values_and_motivations": [
+            "Health impact and social benefit",
+            "Evidence-based programming and learning",
+            "Local ownership and capacity building",
+            "Collaboration and partnership approaches",
+            "Sustainable and scalable solutions"
+          ],
+          "fears_and_concerns": [
+            "Ineffective partnerships that don't deliver results",
+            "Programs that don't address real needs or context",
+            "Wasted resources and missed opportunities",
+            "Lack of local ownership and sustainability",
+            "Being unable to demonstrate meaningful impact"
+          ]
+        },
+
+        "behavioral_profile": {
+          "buying_triggers": [
+            "New program development or funding opportunities",
+            "Partnership identification for initiatives",
+            "Technical expertise needs",
+            "Learning and best practice requirements",
+            "Scale-up or replication opportunities"
+          ],
+          "decision_timeline": "Moderate - program cycles and funding windows provide structure",
+          "buying_process_stages": [
+            "Needs assessment and opportunity identification",
+            "Partner research and due diligence",
+            "Relationship building and proposal development",
+            "Partnership agreement and implementation"
+          ],
+          "information_preferences": {
+            "preferred_formats": [
+              "Program briefs and case studies",
+              "Technical expertise and advisory input",
+              "Best practice documentation and lessons learned",
+              "Partnership proposals and collaboration concepts"
+            ],
+            "trusted_sources": [
+              "Peer organizations and networks",
+              "Technical experts and advisors",
+              "Evidence and evaluation studies",
+              "Success stories and case studies"
+            ],
+            "communication_style": "Collaborative, opportunity-focused, practical and implementation-oriented"
+          }
+        },
+
+        "advisory_engagement_pattern": {
+          "engagement_role": "Connector and advisor - facilitating partnerships between AMANA and partner organizations",
+          "expected_outputs": [
+            "Partnership facilitation and introductions",
+            "Technical advisory and expertise",
+            "Collaboration opportunity identification",
+            "Thought leadership on relevant health issues",
+            "Network and stakeholder mapping"
+          ],
+          "success_metrics": [
+            "Successful partnerships established",
+            "AMANA positioned as valuable partner",
+            "Effective collaboration on initiatives",
+            "Knowledge exchange and learning"
+          ]
+        }
+      },
+      {
+        "segment_id": "ICP-04",
+        "segment_name": "AMANA Staff and Junior Leaders",
+        "priority_tier": "tier_2_secondary",
+
+        "firmographic_profile": {
+          "organization_type": ["AMANA team members"],
+          "career_stage": "Early to mid-career professionals",
+          "relationship": "Coaching and development relationship"
+        },
+
+        "demographic_profile": {
+          "primary_titles": ["Consultant", "Analyst", "Project Lead", "Junior Associate", "Coordinator"],
+          "seniority": "Individual contributors and emerging leaders",
+          "decision_making_authority": "Growing - project and task-level decisions",
+          "influence_network": ["Team members", "Project stakeholders", "Clients and partners"]
+        },
+
+        "psychographic_profile": {
+          "primary_pain_points": [
+            "Developing strategic thinking and analytical capabilities",
+            "Building stakeholder engagement and communication skills",
+            "Understanding health sector landscape and context",
+            "Navigating professional growth and career development",
+            "Balancing client delivery with learning and development"
+          ],
+          "primary_goals": [
+            "Develop professional capabilities and expertise",
+            "Contribute meaningfully to AMANA's mission and success",
+            "Build career progression and advancement opportunities",
+            "Gain mentorship and guidance from experienced advisors",
+            "Apply learning to practical client work"
+          ],
+          "values_and_motivations": [
+            "Professional growth and development",
+            "Mission alignment and social impact",
+            "Learning and skill building",
+            "Collaboration and team success",
+            "Recognition and advancement"
+          ],
+          "fears_and_concerns": [
+            "Stagnation and lack of development opportunities",
+            "Inadequate preparation for increasing responsibility",
+            "Mistakes that impact client relationships",
+            "Not meeting expectations and performance standards",
+            "Limited career progression"
+          ]
+        },
+
+        "behavioral_profile": {
+          "buying_triggers": [
+            "New project or responsibility assignments",
+            "Performance feedback and development needs",
+            "Career advancement opportunities",
+            "Challenging stakeholder situations",
+            "Skill gaps and learning needs"
+          ],
+          "decision_timeline": "Immediate - coaching needs arise in context of work challenges",
+          "buying_process_stages": [
+            "Identify development need",
+            "Seek guidance and coaching",
+            "Apply learning to work",
+            "Reflect and iterate on improvement"
+          ],
+          "information_preferences": {
+            "preferred_formats": [
+              "Practical frameworks and tools",
+              "Coaching and mentoring sessions",
+              "Skill-building exercises and scenarios",
+              "Constructive feedback and guidance"
+            ],
+            "trusted_sources": [
+              "Senior colleagues and advisors",
+              "Training and development resources",
+              "Mentors and coaches",
+              "Peer learning and exchange"
+            ],
+            "communication_style": "Supportive, challenging, developmental with practical application"
+          }
+        },
+
+        "advisory_engagement_pattern": {
+          "engagement_role": "Coach and mentor - developing capability and capacity within AMANA team",
+          "expected_outputs": [
+            "Leadership development frameworks and materials",
+            "Strategic thinking training and coaching",
+            "Stakeholder engagement skill-building",
+            "Personal coaching and mentorship sessions",
+            "Practical tools and approaches for application"
+          ],
+          "success_metrics": [
+            "Skill development and capability improvement",
+            "Application of learning to client work",
+            "Career progression and advancement",
+            "Team member engagement and satisfaction",
+            "Organizational capability strengthening"
+          ]
+        }
+      },
+      {
+        "segment_id": "ICP-05",
+        "segment_name": "Health Sector Thought Leadership Audience",
+        "priority_tier": "tier_3_broad_audience",
+
+        "firmographic_profile": {
+          "audience_type": ["Conference attendees", "Publication readers", "Strategic meeting participants", "Health sector professionals", "Policy community"],
+          "reach": "Broad health sector community across Indonesia and ASEAN",
+          "relationship": "Audience and influence - building AMANA's thought leadership and reputation"
+        },
+
+        "demographic_profile": {
+          "audience_composition": [
+            "Health sector professionals and practitioners",
+            "Policy makers and advisors",
+            "Academics and researchers",
+            "Development partners and donors",
+            "Digital health and health innovators"
+          ],
+          "geographic_distribution": ["Indonesia", "ASEAN region", "Global health community"],
+          "influence_level": "Varied - from practitioners to senior decision-makers"
+        },
+
+        "psychographic_profile": {
+          "primary_interests": [
+            "Health policy and governance trends",
+            "Digital health transformation and innovation",
+            "ASEAN health collaboration and developments",
+            "Public health challenges and solutions",
+            "Health system strengthening approaches"
+          ],
+          "information_seekings": [
+            "Cutting-edge insights and forward-looking analysis",
+            "Evidence-based perspectives and expert views",
+            "Practical lessons from implementation experience",
+            "Regional comparisons and cross-country learning",
+            "Innovative approaches and new thinking"
+          ],
+          "engagement_motivations": [
+            "Professional learning and development",
+            "Staying current with sector trends",
+            "Networking and community connection",
+            "Inspiration and new ideas",
+            "Practical application to their work"
+          ]
+        },
+
+        "behavioral_profile": {
+          "engagement_channels": [
+            "Conferences and events",
+            "Professional publications and journals",
+            "LinkedIn and professional social media",
+            "Webinars and virtual events",
+            "Strategic meetings and roundtables"
+          ],
+          "content_preferences": {
+            "formats": [
+              "Thought leadership articles and op-eds",
+              "Conference presentations and keynotes",
+              "Policy briefs and position papers",
+              "Interviews and expert commentary",
+              "Social media insights and reflections"
+            ],
+            "topics": [
+              "Digital health governance and transformation",
+              "ASEAN health collaboration",
+              "Public goods delivery innovation",
+              "Health policy trends and analysis",
+              "Leadership and organizational development in health"
+            ],
+            "style": "Authoritative, insightful, accessible, inspiring, evidence-based"
+          },
+          "engagement_triggers": [
+            "Current health sector challenges and debates",
+            "Emerging trends and innovations",
+            "Practical implementation insights",
+            "Regional developments and opportunities",
+            "Controversial or thought-provoking perspectives"
+          ]
+        },
+
+        "advisory_engagement_pattern": {
+          "engagement_role": "Thought leader and influencer - shaping health sector discourse and elevating AMANA's profile",
+          "expected_outputs": [
+            "Compelling thought leadership content",
+            "Conference speaking and presentations",
+            "Expert commentary and analysis",
+            "Strategic meeting participation",
+            "Professional network engagement"
+          ],
+          "success_metrics": [
+            "Audience reach and engagement",
+            "Speaking and publication opportunities",
+            "Social media and professional network impact",
+            "AMANA brand recognition and positioning",
+            "Influence on health sector discourse"
+          ]
+        }
+      }
+    ],
+    "segment_usage_guidance": {
+      "primary_targeting": "ICP-01 (AMANA Leadership) and ICP-02 (ASEAN Policymakers) are the flagship segments that receive primary advisory focus",
+      "secondary_targeting": "ICP-03 (Partners) and ICP-04 (AMANA Staff) receive focused support for partnership and capacity building",
+      "broad_reach": "ICP-05 (Thought Leadership Audience) is the broad reach segment for reputation building and influence",
+      "multi_segment_approach": "Some content and activities may address multiple segments simultaneously, particularly thought leadership that can serve both internal and external audiences",
+      "segment_specificity": "Always identify which segment(s) content is targeting to ensure appropriate framing, tone, and depth"
+    }
+  }
+}

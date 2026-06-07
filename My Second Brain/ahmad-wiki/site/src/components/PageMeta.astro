@@ -1,0 +1,18 @@
+---
+interface Props {
+  type: string;
+  subtype?: string;
+  updated: string;
+  sources?: string[];
+}
+
+const { type, subtype, updated, sources = [] } = Astro.props;
+---
+
+<div class="page-meta">
+  <span class="type-badge">{subtype ? `${subtype}` : type}</span>
+  {updated && <span>Updated: {updated}</span>}
+  {sources.length > 0 && (
+    <span>Sources: {sources.join(', ')}</span>
+  )}
+</div>

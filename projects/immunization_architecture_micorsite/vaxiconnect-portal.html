@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VaxiConnect System Architecture</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0 0 10px 0;
+            font-size: 2.5rem;
+            font-weight: 600;
+        }
+        .header p {
+            margin: 0;
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+        .architecture {
+            padding: 30px;
+        }
+        .layer {
+            margin-bottom: 25px;
+            border-radius: 15px;
+            position: relative;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        .layer:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        .layer-1 { background: linear-gradient(135deg, #4ECDC4 0%, #44A08D 100%); }
+        .layer-2 { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .layer-3 { background: linear-gradient(135deg, #FFD93D 0%, #FF6B6B 100%); }
+        .layer-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            padding: 25px;
+            color: white;
+        }
+        .layer-icon {
+            width: 40px;
+            height: 40px;
+            margin-right: 15px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        .components {
+            display: none; /* Initially hidden */
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            padding: 0 30px 30px;
+        }
+        .component {
+            background: #f8f9ff;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #e1e8ff;
+            transition: all 0.3s ease;
+        }
+        .component:hover {
+            background: #f0f4ff;
+            transform: scale(1.02);
+            border-color: #667eea;
+        }
+        .component-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+            color: #2d3748;
+        }
+        .component-desc {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            line-height: 1.5;
+            color: #4a5568;
+        }
+        .metrics {
+            background: #f8f9fa;
+            padding: 40px;
+            margin-top: 30px;
+        }
+        .metrics h2 {
+            text-align: center;
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .metric-item {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .metric-item .value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+        .metric-item .label {
+            font-size: 1rem;
+            color: #718096;
+        }
+        @media (max-width: 768px) {
+            .components {
+                grid-template-columns: 1fr;
+            }
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            .container {
+                margin: 10px;
+                border-radius: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>VaxiConnect System Architecture</h1>
+            <p>An integrated WhatsApp system for automated immunization scheduling and tracking.</p>
+        </div>
+        
+        <div class="architecture">
+            <!-- Layer 1: Presentation -->
+            <div class="layer layer-1" onclick="toggleLayer(this)">
+                <div class="layer-title"><span class="layer-icon">P</span>Presentation Layer</div>
+                <div class="components">
+                    <div class="component">
+                        <div class="component-title">WhatsApp Interface</div>
+                        <div class="component-desc">Handles all patient-facing communication including chats, notifications, and appointment bookings.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Layer 2: Application -->
+            <div class="layer layer-2" onclick="toggleLayer(this)">
+                <div class="layer-title"><span class="layer-icon">A</span>Application Layer</div>
+                <div class="components">
+                    <div class="component"><div class="component-title">AI Engine</div><div class="component-desc">Powers intelligent scheduling and conversational flows.</div></div>
+                    <div class="component"><div class="component-title">Schedule Management</div><div class="component-desc">Manages immunization schedules based on national guidelines.</div></div>
+                    <div class="component"><div class="component-title">Data Analytics</div><div class="component-desc">Provides insights into compliance and operational efficiency.</div></div>
+                    <div class="component"><div class="component-title">Microservices</div><div class="component-desc">Includes services for WhatsApp, AI/NLP, Scheduling, Notifications, Patients, Immunizations, Appointments, and Analytics.</div></div>
+                </div>
+            </div>
+
+            <!-- Layer 3: Data & Integration -->
+            <div class="layer layer-3" onclick="toggleLayer(this)">
+                <div class="layer-title"><span class="layer-icon">D</span>Data & Integration Layer</div>
+                <div class="components">
+                    <div class="component"><div class="component-title">Hospital Systems</div><div class="component-desc">Integrates with existing HIS/EMR, appointment, and billing systems.</div></div>
+                    <div class="component"><div class="component-title">Patient DB (PostgreSQL)</div><div class="component-desc">Stores patient profiles and medical history.</div></div>
+                    <div class="component"><div class="component-title">Schedule DB (MongoDB)</div><div class="component-desc">Manages dynamic immunization schedules and rules.</div></div>
+                    <div class="component"><div class="component-title">Appointment DB (MySQL)</div><div class="component-desc">Handles all booking and appointment data.</div></div>
+                    <div class="component"><div class="component-title">Analytics DB (ClickHouse)</div><div class="component-desc">Stores data for performance and compliance analytics.</div></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="metrics">
+            <h2>Key Performance Metrics</h2>
+            <div class="metric-grid">
+                <div class="metric-item">
+                    <div class="value">85%</div>
+                    <div class="label">On-Time Immunization</div>
+                </div>
+                <div class="metric-item">
+                    <div class="value">40%</div>
+                    <div class="label">Increase in ROI</div>
+                </div>
+                <div class="metric-item">
+                    <div class="value">80%</div>
+                    <div class="label">Reduction in Admin Work</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function toggleLayer(element) {
+            const components = element.querySelector('.components');
+            const isCurrentlyHidden = components.style.display === 'none' || components.style.display === '';
+
+            document.querySelectorAll('.components').forEach(comp => {
+                comp.style.display = 'none';
+            });
+            
+            document.querySelectorAll('.layer').forEach(layer => {
+                layer.style.transform = 'translateY(0)';
+                layer.style.boxShadow = 'none';
+            });
+
+            if (isCurrentlyHidden) {
+                components.style.display = 'grid';
+                element.style.transform = 'translateY(-5px)';
+                element.style.boxShadow = '0 8px 25px rgba(0,0,0,0.1)';
+            } else {
+                components.style.display = 'none';
+                element.style.transform = 'translateY(0)';
+                element.style.boxShadow = 'none';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const firstLayer = document.querySelector('.layer');
+            if (firstLayer) {
+                toggleLayer(firstLayer);
+            }
+        });
+    </script>
+</body>
+</html>

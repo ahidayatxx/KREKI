@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VDHIC Presentation</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Source+Sans+Pro:wght@300;400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            overflow: hidden;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .slide {
+            width: 100vw;
+            height: 100vh;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .slide.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.5em;
+            font-weight: 700;
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5em;
+            font-weight: 600;
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8em;
+            font-weight: 600;
+            color: #333333;
+            margin-bottom: 20px;
+        }
+
+        .subtitle {
+            font-size: 1.5em;
+            color: #f0f0f0;
+            text-align: center;
+            margin-bottom: 50px;
+            font-weight: 300;
+        }
+
+        .content-box {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 1000px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .grid-item {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 25px;
+            border-radius: 15px;
+            color: white;
+            transition: transform 0.3s ease;
+        }
+
+        .grid-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .grid-item h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+
+        .list-item {
+            margin: 15px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .list-item:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            color: #667eea;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: white;
+            transform: scale(1.05);
+        }
+
+        .slide-counter {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        .phase-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            gap: 20px;
+        }
+
+        .phase {
+            flex: 1;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .phase:hover {
+            transform: translateY(-10px);
+        }
+
+        .phase h4 {
+            color: #667eea;
+            font-size: 1.4em;
+            margin-bottom: 15px;
+        }
+
+        .quintuple-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .quintuple-item {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            color: white;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .quintuple-item:nth-child(2) {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .quintuple-item:nth-child(3) {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+
+        .quintuple-item:nth-child(4) {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+
+        .quintuple-item:nth-child(5) {
+            background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
+        }
+    </style>
+</head>
+<body>
+    <!-- Slide 1: Title -->
+    <div class="slide active">
+        <h1>Value-Based Digital Health</h1>
+        <h1>Innovation Canvas</h1>
+        <div class="subtitle">VDHIC - Instruction Guide</div>
+        <div class="content-box">
+            <div style="text-align: center;">
+                <p style="font-size: 1.2em; color: #555; margin-bottom: 20px;">
+                    <strong>From Problem to Impact:</strong> Navigating Indonesia's Digital Health Ecosystem
+                </p>
+                <p style="font-size: 1.1em; color: #666;">
+                    Featuring the Quintuple Aim Framework<br>
+                    Australia Awards Fellowship 2025<br>
+                    Monash University
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 2: Introduction -->
+    <div class="slide">
+        <h2>What is VDHIC?</h2>
+        <div class="content-box">
+            <p style="font-size: 1.2em; color: #333; line-height: 1.6; margin-bottom: 30px;">
+                The <strong>Value-Based Digital Health Innovation Canvas (VDHIC)</strong> transforms the Indonesia Digital Health Transformation Toolkit into a practical, actionable tool for innovators.
+            </p>
+
+            <h3 style="color: #667eea;">Purpose</h3>
+            <div class="list-item">Structured framework for digital health innovation in Indonesia</div>
+            <div class="list-item">Embed governance considerations from the start</div>
+            <div class="list-item">Facilitate multi-stakeholder dialogue</div>
+            <div class="list-item">Bridge design to implementation gap</div>
+            <div class="list-item">Support regulatory sandbox applications</div>
+            <div class="list-item">Align with Quintuple Aim outcomes</div>
+        </div>
+    </div>
+
+    <!-- Slide 3: Canvas Structure -->
+    <div class="slide">
+        <h2>Canvas Structure</h2>
+        <div class="content-box">
+            <p style="font-size: 1.2em; color: #333; margin-bottom: 30px; text-align: center;">
+                Four integrated layers forming a comprehensive innovation framework
+            </p>
+
+            <div class="grid">
+                <div class="grid-item">
+                    <h4>🛡️ Governance Spine</h4>
+                    <p>Four governance blocks forming the comprehensive compliance framework ensuring safety and regulatory adherence</p>
+                </div>
+                <div class="grid-item">
+                    <h4>🎯 Main Canvas Grid</h4>
+                    <p>Nine blocks organized in three phases: Discover → Design → Deliver</p>
+                </div>
+                <div class="grid-item">
+                    <h4>⚖️ Value Anchor</h4>
+                    <p>Five Quintuple Aim outcome indicators measuring comprehensive value creation</p>
+                </div>
+                <div class="grid-item">
+                    <h4>🔄 Innovation Phases</h4>
+                    <p>Systematic progression from problem identification through solution design to market delivery</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: Three Phases -->
+    <div class="slide">
+        <h2>Innovation Journey</h2>
+        <div class="content-box">
+            <div class="phase-container">
+                <div class="phase">
+                    <h4>🔍 DISCOVER</h4>
+                    <div class="list-item">Health Challenge</div>
+                    <div class="list-item">User Profiles</div>
+                    <div class="list-item">Stakeholder Map</div>
+                    <p style="margin-top: 15px; color: #666; font-size: 0.9em;">
+                        Understanding the problem space before solutions
+                    </p>
+                </div>
+
+                <div class="phase">
+                    <h4>🎨 DESIGN</h4>
+                    <div class="list-item">Solution Architecture</div>
+                    <div class="list-item">User Experience</div>
+                    <div class="list-item">SATUSEHAT Integration</div>
+                    <p style="margin-top: 15px; color: #666; font-size: 0.9em;">
+                        Translating insights into concrete solutions
+                    </p>
+                </div>
+
+                <div class="phase">
+                    <h4>🚀 DELIVER</h4>
+                    <div class="list-item">Evidence Plan</div>
+                    <div class="list-item">Scale Strategy</div>
+                    <div class="list-item">Business Model</div>
+                    <p style="margin-top: 15px; color: #666; font-size: 0.9em;">
+                        Validation, scaling, and sustainability
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: Quintuple Aim -->
+    <div class="slide">
+        <h2>The Quintuple Aim</h2>
+        <div class="content-box">
+            <p style="font-size: 1.2em; color: #333; margin-bottom: 30px; text-align: center;">
+                Every innovation must demonstrate clear alignment with these five outcomes
+            </p>
+
+            <div class="quintuple-grid">
+                <div class="quintuple-item">
+                    <h4>🏥 Population<br>Health</h4>
+                    <p>Clinical outcomes at population level</p>
+                </div>
+                <div class="quintuple-item">
+                    <h4>😊 Patient<br>Experience</h4>
+                    <p>Satisfaction & engagement</p>
+                </div>
+                <div class="quintuple-item">
+                    <h4>👨‍⚕️ Provider<br>Satisfaction</h4>
+                    <p>Clinician workflow improvement</p>
+                </div>
+                <div class="quintuple-item">
+                    <h4>💰 Cost<br>Reduction</h4>
+                    <p>Efficiency gains</p>
+                </div>
+                <div class="quintuple-item">
+                    <h4>⚖️ Health<br>Equity</h4>
+                    <p>Reduce healthcare disparities</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="navigation">
+        <button class="nav-btn" onclick="previousSlide()">← Previous</button>
+        <button class="nav-btn" onclick="nextSlide()">Next →</button>
+    </div>
+
+    <div class="slide-counter">
+        <span id="current-slide">1</span> / 5
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 5;
+
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach(slide => slide.classList.remove('active'));
+
+            if (n > totalSlides) currentSlide = 1;
+            if (n < 1) currentSlide = totalSlides;
+
+            slides[currentSlide - 1].classList.add('active');
+            document.getElementById('current-slide').textContent = currentSlide;
+        }
+
+        function nextSlide() {
+            currentSlide++;
+            showSlide(currentSlide);
+        }
+
+        function previousSlide() {
+            currentSlide--;
+            showSlide(currentSlide);
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') previousSlide();
+        });
+    </script>
+</body>
+</html>

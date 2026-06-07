@@ -1,0 +1,293 @@
+{
+  "name": "Simple Gemini Upload & Search",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "upload",
+        "options": {}
+      },
+      "id": "webhook-upload",
+      "name": "Upload Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        200,
+        300
+      ],
+      "webhookId": "gemini-upload-webhook"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "search",
+        "options": {}
+      },
+      "id": "webhook-search",
+      "name": "Search Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        200,
+        500
+      ],
+      "webhookId": "gemini-search-webhook"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.method}}",
+              "operation": "equal",
+              "value2": "upload"
+            }
+          ]
+        }
+      },
+      "id": "check-method",
+      "name": "Upload or Search?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        420,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "store_name",
+              "name": "store_name",
+              "value": "fileSearchStores/n8ndocumentsstore-f7cqp3cqctc6",
+              "type": "string"
+            },
+            {
+              "id": "api_key",
+              "name": "api_key",
+              "value": "AIzaSyAmi8rLTrz3JCQZ2JoBgGSzOtXO_MDgUk8",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        640,
+        300
+      ],
+      "id": "set-credentials",
+      "name": "Set Credentials"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://generativelanguage.googleapis.com/upload/v1beta/files?key={{ $json.api_key }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={ \"file\": { \"displayName\": \"{{ $json.filename }}\" } }",
+        "options": {}
+      },
+      "id": "start-upload",
+      "name": "Start File Upload",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        860,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://generativelanguage.googleapis.com/v1beta/{{ $json.store_name }}:importFile?key={{ $json.api_key }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"fileName\": \"{{ $json.file_id }}\",\n  \"customMetadata\": [\n    {\n      \"key\": \"upload_date\",\n      \"stringValue\": \"{{ $now.format('yyyy-MM-dd') }}\"\n    },\n    {\n      \"key\": \"source\",\n      \"stringValue\": \"webhook-upload\"\n    }\n  ]\n}",
+        "options": {}
+      },
+      "id": "import-to-store",
+      "name": "Import to Store",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        1080,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={{ $json.api_key }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"contents\": [\n    {\n      \"parts\": [\n        {\n          \"text\": \"{{ $json.query }}\"\n        }\n      ]\n    }\n  ],\n  \"tools\": [\n    {\n      \"fileSearch\": {\n        \"fileSearchStoreNames\": [\"{{ $json.store_name }}\"]\n      }\n    }\n  ]\n}",
+        "options": {}
+      },
+      "id": "search-gemini",
+      "name": "Search with Gemini",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        640,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { \"success\": true, \"message\": \"File uploaded successfully to store\", \"file_id\": $json.file_id } }}"
+      },
+      "id": "upload-success",
+      "name": "Upload Success Response",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        1300,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { \"success\": true, \"answer\": $json.candidates[0].content.parts[0].text, \"sources\": $json.candidates[0].groundingMetadata || null } }}"
+      },
+      "id": "search-response",
+      "name": "Search Response",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        860,
+        500
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Upload Webhook": {
+      "main": [
+        [
+          {
+            "node": "Upload or Search?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search Webhook": {
+      "main": [
+        [
+          {
+            "node": "Upload or Search?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload or Search?": {
+      "main": [
+        [
+          {
+            "node": "Set Credentials",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Search with Gemini",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Credentials": {
+      "main": [
+        [
+          {
+            "node": "Start File Upload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Start File Upload": {
+      "main": [
+        [
+          {
+            "node": "Import to Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Import to Store": {
+      "main": [
+        [
+          {
+            "node": "Upload Success Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search with Gemini": {
+      "main": [
+        [
+          {
+            "node": "Search Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "simple-001",
+  "meta": {
+    "instanceId": "simple-workflow-001"
+  },
+  "id": "simple-gemini-workflow",
+  "tags": []
+}

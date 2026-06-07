@@ -1,0 +1,74 @@
+---
+import { getCollection, render } from 'astro:content';
+import WikiLayout from '../../layouts/WikiLayout.astro';
+
+export async function getStaticPaths() {
+  const pages = await getCollection('wiki');
+
+  // Filter out _meta pages — they shouldn't be rendered as wiki pages
+  const wikiPages = pages.filter(p => !p.id.startsWith('_meta/'));
+
+  // Build title→id index for backlink resolution
+  const titleToId = new Map<string, string>();
+  for (const page of wikiPages) {
+    const data = page.data as any;
+    const title = data.name || data.title || page.id.split('/').pop()!.replace(/-/g, ' ');
+    titleToId.set(title, page.id);
+    titleToId.set(title.toLowerCase(), page.id);
+  }
+
+  // Build backlink map: targetId → [{ slug, title }]
+  const backlinkMap = new Map<string, { slug: string; title: string }[]>();
+
+  for (const page of wikiPages) {
+    const body = page.body ?? '';
+    const matches = [...body.matchAll(/\[\[([^\]|]+?)(?:\|[^\]]+?)?\]\]/g)];
+
+    for (const match of matches) {
+      const target = match[1].trim();
+      const targetId = titleToId.get(target) || titleToId.get(target.toLowerCase());
+
+      if (targetId) {
+        const existing = backlinkMap.get(targetId) ?? [];
+        const sourceSlug = page.id.split('/').pop()!;
+        const sourceTitle = (page.data as any).name || (page.data as any).title || sourceSlug.replace(/-/g, ' ');
+
+        if (!existing.some(e => e.slug === sourceSlug)) {
+          existing.push({ slug: sourceSlug, title: sourceTitle });
+        }
+        backlinkMap.set(targetId, existing);
+      }
+    }
+  }
+
+  return wikiPages.map(page => {
+    const data = page.data as any;
+    const slug = page.id.split('/').pop()!;
+
+    return {
+      params: { slug },
+      props: {
+        page,
+        backlinks: backlinkMap.get(page.id) ?? [],
+      },
+    };
+  });
+}
+
+const { page, backlinks } = Astro.props;
+const { Content } = await render(page);
+const data = page.data as any;
+---
+
+<WikiLayout
+  title={data.name || data.title || page.id.split('/').pop()!.replace(/-/g, ' ')}
+  type={data.type || 'page'}
+  subtype={data.subtype}
+  updated={data.updated}
+  tags={data.tags || []}
+  sources={data.sources || []}
+  backlinks={backlinks}
+  currentPageId={page.id}
+>
+  <Content />
+</WikiLayout>

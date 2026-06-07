@@ -1,0 +1,1341 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panduan Lengkap Telemedisin - Slide Presentasi</title>
+    <style>
+        /* Base Styles - Desktop Interactive Version */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            overflow: hidden;
+            height: 100vh;
+            font-size: 18px; /* Base font size untuk desktop */
+        }
+
+        /* Presentation Container */
+        .presentation-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+        }
+
+        /* Slide Management */
+        .slide {
+            display: none;
+            width: 100%;
+            height: 100vh;
+            padding: 40px 60px;
+            background: white;
+            box-sizing: border-box;
+            overflow-y: auto;
+            animation: slideIn 0.5s ease-in-out;
+            margin: 0;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Navigation Controls */
+        .navigation {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.7);
+            border-radius: 20px;
+            padding: 8px 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.2);
+        }
+
+        .nav-btn {
+            background: #2a5298;
+            color: white;
+            border: none;
+            border-radius: 15px;
+            padding: 6px 12px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 500;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .nav-btn:hover {
+            background: #1e3c72;
+            transform: translateY(-1px);
+        }
+
+        .nav-btn:disabled {
+            background: #666;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .slide-counter {
+            color: white;
+            font-size: 12px;
+            font-weight: 500;
+            min-width: 50px;
+            text-align: center;
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 3.2em;
+            color: #1e3c72;
+            margin-bottom: 30px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-size: 2.5em;
+            color: #2a5298;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        h3 {
+            font-size: 1.8em;
+            color: #1e3c72;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        h4 {
+            font-size: 1.4em;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        /* Slide Header */
+        .slide-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .subtitle {
+            font-size: 1.3em;
+            color: #666;
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
+
+        /* Slide Title */
+        .slide-title {
+            background: linear-gradient(135deg, #2a5298 0%, #1e3c72 100%);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            font-weight: 600;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(42, 82, 152, 0.3);
+        }
+
+        /* Speaker Info */
+        .speaker-info {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .speaker-info h3 {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .speaker-info p {
+            font-size: 1.3em;
+            color: rgba(255,255,255,0.9);
+        }
+
+        /* Grid Systems */
+        .framework-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .goals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .two-column-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .three-column-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        /* Cards & Boxes */
+        .framework-card {
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            border-left: 8px solid #2a5298;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .framework-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .goal-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 6px solid #27ae60;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .info-box {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 6px solid #3498db;
+            margin: 20px 0;
+        }
+
+        .alert-box {
+            background: #fff9e6;
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 6px solid #ffc107;
+            margin: 20px 0;
+        }
+
+        .warning-box {
+            background: #f8d7da;
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 6px solid #dc3545;
+            margin: 20px 0;
+        }
+
+        .success-box {
+            background: #d4edda;
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 6px solid #28a745;
+            margin: 20px 0;
+        }
+
+        /* Process Flow */
+        .process-flow {
+            margin: 30px 0;
+        }
+
+        .flow-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 30px;
+            margin-bottom: 30px;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            border-left: 8px solid #3498db;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .step-number {
+            background: #3498db;
+            color: white;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 2.2em;
+            flex-shrink: 0;
+            box-shadow: 0 4px 15px rgba(52,152,219,0.3);
+        }
+
+        .step-content {
+            flex-grow: 1;
+        }
+
+        .step-title {
+            color: #3498db;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .step-desc {
+            color: #7f8c8d;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+
+        /* Tables */
+        .criteria-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .criteria-table th {
+            background: #2a5298;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .criteria-table td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+            vertical-align: top;
+        }
+
+        .criteria-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        /* Lists */
+        ul, ol {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+
+        li {
+            margin: 10px 0;
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: #2c3e50;
+        }
+
+        /* Thank You Slide */
+        .thank-you-content {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .thank-you-main h1 {
+            font-size: 4em;
+            color: #2a5298;
+            margin-bottom: 30px;
+        }
+
+        .contact-info {
+            background: #f8f9fa;
+            padding: 40px;
+            border-radius: 20px;
+            border-left: 8px solid #2a5298;
+            margin: 40px 0;
+            text-align: left;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .closing-message {
+            font-size: 1.3em;
+            color: #666;
+            margin-top: 30px;
+            font-style: italic;
+        }
+
+        /* Page Number */
+        .page-number {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 14px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        /* Responsive Design - Full Screen Layout */
+        @media (min-width: 1920px) {
+            body {
+                font-size: 22px;
+            }
+
+            .slide {
+                padding: 60px 120px;
+            }
+
+            .slide-title {
+                font-size: 3.2em;
+            }
+
+            h1 {
+                font-size: 4.2em;
+            }
+
+            h2 {
+                font-size: 2.8em;
+            }
+
+            h3 {
+                font-size: 2em;
+            }
+
+            .framework-grid {
+                gap: 40px;
+            }
+
+            .goals-grid {
+                gap: 35px;
+            }
+        }
+
+        @media (max-width: 1440px) {
+            .slide {
+                padding: 30px 50px;
+            }
+
+            h1 {
+                font-size: 2.8em;
+            }
+
+            h2 {
+                font-size: 2.2em;
+            }
+
+            .framework-grid {
+                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+                gap: 25px;
+            }
+        }
+
+        @media (max-width: 1200px) {
+            body {
+                font-size: 16px;
+            }
+
+            .slide {
+                padding: 25px 40px;
+            }
+
+            h1 {
+                font-size: 2.4em;
+            }
+
+            h2 {
+                font-size: 1.8em;
+            }
+
+            .three-column-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .framework-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                font-size: 14px;
+            }
+
+            .slide {
+                padding: 20px 25px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.6em;
+            }
+
+            h3 {
+                font-size: 1.4em;
+            }
+
+            .two-column-grid,
+            .three-column-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .flow-step {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .step-number {
+                margin: 0 auto 20px;
+            }
+
+            .navigation {
+                bottom: 10px;
+                right: 10px;
+                padding: 6px 12px;
+            }
+
+            .nav-btn {
+                padding: 4px 8px;
+                font-size: 10px;
+            }
+        }
+
+        /* Print Optimization - Keep A4 for printing but full screen for display */
+        @media print {
+            body {
+                background: white;
+                font-size: 11pt;
+            }
+
+            .slide {
+                display: block !important;
+                width: 210mm;
+                height: auto;
+                min-height: 297mm;
+                margin: 0 auto;
+                page-break-after: always;
+                box-shadow: none;
+                border: 1px solid #ddd;
+                padding: 15mm;
+            }
+
+            .navigation {
+                display: none;
+            }
+
+            .slide-title {
+                background: #2a5298 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .framework-card, .alert-box, .info-box, .warning-box, .success-box {
+                break-inside: avoid;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .page-number {
+                display: block;
+            }
+        }
+
+        @page {
+            size: A4;
+            margin: 15mm;
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+
+        <!-- Slide 1: Title Slide -->
+        <div class="slide active">
+            <div class="slide-header">
+                <h1>🏥 RANGKUMAN JUKNIS PELAYANAN TELEMEDISIN</h1>
+                <p class="subtitle">Presentasi ini adalah rangkuman dari Buku Petunjuk Teknis Pelayanan Telemedisin Kementerian Kesehatan RI</p>
+            </div>
+
+    
+            <div class="framework-card" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-left-color: #27ae60;">
+                <h3 style="color: #27ae60; margin-bottom: 30px; text-align: center; font-size: 2em;">📋 Tujuan Rangkuman Juknis</h3>
+                <div class="goals-grid">
+                    <div class="goal-card">
+                        <h4>📖 Pemahaman Regulasi</h4>
+                        <p>Meringkas ketentuan hukum dan persyaratan pelaksanaan telemedisin</p>
+                    </div>
+                    <div class="goal-card">
+                        <h4>🏥 Standar Pelayanan</h4>
+                        <p>Menyederhanakan prosedur dan kriteria layanan telemedisin</p>
+                    </div>
+                    <div class="goal-card">
+                        <h4>✅ Kepatuhan Standar</h4>
+                        <p>Memastikan implementasi sesuai juknis yang berlaku</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page-number">Halaman 1 dari 15</div>
+        </div>
+
+        <!-- Slide 2: Pengertian Dasar Telemedisin -->
+        <div class="slide">
+            <div class="slide-title">
+                <span>🏥</span>
+                <span>1. PENGERTIAN DASAR TELEMEDISIN</span>
+            </div>
+
+            <div class="info-box">
+                <h3>📖 Definisi Telemedisin</h3>
+                <p><strong>Telemedisin</strong> adalah pelayanan kesehatan jarak jauh yang memanfaatkan teknologi informasi dan komunikasi untuk pertukaran informasi kesehatan yang valid antara dokter dan pasien.</p>
+            </div>
+
+            <div class="framework-grid">
+                <div class="framework-card" style="border-left-color: #3498db;">
+                    <h3 style="color: #3498db;">🩺 Komponen Utama Telemedisin</h3>
+                    <ul>
+                        <li>Konsultasi medis jarak jauh</li>
+                        <li>Pemeriksaan klinis virtual</li>
+                        <li>Pemberian resep elektronik</li>
+                        <li>Monitoring pasien jarak jauh</li>
+                        <li>Edukasi kesehatan digital</li>
+                    </ul>
+                </div>
+
+                <div class="framework-card" style="border-left-color: #27ae60;">
+                    <h3 style="color: #27ae60;">🎯 Manfaat Utama</h3>
+                    <ul>
+                        <li>Aksesibilitas layanan kesehatan</li>
+                        <li>Effisiensi waktu dan biaya</li>
+                        <li>Kontinuitas perawatan</li>
+                        <li>Reach ke daerah terpencil</li>
+                        <li>Reduced healthcare costs</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="page-number">Halaman 2 dari 15</div>
+        </div>
+
+        <!-- Slide 3: Persyaratan Legal dan Regulasi -->
+        <div class="slide">
+            <div class="slide-title">
+                <span>⚖️</span>
+                <span>2. PERSYARATAN LEGAL DAN REGULASI</span>
+            </div>
+
+            <div class="warning-box">
+                <h3>⚠️ PERINGATAN REGULASI</h3>
+                <p>Pastikan semua persyaratan hukum terpenuhi sebelum menyelenggarakan pelayanan telemedisin.</p>
+            </div>
+
+            <div class="two-column-grid">
+                <div class="framework-card" style="border-left-color: #e74c3c;">
+                    <h3 style="color: #e74c3c;">📋 Izin Penyelenggaraan</h3>
+                    <ul>
+                        <li>Surat Izin Praktik (SIP) dokter yang masih berlaku</li>
+                        <li>Registrasi pada sistem telemedisin yang terdaftar di Kemenkes</li>
+                        <li>Struktur Organisasi Penyelenggara Telemedisin</li>
+                        <li>SOP pelayanan telemedisin yang telah disetujui</li>
+                    </ul>
+                </div>
+
+                <div class="framework-card" style="border-left-color: #9b59b6;">
+                    <h3 style="color: #9b59b6;">🔧 Persyaratan Teknis</h3>
+                    <ul>
+                        <li>Sistem rekam medis elektronik yang terintegrasi</li>
+                        <li>Platform komunikasi yang aman dan terenkripsi</li>
+                        <li>Backup data pasien yang terjamin</li>
+                        <li>Keamanan data sesuai standar HIPAA/Kemenkes</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="page-number">Halaman 3 dari 15</div>
+        </div>
+
+        <!-- Slide 4: Prosedur Pelayanan Telemedisin - Overview -->
+        <div class="slide">
+            <div class="slide-title">
+                <span>🔄</span>
+                <span>3. PROSEDUR PELAYANAN TELEMEDISIN</span>
+            </div>
+
+            <div class="process-flow">
+                <div class="flow-step">
+                    <div class="step-number" style="background: #3498db;">1</div>
+                    <div class="step-content">
+                        <div class="step-title" style="color: #3498db;">Verifikasi Pasien</div>
+                        <div class="step-desc">
+                            <ul>
+                                <li>Konfirmasi identitas pasien melalui KTP/identitas resmi</li>
+                                <li>Validasi data demografi dan riwayat medis</li>
+                                <li>Screening kasus darurat vs kasus rutin</li>
+                                <li>Obtain informed consent untuk pelayanan virtual</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flow-step">
+                    <div class="step-number" style="background: #27ae60;">2</div>
+                    <div class="step-content">
+                        <div class="step-title" style="color: #27ae60;">Konsultasi Virtual</div>
+                        <div class="step-desc">
+                            <ul>
+                                <li>Wawancara medis mendalam (anamnesis)</li>
+                                <li>Pemeriksaan fisik virtual yang memungkinkan</li>
+                                <li>Evaluasi gejala dan tanda vital (jika tersedia)</li>
+                                <li>Analisis kasus dan diagnosis diferensial</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flow-step">
+                    <div class="step-number" style="background: #e74c3c;">3</div>
+                    <div class="step-content">
+                        <div class="step-title" style="color: #e74c3c;">Manajemen Pengobatan</div>
+                        <div class="step-desc">
+                            <ul>
+                                <li>Penentuan diagnosis kerja</li>
+                                <li>Perencanaan terapi yang tepat</li>
+                                <li>Pemberian resep elektronik yang valid</li>
+                                <li>Edukasi pasien mengenai kondisi dan pengobatan</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page-number">Halaman 4 dari 15</div>
+        </div>
+
+        <!-- Slide 5: Kriteria Pasien yang Dapat Dilayani -->
+        <div class="slide">
+            <div class="slide-title">
+                <span>👥</span>
+                <span>4. KRITERIA PASIEN YANG BOLEH DILAYANI</span>
+            </div>
+
+            <table class="criteria-table">
+                <thead>
+                    <tr>
+                        <th>Kategori</th>
+                        <th>Kondisi yang Diperbolehkan</th>
+                        <th>Kondisi yang TIDAK Diperbolehkan</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Kasus Rutin</strong></td>
+                        <td>• Follow-up kontrol kronis<br>• Konsultasi penyakit ringan<br>• Edukasi kesehatan</td>
+                        <td>• Kasus pertama kali dengan gejala berat</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Kasus Darurat</strong></td>
+                        <td>• Triase awal untuk rujukan<br>• Konsultasi second opinion</td>
+                        <td>• Gawat darurat medis<br>• Trauma berat<br>• Serangan jantung/stroke</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Kondisi Kronis</strong></td>
+                        <td>• Kontrol rutin diabetes<br>• Hipertensi stabil<br>• Asma terkontrol</td>
+                        <td>• Exaserbasi akut<br>• Kondisi tidak stabil</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="alert-box">
+                <h3>🚨 Penting!</h3>
+                <p>Selalu prioritaskan keselamatan pasien. Jika ada keraguan, rujuk ke fasilitas kesehatan terdekat.</p>
+            </div>
+
+            <div class="page-number">Halaman 5 dari 15</div>
+        </div>
+
+        <!-- Slide 6: Resep Elektronik -->
+        <div class="slide">
+            <div class="slide-title">
+                <span>💊</span>
+                <span>5. RESEP ELEKTRONIK</span>
+            </div>
+
+            <div class="success-box">
+                <h3>✅ PANDUAN RESEP ELEKTRONIK</h3>
+                <p>Resep elektronik harus memenuhi standar keamanan dan keabsahan yang ditetapkan oleh Kemenkes.</p>
+            </div>
+
+            <div class="framework-card" style="border-left-color: #27ae60;">
+                <h3 style="color: #27ae60;">📋 Syarat Resep Elektronik yang Valid:</h3>
+                <ul>
+                    <li>Nama lengkap dan SIP dokter yang jelas</li>
+                    <li>Data identitas pasien yang lengkap</li>
+                    <li>Diagnosis yang jelas</li>
+                    <li>Nama obat (generik dan/atau merek)</li>
+                    <li>Dosis, frekuensi, dan durasi pengobatan</li>
+                    <li>Tanda tangan digital yang terverifikasi</li>
+                    <li>Tanggal penerbitan resep</li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <h3>🔐 Keamanan Data</h3>
+                <p>Resep elektronik harus disimpan dengan aman dan hanya dapat diakses oleh tenaga medis yang berwenang.</p>
+            </div>
+
+            <div class="page-number">Halaman 6 dari 15</div>
+        </div>
+
+        <!-- Slide 7: Etika Profesi Telemedisin -->
+        <div class="slide">
+            <div class="slide-title">
+                <span>⚖️</span>
+                <span>6. ETIKA PROFESI TELEMEDISIN</span>
+            </div>
+
+            <div class="framework-card" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-left-color: #9b59b6;">
+                <h3 style="color: #9b59b6; text-align: center; margin-bottom: 30px; font-size: 2em;">🏛️ Prinsip Etika yang Harus Diperhatikan</h3>
+
+                <div class="three-column-grid">
+                    <div class="framework-card" style="border-left-color: #3498db; text-align: center;">
+                        <h3 style="color: #3498db;">🤝 Autonomi</h3>
+                        <p>Menghormati hak pasien untuk membuat keputusan</p>
+                    </div>
+
+                    <div class="framework-card" style="border-left-color: #27ae60; text-align: center;">
+                        <h3 style="color: #27ae60;">❤️ Beneficence</h3>
+                        <p>Bertindak untuk kebaikan pasien</p>
+                    </div>
+
+                    <div class="framework-card" style="border-left-color: #e74c3c; text-align: center;">
+                        <h3 style="color: #e74c3c;">🛡️ Non-maleficence</h3>
+                        <p>Tidak melakukan harm pada pasien</p>
+                    </div>
+                </div>
+
+                <div class="two-column-grid" style="margin-top: 30px;">
+                    <div class="framework-card" style="border-left-color: #f39c12; text-align: center;">
+                        <h3 style="color: #f39c12;">⚖️ Justice</h3>
+                        <p>Pelayanan yang adil dan merata</p>
+                    </div>
+
+                    <div class="framework-card" style="border-left-color: #9b59b6; text-align: center;">
+                        <h3 style="color: #9b59b6;">🔒 Confidentiality</h3>
+                        <p>Menjaga kerahasiaan data medis</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page-number">Halaman 7 dari 15</div>
+        </div>
+
+        <!-- Slide 8: Dokumentasi Medis -->
+        <div class="slide">
+            <div class="slide-title">
+                <span>📝</span>
+                <span>7. DOKUMENTASI MEDIS</span>
+            </div>
+
+            <div class="info-box">
+                <h3>📋 Format Dokumentasi yang Disarankan:</h3>
+            </div>
+
+            <div class="framework-card" style="border-left-color: #3498db;">
+                <h3 style="color: #3498db;">📄 SOAP Note Format</h3>
+                <div class="two-column-grid">
+                    <div>
+                        <h4 style="color: #3498db;">S (Subjective)</h4>
+                        <p>Keluhan pasien dan riwayat penyakit</p>
+                    </div>
+                    <div>
+                        <h4 style="color: #3498db;">O (Objective)</h4>
+                        <p>Data objektif dari pemeriksaan</p>
+                    </div>
+                </div>
+                <div class="two-column-grid" style="margin-top: 20px;">
+                    <div>
+                        <h4 style="color: #3498db;">A (Assessment)</h4>
+                        <p>Diagnosis dan analisis medis</p>
+                    </div>
+                    <div>
+                        <h4 style="color: #3498db;">P (Plan)</h4>
+                        <p>Rencana tindakan dan follow-up</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="framework-card" style="border-left-color: #27ae60;">
+                <h3 style="color: #27ae60;">📝 Dokumentasi Tambahan</h3>
+                <ul>
+                    <li>Record waktu konsultasi (mulai dan selesai)</li>
+                    <li>Dokumentasi informed consent</li>
+                    <li>Catatan komunikasi dengan pasien</li>
+                    <li>Rencana follow-up dan monitoring</li>
+                </ul>
+            </div>
+
+            <div class="page-number">Halaman 8 dari 15</div>
+        </div>
+
+        <!-- Slide 9: Aspek Keamanan Data -->
+        <div class="slide">
+            <div class="slide-title">
+                <span>🔐</span>
+                <span>8. ASPEK KEAMANAN DATA</span>
+            </div>
+
+            <div class="warning-box">
+                <h3>⚠️ KEAMANAN DATA</h3>
+                <p>Perlindungan data pasien adalah tanggung jawab utama penyelenggara telemedisin.</p>
+            </div>
+
+            <div class="framework-grid">
+                <div class="framework-card" style="border-left-color: #e74c3c;">
+                    <h3 style="color: #e74c3c;">🛡️ Standar Keamanan yang Harus Dipenuhi:</h3>
+                    <ul>
+                        <li>Enkripsi data end-to-end</li>
+                        <li>Authentication multi-factor</li>
+                        <li>Regular security audit</li>
+                        <li>Data backup dan disaster recovery</li>
+                        <li>Compliance dengan regulasi data medis</li>
+                        <li>Pelatihan staf mengenai keamanan data</li>
+                    </ul>
+                </div>
+
+                <div class="framework-card" style="border-left-color: #9b59b6;">
+                    <h3 style="color: #9b59b6;">📊 Statistik Keamanan</h3>
+                    <ul>
+                        <li>99.9% uptime system target</li>
+                        <li>256-bit encryption minimum</li>
+                        <li>Regular vulnerability assessment</li>
+                        <li>Incident response time &lt;1 hour</li>
+                        <li>Annual penetration testing</li>
+                        <li>Compliance audit quarterly</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="page-number">Halaman 9 dari 15</div>
+        </div>
+
+        <!-- Slide 10: Kualitas Pelayanan -->
+        <div class="slide">
+            <div class="slide-title">
+                <span>⭐</span>
+                <span>9. KUALITAS PELAYANAN</span>
+            </div>
+
+            <div class="framework-card" style="border-left-color: #27ae60;">
+                <h3 style="color: #27ae60;">📈 Indikator Kualitas Telemedisin:</h3>
+            </div>
+
+            <div class="goals-grid">
+                <div class="goal-card">
+                    <h4>⏱️ Waktu Respons</h4>
+                    <p>&lt;15 menit untuk kasus rutin</p>
+                </div>
+                <div class="goal-card">
+                    <h4>😊 Kepuasan Pasien</h4>
+                    <p>&gt;85% satisfaction rate</p>
+                </div>
+                <div class="goal-card">
+                    <h4>🎯 Akurasi Diagnosis</h4>
+                    <p>Validated dengan follow-up</p>
+                </div>
+                <div class="goal-card">
+                    <h4>✅ Completion Rate</h4>
+                    <p>Tingkat penyelesaian konsultasi</p>
+                </div>
+                <div class="goal-card">
+                    <h4>📊 Adverse Events</h4>
+                    <p>Monitoring dan reporting</p>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h3>🔍 Continuous Quality Improvement</h3>
+                <p>Implementasi PDCA cycle untuk peningkatan kualitas berkelanjutan.</p>
+            </div>
+
+            <div class="page-number">Halaman 10 dari 15</div>
+        </div>
+
+        <!-- Slide 11: Pelaporan dan Monitoring -->
+        <div class="slide">
+            <div class="slide-title">
+                <span>📊</span>
+                <span>10. PELAPORAN DAN MONITORING</span>
+            </div>
+
+            <div class="framework-card" style="border-left-color: #3498db;">
+                <h3 style="color: #3498db;">📋 Laporan yang Harus Dibuat:</h3>
+            </div>
+
+            <div class="three-column-grid">
+                <div class="framework-card" style="border-left-color: #e74c3c;">
+                    <h4 style="color: #e74c3c;">📈 Operational Reports</h4>
+                    <ul>
+                        <li>Laporan bulanan jumlah konsultasi</li>
+                        <li>Statistik jenis penyakit</li>
+                        <li>Data kepuasan pasien</li>
+                    </ul>
+                </div>
+
+                <div class="framework-card" style="border-left-color: #27ae60;">
+                    <h4 style="color: #27ae60;">⚠️ Safety Reports</h4>
+                    <ul>
+                        <li>Laporan adverse events</li>
+                        <li>Near miss incidents</li>
+                        <li>Complaint resolution</li>
+                    </ul>
+                </div>
+
+                <div class="framework-card" style="border-left-color: #9b59b6;">
+                    <h4 style="color: #9b59b6;">🔍 Quality Reports</h4>
+                    <ul>
+                        <li>Audit kualitas pelayanan</li>
+                        <li>Laporan kepatuhan regulasi</li>
+                        <li>Performance metrics</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="alert-box">
+                <h3>📅 Reporting Schedule</h3>
+                <p><strong>Daily:</strong> Operational metrics<br>
+                   <strong>Weekly:</strong> Quality indicators<br>
+                   <strong>Monthly:</strong> Comprehensive reports<br>
+                   <strong>Quarterly:</strong> Compliance audit</p>
+            </div>
+
+            <div class="page-number">Halaman 11 dari 15</div>
+        </div>
+
+        <!-- Slide 12: Kontinuitas Pelayanan -->
+        <div class="slide">
+            <div class="slide-title">
+                <span>🔄</span>
+                <span>11. KONTINUITAS PELAYANAN</span>
+            </div>
+
+            <div class="info-box">
+                <h3>🔄 Strategi Menjamin Kontinuitas:</h3>
+            </div>
+
+            <div class="process-flow">
+                <div class="flow-step">
+                    <div class="step-number" style="background: #3498db;">1</div>
+                    <div class="step-content">
+                        <div class="step-title" style="color: #3498db;">System Integration</div>
+                        <div class="step-desc">Integrasi dengan sistem rekam medis rumah sakit untuk seamless data flow</div>
+                    </div>
+                </div>
+
+                <div class="flow-step">
+                    <div class="step-number" style="background: #27ae60;">2</div>
+                    <div class="step-content">
+                        <div class="step-title" style="color: #27ae60;">Follow-up Schedule</div>
+                        <div class="step-desc">Jadwal follow-up yang jelas dan terstruktur untuk monitoring pasien</div>
+                    </div>
+                </div>
+
+                <div class="flow-step">
+                    <div class="step-number" style="background: #e74c3c;">3</div>
+                    <div class="step-content">
+                        <div class="step-title" style="color: #e74c3c;">Referral System</div>
+                        <div class="step-desc">Sistem rujukan yang terstruktur untuk kasus yang memerlukan penanganan lebih lanjut</div>
+                    </div>
+                </div>
+
+                <div class="flow-step">
+                    <div class="step-number" style="background: #f39c12;">4</div>
+                    <div class="step-content">
+                        <div class="step-title" style="color: #f39c12;">Emergency Protocols</div>
+                        <div class="step-desc">Protocols darurat dan escalation pathways untuk situasi kritikal</div>
+                    </div>
+                </div>
+
+                <div class="flow-step">
+                    <div class="step-number" style="background: #9b59b6;">5</div>
+                    <div class="step-content">
+                        <div class="step-title" style="color: #9b59b6;">Patient Education</div>
+                        <div class="step-desc">Edukasi pasien untuk self-management dan penggunaan layanan yang tepat</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page-number">Halaman 12 dari 15</div>
+        </div>
+
+        <!-- Slide 13: Biaya dan Reimbursement -->
+        <div class="slide">
+            <div class="slide-title">
+                <span>💰</span>
+                <span>12. BIAYA DAN REIMBURSEMENT</span>
+            </div>
+
+            <table class="criteria-table">
+                <thead>
+                    <tr>
+                        <th>Jenis Pelayanan</th>
+                        <th>Kode Tarif</th>
+                        <th>Coverage BPJS</th>
+                        <th>Keterangan</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Konsultasi Rutin</strong></td>
+                        <td>TEL-001</td>
+                        <td>Ya (tertentu)</td>
+                        <td>Max 30 menit</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Konsultasi Spesialis</strong></td>
+                        <td>TEL-002</td>
+                        <td>Ya (tertentu)</td>
+                        <td>Perlu rujukan</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Follow-up Kronis</strong></td>
+                        <td>TEL-003</td>
+                        <td>Ya</td>
+                        <td>Max 15 menit</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="two-column-grid">
+                <div class="framework-card" style="border-left-color: #27ae60;">
+                    <h3 style="color: #27ae60;">💰 Komponen Biaya</h3>
+                    <ul>
+                        <li>Konsultasi dokter</li>
+                        <li>Platform fee</li>
+                        <li>Administrasi</li>
+                        <li>Resep elektronik</li>
+                    </ul>
+                </div>
+
+                <div class="framework-card" style="border-left-color: #3498db;">
+                    <h3 style="color: #3498db;">📋 Persyaratan Klaim</h3>
+                    <ul>
+                        <li>Dokumentasi lengkap</li>
+                        <li>SOAP notes</li>
+                        <li>Resep valid</li>
+                        <li>Follow-up plan</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="page-number">Halaman 13 dari 15</div>
+        </div>
+
+        <!-- Slide 14: Best Practices and Tips -->
+        <div class="slide">
+            <div class="slide-title">
+                <span>✨</span>
+                <span>BEST PRACTICES & TIPS</span>
+            </div>
+
+            <div class="framework-grid">
+                <div class="framework-card" style="border-left-color: #27ae60;">
+                    <h3 style="color: #27ae60;">✅ Do's</h3>
+                    <ul>
+                        <li>Verifikasi identitas pasien</li>
+                        <li>Dokumentasi lengkap</li>
+                        <li>Follow-up teratur</li>
+                        <li>Edukasi pasien</li>
+                        <li>Maintain professional boundaries</li>
+                        <li>Use secure platforms</li>
+                    </ul>
+                </div>
+
+                <div class="framework-card" style="border-left-color: #e74c3c;">
+                    <h3 style="color: #e74c3c;">❌ Don'ts</h3>
+                    <ul>
+                        <li>Tidak ada diagnosis tanpa pemeriksaan</li>
+                        <li>Tidak meresep obat terkontrol baru</li>
+                        <li>Tidak menangani kasus darurat</li>
+                        <li>Tidak menggunakan personal devices</li>
+                        <li>Tidak mengabaikan informed consent</li>
+                        <li>Tidak lupa follow-up</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="success-box">
+                <h3>💡 Pro Tips</h3>
+                <p>• Always have backup plan for technical issues<br>
+                   • Maintain professional appearance and environment<br>
+                   • Use clear, simple language for patient education<br>
+                   • Document everything thoroughly<br>
+                   • Know when to refer to in-person care</p>
+            </div>
+
+            <div class="page-number">Halaman 14 dari 15</div>
+        </div>
+
+        <!-- Slide 15: Thank You -->
+        <div class="slide">
+            <div class="thank-you-content">
+                <div class="thank-you-main">
+                    <h1>🙏 Terima Kasih</h1>
+                </div>
+            </div>
+
+            <div class="page-number">Halaman 15 dari 15</div>
+        </div>
+
+    </div>
+
+    <!-- Navigation Controls -->
+    <div class="navigation">
+        <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">◀ Prev</button>
+        <span class="slide-counter">
+            <span id="currentSlide">1</span> / <span id="totalSlides">15</span>
+        </span>
+        <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Next ▶</button>
+    </div>
+
+    <script>
+        let currentSlideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        document.getElementById('totalSlides').textContent = totalSlides;
+
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[index].classList.add('active');
+
+            document.getElementById('currentSlide').textContent = index + 1;
+
+            // Update navigation buttons
+            document.getElementById('prevBtn').disabled = index === 0;
+            document.getElementById('nextBtn').disabled = index === totalSlides - 1;
+
+            // Scroll to top of slide
+            slides[index].scrollTop = 0;
+        }
+
+        function changeSlide(direction) {
+            const newIndex = currentSlideIndex + direction;
+            if (newIndex >= 0 && newIndex < totalSlides) {
+                currentSlideIndex = newIndex;
+                showSlide(currentSlideIndex);
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            switch(e.key) {
+                case 'ArrowLeft':
+                case 'ArrowUp':
+                    changeSlide(-1);
+                    e.preventDefault();
+                    break;
+                case 'ArrowRight':
+                case 'ArrowDown':
+                case ' ': // Space bar
+                    changeSlide(1);
+                    e.preventDefault();
+                    break;
+                case 'Home':
+                    currentSlideIndex = 0;
+                    showSlide(currentSlideIndex);
+                    e.preventDefault();
+                    break;
+                case 'End':
+                    currentSlideIndex = totalSlides - 1;
+                    showSlide(currentSlideIndex);
+                    e.preventDefault();
+                    break;
+            }
+        });
+
+        // Touch/swipe support for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    // Swipe left - next slide
+                    changeSlide(1);
+                } else {
+                    // Swipe right - previous slide
+                    changeSlide(-1);
+                }
+            }
+        }
+
+        // Initialize first slide
+        showSlide(0);
+
+        // Prevent zooming on mobile double tap
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function (event) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+
+        // Add fullscreen toggle (F11 alternative)
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'F11') {
+                e.preventDefault();
+                if (!document.fullscreenElement) {
+                    document.documentElement.requestFullscreen();
+                } else {
+                    document.exitFullscreen();
+                }
+            }
+        });
+    </script>
+</body>
+</html>

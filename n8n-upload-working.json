@@ -1,0 +1,164 @@
+{
+  "name": "Gemini File Upload Working",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "upload"
+      },
+      "name": "Upload Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [100, 100]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://generativelanguage.googleapis.com/upload/v1beta/files",
+        "authentication": "headerAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-Goog-Upload-Protocol",
+              "value": "resumable"
+            },
+            {
+              "name": "X-Goog-Upload-Command",
+              "value": "start"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={ \"file\": { \"displayName\": \"test-file\" } }"
+      },
+      "name": "Start Upload",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [300, 100]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $json.upload_url }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/octet-stream"
+            },
+            {
+              "name": "X-Goog-Upload-Command",
+              "value": "upload, finalize"
+            },
+            {
+              "name": "X-Goog-Upload-Offset",
+              "value": "0"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "data",
+              "value": "={{ $binary.data }}"
+            }
+          ]
+        }
+      },
+      "name": "Upload Data",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [500, 100]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://generativelanguage.googleapis.com/v1beta/fileSearchStores/n8ndocumentsstore-f7cqp3cqctc6:importFile",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer AIzaSyAmi8rLTrz3JCQZ2JoBgGSzOtXO_MDgUk8"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={ \"fileName\": \"{{ $json.name }}\" }"
+      },
+      "name": "Import to Store",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [700, 100]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { \"success\": true, \"file\": $json } }}"
+      },
+      "name": "Final Response",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [900, 100]
+    }
+  ],
+  "connections": {
+    "Upload Webhook": {
+      "main": [
+        [
+          {
+            "node": "Start Upload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Start Upload": {
+      "main": [
+        [
+          {
+            "node": "Upload Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload Data": {
+      "main": [
+        [
+          {
+            "node": "Import to Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Import to Store": {
+      "main": [
+        [
+          {
+            "node": "Final Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pembaruan Juknis Telemedisin Indonesia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .slide {
+            background: white;
+            width: 100%;
+            max-width: 1400px;
+            aspect-ratio: 16/9;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 50px 60px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 35px;
+            border-bottom: 4px solid #667eea;
+            padding-bottom: 20px;
+        }
+        
+        .header h1 {
+            color: #2d3748;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        
+        .header .subtitle {
+            color: #667eea;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 35px;
+            flex: 1;
+        }
+        
+        .column {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .section {
+            background: linear-gradient(135deg, #f6f8fb 0%, #e9eef5 100%);
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 5px solid #667eea;
+            flex: 1;
+        }
+        
+        .section h2 {
+            color: #667eea;
+            font-size: 20px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .icon {
+            font-size: 24px;
+        }
+        
+        .section ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .section li {
+            color: #4a5568;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .section li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            grid-column: 1 / -1;
+        }
+        
+        .highlight-box h3 {
+            font-size: 22px;
+            margin-bottom: 12px;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 15px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 32px;
+            font-weight: 700;
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 13px;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+        
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            color: #718096;
+            font-size: 13px;
+            border-top: 2px solid #e2e8f0;
+            padding-top: 15px;
+        }
+        
+        .footer strong {
+            color: #2d3748;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="header">
+            <h1>Pembaruan Petunjuk Teknis Telemedisin Indonesia</h1>
+            <p class="subtitle">Roadmap Transformasi Digital Healthcare Menuju Universal Coverage 2030</p>
+        </div>
+        
+        <div class="content">
+            <div class="column">
+                <div class="section">
+                    <h2><span class="icon">⚖️</span> Kerangka Regulasi & Keamanan</h2>
+                    <ul>
+                        <li><strong>Harmonisasi Regulasi:</strong> Matriks compliance 17+ regulasi dengan klausul supremasi</li>
+                        <li><strong>Data Sovereignty:</strong> Wajib server lokal, audit BSSN tahunan, Zero-Trust Architecture</li>
+                        <li><strong>Blockchain Layer:</strong> Audit trail immutable, consent management real-time</li>
+                        <li><strong>Integrasi SATUSEHAT:</strong> Mandatory 2027, interoperabilitas HL7 FHIR</li>
+                    </ul>
+                </div>
+                
+                <div class="section">
+                    <h2><span class="icon">🎓</span> SDM & Infrastruktur Adaptif</h2>
+                    <ul>
+                        <li><strong>Sertifikasi 3-Tier:</strong> Basic, Advanced, RPL (Recognition Prior Learning)</li>
+                        <li><strong>Standar Regional:</strong> Urban (5 Mbps), Semi-urban (2 Mbps), 3T (512 Kbps store-forward)</li>
+                        <li><strong>Hub & Spoke Model:</strong> Equipment leasing subsidi 90%, mobile unit rotasi</li>
+                        <li><strong>1000 Digital Champions:</strong> ToT masif, campaign literasi nasional</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="column">
+                <div class="section">
+                    <h2><span class="icon">💰</span> Model Pembiayaan Value-Based</h2>
+                    <ul>
+                        <li><strong>Bundled Payment:</strong> Flat rate + bonus outcome (HbA1c terkontrol, zero emergency)</li>
+                        <li><strong>Differential Pricing:</strong> Basic (Rp 0) - Premium (Rp 1 juta), transparansi upfront</li>
+                        <li><strong>Insentif 3T:</strong> 2x tarif, tax deduction 30%, DSO mandatory 4 jam/minggu</li>
+                        <li><strong>Blended Finance:</strong> Rp 500 M/tahun (APBN 40%, BPJS 30%, CSR 20%, Donor 10%)</li>
+                    </ul>
+                </div>
+                
+                <div class="section">
+                    <h2><span class="icon">🚀</span> Inovasi & Spesialisasi</h2>
+                    <ul>
+                        <li><strong>Disease Matrix:</strong> Traffic light system (Green/Yellow/Red), update 6 bulan</li>
+                        <li><strong>10 Specialty Guidelines:</strong> Derma, Kardio, Pedi, ObGyn, Psikiatri, dll.</li>
+                        <li><strong>Innovation Sandbox:</strong> 5 kota DHIZ, waiver 12-24 bulan, AI/IoMT pilot</li>
+                        <li><strong>Framework ASEAN:</strong> Second opinion lintas negara, reciprocal license</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="highlight-box">
+                <h3>🎯 Target Universal Coverage 2030</h3>
+                <div class="stats">
+                    <div class="stat-item">
+                        <span class="stat-number">514</span>
+                        <div class="stat-label">Kabupaten Tercakup</div>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">80%</span>
+                        <div class="stat-label">Populasi Terakses</div>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">500K</span>
+                        <div class="stat-label">Konsultasi/Bulan</div>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">60%</span>
+                        <div class="stat-label">Reduksi Rujukan</div>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">3 Phase</span>
+                        <div class="stat-label">2025-2030</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <strong>Dr. Ahmad Hidayat</strong> | Technical Working Group | Kementerian Kesehatan RI | 
+            <em>"Equity, Access, Quality: Healthcare untuk Sabang-Merauke"</em>
+        </div>
+    </div>
+</body>
+</html>

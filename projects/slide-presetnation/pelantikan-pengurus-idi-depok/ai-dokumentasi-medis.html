@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pemanfaatan AI Generatif untuk Dokumentasi Medis Berkualitas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            overflow: hidden;
+            height: 100vh;
+            font-size: 18px;
+        }
+
+        .presentation-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+        }
+
+        .slide {
+            display: none;
+            width: 100%;
+            height: 100vh;
+            padding: 60px 80px;
+            background: white;
+            box-sizing: border-box;
+            overflow-y: auto;
+            animation: slideIn 0.5s ease-in-out;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .slide-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .slide-header h1 {
+            font-size: 3.2em;
+            color: #1e3c72;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            font-size: 1.3em;
+            color: #666;
+            font-weight: 400;
+        }
+
+        .speaker-info {
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .speaker-info h3 {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+
+        .speaker-info p {
+            font-size: 1.3em;
+        }
+
+        .slide-title {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 25px 40px;
+            border-radius: 15px;
+            font-size: 2.5em;
+            font-weight: 600;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .agenda-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .agenda-item {
+            border-left: 6px solid #22c55e;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .agenda-number {
+            font-size: 0.9em;
+            color: #22c55e;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .agenda-title {
+            font-size: 1.4em;
+            color: #1e3c72;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        .challenge-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .challenge-box {
+            background: #1a1a1a;
+            border: 3px solid #22c55e;
+            border-radius: 15px;
+            padding: 30px;
+            color: white;
+            font-size: 1.2em;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        .section-subtitle {
+            color: #22c55e;
+            font-size: 2em;
+            font-weight: 700;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .feature-box {
+            background: #4a5a3a;
+            border-radius: 15px;
+            padding: 35px;
+            color: white;
+            font-size: 1.15em;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        .benefit-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            margin: 40px 0;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 25px;
+        }
+
+        .benefit-icon {
+            font-size: 3em;
+            flex-shrink: 0;
+        }
+
+        .benefit-content h4 {
+            font-size: 1.3em;
+            color: #1e3c72;
+            margin-bottom: 10px;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        .flow-step {
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            border-left: 8px solid #22c55e;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .step-icon {
+            font-size: 2.5em;
+            flex-shrink: 0;
+        }
+
+        .step-text {
+            font-size: 1.2em;
+            color: #2c3e50;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        .security-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .security-box {
+            background: #4a5a3a;
+            border-radius: 15px;
+            padding: 40px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .security-icon {
+            width: 60px;
+            height: 60px;
+            background: #9ef01a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8em;
+        }
+
+        .security-text {
+            font-size: 1.2em;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        .steps-list {
+            margin: 30px 0;
+        }
+
+        .step-bar {
+            background: #4a5a3a;
+            color: white;
+            padding: 25px 35px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 1.15em;
+            line-height: 1.6;
+            font-weight: 500;
+            border-left: 6px solid #22c55e;
+        }
+
+        .conclusion-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 50px;
+            margin: 40px 0;
+        }
+
+        .key-points, .next-steps {
+            background: #f8f9fa;
+            padding: 40px;
+            border-radius: 20px;
+            border-left: 8px solid #22c55e;
+        }
+
+        .key-points h3, .next-steps h3 {
+            color: #1e3c72;
+            font-size: 1.8em;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+
+        .key-points ul, .next-steps ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .key-points li, .next-steps li {
+            font-size: 1.15em;
+            line-height: 1.8;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .key-points li::before, .next-steps li::before {
+            content: "•";
+            position: absolute;
+            left: 10px;
+            color: #22c55e;
+            font-weight: bold;
+            font-size: 1.5em;
+        }
+
+        .thank-you-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: calc(100vh - 120px);
+            text-align: center;
+        }
+
+        .thank-you-main h1 {
+            font-size: 5em;
+            color: #22c55e;
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
+
+        .thank-you-main p {
+            font-size: 2em;
+            color: #1e3c72;
+            font-weight: 600;
+            margin-bottom: 50px;
+        }
+
+        .closing-message {
+            font-size: 1.5em;
+            color: #666;
+            font-style: italic;
+            max-width: 900px;
+            line-height: 1.8;
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.7);
+            border-radius: 20px;
+            padding: 8px 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.2);
+        }
+
+        .nav-btn {
+            background: #22c55e;
+            color: white;
+            border: none;
+            border-radius: 15px;
+            padding: 6px 12px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 500;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .nav-btn:hover {
+            background: #16a34a;
+            transform: translateY(-1px);
+        }
+
+        .nav-btn:disabled {
+            background: #666;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .slide-counter {
+            color: white;
+            font-size: 12px;
+            font-weight: 500;
+            min-width: 50px;
+            text-align: center;
+        }
+
+        @media (min-width: 1920px) {
+            body {
+                font-size: 20px;
+            }
+
+            .slide {
+                padding: 80px 120px;
+            }
+
+            .slide-title {
+                font-size: 3em;
+            }
+
+            .slide-header h1 {
+                font-size: 3.8em;
+            }
+        }
+
+        @media (max-width: 1366px) {
+            .slide {
+                padding: 40px 60px;
+            }
+
+            .challenge-grid,
+            .feature-grid,
+            .benefit-grid,
+            .security-grid,
+            .conclusion-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media print {
+            .slide {
+                page-break-after: always;
+                display: block !important;
+                height: auto;
+            }
+
+            .navigation {
+                display: none;
+            }
+
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        @page {
+            size: A4 landscape;
+            margin: 15mm;
+        }
+
+        .chart-container {
+            margin: 40px 0;
+            padding: 50px;
+            background: white;
+            border-radius: 20px;
+            border: 3px solid #e0e0e0;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            margin: 30px 0 50px 0;
+        }
+
+        .chart-y-axis {
+            position: absolute;
+            left: -10px;
+            top: 0;
+            bottom: 60px;
+            width: 3px;
+            background: #2c3e50;
+        }
+
+        .chart-bars {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            height: 350px;
+            padding: 20px 30px;
+            border-bottom: 3px solid #2c3e50;
+            gap: 15px;
+            position: relative;
+            background: linear-gradient(to top, rgba(34, 197, 94, 0.05) 0%, transparent 100%);
+        }
+
+        .bar-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+        }
+
+        .bar-value {
+            font-size: 1.15em;
+            font-weight: 700;
+            color: #1e3c72;
+            white-space: nowrap;
+            background: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border: 2px solid #22c55e;
+            order: -1;
+        }
+
+        .bar {
+            width: 100%;
+            max-width: 100px;
+            background: linear-gradient(180deg, #22c55e 0%, #16a34a 100%);
+            border-radius: 8px 8px 0 0;
+            position: relative;
+            transition: all 0.3s;
+            box-shadow: 0 -4px 15px rgba(34, 197, 94, 0.4);
+            border: 2px solid #16a34a;
+        }
+
+        .bar:hover {
+            box-shadow: 0 -8px 25px rgba(34, 197, 94, 0.6);
+            filter: brightness(1.1);
+            transform: scale(1.02);
+        }
+
+        .bar-label {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: #1e3c72;
+            text-align: center;
+        }
+
+        .chart-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .stat-box {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 6px solid #22c55e;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #22c55e;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1.1em;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        .pie-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            margin: 40px 0;
+            align-items: center;
+        }
+
+        .pie-chart-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+        }
+
+        .pie-chart {
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: conic-gradient(
+                #22c55e 0% 12.91%,
+                #16a34a 12.91% 24.90%,
+                #10b981 24.90% 34.61%,
+                #14b8a6 34.61% 44.29%,
+                #06b6d4 44.29% 53.82%,
+                #d1d5db 53.82% 100%
+            );
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        .pie-chart::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 140px;
+            height: 140px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        .pie-legend {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+
+        .legend-item:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+        }
+
+        .legend-color {
+            width: 30px;
+            height: 30px;
+            border-radius: 6px;
+            flex-shrink: 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .legend-content {
+            flex: 1;
+        }
+
+        .legend-title {
+            font-size: 1.1em;
+            font-weight: 700;
+            color: #1e3c72;
+            margin-bottom: 5px;
+        }
+
+        .legend-percentage {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #22c55e;
+        }
+
+        .legend-rank {
+            display: inline-block;
+            background: #1e3c72;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <!-- Slide 1: Title -->
+        <div class="slide active">
+            <div class="slide-header" style="margin-bottom: 60px;">
+                <h1 style="font-size: 3.5em; margin-bottom: 30px; line-height: 1.3;">PEMANFAATAN AI GENERATIF<br>UNTUK DOKUMENTASI MEDIS<br>BERKUALITAS</h1>
+                <p class="subtitle" style="font-size: 1.4em;">Pelantikan Pengurus IDI Cabang Kota Depok 2025 - 2028</p>
+            </div>
+
+            <div class="speaker-info" style="max-width: 900px; margin: 0 auto; padding: 40px 50px;">
+                <h3 style="font-size: 2em; margin-bottom: 15px;">dr. Ahmad Hidayat, MSc, MBA</h3>
+                <p style="font-size: 1.4em;">The Margo Hotel, 5 Oktober 2025</p>
+            </div>
+        </div>
+
+        <!-- Slide 2: Agenda -->
+        <div class="slide">
+            <div class="slide-title">
+                <span>📋</span>
+                <span>Agenda Presentasi</span>
+            </div>
+
+            <div class="agenda-grid">
+                <div class="agenda-item">
+                    <div class="agenda-number">01</div>
+                    <div class="agenda-title">Tantangan dokumentasi medis saat ini</div>
+                </div>
+                <div class="agenda-item">
+                    <div class="agenda-number">02</div>
+                    <div class="agenda-title">Pengenalan AI generatif untuk kesehatan</div>
+                </div>
+                <div class="agenda-item">
+                    <div class="agenda-number">03</div>
+                    <div class="agenda-title">Manfaat untuk resume medis</div>
+                </div>
+                <div class="agenda-item">
+                    <div class="agenda-number">04</div>
+                    <div class="agenda-title">Manfaat untuk surat rujukan</div>
+                </div>
+                <div class="agenda-item">
+                    <div class="agenda-number">05</div>
+                    <div class="agenda-title">Implementasi praktis</div>
+                </div>
+                <div class="agenda-item">
+                    <div class="agenda-number">06</div>
+                    <div class="agenda-title">Keamanan dan etika</div>
+                </div>
+                <div class="agenda-item">
+                    <div class="agenda-number">07</div>
+                    <div class="agenda-title">Langkah memulai</div>
+                </div>
+                <div class="agenda-item">
+                    <div class="agenda-number">08</div>
+                    <div class="agenda-title">Kesimpulan dan tindak lanjut</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Tantangan -->
+        <div class="slide">
+            <div class="slide-title">
+                <span>⚠️</span>
+                <span>Tantangan Dokumentasi Medis Saat Ini</span>
+            </div>
+
+            <div class="section-subtitle">
+                <span>⚠️</span>
+                <span>Tantangan yang Dihadapi Dokter Umum</span>
+            </div>
+
+            <div class="challenge-grid">
+                <div class="challenge-box">
+                    Beban administratif menghabiskan 34-55% waktu kerja
+                </div>
+                <div class="challenge-box">
+                    Dokumentasi tidak lengkap menghambat rujukan berkualitas
+                </div>
+                <div class="challenge-box">
+                    Waktu bersama pasien berkurang drastis
+                </div>
+                <div class="challenge-box">
+                    Perubahan regulasi JKN dan asuransi terus berlangsung
+                </div>
+                <div class="challenge-box">
+                    Risiko kelelahan kerja dan penurunan kepuasan
+                </div>
+                <div class="challenge-box">
+                    Koding diagnosis yang kompleks dan memakan waktu
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Pengenalan AI -->
+        <div class="slide">
+            <div class="slide-title">
+                <span>💡</span>
+                <span>Apa Itu AI Generatif untuk Kesehatan?</span>
+            </div>
+
+            <div class="section-subtitle">
+                <span>💡</span>
+                <span>Pengenalan AI Generatif untuk Dokumentasi Medis</span>
+            </div>
+
+            <div class="feature-grid">
+                <div class="feature-box">
+                    Teknologi kecerdasan buatan yang menghasilkan teks medis
+                </div>
+                <div class="feature-box">
+                    Mengubah percakapan dokter-pasien menjadi catatan terstruktur
+                </div>
+                <div class="feature-box">
+                    Terintegrasi dengan Rekam Medis Elektronik (RME)
+                </div>
+                <div class="feature-box">
+                    Sesuai Permenkes 24/2022 tentang RME
+                </div>
+                <div class="feature-box">
+                    Menggunakan Model Bahasa Besar yang terlatih
+                </div>
+                <div class="feature-box">
+                    Memerlukan tinjauan dan persetujuan dokter
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Grafik Adopsi AI -->
+        <div class="slide">
+            <div class="slide-title">
+                <span>📈</span>
+                <span>Adopsi AI di Bidang Kesehatan Global</span>
+            </div>
+
+            <div class="section-subtitle">
+                <span>📊</span>
+                <span>Pertumbuhan Pasar AI Kesehatan 2020-2025</span>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-wrapper">
+                    <div class="chart-bars">
+                        <div class="bar-item">
+                            <div class="bar-value">$6.7 M</div>
+                            <div class="bar" style="height: 60px;"></div>
+                            <div class="bar-label">2020</div>
+                        </div>
+                        <div class="bar-item">
+                            <div class="bar-value">$11.1 M</div>
+                            <div class="bar" style="height: 120px;"></div>
+                            <div class="bar-label">2021</div>
+                        </div>
+                        <div class="bar-item">
+                            <div class="bar-value">$15.4 M</div>
+                            <div class="bar" style="height: 170px;"></div>
+                            <div class="bar-label">2022</div>
+                        </div>
+                        <div class="bar-item">
+                            <div class="bar-value">$22.4 M</div>
+                            <div class="bar" style="height: 245px;"></div>
+                            <div class="bar-label">2023</div>
+                        </div>
+                        <div class="bar-item">
+                            <div class="bar-value">$32.3 M</div>
+                            <div class="bar" style="height: 315px;"></div>
+                            <div class="bar-label">2024</div>
+                        </div>
+                        <div class="bar-item">
+                            <div class="bar-value">$39.25 M</div>
+                            <div class="bar" style="height: 350px;"></div>
+                            <div class="bar-label">2025</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-stats">
+                    <div class="stat-box">
+                        <div class="stat-number">42%</div>
+                        <div class="stat-label">Pertumbuhan tahunan rata-rata (CAGR)</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">80%</div>
+                        <div class="stat-label">Rumah sakit menggunakan AI untuk perawatan pasien</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">95%</div>
+                        <div class="stat-label">Organisasi kesehatan menggunakan AI dalam beberapa kapasitas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Diagram Pie Kategori AI -->
+        <div class="slide">
+            <div class="slide-title">
+                <span>🥧</span>
+                <span>Kategori AI yang Paling Banyak Digunakan</span>
+            </div>
+
+            <div class="section-subtitle">
+                <span>📊</span>
+                <span>Top 5 Aplikasi AI di Rumah Sakit</span>
+            </div>
+
+            <div class="pie-container">
+                <div class="pie-chart-wrapper">
+                    <div class="pie-chart"></div>
+                </div>
+
+                <div class="pie-legend">
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #22c55e;"></div>
+                        <div class="legend-content">
+                            <div class="legend-title">
+                                <span class="legend-rank">#1</span>
+                                Optimisasi Alur Kerja
+                            </div>
+                        </div>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #16a34a;"></div>
+                        <div class="legend-content">
+                            <div class="legend-title">
+                                <span class="legend-rank">#2</span>
+                                Otomatisasi Tugas Rutin
+                            </div>
+                        </div>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #10b981;"></div>
+                        <div class="legend-content">
+                            <div class="legend-title">
+                                <span class="legend-rank">#3</span>
+                                Prediksi Kebutuhan Pasien
+                            </div>
+                        </div>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #14b8a6;"></div>
+                        <div class="legend-content">
+                            <div class="legend-title">
+                                <span class="legend-rank">#4</span>
+                                Prediksi Kebutuhan Staf
+                            </div>
+                        </div>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #06b6d4;"></div>
+                        <div class="legend-content">
+                            <div class="legend-title">
+                                <span class="legend-rank">#5</span>
+                                Penjadwalan Staf
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Manfaat Resume Medis -->
+        <div class="slide">
+            <div class="slide-title">
+                <span>📝</span>
+                <span>Manfaat AI untuk Resume Medis</span>
+            </div>
+
+            <div class="section-subtitle">
+                <span>📝</span>
+                <span>Transformasi Pembuatan Resume Medis</span>
+            </div>
+
+            <div class="benefit-grid">
+                <div class="benefit-item">
+                    <div class="benefit-icon">🎤</div>
+                    <div class="benefit-content">
+                        <h4>Transkripsi otomatis percakapan dokter-pasien menjadi catatan</h4>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">⏱️</div>
+                    <div class="benefit-content">
+                        <h4>Menghemat waktu dokumentasi hingga 70 persen</h4>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">🎯</div>
+                    <div class="benefit-content">
+                        <h4>Meningkatkan kelengkapan dan akurasi informasi medis</h4>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">📋</div>
+                    <div class="benefit-content">
+                        <h4>Format terstruktur sesuai standar rekam medis</h4>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">👨‍⚕️</div>
+                    <div class="benefit-content">
+                        <h4>Membebaskan dokter fokus pada interaksi pasien</h4>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">🛡️</div>
+                    <div class="benefit-content">
+                        <h4>Mengurangi risiko informasi penting yang terlewat</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Manfaat Surat Rujukan -->
+        <div class="slide">
+            <div class="slide-title">
+                <span>📄</span>
+                <span>Manfaat AI untuk Surat Rujukan</span>
+            </div>
+
+            <div class="section-subtitle">
+                <span>📄</span>
+                <span>Surat Rujukan Berkualitas dengan Cepat</span>
+            </div>
+
+            <div style="margin: 40px 0;">
+                <div class="flow-step">
+                    <div class="step-icon">🚀</div>
+                    <div class="step-text">Pembuatan otomatis dari catatan medis yang ada</div>
+                </div>
+                <div class="flow-step">
+                    <div class="step-icon">📊</div>
+                    <div class="step-text">Informasi klinis lengkap dan relevan tersusun sistematis</div>
+                </div>
+                <div class="flow-step">
+                    <div class="step-icon">🔧</div>
+                    <div class="step-text">Format sesuai standar sistem rujukan Indonesia</div>
+                </div>
+                <div class="flow-step">
+                    <div class="step-icon">⏰</div>
+                    <div class="step-text">Menghemat waktu pembuatan hingga 25-30 persen</div>
+                </div>
+                <div class="flow-step">
+                    <div class="step-icon">✅</div>
+                    <div class="step-text">Mengurangi kesalahan dan kelengkapan informasi rujukan</div>
+                </div>
+                <div class="flow-step">
+                    <div class="step-icon">📧</div>
+                    <div class="step-text">Meningkatkan komunikasi dengan dokter spesialis</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Implementasi Praktis -->
+        <div class="slide">
+            <div class="slide-title">
+                <span>🔧</span>
+                <span>Implementasi Praktis dalam Alur Kerja</span>
+            </div>
+
+            <div class="section-subtitle">
+                <span>🔧</span>
+                <span>Cara Kerja AI dalam Praktik Sehari-hari</span>
+            </div>
+
+            <div class="benefit-grid">
+                <div class="benefit-item">
+                    <div class="benefit-icon">①</div>
+                    <div class="benefit-content">
+                        <h4>Rekam percakapan dengan pasien menggunakan aplikasi AI</h4>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">②</div>
+                    <div class="benefit-content">
+                        <h4>Sistem mentranskripsi dan menyusun catatan secara otomatis</h4>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">③</div>
+                    <div class="benefit-content">
+                        <h4>Dokter meninjau, mengedit, dan menyetujui catatan</h4>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">④</div>
+                    <div class="benefit-content">
+                        <h4>Catatan tersimpan otomatis di Rekam Medis Elektronik</h4>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">⑤</div>
+                    <div class="benefit-content">
+                        <h4>Buat surat rujukan langsung dari catatan tersebut</h4>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">⑥</div>
+                    <div class="benefit-content">
+                        <h4>Integrasi penuh dengan alur kerja yang sudah ada</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Keamanan dan Etika -->
+        <div class="slide">
+            <div class="slide-title">
+                <span>🔒</span>
+                <span>Pertimbangan Keamanan dan Etika</span>
+            </div>
+
+            <div class="section-subtitle">
+                <span>🔒</span>
+                <span>Keamanan Data dan Tanggung Jawab Profesional</span>
+            </div>
+
+            <div class="security-grid">
+                <div class="security-box">
+                    <div class="security-icon">👥</div>
+                    <div class="security-text">Privasi pasien dilindungi sesuai UU Perlindungan Data</div>
+                </div>
+                <div class="security-box">
+                    <div class="security-icon">💬</div>
+                    <div class="security-text">Data harus diproses di Indonesia sesuai regulasi</div>
+                </div>
+                <div class="security-box">
+                    <div class="security-icon">🔥</div>
+                    <div class="security-text">Dokter tetap bertanggung jawab penuh atas setiap catatan</div>
+                </div>
+                <div class="security-box">
+                    <div class="security-icon">✅</div>
+                    <div class="security-text">Peninjauan dan validasi wajib sebelum persetujuan final</div>
+                </div>
+                <div class="security-box">
+                    <div class="security-icon">🔔</div>
+                    <div class="security-text">Transparansi kepada pasien tentang penggunaan AI</div>
+                </div>
+                <div class="security-box">
+                    <div class="security-icon">⚖️</div>
+                    <div class="security-text">Kepatuhan terhadap kode etik kedokteran Indonesia</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11: Langkah Memulai -->
+        <div class="slide">
+            <div class="slide-title">
+                <span>🚀</span>
+                <span>Langkah Memulai untuk Praktik Anda</span>
+            </div>
+
+            <div class="section-subtitle">
+                <span>🚀</span>
+                <span>Panduan Memulai Implementasi AI</span>
+            </div>
+
+            <div class="steps-list">
+                <div class="step-bar">
+                    Evaluasi kebutuhan dokumentasi praktik Anda saat ini
+                </div>
+                <div class="step-bar">
+                    Riset dan pilih platform sesuai kebutuhan dan anggaran
+                </div>
+                <div class="step-bar">
+                    Mulai dengan proyek percobaan skala kecil
+                </div>
+                <div class="step-bar">
+                    Latih diri dan tim dengan panduan yang tersedia
+                </div>
+                <div class="step-bar">
+                    Evaluasi hasil dan lakukan penyesuaian sistem
+                </div>
+                <div class="step-bar">
+                    Perluas penggunaan secara bertahap ke seluruh praktik
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12: Kesimpulan -->
+        <div class="slide">
+            <div class="slide-title">
+                <span>✅</span>
+                <span>Kesimpulan dan Tindak Lanjut</span>
+            </div>
+
+            <div class="section-subtitle">
+                <span>✅</span>
+                <span>Ringkasan dan Langkah Selanjutnya</span>
+            </div>
+
+            <div class="conclusion-container">
+                <div class="key-points">
+                    <h3>Poin Kunci:</h3>
+                    <ul>
+                        <li>AI generatif menghemat waktu dokumentasi hingga 70 persen</li>
+                        <li>Resume medis dan surat rujukan lebih lengkap dan akurat</li>
+                        <li>Dokter bisa fokus kembali pada interaksi dengan pasien</li>
+                        <li>Kepatuhan regulasi dan etika tetap menjadi prioritas</li>
+                        <li>Implementasi dapat dimulai dengan pilot project sederhana</li>
+                    </ul>
+                </div>
+
+                <div class="next-steps">
+                    <h3>Tindak Lanjut:</h3>
+                    <ul>
+                        <li>Mulai riset platform AI yang sesuai kebutuhan Anda</li>
+                        <li>Diskusikan dengan rekan sejawat tentang pengalaman mereka</li>
+                        <li>Hubungi penyedia RME Anda tentang integrasi AI</li>
+                        <li>Kontak: dr. Ahmad Hidayat, MSc, MBA</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 13: Thank You -->
+        <div class="slide">
+            <div class="thank-you-content">
+                <div class="thank-you-main">
+                    <h1>Terima Kasih!</h1>
+                    <p>Pertanyaan dan Diskusi</p>
+                </div>
+
+                <div class="closing-message">
+                    <p>Mari bersama membangun masa depan dokumentasi medis yang lebih baik di Indonesia</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Controls -->
+    <div class="navigation">
+        <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">◀ Prev</button>
+        <span class="slide-counter">
+            <span id="currentSlide">1</span> / <span id="totalSlides">13</span>
+        </span>
+        <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Next ▶</button>
+    </div>
+
+    <script>
+        let currentSlideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        document.getElementById('totalSlides').textContent = totalSlides;
+
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[index].classList.add('active');
+
+            document.getElementById('currentSlide').textContent = index + 1;
+
+            document.getElementById('prevBtn').disabled = index === 0;
+            document.getElementById('nextBtn').disabled = index === totalSlides - 1;
+
+            slides[index].scrollTop = 0;
+        }
+
+        function changeSlide(direction) {
+            const newIndex = currentSlideIndex + direction;
+            if (newIndex >= 0 && newIndex < totalSlides) {
+                currentSlideIndex = newIndex;
+                showSlide(currentSlideIndex);
+            }
+        }
+
+        document.addEventListener('keydown', function(e) {
+            switch(e.key) {
+                case 'ArrowLeft':
+                case 'ArrowUp':
+                    changeSlide(-1);
+                    e.preventDefault();
+                    break;
+                case 'ArrowRight':
+                case 'ArrowDown':
+                case ' ':
+                    changeSlide(1);
+                    e.preventDefault();
+                    break;
+                case 'Home':
+                    currentSlideIndex = 0;
+                    showSlide(currentSlideIndex);
+                    e.preventDefault();
+                    break;
+                case 'End':
+                    currentSlideIndex = totalSlides - 1;
+                    showSlide(currentSlideIndex);
+                    e.preventDefault();
+                    break;
+            }
+        });
+
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    changeSlide(1);
+                } else {
+                    changeSlide(-1);
+                }
+            }
+        }
+
+        showSlide(0);
+
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function (event) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'F11') {
+                e.preventDefault();
+                if (!document.fullscreenElement) {
+                    document.documentElement.requestFullscreen();
+                } else {
+                    document.exitFullscreen();
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+html { background: #ffffff; }
+body {
+  width: 720pt; height: 405pt; margin: 0; padding: 0;
+  background: #ffffff;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+.header {
+  background: #C0392B;
+  padding: 10pt 40pt;
+}
+h1 {
+  color: #ffffff;
+  font-size: 18pt;
+  font-weight: bold;
+  margin: 0;
+}
+.content {
+  flex: 1;
+  display: flex;
+  padding: 6pt 40pt 85pt 40pt;
+  gap: 15pt;
+}
+.text-column {
+  flex: 0 0 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+h2 {
+  color: #C0392B;
+  font-size: 13pt;
+  font-weight: bold;
+  margin: 0 0 8pt 0;
+}
+ul {
+  margin: 0;
+  padding-left: 15pt;
+  color: #2C3E50;
+  font-size: 9pt;
+  line-height: 1.2;
+}
+li {
+  margin-bottom: 4pt;
+}
+.quote {
+  margin-top: 8pt;
+  padding: 8pt;
+  background: #FFF3E0;
+  border-left: 4pt solid #F39C12;
+  font-style: italic;
+  color: #2C3E50;
+  font-size: 8pt;
+}
+.chart-column {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.chart-placeholder {
+  width: 100%;
+  height: 100%;
+  min-height: 240pt;
+  background: #ECF0F1;
+  border-radius: 10pt;
+}
+</style>
+</head>
+<body>
+  <div class="header">
+    <h1>Gap Literasi Digital dan Kapasitas Teknis</h1>
+  </div>
+  <div class="content">
+    <div class="text-column">
+      <h2>Tantangan #2: SDM dan Literasi Digital</h2>
+      <ul>
+        <li>Literasi digital tenaga kesehatan belum merata</li>
+        <li>TTDK dengan personel terbatas vs kebutuhan meningkat</li>
+        <li>Resistensi perubahan di berbagai level</li>
+        <li>Sistem pelatihan & sertifikasi belum terstandar</li>
+      </ul>
+      <div class="quote"><p style="margin:0">"Kunci transformasi = perubahan manajemen, bukan teknologi"</p></div>
+    </div>
+    <div class="chart-column">
+      <div id="sdmChart" class="chart-placeholder"></div>
+    </div>
+  </div>
+</body>
+</html>

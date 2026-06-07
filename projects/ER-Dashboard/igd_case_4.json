@@ -1,0 +1,634 @@
+{
+  "resourceType": "Bundle",
+  "id": "bundle-igd-case-4",
+  "type": "collection",
+  "timestamp": "2025-01-15T20:30:00+07:00",
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "Patient",
+        "id": "patient-004",
+        "identifier": [
+          {
+            "use": "official",
+            "system": "https://fhir.kemkes.go.id/id/nik",
+            "value": "3174567890123456"
+          },
+          {
+            "use": "usual",
+            "system": "http://rsud-jakarta.kemkes.go.id/identifier/mr",
+            "value": "MR202501004"
+          }
+        ],
+        "name": [
+          {
+            "text": "Sumarni",
+            "family": "Sumarni",
+            "given": ["Sumarni"]
+          }
+        ],
+        "gender": "female",
+        "birthDate": "1950-06-15",
+        "address": [
+          {
+            "line": ["Jl. Kebon Jeruk No. 321"],
+            "city": "Jakarta Barat",
+            "postalCode": "11530",
+            "country": "ID"
+          }
+        ],
+        "contact": [
+          {
+            "relationship": [
+              {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/v2-0131",
+                    "code": "C",
+                    "display": "Emergency Contact"
+                  }
+                ]
+              }
+            ],
+            "name": {
+              "text": "Agus Sumarno (anak)"
+            },
+            "telecom": [
+              {
+                "system": "phone",
+                "value": "+62856789012"
+              }
+            ]
+          }
+        ],
+        "maritalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-MaritalStatus",
+              "code": "W",
+              "display": "Widowed"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Encounter",
+        "id": "encounter-004",
+        "identifier": [
+          {
+            "system": "http://rsud-jakarta.kemkes.go.id/encounter",
+            "value": "ENC202501004"
+          }
+        ],
+        "status": "finished",
+        "class": {
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+          "code": "EMER",
+          "display": "emergency"
+        },
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "50849002",
+                "display": "Emergency room visit"
+              }
+            ]
+          }
+        ],
+        "subject": {
+          "reference": "Patient/patient-004"
+        },
+        "period": {
+          "start": "2025-01-15T20:30:00+07:00",
+          "end": "2025-01-16T02:15:00+07:00"
+        },
+        "location": [
+          {
+            "location": {
+              "display": "IGD RSUD Jakarta Barat"
+            },
+            "extension": [
+              {
+                "url": "https://fhir.kemkes.go.id/r4/StructureDefinition/ServiceClass",
+                "extension": [
+                  {
+                    "url": "value",
+                    "valueCodeableConcept": {
+                      "coding": [
+                        {
+                          "system": "http://terminology.kemkes.go.id/CodeSystem/LocationServiceClass-Outpatient",
+                          "code": "reguler",
+                          "display": "Kelas Reguler"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "participant": [
+          {
+            "type": [
+              {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/v3-ParticipationType",
+                    "code": "ATND",
+                    "display": "attender"
+                  }
+                ]
+              }
+            ],
+            "individual": {
+              "display": "dr. Maria Angelina, Sp.JP"
+            }
+          }
+        ],
+        "diagnosis": [
+          {
+            "condition": {
+              "reference": "Condition/condition-004"
+            },
+            "use": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/diagnosis-role",
+                  "code": "AD",
+                  "display": "Admission diagnosis"
+                }
+              ]
+            }
+          }
+        ],
+        "hospitalization": {
+          "dischargeDisposition": {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/discharge-disposition",
+                "code": "other-hcf",
+                "display": "Other healthcare facility"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Condition",
+        "id": "condition-004",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.kemkes.go.id",
+                "code": "chief-complaint",
+                "display": "Chief Complaint"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "267036007",
+              "display": "Dyspnea"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/patient-004"
+        },
+        "encounter": {
+          "reference": "Encounter/encounter-004"
+        },
+        "onsetDateTime": "2025-01-15T18:00:00+07:00"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Condition",
+        "id": "diagnosis-004",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/R4/codesystem-condition-category.html",
+                "code": "encounter-diagnosis",
+                "display": "Encounter Diagnosis"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/sid/icd-10",
+              "code": "I50.9",
+              "display": "Heart failure, unspecified"
+            },
+            {
+              "system": "http://snomed.info/sct",
+              "code": "84114007",
+              "display": "Heart failure"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/patient-004"
+        },
+        "encounter": {
+          "reference": "Encounter/encounter-004"
+        },
+        "recordedDate": "2025-01-15T23:30:00+07:00"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-triase-004",
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "75910-0",
+              "display": "Canadian triage and acuity scale"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/patient-004"
+        },
+        "encounter": {
+          "reference": "Encounter/encounter-004"
+        },
+        "effectiveDateTime": "2025-01-15T20:35:00+07:00",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "LA6113-0",
+              "display": "2"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-spo2-004",
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "2708-6",
+              "display": "Oxygen saturation in Arterial blood"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/patient-004"
+        },
+        "encounter": {
+          "reference": "Encounter/encounter-004"
+        },
+        "effectiveDateTime": "2025-01-15T20:40:00+07:00",
+        "valueQuantity": {
+          "value": 88,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-rr-004",
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "9279-1",
+              "display": "Respiratory rate"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/patient-004"
+        },
+        "encounter": {
+          "reference": "Encounter/encounter-004"
+        },
+        "effectiveDateTime": "2025-01-15T20:40:00+07:00",
+        "valueQuantity": {
+          "value": 28,
+          "unit": "breaths/min",
+          "system": "http://unitsofmeasure.org",
+          "code": "/min"
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ServiceRequest",
+        "id": "service-ecg-004",
+        "identifier": [
+          {
+            "system": "http://rsud-jakarta.kemkes.go.id/servicerequest",
+            "value": "SR202501004A"
+          }
+        ],
+        "status": "completed",
+        "intent": "order",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "386053000",
+                "display": "Evaluation procedure"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "11524-6",
+              "display": "EKG study"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/patient-004"
+        },
+        "encounter": {
+          "reference": "Encounter/encounter-004"
+        },
+        "authoredOn": "2025-01-15T21:00:00+07:00",
+        "requester": {
+          "display": "dr. Maria Angelina, Sp.JP"
+        },
+        "priority": "stat"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ServiceRequest",
+        "id": "service-chest-xray-004",
+        "identifier": [
+          {
+            "system": "http://rsud-jakarta.kemkes.go.id/servicerequest",
+            "value": "SR202501004B"
+          }
+        ],
+        "status": "completed",
+        "intent": "order",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "363679005",
+                "display": "Imaging"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "30746-2",
+              "display": "Chest X-ray"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/patient-004"
+        },
+        "encounter": {
+          "reference": "Encounter/encounter-004"
+        },
+        "authoredOn": "2025-01-15T21:00:00+07:00",
+        "requester": {
+          "display": "dr. Maria Angelina, Sp.JP"
+        },
+        "priority": "stat"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Procedure",
+        "id": "procedure-oxygen-004",
+        "status": "completed",
+        "category": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "182964004",
+              "display": "Oxygen therapy"
+            }
+          ]
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "57485005",
+              "display": "Oxygen therapy"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/patient-004"
+        },
+        "encounter": {
+          "reference": "Encounter/encounter-004"
+        },
+        "performedPeriod": {
+          "start": "2025-01-15T20:45:00+07:00",
+          "end": "2025-01-16T02:00:00+07:00"
+        },
+        "performer": [
+          {
+            "actor": {
+              "display": "Perawat IGD"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "MedicationRequest",
+        "id": "medreq-004",
+        "identifier": [
+          {
+            "system": "http://rsud-jakarta.kemkes.go.id/prescription",
+            "value": "RX202501004"
+          }
+        ],
+        "status": "completed",
+        "intent": "order",
+        "medicationCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://sys-ids.kemkes.go.id/kfa",
+              "code": "93004789",
+              "display": "Furosemide 40 mg Tablet"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/patient-004"
+        },
+        "encounter": {
+          "reference": "Encounter/encounter-004"
+        },
+        "authoredOn": "2025-01-15T22:00:00+07:00",
+        "requester": {
+          "display": "dr. Maria Angelina, Sp.JP"
+        },
+        "dosageInstruction": [
+          {
+            "text": "2 x sehari 1 tablet pagi dan sore",
+            "timing": {
+              "repeat": {
+                "frequency": 2,
+                "period": 1,
+                "periodUnit": "d"
+              }
+            },
+            "route": {
+              "coding": [
+                {
+                  "system": "http://www.whocc.no/atc",
+                  "code": "O",
+                  "display": "Oral"
+                }
+              ]
+            },
+            "doseAndRate": [
+              {
+                "doseQuantity": {
+                  "value": 1,
+                  "unit": "tablet",
+                  "system": "http://unitsofmeasure.org",
+                  "code": "1"
+                }
+              }
+            ]
+          }
+        ],
+        "dispenseRequest": {
+          "quantity": {
+            "value": 14,
+            "unit": "tablet",
+            "system": "http://unitsofmeasure.org",
+            "code": "1"
+          }
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ServiceRequest",
+        "id": "referral-004",
+        "status": "active",
+        "intent": "order",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "3457005",
+                "display": "Patient referral"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "737481003",
+              "display": "Inpatient care management"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/patient-004"
+        },
+        "encounter": {
+          "reference": "Encounter/encounter-004"
+        },
+        "authoredOn": "2025-01-16T01:30:00+07:00",
+        "requester": {
+          "display": "dr. Maria Angelina, Sp.JP"
+        },
+        "performer": [
+          {
+            "display": "Ruang Rawat Inap Jantung RSUD Jakarta Barat"
+          }
+        ],
+        "reasonReference": [
+          {
+            "reference": "Condition/diagnosis-004"
+          }
+        ],
+        "note": [
+          {
+            "text": "Pasien dengan gagal jantung akut, memerlukan monitoring ketat dan terapi lanjutan"
+          }
+        ]
+      }
+    }
+  ]
+}

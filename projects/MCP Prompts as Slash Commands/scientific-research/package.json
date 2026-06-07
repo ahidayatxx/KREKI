@@ -1,0 +1,19 @@
+{
+  "name": "scientific-research",
+  "version": "1.0.0",
+  "description": "MCP server for research prompt",
+  "main": "dist/research-prompt.js",
+  "type": "module",
+  "scripts": {
+    "start": "node dist/research-prompt.js",
+    "build": "tsc",
+    "prestart": "npm run build"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.20.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5"
+  }
+}

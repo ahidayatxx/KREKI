@@ -1,0 +1,58 @@
+---
+import Sidebar from '../components/Sidebar.astro';
+import PageMeta from '../components/PageMeta.astro';
+import TagList from '../components/TagList.astro';
+import Backlinks from '../components/Backlinks.astro';
+import '../styles/global.css';
+
+interface BacklinkEntry {
+  slug: string;
+  title: string;
+}
+
+interface Props {
+  title: string;
+  type: string;
+  subtype?: string;
+  updated?: string;
+  tags?: string[];
+  sources?: string[];
+  backlinks?: BacklinkEntry[];
+  currentPageId?: string;
+}
+
+const {
+  title,
+  type,
+  subtype,
+  updated,
+  tags = [],
+  sources = [],
+  backlinks = [],
+  currentPageId,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title} — Ahmad Wiki</title>
+  </head>
+  <body>
+    <div class="app">
+      <Sidebar currentPageId={currentPageId} />
+      <main class="main-content">
+        <article class="content-area" data-pagefind-body>
+          <h1>{title}<span data-pagefind-meta="title" style="display:none">{title}</span></h1>
+          <PageMeta type={type} subtype={subtype} updated={updated} sources={sources} />
+          <TagList tags={tags} />
+          <hr />
+          <slot />
+          <Backlinks links={backlinks} />
+        </article>
+      </main>
+    </div>
+  </body>
+</html>

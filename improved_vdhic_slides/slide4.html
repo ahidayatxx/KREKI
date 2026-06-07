@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        @page { size: 720pt 405pt; margin: 0; }
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            width: 720pt;
+            height: 405pt;
+            overflow: hidden;
+            background: #f8fafc;
+            color: #1e293b;
+        }
+        .header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            padding: 25pt 40pt;
+            text-align: center;
+        }
+        .title {
+            font-size: 36pt;
+            font-weight: 700;
+            margin: 0;
+        }
+        .phases-container {
+            display: flex;
+            height: calc(100% - 88pt);
+            padding: 30pt 40pt;
+            gap: 25pt;
+        }
+        .phase {
+            flex: 1;
+            background: white;
+            border-radius: 12pt;
+            padding: 25pt;
+            box-shadow: 0 4pt 12pt rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        .phase:hover {
+            transform: translateY(-5pt);
+        }
+        .phase-icon {
+            font-size: 36pt;
+            margin-bottom: 15pt;
+        }
+        .phase-title {
+            font-size: 24pt;
+            font-weight: 600;
+            margin-bottom: 15pt;
+            text-align: center;
+        }
+        .phase-items {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            flex-grow: 1;
+        }
+        .phase-items li {
+            padding: 5pt 0;
+            padding-left: 20pt;
+            position: relative;
+            font-size: 14pt;
+            color: #475569;
+        }
+        .phase-items li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #3b82f6;
+        }
+        .phase-desc {
+            font-size: 13pt;
+            color: #64748b;
+            font-style: italic;
+            margin-top: 15pt;
+            text-align: center;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 15pt;
+        }
+        .phase-1 { border-top: 4pt solid #3b82f6; }
+        .phase-2 { border-top: 4pt solid #10b981; }
+        .phase-3 { border-top: 4pt solid #f59e0b; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1 class="title">Innovation Journey</h1>
+    </div>
+    <div class="phases-container">
+        <div class="phase phase-1">
+            <div class="phase-icon">🔍</div>
+            <h2 class="phase-title">DISCOVER</h2>
+            <ul class="phase-items">
+                <li>Health Challenge</li>
+                <li>User Profiles</li>
+                <li>Stakeholder Map</li>
+            </ul>
+            <p class="phase-desc">Understanding the problem space before solutions</p>
+        </div>
+        <div class="phase phase-2">
+            <div class="phase-icon">🎨</div>
+            <h2 class="phase-title">DESIGN</h2>
+            <ul class="phase-items">
+                <li>Solution Architecture</li>
+                <li>User Experience</li>
+                <li>SATUSEHAT Integration</li>
+            </ul>
+            <p class="phase-desc">Translating insights into concrete solutions</p>
+        </div>
+        <div class="phase phase-3">
+            <div class="phase-icon">🚀</div>
+            <h2 class="phase-title">DELIVER</h2>
+            <ul class="phase-items">
+                <li>Evidence Plan</li>
+                <li>Scale Strategy</li>
+                <li>Business Model</li>
+            </ul>
+            <p class="phase-desc">Validation, scaling, and sustainability</p>
+        </div>
+    </div>
+</body>
+</html>

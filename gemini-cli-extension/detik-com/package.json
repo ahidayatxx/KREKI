@@ -1,0 +1,18 @@
+{
+  "name": "detik-com-reader",
+  "version": "1.0.0",
+  "description": "Gemini extension to fetch content from detik.com and summarize it.",
+  "main": "dist/detik-com-fetcher.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/detik-com-fetcher.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "*",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}

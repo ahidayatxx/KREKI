@@ -1,0 +1,27 @@
+{
+  "name": "detik-com-reader",
+  "version": "1.0.0",
+  "mcpServers": {
+    "nodeServer": {
+      "command": "node",
+      "args": ["${extensionPath}${/}dist${/}detik-com-fetcher.js"],
+      "cwd": "${extensionPath}"
+    }
+  },
+  "tools": [
+    {
+      "name": "fetch_detik_content",
+      "description": "Fetches content from detik.com and provides a C-Level summary.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string",
+            "description": "The raw content of the detik.com page to summarize."
+          }
+        },
+        "required": ["content"]
+      }
+    }
+  ]
+}

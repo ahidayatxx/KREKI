@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        @page { size: 720pt 405pt; margin: 0; }
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            width: 720pt;
+            height: 405pt;
+            overflow: hidden;
+            background: #f8fafc;
+            color: #1e293b;
+        }
+        .header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            padding: 25pt 40pt;
+            text-align: center;
+        }
+        .title {
+            font-size: 36pt;
+            font-weight: 700;
+            margin: 0;
+        }
+        .subtitle {
+            font-size: 16pt;
+            font-weight: 300;
+            opacity: 0.9;
+            margin-top: 5pt;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25pt;
+            padding: 30pt 40pt;
+            height: calc(100% - 120pt);
+        }
+        .grid-item {
+            background: white;
+            border-radius: 12pt;
+            padding: 25pt;
+            box-shadow: 0 4pt 12pt rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .grid-item:hover {
+            transform: translateY(-5pt);
+        }
+        .icon {
+            font-size: 32pt;
+            margin-bottom: 15pt;
+        }
+        .item-title {
+            font-size: 20pt;
+            font-weight: 600;
+            color: #1e3a8a;
+            margin-bottom: 10pt;
+        }
+        .item-description {
+            font-size: 14pt;
+            line-height: 1.4;
+            color: #475569;
+            flex-grow: 1;
+        }
+        .accent {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4pt;
+            height: 100%;
+        }
+        .accent-1 { background: #3b82f6; }
+        .accent-2 { background: #10b981; }
+        .accent-3 { background: #f59e0b; }
+        .accent-4 { background: #ef4444; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1 class="title">Canvas Structure</h1>
+        <p class="subtitle">Four integrated layers forming a comprehensive innovation framework</p>
+    </div>
+    <div class="grid-container">
+        <div class="grid-item">
+            <div class="accent accent-1"></div>
+            <div class="icon">🛡️</div>
+            <h2 class="item-title">Governance Spine</h2>
+            <p class="item-description">Four governance blocks forming the comprehensive compliance framework ensuring safety and regulatory adherence</p>
+        </div>
+        <div class="grid-item">
+            <div class="accent accent-2"></div>
+            <div class="icon">🎯</div>
+            <h2 class="item-title">Main Canvas Grid</h2>
+            <p class="item-description">Nine blocks organized in three phases: Discover → Design → Deliver</p>
+        </div>
+        <div class="grid-item">
+            <div class="accent accent-3"></div>
+            <div class="icon">⚖️</div>
+            <h2 class="item-title">Value Anchor</h2>
+            <p class="item-description">Five Quintuple Aim outcome indicators measuring comprehensive value creation</p>
+        </div>
+        <div class="grid-item">
+            <div class="accent accent-4"></div>
+            <div class="icon">🔄</div>
+            <h2 class="item-title">Innovation Phases</h2>
+            <p class="item-description">Systematic progression from problem identification through solution design to market delivery</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+html { background: #ffffff; }
+body {
+  width: 720pt; height: 405pt; margin: 0; padding: 0;
+  background: #ffffff;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+.header {
+  background: #C0392B;
+  padding: 10pt 40pt;
+}
+h1 {
+  color: #ffffff;
+  font-size: 18pt;
+  font-weight: bold;
+  margin: 0;
+}
+.content {
+  flex: 1;
+  display: flex;
+  padding: 6pt 40pt 85pt 40pt;
+  gap: 15pt;
+}
+.text-column {
+  flex: 0 0 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+h2 {
+  color: #C0392B;
+  font-size: 13pt;
+  font-weight: bold;
+  margin: 0 0 8pt 0;
+}
+ul {
+  margin: 0;
+  padding-left: 15pt;
+  color: #2C3E50;
+  font-size: 9pt;
+  line-height: 1.2;
+}
+li {
+  margin-bottom: 4pt;
+}
+.visual-column {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.diagram-placeholder {
+  width: 100%;
+  height: 100%;
+  min-height: 240pt;
+  background: #ECF0F1;
+  border: 3pt dashed #C0392B;
+  border-radius: 10pt;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8pt;
+  padding: 12pt;
+}
+.placeholder-text {
+  color: #2C3E50;
+  font-size: 14pt;
+  font-weight: bold;
+  text-align: center;
+  margin: 0;
+}
+.placeholder-subtext {
+  color: #7F8C8D;
+  font-size: 9pt;
+  text-align: center;
+  margin: 0;
+}
+.gigo {
+  margin-top: 8pt;
+  padding: 8pt;
+  background: #FFEBEE;
+  border-radius: 8pt;
+  text-align: center;
+  color: #C0392B;
+  font-size: 12pt;
+  font-weight: bold;
+}
+</style>
+</head>
+<body>
+  <div class="header">
+    <h1>From Data Collection to Data Quality</h1>
+  </div>
+  <div class="content">
+    <div class="text-column">
+      <h2>Tantangan #3: Interoperabilitas & Kualitas Data</h2>
+      <ul>
+        <li>Integrasi sistem legacy dengan SATUSEHAT</li>
+        <li>ARSSI: Tantangan integrasi RME rumah sakit swasta</li>
+        <li>Data ganda, diagnosa tidak lengkap, SPO belum update</li>
+        <li>Fragmentasi data di tingkat sub-nasional (Kab/Kota)</li>
+      </ul>
+      <div class="gigo"><p style="margin:0">Garbage In, Garbage Out</p></div>
+    </div>
+    <div class="visual-column">
+      <div class="diagram-placeholder">
+        <p class="placeholder-text">DATA QUALITY FUNNEL</p>
+        <p class="placeholder-subtext">Tambahkan diagram funnel di PowerPoint</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

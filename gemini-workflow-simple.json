@@ -1,0 +1,156 @@
+{
+  "name": "Simple Gemini File Store",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "upload",
+        "options": {}
+      },
+      "id": "webhook-upload",
+      "name": "File Upload Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [260, 300],
+      "webhookId": "simple-upload"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "search",
+        "options": {}
+      },
+      "id": "webhook-search",
+      "name": "Search Query Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [260, 500],
+      "webhookId": "simple-search"
+    },
+    {
+      "parameters": {
+        "url": "https://generativelanguage.googleapis.com/v1beta/fileSearchStores/n8ndocumentsstore-f7cqp3cqctc6/documents:list",
+        "authentication": "headerAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer YOUR_API_KEY_HERE"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "list-files",
+      "name": "List Files",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent",
+        "authentication": "headerAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer YOUR_API_KEY_HERE"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParametersJson": "{ \"contents\": [{ \"parts\": [{ \"text\": \"{{ $json.query }}\" }] }], \"tools\": [{ \"retrieval\": { \"source\": \"fileSearchStores/n8ndocumentsstore-f7cqp3cqctc6\" } }] }",
+        "options": {}
+      },
+      "id": "search-docs",
+      "name": "Search Documents",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [680, 500]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { \"success\": true, \"files\": $json.documents } }}"
+      },
+      "id": "upload-response",
+      "name": "List Response",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [900, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { \"success\": true, \"answer\": $json.candidates[0].content.parts[0].text } }}"
+      },
+      "id": "search-response",
+      "name": "Search Response",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [900, 500]
+    }
+  ],
+  "connections": {
+    "File Upload Webhook": {
+      "main": [
+        [
+          {
+            "node": "List Files",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search Query Webhook": {
+      "main": [
+        [
+          {
+            "node": "Search Documents",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "List Files": {
+      "main": [
+        [
+          {
+            "node": "List Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search Documents": {
+      "main": [
+        [
+          {
+            "node": "Search Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2024-12-14T10:00:00.000Z",
+  "versionId": "1"
+}

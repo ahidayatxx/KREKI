@@ -1,0 +1,180 @@
+{
+  "dataset_info": {
+    "name": "Sepsis Prediction Test Set",
+    "total_patients": 10,
+    "purpose": "SADR Model Validation",
+    "note": "Classification labels removed for prediction testing"
+  },
+  "patients": [
+    {
+      "patient_id": "P-025",
+      "vital_signs": {
+        "heart_rate": 109.0,
+        "mean_arterial_pressure": 66.0,
+        "respiratory_rate": 27.0,
+        "temperature": 38.19
+      },
+      "lab_values": {
+        "lactate": 2.43,
+        "procalcitonin": 2.44,
+        "white_blood_cells": 15.25,
+        "creatinine": 1.9,
+        "platelet_count": 106.0,
+        "bilirubin": 3.0
+      }
+    },
+    {
+      "patient_id": "P-061",
+      "vital_signs": {
+        "heart_rate": 94.0,
+        "mean_arterial_pressure": 65.0,
+        "respiratory_rate": 25.0,
+        "temperature": 35.81
+      },
+      "lab_values": {
+        "lactate": 2.54,
+        "procalcitonin": 4.25,
+        "white_blood_cells": 16.9,
+        "creatinine": 1.84,
+        "platelet_count": 108.0,
+        "bilirubin": 1.45
+      }
+    },
+    {
+      "patient_id": "P-066",
+      "vital_signs": {
+        "heart_rate": 142.0,
+        "mean_arterial_pressure": 55.0,
+        "respiratory_rate": 37.0,
+        "temperature": 34.31
+      },
+      "lab_values": {
+        "lactate": 9.55,
+        "procalcitonin": 6.27,
+        "white_blood_cells": 2.52,
+        "creatinine": 2.78,
+        "platelet_count": 68.0,
+        "bilirubin": 3.87
+      }
+    },
+    {
+      "patient_id": "P-072",
+      "vital_signs": {
+        "heart_rate": 152.0,
+        "mean_arterial_pressure": 45.0,
+        "respiratory_rate": 39.0,
+        "temperature": 41.19
+      },
+      "lab_values": {
+        "lactate": 4.02,
+        "procalcitonin": 19.57,
+        "white_blood_cells": 3.29,
+        "creatinine": 2.84,
+        "platelet_count": 28.0,
+        "bilirubin": 6.73
+      }
+    },
+    {
+      "patient_id": "P-074",
+      "vital_signs": {
+        "heart_rate": 73.0,
+        "mean_arterial_pressure": 104.0,
+        "respiratory_rate": 18.0,
+        "temperature": 37.2
+      },
+      "lab_values": {
+        "lactate": 1.55,
+        "procalcitonin": 0.32,
+        "white_blood_cells": 6.19,
+        "creatinine": 0.92,
+        "platelet_count": 314.0,
+        "bilirubin": 0.46
+      }
+    },
+    {
+      "patient_id": "P-008",
+      "vital_signs": {
+        "heart_rate": 101.0,
+        "mean_arterial_pressure": 70.0,
+        "respiratory_rate": 23.0,
+        "temperature": 38.74
+      },
+      "lab_values": {
+        "lactate": 3.75,
+        "procalcitonin": 3.57,
+        "white_blood_cells": 17.12,
+        "creatinine": 1.27,
+        "platelet_count": 112.0,
+        "bilirubin": 1.74
+      }
+    },
+    {
+      "patient_id": "P-082",
+      "vital_signs": {
+        "heart_rate": 60.0,
+        "mean_arterial_pressure": 81.0,
+        "respiratory_rate": 14.0,
+        "temperature": 36.9
+      },
+      "lab_values": {
+        "lactate": 1.73,
+        "procalcitonin": 0.3,
+        "white_blood_cells": 10.82,
+        "creatinine": 0.87,
+        "platelet_count": 382.0,
+        "bilirubin": 0.96
+      }
+    },
+    {
+      "patient_id": "P-054",
+      "vital_signs": {
+        "heart_rate": 135.0,
+        "mean_arterial_pressure": 47.0,
+        "respiratory_rate": 38.0,
+        "temperature": 40.42
+      },
+      "lab_values": {
+        "lactate": 4.42,
+        "procalcitonin": 26.08,
+        "white_blood_cells": 28.46,
+        "creatinine": 4.68,
+        "platelet_count": 86.0,
+        "bilirubin": 7.42
+      }
+    },
+    {
+      "patient_id": "P-065",
+      "vital_signs": {
+        "heart_rate": 156.0,
+        "mean_arterial_pressure": 43.0,
+        "respiratory_rate": 45.0,
+        "temperature": 40.77
+      },
+      "lab_values": {
+        "lactate": 9.83,
+        "procalcitonin": 30.39,
+        "white_blood_cells": 1.82,
+        "creatinine": 3.69,
+        "platelet_count": 31.0,
+        "bilirubin": 4.02
+      }
+    },
+    {
+      "patient_id": "P-100",
+      "vital_signs": {
+        "heart_rate": 70.0,
+        "mean_arterial_pressure": 98.0,
+        "respiratory_rate": 18.0,
+        "temperature": 36.46
+      },
+      "lab_values": {
+        "lactate": 1.66,
+        "procalcitonin": 0.19,
+        "white_blood_cells": 10.8,
+        "creatinine": 1.06,
+        "platelet_count": 322.0,
+        "bilirubin": 1.04
+      }
+    }
+  ]
+}

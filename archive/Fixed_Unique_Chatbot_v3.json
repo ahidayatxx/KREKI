@@ -1,0 +1,366 @@
+{
+  "name": "Fixed Unique Chatbot v3",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "claude-ai-assistant-ultimate-unique-ahmad-2025-final",
+        "options": {
+          "noResponseBody": false
+        }
+      },
+      "id": "ec1e2026-69ed-42b7-b51c-12cb940deacf",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "webhookId": "unique-chat-webhook-ahmad"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "request-validation",
+              "leftValue": "={{ $json.body.message }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "e02b6a11-1b86-46b2-8a20-eeee51d23da8",
+      "name": "Request Validator",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        200,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Parse and validate incoming request\nconst body = $input.all()[0].json.body;\n\n// Validate required fields\nif (!body.message || typeof body.message !== 'string') {\n  throw new Error('Invalid message format');\n}\n\n// Generate session ID if not provided\nconst userId = body.user_id || 'anonymous';\nconst sessionId = body.session_id || `session_${userId}_${Date.now()}`;\nconst timestamp = new Date().toISOString();\n\n// Clean and prepare message\nconst message = body.message.trim();\n\nif (message.length === 0) {\n  throw new Error('Message cannot be empty');\n}\n\nif (message.length > 2000) {\n  throw new Error('Message too long. Maximum 2000 characters allowed.');\n}\n\nreturn {\n  message: message,\n  user_id: userId,\n  session_id: sessionId,\n  timestamp: timestamp,\n  chatInput: message,  // For AI Agent compatibility\n  original_request: body\n};"
+      },
+      "id": "e3c665ea-30ff-4d5c-ab67-f142e3c66a0b",
+      "name": "Message Processor",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        400,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "model": "anthropic/claude-3-haiku",
+        "options": {
+          "maxTokens": 800,
+          "temperature": 0.7
+        }
+      },
+      "id": "f12f8471-5bb7-4893-b0e7-d9fa5ee7e5c6",
+      "name": "OpenRouter Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        600,
+        200
+      ],
+      "credentials": {
+        "openRouterApi": {
+          "id": "i5hdWqtSltjOwu03",
+          "name": "OpenRouter account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Anda adalah asisten AI yang membantu dan ramah bernama Claude. Berikan jawaban yang informatif, akurat, dan berguna dalam bahasa Indonesia. \n\nPedoman:\n- Gunakan bahasa yang sopan dan profesional\n- Berikan konteks yang relevan berdasarkan percakapan sebelumnya\n- Jika tidak yakin tentang informasi, katakan dengan jujur\n- Berikan jawaban yang terstruktur dan mudah dipahami\n- Sesuaikan panjang jawaban dengan kompleksitas pertanyaan\n\n---\n\nUser ID: {{$json.user_id}}\nSession: {{$json.session_id}}\nWaktu: {{$json.timestamp}}\n\nPertanyaan Pengguna: {{$json.chatInput}}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        600,
+        0
+      ],
+      "id": "340e39dc-abfd-4b8e-8c4f-626fe0b98f42",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.session_id }}",
+        "contextWindowLength": 15
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        720,
+        200
+      ],
+      "id": "e37bb20d-92b3-4743-a820-593ae84f35f3",
+      "name": "Dynamic Memory"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Format successful response\nconst aiResponse = $input.all()[0].json;\nconst inputData = $('Message Processor').all()[0].json;\n\n// Extract AI response text\nlet responseText = '';\nif (aiResponse.output) {\n  responseText = aiResponse.output;\n} else if (aiResponse.text) {\n  responseText = aiResponse.text;\n} else {\n  responseText = JSON.stringify(aiResponse);\n}\n\n// Create response object\nconst response = {\n  status: 'success',\n  response: responseText,\n  user_id: inputData.user_id,\n  session_id: inputData.session_id,\n  timestamp: new Date().toISOString(),\n  message_id: `msg_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,\n  metadata: {\n    model: 'anthropic/claude-3-haiku',\n    processing_time: Date.now() - new Date(inputData.timestamp).getTime(),\n    session_active: true\n  }\n};\n\nreturn response;"
+      },
+      "id": "6b661c1b-fffa-41da-a8f4-f20b4310400e",
+      "name": "Response Formatter",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        800,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{ JSON.stringify($json) }}",
+        "options": {
+          "responseCode": 200,
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          }
+        }
+      },
+      "id": "b3729f8d-d2f5-49aa-b129-687776b72bd7",
+      "name": "Webhook Response",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        1000,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Handle validation errors\nconst error = {\n  status: 'error',\n  error: 'Invalid request format',\n  message: 'Missing required field: message', \n  timestamp: new Date().toISOString(),\n  user_id: null,\n  session_id: null\n};\n\nreturn error;"
+      },
+      "id": "018d2c01-bded-4103-8cc3-fd048e8625fc",
+      "name": "Validation Error Handler",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        200,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json }}",
+        "options": {
+          "responseCode": 400
+        }
+      },
+      "id": "fa691c3f-1fb9-4b6b-aa85-7d52beeab1be",
+      "name": "Error Response - Validation",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        400,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Handle processing errors\nconst inputData = $('Message Processor').all()[0]?.json || {};\nconst errorInfo = $input.all()[0]?.error || { message: 'Unknown error occurred' };\n\nconst error = {\n  status: 'error',\n  error: 'Processing failed',\n  message: errorInfo.message || 'An error occurred while processing your request',\n  timestamp: new Date().toISOString(),\n  user_id: inputData.user_id || null,\n  session_id: inputData.session_id || null,\n  retry_possible: !errorInfo.message?.includes('Invalid') && !errorInfo.message?.includes('too long')\n};\n\nreturn error;"
+      },
+      "id": "f98ea2b5-e0f0-4e2a-8dfe-ac43ee49b6dd",
+      "name": "Processing Error Handler",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        600,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json }}",
+        "options": {
+          "responseCode": 500
+        }
+      },
+      "id": "dabd1304-dbd5-4247-87d7-bf360c2745e6",
+      "name": "Error Response - Processing",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        800,
+        360
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook Trigger": {
+      "main": [
+        [
+          {
+            "node": "Request Validator",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Request Validator": {
+      "main": [
+        [
+          {
+            "node": "Message Processor",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Validation Error Handler",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message Processor": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ],
+      "error": [
+        [
+          {
+            "node": "Processing Error Handler",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Response Formatter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ],
+      "error": [
+        [
+          {
+            "node": "Processing Error Handler",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Dynamic Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Response Formatter": {
+      "main": [
+        [
+          {
+            "node": "Webhook Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ],
+      "error": [
+        [
+          {
+            "node": "Processing Error Handler",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validation Error Handler": {
+      "main": [
+        [
+          {
+            "node": "Error Response - Validation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Processing Error Handler": {
+      "main": [
+        [
+          {
+            "node": "Error Response - Processing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "fixed-unique-v3",
+  "meta": {
+    "instanceId": "ahmad-unique-chatbot-final"
+  },
+  "id": "UniqueAhmadChatbot2025",
+  "tags": ["fixed", "unique", "ahmad", "final"]
+}

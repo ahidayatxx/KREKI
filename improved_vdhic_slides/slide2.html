@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        @page { size: 720pt 405pt; margin: 0; }
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            width: 720pt;
+            height: 405pt;
+            overflow: hidden;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            color: #1e293b;
+        }
+        .container {
+            display: flex;
+            height: 100%;
+            width: 100%;
+        }
+        .left-panel {
+            flex: 1;
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 40pt;
+            position: relative;
+            overflow: hidden;
+        }
+        .right-panel {
+            flex: 1.2;
+            padding: 40pt;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .title {
+            font-size: 42pt;
+            font-weight: 700;
+            margin-bottom: 20pt;
+            position: relative;
+            z-index: 2;
+        }
+        .subtitle {
+            font-size: 18pt;
+            font-weight: 300;
+            line-height: 1.5;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+        }
+        .purpose-title {
+            font-size: 24pt;
+            font-weight: 600;
+            color: #1e3a8a;
+            margin-bottom: 20pt;
+        }
+        .purpose-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .purpose-list li {
+            padding: 8pt 0;
+            padding-left: 28pt;
+            position: relative;
+            font-size: 16pt;
+            line-height: 1.4;
+        }
+        .purpose-list li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #3b82f6;
+            font-weight: bold;
+            font-size: 18pt;
+        }
+        .accent-circle {
+            position: absolute;
+            width: 120pt;
+            height: 120pt;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            top: 20pt;
+            right: -30pt;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left-panel">
+            <div class="accent-circle"></div>
+            <h1 class="title">What is VDHIC?</h1>
+            <p class="subtitle">The Value-Based Digital Health Innovation Canvas transforms Indonesia's Digital Health Transformation Toolkit into a practical, actionable tool for innovators.</p>
+        </div>
+        <div class="right-panel">
+            <h2 class="purpose-title">Purpose</h2>
+            <ul class="purpose-list">
+                <li>Structured framework for digital health innovation in Indonesia</li>
+                <li>Embed governance considerations from the start</li>
+                <li>Facilitate multi-stakeholder dialogue</li>
+                <li>Bridge design to implementation gap</li>
+                <li>Support regulatory sandbox applications</li>
+                <li>Align with Quintuple Aim outcomes</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

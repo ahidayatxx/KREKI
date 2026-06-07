@@ -1,0 +1,163 @@
+{
+  "name": "Upload File to Existing Gemini File Search Store - DEBUG",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Upload Files to Gemini File Search",
+        "formDescription": "Upload PDF or text files to be indexed in Google Gemini File Search Store",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "File Store Name",
+              "fieldType": "text",
+              "requiredField": true,
+              "defaultValue": "fileSearchStores/n8ndocumentsstore-f7cqp3cqctc6",
+              "placeholder": "fileSearchStores/your-store-name"
+            },
+            {
+              "fieldLabel": "Upload File",
+              "fieldType": "file",
+              "multipleFiles": false,
+              "acceptFileTypes": ".pdf, .txt",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {
+          "appendAttribution": false,
+          "buttonLabel": "Upload File"
+        }
+      },
+      "id": "eed26157-2bde-4ba6-a298-89d6fb194124",
+      "name": "File Upload Form",
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.3,
+      "position": [352, 288],
+      "webhookId": "53507463-04ff-4627-a563-c1fcee98d7cb"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Restructure data and KEEP binary\nreturn items.map(item => {\n  const uploadFile = item.json['Upload File'];\n  const fileStoreName = item.json['File Store Name'] || 'fileSearchStores/n8ndocumentsstore-f7cqp3cqctc6';\n  \n  console.log('=== DEBUG: File Store Name =', fileStoreName);\n  \n  // Get the first binary field\n  const binaryKeys = Object.keys(item.binary || {});\n  const firstBinaryKey = binaryKeys[0];\n  \n  const binaryData = {};\n  if (firstBinaryKey) {\n    binaryData.data = item.binary[firstBinaryKey];\n  }\n  \n  return {\n    json: {\n      filename: uploadFile.filename,\n      mimetype: uploadFile.mimetype,\n      size: uploadFile.size,\n      submittedAt: item.json.submittedAt,\n      formMode: item.json.formMode,\n      store_name: fileStoreName\n    },\n    binary: binaryData\n  };\n});"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [576, 288],
+      "id": "dc079d13-d7f4-4959-b1fa-916abfd15f70",
+      "name": "Prepare File Data"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://generativelanguage.googleapis.com/upload/v1beta/files",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "key",
+              "value": "AIzaSyAmi8rLTrz3JCQZ2JoBgGSzOtXO_MDgUk8"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "parameterType": "formBinaryData",
+              "name": "file",
+              "inputDataFieldName": "=data"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "71d8f444-90e1-46b1-8863-3c35f7c6c87d",
+      "name": "Upload File to Gemini",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [800, 288]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Debug node to check upload result\nconst uploadResult = $input.item.json;\nconst fileData = $('Prepare File Data').item.json;\n\nconsole.log('=== DEBUG: Upload Result ===');\nconsole.log('Full response:', JSON.stringify(uploadResult, null, 2));\nconsole.log('File name:', uploadResult.file?.name || 'NOT FOUND');\nconsole.log('Store name:', fileData.store_name);\n\nreturn {\n  json: {\n    debug_info: {\n      upload_response: uploadResult,\n      file_name_from_upload: uploadResult.file?.name || 'NOT FOUND',\n      store_name: fileData.store_name,\n      original_filename: fileData.filename\n    }\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1024, 200],
+      "id": "debug-node-1",
+      "name": "DEBUG: Check Upload Result"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://generativelanguage.googleapis.com/v1beta/{{ $('Prepare File Data').item.json.store_name }}:importFile",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "key",
+              "value": "AIzaSyAmi8rLTrz3JCQZ2JoBgGSzOtXO_MDgUk8"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"fileName\": \"{{ $('Upload File to Gemini').item.json.file.name }}\",\n  \"customMetadata\": [\n    {\n      \"key\": \"upload_date\",\n      \"stringValue\": \"{{ $now.format('yyyy-MM-dd') }}\"\n    },\n    {\n      \"key\": \"source\",\n      \"stringValue\": \"n8n-workflow\"\n    },\n    {\n      \"key\": \"original_filename\",\n      \"stringValue\": \"{{ $('Prepare File Data').item.json.filename }}\"\n    }\n  ]\n}",
+        "options": {}
+      },
+      "id": "c79a94e2-97e6-4e29-b1b5-057dec40174b",
+      "name": "Import File to Store",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [1024, 288]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Format success response\nconst importResult = $input.item.json;\nconst fileData = $('Prepare File Data').item.json;\nconst uploadResult = $('Upload File to Gemini').item.json;\n\nreturn {\n  json: {\n    success: true,\n    message: 'File successfully uploaded and indexed',\n    details: {\n      original_filename: fileData.filename,\n      file_size: fileData.size,\n      mime_type: fileData.mimetype,\n      gemini_file_name: uploadResult.file?.name || 'Unknown',\n      store_name: fileData.store_name,\n      uploaded_at: fileData.submittedAt,\n      import_result: importResult\n    }\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1248, 288],
+      "id": "d48d1e6a-f4c1-456e-8a1b-1ba23b036e8f",
+      "name": "Format Response"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "File Upload Form": {
+      "main": [[{"node": "Prepare File Data", "type": "main", "index": 0}]]
+    },
+    "Prepare File Data": {
+      "main": [[{"node": "Upload File to Gemini", "type": "main", "index": 0}]]
+    },
+    "Upload File to Gemini": {
+      "main": [[
+        {"node": "DEBUG: Check Upload Result", "type": "main", "index": 0},
+        {"node": "Import File to Store", "type": "main", "index": 0}
+      ]]
+    },
+    "DEBUG: Check Upload Result": {
+      "main": [[{"node": "Import File to Store", "type": "main", "index": 0}]]
+    },
+    "Import File to Store": {
+      "main": [[{"node": "Format Response", "type": "main", "index": 0}]]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "instanceId": "debug-mode"
+  },
+  "tags": []
+}

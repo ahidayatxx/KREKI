@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+html { background: #ffffff; }
+body {
+  width: 720pt; height: 405pt; margin: 0; padding: 0;
+  background: #ffffff;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+.header {
+  background: #1E5128;
+  padding: 20pt 40pt;
+}
+h1 {
+  color: #ffffff;
+  font-size: 32pt;
+  font-weight: bold;
+  margin: 0;
+}
+.content {
+  flex: 1;
+  padding: 30pt 40pt;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 20pt;
+}
+.app-card {
+  background: #ECF0F1;
+  border-radius: 12pt;
+  padding: 20pt;
+  border-left: 6pt solid #4E9F3D;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+h2 {
+  color: #1E5128;
+  font-size: 18pt;
+  font-weight: bold;
+  margin: 0 0 10pt 0;
+}
+.app-description {
+  color: #2C3E50;
+  font-size: 13pt;
+  line-height: 1.5;
+  margin: 0;
+}
+</style>
+</head>
+<body>
+  <div class="header">
+    <h1>Ekosistem Digital yang Memberdayakan</h1>
+  </div>
+  <div class="content">
+    <div class="app-card">
+      <h2>SATUSEHAT Mobile</h2>
+      <p class="app-description">Akses data pribadi kesehatan untuk masyarakat umum</p>
+    </div>
+    <div class="app-card">
+      <h2>ASIK</h2>
+      <p class="app-description">Pengumpulan data berbasis komunitas untuk surveilans</p>
+    </div>
+    <div class="app-card">
+      <h2>SATUSEHAT Dashboard</h2>
+      <p class="app-description">Decision support untuk pembuat kebijakan kesehatan</p>
+    </div>
+    <div class="app-card">
+      <h2>RME Terintegrasi</h2>
+      <p class="app-description">Mandatory untuk semua faskes di seluruh Indonesia</p>
+    </div>
+  </div>
+</body>
+</html>

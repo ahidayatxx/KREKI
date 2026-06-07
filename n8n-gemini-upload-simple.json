@@ -1,0 +1,138 @@
+{
+  "name": "Simple Gemini Upload",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Upload File to Gemini",
+        "formDescription": "Upload PDF or text file to your Gemini File Search Store",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "File",
+              "fieldType": "file",
+              "multipleFiles": false,
+              "acceptFileTypes": ".pdf,.txt",
+              "requiredField": true
+            }
+          ]
+        }
+      },
+      "id": "8a1b2c3d",
+      "name": "Form Trigger",
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2,
+      "position": [100, 200]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://generativelanguage.googleapis.com/upload/v1beta/files",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "key",
+              "value": "AIzaSyAmi8rLTrz3JCQZ2JoBgGSzOtXO_MDgUk8"
+            },
+            {
+              "name": "uploadType",
+              "value": "multipart"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "file",
+              "value": "={{ $binary.data }}"
+            }
+          ]
+        }
+      },
+      "id": "9a2b3c4d",
+      "name": "Upload to Gemini",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [300, 200]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://generativelanguage.googleapis.com/v1beta/fileSearchStores/n8ndocumentsstore-f7cqp3cqctc6:importFile",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "key",
+              "value": "AIzaSyAmi8rLTrz3JCQZ2JoBgGSzOtXO_MDgUk8"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={ \"fileName\": \"{{ $json.name }}\" }"
+      },
+      "id": "0a3b4c5d",
+      "name": "Import to Store",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [500, 200]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { \"success\": true, \"message\": \"File uploaded and imported successfully\" } }}"
+      },
+      "id": "1a4b5c6d",
+      "name": "Success Response",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [700, 200]
+    }
+  ],
+  "connections": {
+    "Form Trigger": {
+      "main": [
+        [
+          {
+            "node": "Upload to Gemini",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload to Gemini": {
+      "main": [
+        [
+          {
+            "node": "Import to Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Import to Store": {
+      "main": [
+        [
+          {
+            "node": "Success Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}

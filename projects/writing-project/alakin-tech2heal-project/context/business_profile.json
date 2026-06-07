@@ -1,0 +1,206 @@
+{
+  "professional_identity": {
+    "name": "Dr. Ahmad Hidayat, MSc, MBA",
+    "title": "Indonesia Market Development Consultant",
+    "company": "Tech2Heal SAS",
+    "tagline": "Bridging International Digital Health Innovation with Indonesian Healthcare Ecosystem",
+    "years_of_experience": 30,
+    "primary_affiliations": [
+      {
+        "organization": "Ministry of Health Indonesia",
+        "role": "Chairman, Technical Working Group for SATUSEHAT Platform",
+        "relevance": "National health information exchange implementation authority"
+      },
+      {
+        "organization": "Tech2Heal SAS",
+        "role": "Indonesia Market Development Consultant",
+        "relevance": "Digital health platform market entry strategy"
+      },
+      {
+        "organization": "UPQuality",
+        "role": "Consultant",
+        "relevance": "Clinical Research Governance & GCP Training"
+      },
+      {
+        "organization": "Indonesian Clinical Research Center (INA-CRC)",
+        "role": "Consultant",
+        "relevance": "Clinical trial coordination and governance"
+      },
+      {
+        "organization": "Australian Awards Fellow 2025",
+        "role": "Monash University - Digital Health Governance and Innovation",
+        "relevance": "International digital health governance expertise"
+      }
+    ]
+  },
+  "core_expertise": {
+    "primary_domains": [
+      {
+        "domain": "Digital Health Governance",
+        "proficiency": "Expert",
+        "sub_specializations": [
+          "National health information exchange implementation (SATUSEHAT)",
+          "Regulatory framework development for digital health innovation",
+          "Health data governance and interoperability standards (FHIR, HL7)",
+          "Digital health regulatory sandbox methodology"
+        ]
+      },
+      {
+        "domain": "Health Informatics & Interoperability",
+        "proficiency": "Expert",
+        "sub_specializations": [
+          "FHIR R4 implementation",
+          "Health information systems architecture",
+          "Clinical data standards and terminologies",
+          "Health technology assessment (HTA)"
+        ]
+      },
+      {
+        "domain": "Clinical Research Governance",
+        "proficiency": "Expert",
+        "sub_specializations": [
+          "Good Clinical Practice (GCP) compliance",
+          "Research ethics and institutional review",
+          "Clinical trial quality assurance",
+          "Research governance frameworks"
+        ]
+      },
+      {
+        "domain": "Tech2Heal Alakin Platform",
+        "proficiency": "Knowledgeable",
+        "sub_specializations": [
+          "Remote Patient Monitoring (RPM) implementation",
+          "Digital Therapeutics (DTx) deployment",
+          "AI-powered care automation",
+          "No-code care program development"
+        ]
+      },
+      {
+        "domain": "Indonesian Healthcare System",
+        "proficiency": "Expert",
+        "sub_specializations": [
+          "BPJS Kesehatan (national health insurance) operations",
+          "Hospital procurement processes",
+          "Ministry of Health regulatory pathways",
+          "Healthcare provider stakeholder landscape"
+        ]
+      }
+    ]
+  },
+  "consulting_service_portfolio": {
+    "service_areas": [
+      {
+        "service_line": "Market Adaptation Guidance",
+        "description": "Quarterly strategic deliverables for Indonesian market entry",
+        "deliverables": [
+          "SATUSEHAT technical integration specifications",
+          "Indonesian regulatory compliance roadmap",
+          "Cultural adaptation recommendations",
+          "Healthcare provider workflow integration guidelines"
+        ],
+        "engagement_duration": "Ongoing quarterly deliverables",
+        "time_allocation": "5-7 hours/month"
+      },
+      {
+        "service_line": "Pilot Development Support",
+        "description": "End-to-end support from partner identification to active pilot execution",
+        "deliverables": [
+          "Partner qualification assessment",
+          "Pilot scope definition",
+          "Technical integration planning",
+          "Implementation support and outcome measurement"
+        ],
+        "engagement_duration": "6-8 months per pilot",
+        "time_allocation": "8-10 hours/month (active pilot), 3-5 hours/month (partner identification)"
+      },
+      {
+        "service_line": "Client and Partner Identification",
+        "description": "Systematic business introduction and EOI generation",
+        "deliverables": [
+          "Qualified lead identification",
+          "Warm introductions to Tech2Heal",
+          "Expression of Interest (EOI) facilitation",
+          "Introduction tracking and pipeline management"
+        ],
+        "engagement_duration": "Continuous activity",
+        "time_allocation": "5-7 hours/month"
+      },
+      {
+        "service_line": "Deployment Roadmap Strategy",
+        "description": "Strategic planning for Indonesia market scale and expansion",
+        "deliverables": [
+          "Regulatory compliance frameworks",
+          "Competitive landscape analysis",
+          "Partnership ecosystem mapping",
+          "Scale strategy development"
+        ],
+        "engagement_duration": "Quarterly strategic deliverables",
+        "time_allocation": "3-5 hours/month"
+      },
+      {
+        "service_line": "General Consulting Advisory",
+        "description": "Responsive advisory and ongoing support",
+        "deliverables": [
+          "Industry trend briefings",
+          "Regulatory update alerts",
+          "Strategic opportunity identification",
+          "Network expansion facilitation"
+        ],
+        "engagement_duration": "Ongoing responsive support",
+        "time_allocation": "2-3 hours/month"
+      }
+    ]
+  },
+  "market_positioning": {
+    "unique_value_proposition": "SATUSEHAT Technical Working Group Chairman enabling FHIR-compliant digital health platform market entry through regulatory navigation, clinical credibility transfer, and healthcare provider network access",
+    "target_markets": [
+      {
+        "market": "Indonesia",
+        "priority": "Primary",
+        "focus": "National digital health transformation ecosystem"
+      },
+      {
+        "market": "Southeast Asia",
+        "priority": "Secondary",
+        "focus": "Emerging regional expansion opportunities"
+      }
+    ],
+    "competitive_positioning": {
+      "differentiators": [
+        "Direct influence over national SATUSEHAT interoperability standards",
+        "Ministry of Health relationships for regulatory pathway access",
+        "FHIR R4 implementation expertise enabling technical validation",
+        "Clinical credibility (emergency medicine physician) with healthcare provider decision-makers",
+        "IDI and professional association network for hospital system access",
+        "Bilingual capability (Indonesian/English) for international-local stakeholder bridging"
+      ],
+      "capability_uniqueness": "Only Tech2Heal consultant combining national policy influence, technical interoperability expertise, and clinical practice credibility"
+    }
+  },
+  "tech2heal_engagement": {
+    "contract_details": {
+      "contract_period": "December 2025 - Ongoing (7-day termination clause)",
+      "time_commitment": "20 hours/month (240 hours/year)",
+      "base_compensation": "IDR 10,000,000/month + Performance Incentives"
+    },
+    "incentive_structure": {
+      "base_fee": "IDR 10,000,000/month",
+      "milestone_incentives": {
+        "eoi_submission": "IDR 1,500,000 per qualified lead",
+        "pilot_initiation": "IDR 5,000,000 per pilot",
+        "quarterly_deliverable": "IDR 3,000,000 - 7,000,000 (based on complexity)"
+      },
+      "commission": "10% of net payments from signed contracts (24-month attribution window, first 12 months revenue only)"
+    },
+    "key_contacts": {
+      "ceo": "Fabrice Pakin (fabrice@alakinhealth.com)",
+      "operations": "Raphael Pakin (raphael.pakin@alakinhealth.com)"
+    }
+  },
+  "communication_profile": {
+    "languages": ["English", "Indonesian"],
+    "primary_tone": "Professional consulting with business outcomes focus",
+    "formality_level": "High formal with accessibility",
+    "expertise_projection": "Evidence-based practitioner-scholar with business acumen"
+  }
+}

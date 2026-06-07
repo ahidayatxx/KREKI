@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INA-CRC Integrated Architecture According to Clinical Trial Cycle</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .phase-card {
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+        .phase-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .phase-1 { border-left-color: #3B82F6; }
+        .phase-2 { border-left-color: #10B981; }
+        .phase-3 { border-left-color: #F59E0B; }
+        .phase-4 { border-left-color: #EF4444; }
+        .phase-5 { border-left-color: #8B5CF6; }
+
+        .process-flow {
+            position: relative;
+        }
+        .process-flow::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #3B82F6, #10B981, #F59E0B, #EF4444, #8B5CF6);
+        }
+
+        .process-step {
+            position: relative;
+            padding-left: 50px;
+            margin-bottom: 2rem;
+        }
+
+        .process-step::before {
+            content: '';
+            position: absolute;
+            left: 14px;
+            top: 8px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: white;
+            border: 2px solid #3B82F6;
+        }
+
+        .actor-badge {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .system-badge {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .regulation-badge {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .custom-table {
+            min-width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+
+        .custom-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: 600;
+            padding: 1rem;
+            text-align: left;
+        }
+
+        .custom-table th:first-child {
+            border-top-left-radius: 0.5rem;
+        }
+
+        .custom-table th:last-child {
+            border-top-right-radius: 0.5rem;
+        }
+
+        .custom-table td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #e5e7eb;
+            vertical-align: top;
+        }
+
+        .custom-table tr:hover td {
+            background-color: #f9fafb;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border-left: 4px solid #f59e0b;
+        }
+
+        .nav-tab {
+            transition: all 0.3s ease;
+        }
+
+        .nav-tab.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-3xl font-bold">INA-CRC Integrated Architecture</h1>
+                    <p class="text-blue-100 mt-2">Indonesia Clinical Research Center - Clinical Trial Cycle Management</p>
+                </div>
+                <div class="text-right">
+                    <p class="text-sm text-blue-100">Ministry of Health - Republic of Indonesia</p>
+                    <p class="text-xs text-blue-200">Strategic Governance Optimization Project</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="bg-white shadow-md sticky top-0 z-10">
+        <div class="container mx-auto px-4">
+            <div class="flex space-x-1">
+                <button class="nav-tab active px-6 py-3 text-sm font-medium rounded-t-lg" onclick="showPhase('overview')">
+                    Overview
+                </button>
+                <button class="nav-tab px-6 py-3 text-sm font-medium rounded-t-lg hover:bg-gray-100" onclick="showPhase('phase1')">
+                    Phase I: Strategic Initiation
+                </button>
+                <button class="nav-tab px-6 py-3 text-sm font-medium rounded-t-lg hover:bg-gray-100" onclick="showPhase('phase2')">
+                    Phase II: Feasibility Study
+                </button>
+                <button class="nav-tab px-6 py-3 text-sm font-medium rounded-t-lg hover:bg-gray-100" onclick="showPhase('phase3')">
+                    Phase III: Legal & Regulatory
+                </button>
+                <button class="nav-tab px-6 py-3 text-sm font-medium rounded-t-lg hover:bg-gray-100" onclick="showPhase('phase4')">
+                    Phase IV: Execution
+                </button>
+                <button class="nav-tab px-6 py-3 text-sm font-medium rounded-t-lg hover:bg-gray-100" onclick="showPhase('phase5')">
+                    Phase V: Closure & Accountability
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Overview Section -->
+        <section id="overview" class="phase-content fade-in">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-blue-100 text-blue-600 rounded-full p-3 mr-4">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold">5 Clinical Trial Phases</h3>
+                    </div>
+                    <p class="text-gray-600">Complete lifecycle management from strategic initiation to study closure</p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-green-100 text-green-600 rounded-full p-3 mr-4">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold">Multi-Stakeholder Coordination</h3>
+                    </div>
+                    <p class="text-gray-600">Integration of Sponsors, CROs, CRUs, and regulatory authorities</p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-purple-100 text-purple-600 rounded-full p-3 mr-4">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold">Digital Integration</h3>
+                    </div>
+                    <p class="text-gray-600">Digital Feasibility Platform and INA-CRR system for end-to-end management</p>
+                </div>
+            </div>
+
+            <!-- Process Flow Visualization -->
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                <h2 class="text-2xl font-bold mb-6 text-center">Clinical Trial Process Flow</h2>
+                <div class="process-flow">
+                    <div class="process-step">
+                        <div class="bg-blue-50 rounded-lg p-6 border border-blue-200">
+                            <h3 class="text-lg font-semibold text-blue-800 mb-2">Phase I: Strategic Initiation</h3>
+                            <p class="text-blue-600">Study opportunity identification and CRU selection</p>
+                        </div>
+                    </div>
+                    <div class="process-step">
+                        <div class="bg-green-50 rounded-lg p-6 border border-green-200">
+                            <h3 class="text-lg font-semibold text-green-800 mb-2">Phase II: Feasibility Study</h3>
+                            <p class="text-green-600">Digital feasibility assessment through platform system</p>
+                        </div>
+                    </div>
+                    <div class="process-step">
+                        <div class="bg-yellow-50 rounded-lg p-6 border border-yellow-200">
+                            <h3 class="text-lg font-semibold text-yellow-800 mb-2">Phase III: Legal & Regulatory</h3>
+                            <p class="text-yellow-600">Ethical approval and PPUK regulatory clearance</p>
+                        </div>
+                    </div>
+                    <div class="process-step">
+                        <div class="bg-red-50 rounded-lg p-6 border border-red-200">
+                            <h3 class="text-lg font-semibold text-red-800 mb-2">Phase IV: Execution</h3>
+                            <p class="text-red-600">GCP-compliant clinical trial implementation</p>
+                        </div>
+                    </div>
+                    <div class="process-step">
+                        <div class="bg-purple-50 rounded-lg p-6 border border-purple-200">
+                            <h3 class="text-lg font-semibold text-purple-800 mb-2">Phase V: Closure & Accountability</h3>
+                            <p class="text-purple-600">Study completion, audit, and data integration</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Phase I: Strategic Initiation -->
+        <section id="phase1" class="phase-content hidden fade-in">
+            <div class="bg-white rounded-lg shadow-lg p-8 phase-card phase-1">
+                <h2 class="text-2xl font-bold mb-6 text-blue-600">Phase I: Strategic Initiation and Study Opportunity Search</h2>
+                <p class="text-gray-700 mb-6">
+                    In this phase, INA-CRC plays a strategic role as a <strong>matchmaker</strong> and <strong>single entry point</strong> to attract global studies to Indonesia.
+                </p>
+
+                <div class="table-container">
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <th>Key Process</th>
+                                <th>Actors</th>
+                                <th>INA-CRC Role/System</th>
+                                <th>Regulatory Basis/INA-CRC Tasks</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="font-semibold"><strong>1.1. Study Submission</strong></td>
+                                <td>
+                                    <span class="actor-badge text-white text-xs px-2 py-1 rounded">Sponsor/CRO</span>
+                                </td>
+                                <td>Sponsor/CRO contacts INA-CRC (Single Entry Point) and presents clinical trial plan (Study Opps).</td>
+                                <td>
+                                    <div class="regulation-badge text-white text-xs px-2 py-1 rounded mb-2">Task</div>
+                                    <strong>Finding sponsors and global clinical research cooperation</strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="font-semibold"><strong>1.2. Initial CRU Selection</strong></td>
+                                <td>
+                                    <span class="actor-badge text-white text-xs px-2 py-1 rounded">INA-CRC</span>
+                                    <span class="actor-badge text-white text-xs px-2 py-1 rounded ml-1">CRU</span>
+                                </td>
+                                <td>INA-CRC coordinates with CRUs meeting criteria. CRUs propose Key Opinion Leaders (KOL) as Principal Investigators (PI).</td>
+                                <td>
+                                    <div class="system-badge text-white text-xs px-2 py-1 rounded mb-2">Strategy</div>
+                                    <strong>Facilitation and Global Access</strong>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="highlight-box p-6 rounded-lg">
+                        <h3 class="text-lg font-semibold mb-3">🎯 Strategic Objectives</h3>
+                        <ul class="space-y-2 text-gray-700">
+                            <li>• Establish Indonesia as global clinical trial destination</li>
+                            <li>• Create efficient matching mechanism</li>
+                            <li>• Ensure quality CRU selection</li>
+                            <li>• Facilitate international collaboration</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-blue-50 p-6 rounded-lg border border-blue-200">
+                        <h3 class="text-lg font-semibold mb-3">🔑 Success Factors</h3>
+                        <ul class="space-y-2 text-gray-700">
+                            <li>• Comprehensive CRU database</li>
+                            <li>• Streamlined communication channels</li>
+                            <li>• Clear selection criteria</li>
+                            <li>• Strong industry relationships</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Phase II: Feasibility Study -->
+        <section id="phase2" class="phase-content hidden fade-in">
+            <div class="bg-white rounded-lg shadow-lg p-8 phase-card phase-2">
+                <h2 class="text-2xl font-bold mb-6 text-green-600">Phase II: Feasibility Study - Digital Assessment</h2>
+                <p class="text-gray-700 mb-6">
+                    INA-CRC uses a <strong>Digital Feasibility Platform</strong> to conduct initial feasibility assessment of CRUs/sites digitally through systematic workflows and real-time monitoring.
+                </p>
+
+                <div class="table-container">
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <th>Key Process</th>
+                                <th>Actors</th>
+                                <th>Digital Feasibility System Architecture</th>
+                                <th>Key INA-CRC Data</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="font-semibold"><strong>2.1. Feasibility Implementation</strong></td>
+                                <td>
+                                    <span class="actor-badge text-white text-xs px-2 py-1 rounded">Sponsor/CRO</span>
+                                    <span class="actor-badge text-white text-xs px-2 py-1 rounded ml-1">CRU</span>
+                                </td>
+                                <td>Sponsor/CRO sends Study Opps and Feasibility Workflows (Feasibility Questionnaires) to CRUs. CRUs provide <strong>Enrollment Estimates</strong>.</td>
+                                <td>
+                                    Feasibility data includes Therapeutic Area, Study Phase, and Feasibility Criteria.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="font-semibold"><strong>2.2. Site Selection Decision</strong></td>
+                                <td>
+                                    <span class="actor-badge text-white text-xs px-2 py-1 rounded">Sponsor/CRO</span>
+                                </td>
+                                <td>Sponsor/CRO determines CRUs based on feasibility study results.</td>
+                                <td>
+                                    Platform provides <strong>Real-Time Visibility</strong> of activity status and KPIs for INA-CRC.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="mt-8 bg-gradient-to-r from-green-50 to-blue-50 p-6 rounded-lg border border-green-200">
+                    <h3 class="text-lg font-semibold mb-4">🖥️ Digital Platform Features</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-white p-4 rounded shadow">
+                            <h4 class="font-semibold text-green-700 mb-2">Digital Workflows</h4>
+                            <p class="text-sm text-gray-600">Automated feasibility questionnaires and response tracking</p>
+                        </div>
+                        <div class="bg-white p-4 rounded shadow">
+                            <h4 class="font-semibold text-green-700 mb-2">Real-time Analytics</h4>
+                            <p class="text-sm text-gray-600">Live KPI monitoring and performance metrics</p>
+                        </div>
+                        <div class="bg-white p-4 rounded shadow">
+                            <h4 class="font-semibold text-green-700 mb-2">CRU Database</h4>
+                            <p class="text-sm text-gray-600">Comprehensive site capabilities and capacity tracking</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Phase III: Legal & Regulatory -->
+        <section id="phase3" class="phase-content hidden fade-in">
+            <div class="bg-white rounded-lg shadow-lg p-8 phase-card phase-3">
+                <h2 class="text-2xl font-bold mb-6 text-yellow-600">Phase III: Legal, Ethical, and Regulatory Approval (PPUK)</h2>
+                <p class="text-gray-700 mb-6">
+                    This is the formal preparation phase toward study implementation, closely guided by INA-CRC to ensure governance compliance.
+                </p>
+
+                <div class="table-container">
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <th>Key Process</th>
+                                <th>Actors</th>
+                                <th>Related Role/System</th>
+                                <th>Regulatory Basis/INA-CRC Tasks</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="font-semibold"><strong>3.1. Contract Negotiation</strong></td>
+                                <td>
+                                    <span class="actor-badge text-white text-xs px-2 py-1 rounded">Sponsor/CRO</span>
+                                    <span class="actor-badge text-white text-xs px-2 py-1 rounded ml-1">CRU</span>
+                                    <span class="actor-badge text-white text-xs px-2 py-1 rounded ml-1">INA-CRC</span>
+                                </td>
+                                <td>Negotiation of <strong>Clinical Trial Agreement (CTA)</strong> and <strong>Material Transfer Agreement (MTA)</strong>. INA-CRC <strong>accompanies</strong> this process; individual negotiation by researchers is prohibited.</td>
+                                <td>
+                                    <div class="regulation-badge text-white text-xs px-2 py-1 rounded mb-2">Task</div>
+                                    <strong>Assisting CRUs in preparing Clinical Trial Agreements. CTA must be documented.</strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="font-semibold"><strong>3.2. Ethical Approval</strong></td>
+                                <td>
+                                    <span class="actor-badge text-white text-xs px-2 py-1 rounded">CRU</span>
+                                    <span class="actor-badge text-white text-xs px-2 py-1 rounded ml-1">KEPK</span>
+                                </td>
+                                <td>CRU submits ethical approval to Health Research Ethics Committee (KEPK). <strong>PPUK must be given after obtaining Ethical Committee approval</strong>.</td>
+                                <td>
+                                    Clinical research must be based on three general ethical principles (respect for human dignity, doing good, and justice).
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="font-semibold"><strong>3.3. PPUK Submission</strong></td>
+                                <td>
+                                    <span class="actor-badge text-white text-xs px-2 py-1 rounded">Sponsor/CRO</span>
+                                    <span class="actor-badge text-white text-xs px-2 py-1 rounded ml-1">CRU</span>
+                                    <span class="actor-badge text-white text-xs px-2 py-1 rounded ml-1">BPOM/Kemenkes</span>
+                                </td>
+                                <td>Sponsor/CRO submits <strong>Clinical Trial Implementation Approval (PPUK)</strong>. Submitted through <strong>SIAP-UK</strong> (BPOM) for drugs/vaccines or Kemenkes (for medical devices).</td>
+                                <td>
+                                    <div class="regulation-badge text-white text-xs px-2 py-1 rounded mb-2">Requirement</div>
+                                    <strong>Clinical Trials conducted in Indonesia must obtain PPUK from BPOM</strong>. PPUK is valid for 2 years.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="font-semibold"><strong>3.4. PPUK Evaluation</strong></td>
+                                <td>
+                                    <span class="actor-badge text-white text-xs px-2 py-1 rounded">BPOM</span>
+                                </td>
+                                <td>BPOM evaluates Clinical Trial documents through examination and assessment, using time to respond mechanism (maximum 20 Days).</td>
+                                <td>
+                                    BPOM may include experts in evaluation. In emergency conditions, Drug evaluation is issued within 15 Days.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="font-semibold"><strong>3.5. INA-CRR Registration (Initial)</strong></td>
+                                <td>
+                                    <span class="actor-badge text-white text-xs px-2 py-1 rounded">CRU</span>
+                                    <span class="actor-badge text-white text-xs px-2 py-1 rounded ml-1">INA-CRC</span>
+                                </td>
+                                <td><strong>CRU must register research through INA-CRR</strong> (<a href="https://ina-crr.kemkes.go.id/" class="text-blue-600 hover:underline">https://ina-crr.kemkes.go.id/</a>) <strong>for research that has received ethical approval</strong>.</td>
+                                <td>
+                                    <div class="system-badge text-white text-xs px-2 py-1 rounded mb-2">Task</div>
+                                    <strong>Managing clinical trial registration/clinical research registration</strong>. INA-CRR must be integrated with SIKN.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Phase IV: Execution -->
+        <section id="phase4" class="phase-content hidden fade-in">
+            <div class="bg-white rounded-lg shadow-lg p-8 phase-card phase-4">
+                <h2 class="text-2xl font-bold mb-6 text-red-600">Phase IV: Clinical Trial Execution</h2>
+                <p class="text-gray-700 mb-6">
+                    Study implementation must comply with <strong>Good Clinical Practice (GCP)</strong>, which are international ethical and scientific standards.
+                </p>
+
+                <div class="table-container">
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <th>Key Process</th>
+                                <th>Actors</th>
+                                <th>Regulatory Requirements & INA-CRC</th>
+                                <th>BPOM/Kemenkes Regulations</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="font-semibold"><strong>4.1. Pre-Implementation (SIV)</strong></td>
+                                <td>
+                                    <span class="actor-badge text-white text-xs px-2 py-1 rounded">CRO/Sponsor</span>
+                                    <span class="actor-badge text-white text-xs px-2 py-1 rounded ml-1">CRU</span>
+                                </td>
+                                <td>Sponsor/CRO conducts Site Readiness Visit (SIV) and protocol/GCP training. CRU must have GCP-certified PI.</td>
+                                <td>
+                                    Clinical Trials must be conducted in <strong>Clinical Trial Centers</strong> meeting criteria.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="font-semibold"><strong>4.2. Subject Recruitment</strong></td>
+                                <td>
+                                    <span class="actor-badge text-white text-xs px-2 py-1 rounded">Research Team</span>
+                                </td>
+                                <td>Researchers conduct recruitment and screening according to protocol inclusion/exclusion criteria. <strong>Informed Consent</strong> must be obtained voluntarily from subjects.</td>
+                                <td>
+                                    Rights, safety, and welfare of Clinical Trial Subjects are the most important consideration.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="font-semibold"><strong>4.3. Performance Monitoring</strong></td>
+                                <td>
+                                    <span class="actor-badge text-white text-xs px-2 py-1 rounded">CRA</span>
+                                    <span class="actor-badge text-white text-xs px-2 py-1 rounded ml-1">Sponsor/CRO</span>
+                                    <span class="actor-badge text-white text-xs px-2 py-1 rounded ml-1">INA-CRC</span>
+                                </td>
+                                <td>CRA monitors study implementation onsite or remotely. INA-CRC conducts <strong>CRU development</strong> and periodic monitoring/evaluation.</td>
+                                <td>
+                                    Monitoring must ensure compliance with protocol, GCP, and regulations.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="font-semibold"><strong>4.4. Safety Reporting</strong></td>
+                                <td>
+                                    <span class="actor-badge text-white text-xs px-2 py-1 rounded">Principal Investigator</span>
+                                    <span class="actor-badge text-white text-xs px-2 py-1 rounded ml-1">Sponsor</span>
+                                </td>
+                                <td><strong>Principal Investigator</strong> reports <strong>Serious Adverse Events (SAEs)</strong> to Sponsor (max. 24 hours) and Ethics Committee (max. 3 calendar days). <strong>Sponsor must report SAEs</strong> (for Phase I/vaccines/high risk) to BPOM.</td>
+                                <td>
+                                    Reporting of Serious Side Effects of Investigational Products from Clinical Trials in Indonesia to BPOM: 7 calendar days for initial report (death/life-threatening) and 15 days for other serious effects.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="mt-8 bg-red-50 p-6 rounded-lg border border-red-200">
+                    <h3 class="text-lg font-semibold mb-4 text-red-800">⚠️ Critical Compliance Requirements</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <h4 class="font-semibold mb-2">GCP Compliance</h4>
+                            <ul class="text-sm text-gray-700 space-y-1">
+                                <li>• Protocol adherence</li>
+                                <li>• Subject safety priority</li>
+                                <li>• Data integrity</li>
+                                <li>• Documentation standards</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-2">Safety Monitoring</h4>
+                            <ul class="text-sm text-gray-700 space-y-1">
+                                <li>• 24-hour SAE reporting</li>
+                                <li>• Ethics committee notification</li>
+                                <li>• Regulatory reporting timelines</li>
+                                <li>• Safety oversight</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Phase V: Closure & Accountability -->
+        <section id="phase5" class="phase-content hidden fade-in">
+            <div class="bg-white rounded-lg shadow-lg p-8 phase-card phase-5">
+                <h2 class="text-2xl font-bold mb-6 text-purple-600">Phase V: Closure and Data Accountability</h2>
+                <p class="text-gray-700 mb-6">
+                    This phase focuses on study completion, audit, and submission of final data for national supervision and policy.
+                </p>
+
+                <div class="table-container">
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <th>Key Process</th>
+                                <th>Actors</th>
+                                <th>Regulatory Requirements & INA-CRC</th>
+                                <th>BPOM/Kemenkes Regulations</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="font-semibold"><strong>5.1. Progress Reporting (Interim)</strong></td>
+                                <td>
+                                    <span class="actor-badge text-white text-xs px-2 py-1 rounded">Sponsor</span>
+                                </td>
+                                <td>Sponsor must submit <strong>clinical trial progress reports to BPOM every 6 months</strong>.</td>
+                                <td>
+                                    This report uses the established format (Appendix IX Per-BPOM No. 8/2024).
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="font-semibold"><strong>5.2. Verification and Accountability</strong></td>
+                                <td>
+                                    <span class="actor-badge text-white text-xs px-2 py-1 rounded">CRU</span>
+                                    <span class="actor-badge text-white text-xs px-2 py-1 rounded ml-1">Sponsor/CRO</span>
+                                </td>
+                                <td>Close-out visit conducted to ensure data verification, Investigational Product (IP) accountability/destruction.</td>
+                                <td>
+                                    Destruction of remaining Clinical Trial materials must be proven with minutes.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="font-semibold"><strong>5.3. Final Reporting</strong></td>
+                                <td>
+                                    <span class="actor-badge text-white text-xs px-2 py-1 rounded">Sponsor</span>
+                                    <span class="actor-badge text-white text-xs px-2 py-1 rounded ml-1">Principal Investigator</span>
+                                </td>
+                                <td>After Clinical Trial completion, Sponsor must ensure <strong>Clinical Trial Report</strong> is prepared and provided to regulatory authorities. Final report submitted to BPOM/KE no later than 30 Days from implementation end.</td>
+                                <td>
+                                    Final report must be submitted if study is completed or terminated early.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="font-semibold"><strong>5.4. INA-CRR Registration (Update)</strong></td>
+                                <td>
+                                    <span class="actor-badge text-white text-xs px-2 py-1 rounded">CRU</span>
+                                    <span class="actor-badge text-white text-xs px-2 py-1 rounded ml-1">INA-CRC</span>
+                                </td>
+                                <td>CRU must conduct <strong>regular information updates</strong> according to clinical trial phase progress on INA-CRR.</td>
+                                <td>
+                                    INA-CRR ensures transparency, accessibility, and accountability.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="font-semibold"><strong>5.5. Audit and Quality Development</strong></td>
+                                <td>
+                                    <span class="actor-badge text-white text-xs px-2 py-1 rounded">BPOM</span>
+                                    <span class="actor-badge text-white text-xs px-2 py-1 rounded ml-1">INA-CRC</span>
+                                </td>
+                                <td>BPOM conducts <strong>GCP Inspection</strong> before, during, and/or after Clinical Trial to ensure compliance. INA-CRC uses performance data (from Phases II and IV) for <strong>CRU Development</strong>.</td>
+                                <td>
+                                    Inspection results can be technical development or administrative sanctions.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="font-semibold"><strong>5.6. National Data Integration</strong></td>
+                                <td>
+                                    <span class="actor-badge text-white text-xs px-2 py-1 rounded">INA-CRC</span>
+                                    <span class="actor-badge text-white text-xs px-2 py-1 rounded ml-1">Kemenkes</span>
+                                </td>
+                                <td>INA-CRR data from entire cycle (including performance metrics and PPUK status) must be <strong>integrated with National Health Information System (SIKN)</strong>.</td>
+                                <td>
+                                    Data used for <strong>data and evidence-based policy</strong> in Health Transformation.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="mt-8 bg-gradient-to-r from-purple-50 to-pink-50 p-6 rounded-lg border border-purple-200">
+                    <h3 class="text-lg font-semibold mb-4">🔗 Data Integration Framework</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-white p-4 rounded shadow">
+                            <h4 class="font-semibold text-purple-700 mb-2">INA-CRR System</h4>
+                            <p class="text-sm text-gray-600">Central registry for all clinical trial data and progress tracking</p>
+                        </div>
+                        <div class="bg-white p-4 rounded shadow">
+                            <h4 class="font-semibold text-purple-700 mb-2">SIKN Integration</h4>
+                            <p class="text-sm text-gray-600">National health information system connectivity</p>
+                        </div>
+                        <div class="bg-white p-4 rounded shadow">
+                            <h4 class="font-semibold text-purple-700 mb-2">Policy Support</h4>
+                            <p class="text-sm text-gray-600">Evidence-based healthcare transformation planning</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-3">INA-CRC</h3>
+                    <p class="text-gray-300 text-sm">Indonesia Clinical Research Center - Single entry point for clinical trials in Indonesia</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-3">Contact</h3>
+                    <p class="text-gray-300 text-sm">Ministry of Health - Republic of Indonesia<br>
+                    Secretariat: INA-CRC Working Group</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-3">Digital Platforms</h3>
+                    <p class="text-gray-300 text-sm">
+                        <a href="https://ina-crr.kemkes.go.id/" class="hover:text-blue-300 underline">INA-CRR Portal</a><br>
+                        Digital Feasibility Platform
+                    </p>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                <p class="text-gray-400 text-sm">© 2025 INA-CRC Governance Optimization Project. Supported by Context Engineering methodology.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function showPhase(phaseId) {
+            // Hide all phase contents
+            const allPhases = document.querySelectorAll('.phase-content');
+            allPhases.forEach(phase => {
+                phase.classList.add('hidden');
+            });
+
+            // Remove active class from all tabs
+            const allTabs = document.querySelectorAll('.nav-tab');
+            allTabs.forEach(tab => {
+                tab.classList.remove('active');
+                tab.classList.add('hover:bg-gray-100');
+            });
+
+            // Show selected phase
+            const selectedPhase = document.getElementById(phaseId);
+            if (selectedPhase) {
+                selectedPhase.classList.remove('hidden');
+                selectedPhase.classList.add('fade-in');
+            }
+
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+            event.target.classList.remove('hover:bg-gray-100');
+        }
+
+        // Add smooth scroll behavior
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all phase cards
+        document.querySelectorAll('.phase-card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>

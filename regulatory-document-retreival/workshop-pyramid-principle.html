@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workshop 2 Jam: Prinsip Piramida untuk Prompt Regulasi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #e74c3c;
+            --secondary-color: #3498db;
+            --success-color: #27ae60;
+            --purple-color: #9b59b6;
+            --orange-color: #e67e22;
+            --dark-color: #2c3e50;
+            --light-color: #f8f9fa;
+            --gray-color: #34495e;
+            --border-radius: 12px;
+            --spacing: 1rem;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: var(--spacing);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem var(--spacing);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .subtitle {
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            opacity: 0.9;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 2rem var(--spacing);
+            background: var(--light-color);
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--primary-color);
+            transform: translateX(-50%);
+        }
+
+        .sessions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem var(--spacing);
+        }
+
+        .session-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-top: 4px solid;
+        }
+
+        .session-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+        }
+
+        .session-1 { border-top-color: var(--secondary-color); }
+        .session-2 { border-top-color: var(--success-color); }
+        .session-3 { border-top-color: var(--purple-color); }
+        .session-4 { border-top-color: var(--orange-color); }
+
+        .session-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .session-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            margin-right: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .session-1 .session-icon { background: var(--secondary-color); }
+        .session-2 .session-icon { background: var(--success-color); }
+        .session-3 .session-icon { background: var(--purple-color); }
+        .session-4 .session-icon { background: var(--orange-color); }
+
+        .session-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+
+        .session-duration {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .session-content ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .session-content li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--gray-color);
+            font-size: 0.95rem;
+        }
+
+        .session-content li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success-color);
+            font-weight: bold;
+        }
+
+        .outcomes {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem var(--spacing);
+        }
+
+        .outcomes h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .outcomes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .outcome-item {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .outcome-item:hover {
+            transform: translateY(-3px);
+            background: rgba(255,255,255,0.15);
+        }
+
+        .outcome-item h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .outcome-item h3::before {
+            content: '🎯';
+            margin-right: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4CAF50, #8BC34A);
+            border-radius: 4px;
+            transition: width 1s ease;
+        }
+
+        footer {
+            background: var(--dark-color);
+            color: white;
+            text-align: center;
+            padding: 2rem var(--spacing);
+        }
+
+        .time-stamps {
+            display: flex;
+            justify-content: space-around;
+            padding: 1rem var(--spacing);
+            background: var(--light-color);
+            border-top: 2px solid var(--primary-color);
+        }
+
+        .time-stamp {
+            text-align: center;
+        }
+
+        .time-stamp .time {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .time-stamp .label {
+            font-size: 0.8rem;
+            color: var(--gray-color);
+        }
+
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 20px;
+            }
+
+            .sessions-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .session-card {
+                margin-left: 2rem;
+            }
+
+            .outcomes-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .time-stamps {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            .time-stamp {
+                flex: 1;
+                min-width: 80px;
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="fade-in">
+            <h1>Workshop 2 Jam</h1>
+            <p class="subtitle">Prinsip Piramida untuk Prompt Regulasi yang Efektif</p>
+        </header>
+
+        <section class="time-stamps">
+            <div class="time-stamp">
+                <div class="time">00:00</div>
+                <div class="label">Mulai</div>
+            </div>
+            <div class="time-stamp">
+                <div class="time">00:30</div>
+                <div class="label">Praktik</div>
+            </div>
+            <div class="time-stamp">
+                <div class="time">01:15</div>
+                <div class="label">Lanjutan</div>
+            </div>
+            <div class="time-stamp">
+                <div class="time">01:45</div>
+                <div class="label">Implementasi</div>
+            </div>
+            <div class="time-stamp">
+                <div class="time">02:00</div>
+                <div class="label">Selesai</div>
+            </div>
+        </section>
+
+        <section class="sessions-grid">
+            <div class="session-card session-1 fade-in">
+                <div class="session-header">
+                    <div class="session-icon">1</div>
+                    <div>
+                        <h3 class="session-title">Fundamen</h3>
+                        <div class="session-duration">30 menit</div>
+                    </div>
+                </div>
+                <div class="session-content">
+                    <ul>
+                        <li>Konsep Prinsip Piramida</li>
+                        <li>Masalah prompt tidak efisien</li>
+                        <li>Platform & perangkat AI</li>
+                        <li>Studi kasus regulasi</li>
+                    </ul>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 25%"></div>
+                </div>
+            </div>
+
+            <div class="session-card session-2 fade-in" style="animation-delay: 0.2s">
+                <div class="session-header">
+                    <div class="session-icon">2</div>
+                    <div>
+                        <h3 class="session-title">Praktik</h3>
+                        <div class="session-duration">45 menit</div>
+                    </div>
+                </div>
+                <div class="session-content">
+                    <ul>
+                        <li>Tahap 1: Pesan utama</li>
+                        <li>Tahap 2: Struktur argumen</li>
+                        <li>Tahap 3: Kebutuhan bukti</li>
+                        <li>Tahap 4: Prompt final</li>
+                    </ul>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 37.5%"></div>
+                </div>
+            </div>
+
+            <div class="session-card session-3 fade-in" style="animation-delay: 0.4s">
+                <div class="session-header">
+                    <div class="session-icon">3</div>
+                    <div>
+                        <h3 class="session-title">Lanjutan</h3>
+                        <div class="session-duration">30 menit</div>
+                    </div>
+                </div>
+                <div class="session-content">
+                    <ul>
+                        <li>Meta-prompt untuk riset</li>
+                        <li>Integrasi NotebookLM</li>
+                        <li>Validasi & QA</li>
+                        <li>Studi kasus nyata</li>
+                    </ul>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 25%"></div>
+                </div>
+            </div>
+
+            <div class="session-card session-4 fade-in" style="animation-delay: 0.6s">
+                <div class="session-header">
+                    <div class="session-icon">4</div>
+                    <div>
+                        <h3 class="session-title">Implementasi</h3>
+                        <div class="session-duration">15 menit</div>
+                    </div>
+                </div>
+                <div class="session-content">
+                    <ul>
+                        <li>Pustaka prompt</li>
+                        <li>Template reusable</li>
+                        <li>Kesalahan umum</li>
+                        <li>Q&A</li>
+                    </ul>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 12.5%"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="outcomes">
+            <h2 class="pulse">Hasil Yang Akan Dicapai</h2>
+            <div class="outcomes-grid">
+                <div class="outcome-item fade-in" style="animation-delay: 0.1s">
+                    <h3>Kemampuan Prompt Terstruktur</h3>
+                    <p>Mampu membuat prompt efektif menggunakan Prinsip Piramida untuk hasil yang jelas dan terstruktur</p>
+                </div>
+                <div class="outcome-item fade-in" style="animation-delay: 0.2s">
+                    <h3>Metodologi 4 Tahap</h3>
+                    <p>Pemahaman sistematis 4 tahap rekayasa prompt untuk riset regulasi yang komprehensif</p>
+                </div>
+                <div class="outcome-item fade-in" style="animation-delay: 0.3s">
+                    <h3>Praktik NotebookLM</h3>
+                    <p>Pengalaman langsung menggunakan NotebookLM untuk validasi dan quality assurance</p>
+                </div>
+                <div class="outcome-item fade-in" style="animation-delay: 0.4s">
+                    <h3>Template Siap Pakai</h3>
+                    <p>Mendapatkan template prompt yang dapat langsung digunakan untuk pekerjaan regulator</p>
+                </div>
+                <div class="outcome-item fade-in" style="animation-delay: 0.5s">
+                    <h3>Strategi Skala Besar</h3>
+                    <p>Strategi implementasi untuk tim regulator dengan framework yang dapat di-reuse</p>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2024 Workshop Prinsip Piramida untuk Prompt Regulasi</p>
+            <p style="margin-top: 0.5rem; opacity: 0.8;">Transformasikan cara Anda berinteraksi dengan AI untuk riset regulasi</p>
+        </footer>
+    </div>
+
+    <script>
+        // Add interactive animations on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Animate progress bars when they come into view
+        const progressBars = document.querySelectorAll('.progress-fill');
+        const progressObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const width = entry.target.style.width;
+                    entry.target.style.width = '0';
+                    setTimeout(() => {
+                        entry.target.style.width = width;
+                    }, 200);
+                }
+            });
+        }, observerOptions);
+
+        progressBars.forEach(bar => progressObserver.observe(bar));
+    </script>
+</body>
+</html>
